@@ -1,0 +1,7 @@
+﻿################################################################################
+# Ce fichier .gitignore a été créé automatiquement par Microsoft(R) Visual Studio.
+################################################################################
+
+/WTM.Core/bin/Debug
+*.suo
+/WTM.Core/obj/Debug
