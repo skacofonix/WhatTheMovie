@@ -13,126 +13,204 @@ namespace WTM.Core.Application
 {
     public class ShotScrapper : BaseScrapper
     {
-        private string identifier = "shot";
+        private const string identifier = "shot";
+        private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
+        private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
+        private readonly Regex regexNumber = new Regex(@"([0-9]*)", RegexOptions.IgnorePatternWhitespace);
 
-        public Shot Scrap(double id)
+        private int parameterShotId;
+        
+        public Shot Scrap(int id)
         {
+            parameterShotId = id;
+
             var shot = new Shot();
 
-            var url = string.Join("/", urlRoot, identifier, id.ToString(CultureInfo.InvariantCulture));
-            var uri = new Uri(url);
-            var webRequest = WebRequest.CreateHttp(uri);
-
-            var asyncResult = webRequest.BeginGetResponse(new AsyncCallback(state =>
-            {
-            }), null);
-            var webResponse = webRequest.EndGetResponse(asyncResult);
-
-            HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
-            using (var stream = webResponse.GetResponseStream())
-            {
-                document.Load(stream);
-            }
-
-            var regexCleanHtml = new Regex("[\r\t\n ]");
+            base.ReceiveHtmlDocument();
 
             try
             {
-                var mainShot = document.GetElementbyId("main_shot");
+                shot.FirstShotId = GetFirstShotId();
+                shot.PreviousShotId = GetPreviousShotId();
+                shot.PreviousUnsolvedShotId = GetPreviousUnsolvedShotId();
+                shot.ShotId = GetCurrentShotId();
+                shot.NextShotId = GetNextShotId();
+                shot.PreviousUnsolvedShotId = GetNextUnsolvedShotId();
+                shot.LastShotId = GetLastShotId();
 
-                var navShots = document.GetElementbyId("nav_shots");
+                shot.ImageUrl = GetImageUrl(shot);
+                shot.PostedDate = GetPostedDate(shot);
+                shot.PostedBy = GetPostedBy();
 
-                var firstShotIdLink = document.GetElementbyId("first_shot_link")
-                                              .GetAttributeValue("href", "");
-                var regexShotId = new Regex(@"/shot/(\d*)");
-                var matchShotId = regexShotId.Match(firstShotIdLink);
-                if(matchShotId.Success)
-                {
-                    int firstShotId;
-                    if (int.TryParse(matchShotId.Groups[1].Value, out firstShotId))
-                        shot.FirstShotId = firstShotId;
-                }
-
-
-                // ID
-                var value = navShots.ChildNodes.Where(n => n.Name == "li" && n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "number"))
-                                               .FirstOrDefault()
-                                               .InnerText;
-                var shotIdString = regexCleanHtml.Replace(value, string.Empty);
-                int shotId;
-                if (int.TryParse(shotIdString, out shotId))
-                    shot.ShotId = shotId;
-
-                // Image URL
-                var section = document.DocumentNode.Descendants("script")
-                                                   .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
-                                                   .Select(s => s.InnerText)
-                                                   .FirstOrDefault(w => w.Contains("var imageSrc"));
-                var regexImg = new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase);
-                var matchImg = regexImg.Match(section);
-                shot.ImageUrl = matchImg.Groups[1].Value;
-
-                // Date
-                DateTime date;
-                var sectionDate = document.GetElementbyId("hidden_date").InnerText;
-                if (DateTime.TryParse(sectionDate, out date))
-                    shot.PostedDate = date;
-
-                var sectionShotInfo = mainShot.Descendants("ul")
+                var sectionShotInfo = document.GetElementbyId("main_shot")
+                                              .Descendants("ul")
                                               .FirstOrDefault(ul => ul.Attributes.Any(attr => attr.Name == "class" && attr.Value == "nav_shotinfo"));
-
-                // Posted by
-                shot.PostedBy = document.GetElementbyId("postername").Descendants("a").FirstOrDefault().InnerText;
-
-                // Nb solved
-                var sectionNbSolved = sectionShotInfo.Descendants("li")
-                                                     .FirstOrDefault(li => li.Attributes.Any(attr => attr.Name == "class" && attr.Value == "solved"))
-                                                     .InnerText;
-                var regexNbSolved = new Regex(@"status: solved \((\d*)\)");
-                var matchNbSolved = regexNbSolved.Match(sectionNbSolved);
-                if (matchNbSolved.Success)
-                {
-                    int nbSolved;
-                    if (int.TryParse(matchNbSolved.Groups[1].Value, out nbSolved))
-                        shot.NbSolver = nbSolved;
-                }
-
-                // First solved by
-                shot.FirstSolver = sectionShotInfo.Descendants("li")
-                                                   .FirstOrDefault(li => li.InnerText.StartsWith("first solved by:"))
-                                                   .Descendants("a")
-                                                   .FirstOrDefault()
-                                                   .InnerText;
+                shot.NbSolver = GetNumberOfSolver(sectionShotInfo);
+                shot.FirstSolver = GetFirstSolver(sectionShotInfo);
 
                 var sectionSolution = document.GetElementbyId("solve_station");
-
-                // Language
-                var languageSection = sectionSolution.Descendants("form")
-                                                     .FirstOrDefault()
-                                                     .Descendants("ul")
-                                                     .FirstOrDefault(ul => ul.Attributes.Any(attr => attr.Name == "class" && attr.Value == "language_flags"))
-                                                     .Descendants("img")
-                                                     .Select(img => img.Attributes.FirstOrDefault(attr => attr.Name == "src"))
-                                                     .ToList();
-                var regexLanguage = new Regex("//static.whatthemovie.com/images/flags/(dk).png");
-                foreach (var language in languageSection)
-                {
-                    //var matchLanguage = regexLanguage.Match(language);
-                    //matchLanguage.Groups[1].Value;
-                }
-
+                shot.Languages = GetLanguages(sectionSolution);
             }
             catch (Exception ex)
             {
-
                 throw;
             }
 
             return shot;
         }
 
-        public void SendTitle(string title)
+        private int GetFirstShotId()
         {
+            var firstShotIdLink = document.GetElementbyId("first_shot_link")
+                                          .GetAttributeValue("href", string.Empty);
+            return ExtractAndParseInt(firstShotIdLink, regexShotId).GetValueOrDefault();
+        }
+
+        private int? GetPreviousShotId()
+        {
+            var previousShotIdLink = document.GetElementbyId("prev_shot")
+                                             .GetAttributeValue("href", string.Empty);
+            return ExtractAndParseInt(previousShotIdLink, regexShotId);
+        }
+       
+        private int? GetPreviousUnsolvedShotId()
+        {
+            var previousUnsolvedShotIdLink = document.GetElementbyId("prev_unsolved_shot")
+                                                     .GetAttributeValue("href", string.Empty);
+            return ExtractAndParseInt(previousUnsolvedShotIdLink, regexShotId);
+        }
+
+        private int GetCurrentShotId()
+        {
+            var currentShotIdString = document.GetElementbyId("nav_shots")
+                                              .ChildNodes.Where(n => n.Name == "li" && n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "number"))
+                                              .FirstOrDefault()
+                                              .InnerText;
+            var currentShotIdCleaned = regexCleanHtml.Replace(currentShotIdString, string.Empty);
+            return int.Parse(currentShotIdCleaned);
+        }
+
+        private int? GetNextShotId()
+        {
+            var nextShotId = document.GetElementbyId("next_shot")
+                                     .GetAttributeValue("href", string.Empty);
+            return ExtractAndParseInt(nextShotId, regexShotId);
+        }
+
+        private int? GetNextUnsolvedShotId()
+        {
+            var nextUnsolvedShotIdLink = document.GetElementbyId("next_unsolved_shot")
+                                                 .GetAttributeValue("href", string.Empty);
+            return ExtractAndParseInt(nextUnsolvedShotIdLink, regexShotId);
+        }
+
+        private int GetLastShotId()
+        {
+            var LastShotIdLink = document.GetElementbyId("last_shot_link")
+                                         .GetAttributeValue("href", string.Empty);
+            return ExtractAndParseInt(LastShotIdLink, regexShotId).Value;
+        }
+
+        private string GetImageUrl(Shot shot)
+        {
+            var imageUrlSection = document.DocumentNode.Descendants("script")
+                                                       .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
+                                                       .Select(s => s.InnerText)
+                                                       .FirstOrDefault(w => w.Contains("var imageSrc"));
+            return ExtractValue(imageUrlSection, new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
+        }
+
+        private DateTime GetPostedDate(Shot shot)
+        {
+            DateTime date;
+            var sectionDate = document.GetElementbyId("hidden_date").InnerText;
+            if (DateTime.TryParse(sectionDate, out date))
+                shot.PostedDate = date;
+            return date;
+        }
+
+        private string GetPostedBy()
+        {
+            return document.GetElementbyId("postername")
+                                    .Descendants("a")
+                                    .FirstOrDefault()
+                                    .InnerText;
+        }
+
+        private int GetNumberOfSolver(HtmlAgilityPack.HtmlNode sectionShotInfo)
+        {
+            var sectionNbSolved = sectionShotInfo.Descendants("li")
+                                                 .FirstOrDefault(li => li.Attributes.Any(attr => attr.Name == "class" && attr.Value == "solved"))
+                                                 .InnerText;
+            return ExtractAndParseInt(sectionNbSolved, new Regex(@"status: solved \((\d*)\)")).Value;
+        }
+
+        private string GetFirstSolver(HtmlAgilityPack.HtmlNode sectionShotInfo)
+        {
+            return sectionShotInfo.Descendants("li")
+                                  .FirstOrDefault(li => li.InnerText.StartsWith("first solved by:"))
+                                  .Descendants("a")
+                                  .FirstOrDefault()
+                                  .InnerText;
+        }
+
+        private List<string> GetLanguages(HtmlAgilityPack.HtmlNode sectionSolution)
+        {
+            var regexLanguage = new Regex("//static.whatthemovie.com/images/flags/([a-z]{2,3}).png");
+            return sectionSolution.Descendants("ul")
+                                  .FirstOrDefault(ul => ul.Attributes.Any(attr => attr.Name == "class" && attr.Value == "language_flags"))
+                                  .Descendants("img")
+                                  .Select(img => img.Attributes.FirstOrDefault(attr => attr.Name == "src").Value)
+                                  .Select(s => regexLanguage.Match(s).Groups[1].Value)
+                                  .ToList();
+        }
+
+        /// /////////////////////////////////////////////////:
+
+        private string ExtractValue(string value, Regex regex)
+        {
+            string valueExtracted = value;
+
+            var match = regex.Match(value);
+            value = match.Groups[1].Value;
+
+            return value;
+        }
+
+        private int? ExtractAndParseInt(string value, Regex regex)
+        {
+            var valueExctracted = ExtractValue(value, regex);
+
+            if (string.IsNullOrWhiteSpace(valueExctracted))
+                return null;
+
+            int valueConverted;
+            if(int.TryParse(valueExctracted, out valueConverted))
+                return valueConverted;
+
+            return null;
+        }
+
+        private DateTime ExtractAndParseDateTime(string value, Regex regex)
+        {
+            var valueExctracted = ExtractValue(value, regex);
+
+            DateTime valueConverted;
+            DateTime.TryParse(valueExctracted, out valueConverted);
+
+            return valueConverted;
+        }
+
+        protected override Uri MakeUri()
+        {
+            var url = string.Join("/", urlRoot, identifier, parameterShotId.ToString(CultureInfo.InvariantCulture));
+            var uri = new Uri(url);
+            return uri;
+        }
+
+        protected override void DoWorkInternal()
+        {
+            throw new NotImplementedException();
         }
     }
 }

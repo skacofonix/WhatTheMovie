@@ -9,9 +9,11 @@ namespace WTM.Core.Domain.WebsiteEntities
     public class Shot
     {
         public int FirstShotId { get; set; }
-        public int PreviousShotId { get; set; }
+        public int? PreviousShotId { get; set; }
+        public int? PreviousUnsolvedShotId { get; set; }
         public int ShotId { get; set; }
-        public int NextShotId { get; set; }
+        public int? NextShotId { get; set; }
+        public int? NextUnsolvedShotId { get; set; }
         public int LastShotId { get; set; }
 
         public DateTime PostedDate { get; set; }
