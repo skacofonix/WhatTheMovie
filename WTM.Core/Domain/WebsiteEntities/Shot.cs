@@ -29,7 +29,7 @@ namespace WTM.Core.Domain.WebsiteEntities
         public bool IsVoteDeletation { get; set; }
 
         public string MovieTitle { get; set; }
-        public bool IsSolutionAvaible { get; set; }
+        public bool IsSolutionAvailible { get; set; }
 
         public DateTime SolutionAvailableDate { get; set; }
         public int RemainingDaysBeforeSolution { get; set; }
@@ -39,5 +39,7 @@ namespace WTM.Core.Domain.WebsiteEntities
         public List<string> Comments { get; set; }
         public double Rate { get; set; }
         public int NbRaters { get; set; }
+
+        public int NbFavourited { get; set; }
     }
 }
