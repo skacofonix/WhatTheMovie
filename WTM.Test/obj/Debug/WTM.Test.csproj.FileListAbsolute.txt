@@ -7,3 +7,4 @@ C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.dll
 C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.pdb
 C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\HtmlAgilityPack-PCL.dll
 C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\HtmlAgilityPack-PCL.xml
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\10.htm

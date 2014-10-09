@@ -41,5 +41,9 @@ namespace WTM.Core.Domain.WebsiteEntities
         public int NbRaters { get; set; }
 
         public int NbFavourited { get; set; }
+
+        public string Difficulty { get; set; }
+        public bool IncludeArchive { get; set; }
+        public bool IncludeSolvedSHots { get; set; }
     }
 }

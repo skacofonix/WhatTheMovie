@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -20,13 +21,25 @@ namespace WTM.Core.Application
 
         private int parameterShotId;
 
+        public Shot Scrap(Stream stream)
+        {
+            this.LoadHtmlDocument(stream);
+
+            return Scrap();
+        }
+
         public Shot Scrap(int id)
         {
             parameterShotId = id;
 
-            var shot = new Shot();
-
             base.ReceiveHtmlDocument();
+
+            return Scrap();
+        }
+
+        private Shot Scrap()
+        {
+            var shot = new Shot();
 
             try
             {
@@ -40,13 +53,13 @@ namespace WTM.Core.Application
 
                 shot.ImageUrl = GetImageUrl(shot);
                 shot.PostedDate = GetPostedDate(shot);
-                shot.PostedBy = GetPostedBy();
+                //shot.PostedBy = GetPostedBy();
 
                 var sectionShotInfo = document.GetElementbyId("main_shot")
                                               .Descendants("ul")
                                               .FirstOrDefault(ul => ul.Attributes.Any(attr => attr.Name == "class" && attr.Value == "nav_shotinfo"));
                 shot.NbSolver = GetNumberOfSolver(sectionShotInfo);
-                shot.FirstSolver = GetFirstSolver(sectionShotInfo);
+                //shot.FirstSolver = GetFirstSolver(sectionShotInfo);
 
                 var sectionSolution = document.GetElementbyId("solve_station");
                 shot.IsFavourite = GetIsFavourited();
@@ -58,6 +71,7 @@ namespace WTM.Core.Application
 
                 shot.Tags = GetTags();
                 shot.NbFavourited = GetNumberOfFavourited();
+
             }
             catch (Exception ex)
             {
@@ -67,7 +81,28 @@ namespace WTM.Core.Application
             return shot;
         }
 
+        private string GetDifficulty()
+        {
+            var isEasy = document.GetElementbyId("difficulty_easy")
+                                 .GetAttributeValue("checked", string.Empty)
+                                 .Equals("cheked");
+            if (isEasy)
+                return "easy";
 
+            var isMedium = document.GetElementbyId("difficulty_medium")
+                                 .GetAttributeValue("checked", string.Empty)
+                                 .Equals("cheked");
+            if (isMedium)
+                return "medium";
+
+            var isHard = document.GetElementbyId("difficulty_hard")
+                                 .GetAttributeValue("checked", string.Empty)
+                                 .Equals("cheked");
+            if (isHard)
+                return "hard";
+
+            return "all";
+        }
 
         private int GetFirstShotId()
         {
@@ -168,10 +203,10 @@ namespace WTM.Core.Application
         {
             bool isFavourite = false;
 
-            //var isFavouriteOnclickContent = document.GetElementbyId("favbutton")
-            //                                        .GetAttributeValue("onclick", string.Empty);
-            //var value = ExtractValue(isFavouriteOnclickContent, new Regex(@"new Ajax.Request('/shot/\d*/(fav|unfav)'"));
-            //isFavourite = (value == "unfav");
+            var isFavouriteOnclickContent = document.GetElementbyId("favbutton")
+                                                    .GetAttributeValue("onclick", string.Empty);
+            var value = ExtractValue(isFavouriteOnclickContent, new Regex(@"new Ajax.Request\('/shot/\d*/(fav|unfav)'"));
+            isFavourite = (value == "unfav");
 
             return isFavourite;
         }

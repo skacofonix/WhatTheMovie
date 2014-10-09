@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -13,12 +14,37 @@ namespace WTM.Core.Application.Scrapper
         protected const string urlRoot = "http://www.whatthemovie.com";
         protected HtmlDocument document;
 
+        protected T TryParseElement<T>(Func<T> func)
+            where T : class
+        {
+            T value = null;
+
+            try
+            {
+                value = func();
+            }
+            catch (Exception ex)
+            {
+                // Log
+                value = null;
+            }
+
+            return value;
+        }
+
         protected void ReceiveHtmlDocument()
         {
             var uri = MakeUri();
             var webRequest = GetWebRequest(uri);
             var webResponse = GetWebResponse(webRequest);
             this.document = LoadHtmlDocument(webResponse);
+        }
+
+        protected void LoadHtmlDocument(Stream stream)
+        {
+            var doc = new HtmlDocument();
+            doc.Load(stream);
+            document = doc;
         }
 
         protected abstract Uri MakeUri();
