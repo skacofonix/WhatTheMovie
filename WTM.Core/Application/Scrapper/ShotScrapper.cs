@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -12,32 +13,18 @@ using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application
 {
-    public class ShotScrapper : BaseScrapper
+    public class ShotScrapper : ScrapperT<Shot>
     {
-        private const string identifier = "shot";
         private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
         private readonly Regex regexNumber = new Regex(@"([0-9]*)", RegexOptions.IgnorePatternWhitespace);
 
-        private int parameterShotId;
-
-        public Shot Scrap(Stream stream)
+        protected override string Identifier
         {
-            this.LoadHtmlDocument(stream);
-
-            return Scrap();
+            get { return "shot"; }
         }
 
-        public Shot Scrap(int id)
-        {
-            parameterShotId = id;
-
-            base.ReceiveHtmlDocument();
-
-            return Scrap();
-        }
-
-        private Shot Scrap()
+        protected override Shot Scrappe()
         {
             var shot = new Shot();
 
@@ -81,34 +68,11 @@ namespace WTM.Core.Application
             return shot;
         }
 
-        private string GetDifficulty()
-        {
-            var isEasy = document.GetElementbyId("difficulty_easy")
-                                 .GetAttributeValue("checked", string.Empty)
-                                 .Equals("cheked");
-            if (isEasy)
-                return "easy";
-
-            var isMedium = document.GetElementbyId("difficulty_medium")
-                                 .GetAttributeValue("checked", string.Empty)
-                                 .Equals("cheked");
-            if (isMedium)
-                return "medium";
-
-            var isHard = document.GetElementbyId("difficulty_hard")
-                                 .GetAttributeValue("checked", string.Empty)
-                                 .Equals("cheked");
-            if (isHard)
-                return "hard";
-
-            return "all";
-        }
-
-        private int GetFirstShotId()
+        private int? GetFirstShotId()
         {
             var firstShotIdLink = document.GetElementbyId("first_shot_link")
                                           .GetAttributeValue("href", string.Empty);
-            return ExtractAndParseInt(firstShotIdLink, regexShotId).GetValueOrDefault();
+            return ExtractAndParseInt(firstShotIdLink, regexShotId);
         }
 
         private int? GetPreviousShotId()
@@ -125,7 +89,7 @@ namespace WTM.Core.Application
             return ExtractAndParseInt(previousUnsolvedShotIdLink, regexShotId);
         }
 
-        private int GetCurrentShotId()
+        private int? GetCurrentShotId()
         {
             var currentShotIdString = document.GetElementbyId("nav_shots")
                                               .ChildNodes.Where(n => n.Name == "li" && n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "number"))
@@ -149,7 +113,7 @@ namespace WTM.Core.Application
             return ExtractAndParseInt(nextUnsolvedShotIdLink, regexShotId);
         }
 
-        private int GetLastShotId()
+        private int? GetLastShotId()
         {
             var LastShotIdLink = document.GetElementbyId("last_shot_link")
                                          .GetAttributeValue("href", string.Empty);
@@ -165,7 +129,7 @@ namespace WTM.Core.Application
             return ExtractValue(imageUrlSection, new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
         }
 
-        private DateTime GetPostedDate(Shot shot)
+        private DateTime? GetPostedDate(Shot shot)
         {
             DateTime date;
             var sectionDate = document.GetElementbyId("hidden_date").InnerText;
@@ -182,7 +146,7 @@ namespace WTM.Core.Application
                                     .InnerText;
         }
 
-        private int GetNumberOfSolver(HtmlAgilityPack.HtmlNode sectionShotInfo)
+        private int? GetNumberOfSolver(HtmlAgilityPack.HtmlNode sectionShotInfo)
         {
             var sectionNbSolved = sectionShotInfo.Descendants("li")
                                                  .FirstOrDefault(li => li.Attributes.Any(attr => attr.Name == "class" && attr.Value == "solved"))
@@ -199,7 +163,7 @@ namespace WTM.Core.Application
                                   .FirstOrDefault();
         }
 
-        private bool GetIsFavourited()
+        private bool? GetIsFavourited()
         {
             bool isFavourite = false;
 
@@ -211,17 +175,17 @@ namespace WTM.Core.Application
             return isFavourite;
         }
 
-        private bool GetIsBookmarked()
+        private bool? GetIsBookmarked()
         {
             return false;
         }
 
-        private bool GetIsVoteDeletation()
+        private bool? GetIsVoteDeletation()
         {
             return false;
         }
 
-        private bool GetIsSolutionAvailable()
+        private bool? GetIsSolutionAvailable()
         {
             return false;
         }
@@ -254,8 +218,8 @@ namespace WTM.Core.Application
                                                     .Descendants("script")
                                                     .Where(script => script.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
                                                     .FirstOrDefault(script => script.InnerText.Contains("This snapshot has been favourites"));
-            
-            if(numberOfFavouritedSection != null)
+
+            if (numberOfFavouritedSection != null)
             {
                 var value = ExtractAndParseInt(numberOfFavouritedSection.InnerText, new Regex(@"This snapshot has been favourited (\d*) time"));
                 numberOfFavourited = value.GetValueOrDefault(0);
@@ -264,52 +228,27 @@ namespace WTM.Core.Application
             return numberOfFavourited;
         }
 
-        /// /////////////////////////////////////////////////:
-
-        private string ExtractValue(string value, Regex regex)
+        private string GetDifficulty()
         {
-            string valueExtracted = value;
+            var isEasy = document.GetElementbyId("difficulty_easy")
+                                 .GetAttributeValue("checked", string.Empty)
+                                 .Equals("cheked");
+            if (isEasy)
+                return "easy";
 
-            var match = regex.Match(value);
-            value = match.Groups[1].Value;
+            var isMedium = document.GetElementbyId("difficulty_medium")
+                                 .GetAttributeValue("checked", string.Empty)
+                                 .Equals("cheked");
+            if (isMedium)
+                return "medium";
 
-            return value;
-        }
+            var isHard = document.GetElementbyId("difficulty_hard")
+                                 .GetAttributeValue("checked", string.Empty)
+                                 .Equals("cheked");
+            if (isHard)
+                return "hard";
 
-        private int? ExtractAndParseInt(string value, Regex regex)
-        {
-            var valueExctracted = ExtractValue(value, regex);
-
-            if (string.IsNullOrWhiteSpace(valueExctracted))
-                return null;
-
-            int valueConverted;
-            if (int.TryParse(valueExctracted, out valueConverted))
-                return valueConverted;
-
-            return null;
-        }
-
-        private DateTime ExtractAndParseDateTime(string value, Regex regex)
-        {
-            var valueExctracted = ExtractValue(value, regex);
-
-            DateTime valueConverted;
-            DateTime.TryParse(valueExctracted, out valueConverted);
-
-            return valueConverted;
-        }
-
-        protected override Uri MakeUri()
-        {
-            var url = string.Join("/", urlRoot, identifier, parameterShotId.ToString(CultureInfo.InvariantCulture));
-            var uri = new Uri(url);
-            return uri;
-        }
-
-        protected override void DoWorkInternal()
-        {
-            throw new NotImplementedException();
+            return "all";
         }
     }
 }

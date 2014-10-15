@@ -13,7 +13,7 @@
     <DefaultLanguage>fr-FR</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,8 +39,15 @@
     <Folder Include="Infrastructure\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Scrapper\BaseScrapper.cs" />
-    <Compile Include="Application\ShotScrapper.cs" />
+    <Compile Include="Application\Attributes\AuthenticatedUser.cs" />
+    <Compile Include="Application\Attributes\HtmlParserAttribute.cs" />
+    <Compile Include="Application\Attributes\MandatoryAttribute.cs" />
+    <Compile Include="Application\Attributes\NeedCallback.cs" />
+    <Compile Include="Application\HtmlParser.cs" />
+    <Compile Include="Application\Scrapper\Base\ScrapperT.cs" />
+    <Compile Include="Application\Scrapper\Base\BaseScrapper.cs" />
+    <Compile Include="Application\Scrapper\ShotScrapper.cs" />
+    <Compile Include="Application\WebClient.cs" />
     <Compile Include="Domain\BusinessEntities\Base\BaseClass.cs" />
     <Compile Include="Domain\BusinessEntities\Culture.cs" />
     <Compile Include="Domain\BusinessEntities\Movie.cs" />
@@ -48,12 +55,13 @@
     <Compile Include="Domain\BusinessEntities\SnapshotDifficulty.cs" />
     <Compile Include="Domain\BusinessEntities\Tag.cs" />
     <Compile Include="Domain\BusinessEntities\User.cs" />
+    <Compile Include="Domain\WebsiteEntities\Base\WebsiteEntityBase.cs" />
     <Compile Include="Domain\WebsiteEntities\Shot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack-PCL">
-      <HintPath>..\packages\HtmlAgilityPack-PCL.1.4.6\lib\HtmlAgilityPack-PCL.dll</HintPath>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\portable-net45+netcore45+wp8+MonoAndroid+MonoTouch\HtmlAgilityPack.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

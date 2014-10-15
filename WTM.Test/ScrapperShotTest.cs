@@ -20,9 +20,9 @@ namespace WTM.Test
             sw.Start();
 
             var file = "10.htm";
-            using(var fs = File.OpenRead(file))
+            using (var fs = File.OpenRead(file))
             {
-                shot = scrapper.Scrap(fs);
+                shot = scrapper.Scrappe(fs);
             }
 
             sw.Stop();
