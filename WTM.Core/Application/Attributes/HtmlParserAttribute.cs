@@ -9,23 +9,22 @@ namespace WTM.Core.Application.Attributes
 {
     public class HtmlParserAttribute : Attribute
     {
-        public string Pattern
+        public string jQuery { get; set; }
+
+        public string Pattern { get; set; }
+      
+        public bool PatternIsDefined 
         {
             get
             {
-                if (regex != null)
-                    regex.ToString();
-                return null;
-            }
-            set
-            {
-                regex = new Regex(value);
+                return string.IsNullOrEmpty(Pattern); ;
             }
         }
-        private Regex regex;
 
-        public string XPathExpression { get; set; }
-
-        public string jQuery { get; set; }
+        public HtmlParserAttribute(string jQuerySelector, string regexPattern = null)
+        {
+            jQuery = jQuery = jQuerySelector;
+            Pattern = regexPattern;
+        }
     }
 }

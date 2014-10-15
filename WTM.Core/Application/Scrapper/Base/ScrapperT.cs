@@ -42,13 +42,25 @@ namespace WTM.Core.Application
 
         protected abstract T Scrappe();
 
-        protected void Blop<T>()
+        private void Scrappe<T>()
         {
             var type = typeof(T);
-            var properties = type.GetTypeInfo().DeclaredProperties
-                                            .Where(p => p.CustomAttributes.Any(ca => ca.AttributeType == typeof(HtmlParserAttribute)));
+            var properties = type.GetTypeInfo()
+                                 .DeclaredProperties
+                                 .Where(p => p.CustomAttributes.Any());
 
-            var htmlParserProperty = properties as HtmlParserAttribute;
+            //foreach (var property in properties)
+            //{
+            //    var htmlParserAttr = property as HtmlParserAttribute;
+            //    if (htmlParserAttr != null)
+            //    {
+            //        var jQueryResult = htmlParserAttr.jQuery;
+            //        // TODO 
+            //    }
+
+            //    var authenticatedAttr = property as AuthenticatedUser;
+            //    var mandatoryAttr = property as MandatoryAttribute;
+            //}
         }
     }
 }
