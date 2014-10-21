@@ -1,19 +1,12 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using WTM.Core.Application.Scrapper;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application
 {
-    public class ShotScrapper : ScrapperT<Shot>
+    public class ShotScrapper : ScrapperT<IShot>
     {
         private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
@@ -28,7 +21,7 @@ namespace WTM.Core.Application
             get { return "shot"; }
         }
 
-        protected override Shot Scrappe()
+        protected override IShot Scrappe()
         {
             var shot = new Shot();
 
@@ -124,7 +117,7 @@ namespace WTM.Core.Application
             return ExtractAndParseInt(LastShotIdLink, regexShotId).Value;
         }
 
-        private string GetImageUrl(Shot shot)
+        private string GetImageUrl(IShot shot)
         {
             var imageUrlSection = document.DocumentNode.Descendants("script")
                                                        .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
@@ -133,7 +126,7 @@ namespace WTM.Core.Application
             return ExtractValue(imageUrlSection, new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
         }
 
-        private DateTime? GetPostedDate(Shot shot)
+        private DateTime? GetPostedDate(IShot shot)
         {
             DateTime date;
             var sectionDate = document.GetElementbyId("hidden_date").InnerText;

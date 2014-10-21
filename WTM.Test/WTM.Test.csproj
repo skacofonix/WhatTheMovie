@@ -60,6 +60,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Application\Scrapper\ScrapperMovieTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,7 +71,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Application\ScrapperShotTest.cs" />
+    <Compile Include="Application\Scrapper\ScrapperShotTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Application\StubWebClient.cs" />
     <Compile Include="Application\HtmlParserTest.cs" />

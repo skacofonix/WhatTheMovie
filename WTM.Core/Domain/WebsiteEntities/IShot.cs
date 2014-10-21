@@ -3,7 +3,7 @@ using WTM.Core.Domain.WebsiteEntities.Base;
 
 namespace WTM.Core.Domain.WebsiteEntities
 {
-    interface IShot : IWebsiteEntityBase
+    public interface IShot : IWebsiteEntityBase
     {
         System.Collections.Generic.List<string> Comments { get; set; }
         string Difficulty { get; set; }
