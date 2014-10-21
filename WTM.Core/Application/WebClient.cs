@@ -1,11 +1,10 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 
 namespace WTM.Core.Application
 {
-    internal class WebClient
+    internal class WebClient : IWebClient
     {
         public Stream GetStream(Uri uri)
         {

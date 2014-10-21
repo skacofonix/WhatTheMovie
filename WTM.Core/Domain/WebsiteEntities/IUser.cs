@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WTM.Core.Domain.WebsiteEntities.Base
+namespace WTM.Core.Domain.WebsiteEntities
 {
-    public class WebsiteEntityBase
+    interface IUser
     {
     }
 }

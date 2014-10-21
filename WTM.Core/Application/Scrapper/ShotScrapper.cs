@@ -19,6 +19,10 @@ namespace WTM.Core.Application
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
         private readonly Regex regexNumber = new Regex(@"([0-9]*)", RegexOptions.IgnorePatternWhitespace);
 
+        public ShotScrapper(IWebClient webClient, IHtmlParser htmlParser)
+            : base(webClient, htmlParser)
+        { }
+
         protected override string Identifier
         {
             get { return "shot"; }
@@ -49,15 +53,15 @@ namespace WTM.Core.Application
                 //shot.FirstSolver = GetFirstSolver(sectionShotInfo);
 
                 var sectionSolution = document.GetElementbyId("solve_station");
-                shot.IsFavourite = GetIsFavourited();
-                shot.IsBookmark = GetIsBookmarked();
-                shot.IsVoteDeletation = GetIsVoteDeletation();
-                shot.IsSolutionAvailible = GetIsSolutionAvailable();
+                //shot.IsFavourite = GetIsFavourited();
+                //shot.IsBookmark = GetIsBookmarked();
+                //shot.IsVoteDeletation = GetIsVoteDeletation();
+                //shot.IsSolutionAvailible = GetIsSolutionAvailable();
 
                 shot.Languages = GetLanguages(sectionSolution);
 
                 shot.Tags = GetTags();
-                shot.NbFavourited = GetNumberOfFavourited();
+                //shot.NbFavourited = GetNumberOfFavourited();
 
             }
             catch (Exception ex)

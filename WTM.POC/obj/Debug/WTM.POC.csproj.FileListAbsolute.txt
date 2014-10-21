@@ -1,0 +1,8 @@
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.POC\bin\Debug\WTM.POC.exe.config
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.POC\obj\Debug\WTM.POC.csprojResolveAssemblyReference.cache
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.POC\bin\Debug\WTM.POC.exe
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.POC\bin\Debug\WTM.POC.pdb
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.POC\bin\Debug\CsQuery.dll
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.POC\bin\Debug\CsQuery.xml
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.POC\obj\Debug\WTM.POC.exe
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.POC\obj\Debug\WTM.POC.pdb

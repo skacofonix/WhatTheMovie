@@ -1,0 +1,7 @@
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.DLL\obj\Debug\WTM.DLL.csprojResolveAssemblyReference.cache
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.DLL\bin\Debug\WTM.DLL.dll
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.DLL\bin\Debug\WTM.DLL.pdb
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.DLL\bin\Debug\CsQuery.dll
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.DLL\bin\Debug\CsQuery.xml
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.DLL\obj\Debug\WTM.DLL.dll
+C:\Repository\WhatTheMovie\WhatTheMovie\WTM.DLL\obj\Debug\WTM.DLL.pdb

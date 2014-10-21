@@ -13,11 +13,17 @@ using WTM.Core.Application.Attributes;
 namespace WTM.Core.Application
 {
     public abstract class ScrapperT<T> : BaseScrapper
-        where T : WebsiteEntityBase
+        where T : IWebsiteEntityBase
     {
-        private WebClient webClient = new WebClient();
-        private HtmlParser parser = new HtmlParser();
+        private IWebClient webClient;
+        private IHtmlParser htmlParser;
         protected HtmlDocument document;
+
+        public ScrapperT(IWebClient webClient, IHtmlParser htmlParser)
+        {
+            this.webClient = webClient;
+            this.htmlParser = htmlParser;
+        }
 
         protected override string Parameter
         {
@@ -30,13 +36,7 @@ namespace WTM.Core.Application
             this.parameter = parameter;
             var uri = this.MakeUri();
             var stream = webClient.GetStream(uri);
-            this.document = parser.GetHtmlDocument(stream);
-            return Scrappe();
-        }
-
-        public T Scrappe(Stream stream)
-        {
-            this.document = parser.GetHtmlDocument(stream);
+            this.document = htmlParser.GetHtmlDocument(stream);
             return Scrappe();
         }
 

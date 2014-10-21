@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WTM.Core\bin\Debug\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="NFluent">
       <HintPath>..\packages\NFluent.1.3.1.0\lib\net40\NFluent.dll</HintPath>
     </Reference>
@@ -56,8 +60,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ScrapperShotTest.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Application\ScrapperShotTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Application\StubWebClient.cs" />
+    <Compile Include="Application\HtmlParserTest.cs" />
+    <Compile Include="Application\WebClientTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
@@ -66,11 +83,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="10.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="10.htm" />
+  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
