@@ -24,7 +24,7 @@ namespace WTM.Test.Application.Scrapper
         [TestMethod]
         public void WhenStubWebClientThenParseCorrectlyShot()
         {
-            IWebClient webClient = new StubWebClient();
+            IWebClient webClient = new StubWebClientShot();
             IHtmlParser htmlParser = new HtmlParser();
             var scrapper = new ShotScrapper(webClient, htmlParser);
 

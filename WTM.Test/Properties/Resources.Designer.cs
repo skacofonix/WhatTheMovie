@@ -65,6 +65,25 @@ namespace WTM.Test.Properties {
         ///&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
         ///          &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
         ///
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;
+        ///
+        ///&lt;head&gt;
+        ///    &lt;script type=&quot;text/javascript&quot;&gt;var _sf_startpt=(new Date()).getTime()&lt;/script&gt;
+        ///    &lt;!-- META --&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+        ///    &lt;meta name=&quot;keywords&quot; content=&quot;movie quiz, film quiz, movies, movie, quiz, guess, film, films, puzzle, movie, gue [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        internal static string movie {
+            get {
+                return ResourceManager.GetString("movie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 
+        ///&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+        ///          &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+        ///
         ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot; style=&quot;background-color:#000000&quot;&gt;
         ///
         ///&lt;head&gt;
@@ -73,9 +92,9 @@ namespace WTM.Test.Properties {
         ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
         ///    &lt;meta name=&quot;keywords&quot; content=&quot;movie quiz, film quiz, movies, movie, quiz, guess [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
-        internal static string _10 {
+        internal static string shot10 {
             get {
-                return ResourceManager.GetString("_10", resourceCulture);
+                return ResourceManager.GetString("shot10", resourceCulture);
             }
         }
     }

@@ -73,7 +73,7 @@
     </Compile>
     <Compile Include="Application\Scrapper\ScrapperShotTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Application\StubWebClient.cs" />
+    <Compile Include="Application\StubWebClientShot.cs" />
     <Compile Include="Application\HtmlParserTest.cs" />
     <Compile Include="Application\WebClientTest.cs" />
   </ItemGroup>
@@ -97,7 +97,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="10.htm" />
+    <Content Include="Resources\movie.htm" />
+    <Content Include="Resources\shot10.htm" />
   </ItemGroup>
   <ItemGroup />
   <Choose>

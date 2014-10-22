@@ -37,7 +37,7 @@ namespace WTM.Test.Application
         [TestMethod]
         public void WhenFakeWebClientReturnMockStream()
         {
-            IWebClient webClient = new StubWebClient();
+            IWebClient webClient = new StubWebClientShot();
 
             using (var stream = webClient.GetStream(null))
             {

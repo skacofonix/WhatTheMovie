@@ -5,11 +5,11 @@ using WTM.Test.Properties;
 
 namespace WTM.Test.Application
 {
-    class StubWebClient : IWebClient
+    class StubWebClientShot : IWebClient
     {
         public System.IO.Stream GetStream(Uri uri)
         {
-            var htmlContent = Resources._10;
+            var htmlContent = Resources.shot10;
 
             var ms = new MemoryStream();
             var sw = new StreamWriter(ms);

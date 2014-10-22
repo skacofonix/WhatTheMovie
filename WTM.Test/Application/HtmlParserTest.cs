@@ -13,7 +13,7 @@ namespace WTM.Test.Application
         public void WhenGoodStreamThenParseCorrectly()
         {
             IHtmlParser htmlParser = new HtmlParser();
-            IWebClient webClient = new StubWebClient();
+            IWebClient webClient = new StubWebClientShot();
             var stream = webClient.GetStream(null);
 
             //var htmlDoc = htmlParser.GetHtmlDocument(stream);
