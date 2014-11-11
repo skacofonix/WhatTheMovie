@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.CorePCL.Domain.WebsiteEntities;
+using WTM.CorePCL.Domain.WebsiteEntities;
 
-namespace WTM.Core.Application
+namespace WTM.CorePCL.Application
 {
     public class ShotScrapper : ScrapperT<IShot>
     {

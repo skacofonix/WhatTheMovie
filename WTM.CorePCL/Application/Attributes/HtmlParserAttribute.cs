@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WTM.Core.Application.Attributes
+namespace WTM.CorePCL.Application.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class HtmlParserAttribute : Attribute

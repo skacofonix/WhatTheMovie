@@ -1,10 +1,10 @@
 ﻿using HtmlAgilityPack;
 using System.Linq;
-using WTM.Core.Application.Scrapper;
-using WTM.Core.Domain.WebsiteEntities.Base;
+using WTM.CorePCL.Application.Scrapper;
+using WTM.CorePCL.Domain.WebsiteEntities.Base;
 using System.Reflection;
 
-namespace WTM.Core.Application
+namespace WTM.CorePCL.Application
 {
     public abstract class ScrapperT<T> : BaseScrapper
         where T : IWebsiteEntityBase

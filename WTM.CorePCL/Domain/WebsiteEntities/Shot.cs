@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using WTM.Core.Application.Attributes;
+using WTM.CorePCL.Application.Attributes;
+using WTM.CorePCL.Domain.WebsiteEntities;
 
-namespace WTM.Core.Domain.WebsiteEntities
+namespace WTM.CorePCL.Domain.WebsiteEntities
 {
     public class Shot : IShot
     {

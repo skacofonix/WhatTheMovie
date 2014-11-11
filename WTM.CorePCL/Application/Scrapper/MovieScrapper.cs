@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.CorePCL.Domain.WebsiteEntities;
+using WTM.CorePCL.Domain.WebsiteEntities;
 
-namespace WTM.Core.Application.Scrapper
+namespace WTM.CorePCL.Application.Scrapper
 {
     public class MovieScrapper : ScrapperT<IMovie>
     {

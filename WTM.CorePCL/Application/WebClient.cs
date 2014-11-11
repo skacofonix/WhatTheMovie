@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 
-namespace WTM.Core.Application
+namespace WTM.CorePCL.Application
 {
     internal class WebClient : IWebClient
     {

@@ -1,7 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.IO;
 
-namespace WTM.Core.Application
+namespace WTM.CorePCL.Application
 {
     public class HtmlParser : IHtmlParser
     {

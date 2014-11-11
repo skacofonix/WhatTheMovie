@@ -1,4 +1,4 @@
-﻿namespace WTM.Core.Domain.BusinessEntities
+﻿namespace WTM.CorePCL.Domain.BusinessEntities
 {
     public enum SnapshotDifficulty
     {

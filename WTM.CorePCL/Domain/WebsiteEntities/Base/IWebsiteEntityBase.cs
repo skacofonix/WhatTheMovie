@@ -1,4 +1,4 @@
-﻿namespace WTM.Core.Domain.WebsiteEntities.Base
+﻿namespace WTM.CorePCL.Domain.WebsiteEntities.Base
 {
     public interface IWebsiteEntityBase
     {

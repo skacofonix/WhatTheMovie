@@ -8,8 +8,8 @@
     <ProjectGuid>{4BAA5F43-F837-449C-9C41-5EE9EE0F2DDC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WTM.Core</RootNamespace>
-    <AssemblyName>WTM.Core</AssemblyName>
+    <RootNamespace>WTM.CorePCL</RootNamespace>
+    <AssemblyName>WTM.CorePCL</AssemblyName>
     <DefaultLanguage>fr-FR</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -72,8 +72,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\Dependances\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack-PCL">
+      <HintPath>..\packages\HtmlAgilityPack-PCL.1.4.6\lib\HtmlAgilityPack-PCL.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

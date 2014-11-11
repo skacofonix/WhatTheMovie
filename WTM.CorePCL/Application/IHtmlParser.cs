@@ -1,4 +1,4 @@
-﻿namespace WTM.Core.Application
+﻿namespace WTM.CorePCL.Application
 {
     public interface IHtmlParser
     {

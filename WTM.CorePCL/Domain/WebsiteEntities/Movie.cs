@@ -1,4 +1,6 @@
-﻿namespace WTM.Core.Domain.WebsiteEntities
+﻿using WTM.CorePCL.Domain.WebsiteEntities;
+
+namespace WTM.CorePCL.Domain.WebsiteEntities
 {
     class Movie : IMovie
     {

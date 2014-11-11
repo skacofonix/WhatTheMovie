@@ -1,6 +1,6 @@
-﻿using WTM.Core.Domain.WebsiteEntities.Base;
+﻿using WTM.CorePCL.Domain.WebsiteEntities.Base;
 
-namespace WTM.Core.Domain.WebsiteEntities
+namespace WTM.CorePCL.Domain.WebsiteEntities
 {
     public interface IUser : IWebsiteEntityBase
     {

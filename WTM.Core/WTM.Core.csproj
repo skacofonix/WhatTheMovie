@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0A433949-DD18-4B4F-A31E-61415FC2A38A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WTM.Core</RootNamespace>
+    <AssemblyName>WTM.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\Dependances\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\Attributes\AuthenticatedUser.cs" />
+    <Compile Include="Application\Attributes\HtmlParserAttribute.cs" />
+    <Compile Include="Application\Attributes\MandatoryAttribute.cs" />
+    <Compile Include="Application\Attributes\NeedCallback.cs" />
+    <Compile Include="Application\Game.cs" />
+    <Compile Include="Application\HtmlParser.cs" />
+    <Compile Include="Application\IHtmlParser.cs" />
+    <Compile Include="Application\IWebClient.cs" />
+    <Compile Include="Application\Scrapper\Base\BaseScrapper.cs" />
+    <Compile Include="Application\Scrapper\Base\ScrapperT.cs" />
+    <Compile Include="Application\Scrapper\MovieScrapper.cs" />
+    <Compile Include="Application\Scrapper\ShotScrapper.cs" />
+    <Compile Include="Application\UserScrapper.cs" />
+    <Compile Include="Application\WebClient.cs" />
+    <Compile Include="Domain\BusinessEntities\Base\BaseClass.cs" />
+    <Compile Include="Domain\BusinessEntities\Culture.cs" />
+    <Compile Include="Domain\BusinessEntities\Movie.cs" />
+    <Compile Include="Domain\BusinessEntities\Shot.cs" />
+    <Compile Include="Domain\BusinessEntities\SnapshotDifficulty.cs" />
+    <Compile Include="Domain\BusinessEntities\Tag.cs" />
+    <Compile Include="Domain\BusinessEntities\User.cs" />
+    <Compile Include="Domain\WebsiteEntities\Base\IWebsiteEntityBase.cs" />
+    <Compile Include="Domain\WebsiteEntities\IMovie.cs" />
+    <Compile Include="Domain\WebsiteEntities\IShot.cs" />
+    <Compile Include="Domain\WebsiteEntities\IUser.cs" />
+    <Compile Include="Domain\WebsiteEntities\Movie.cs" />
+    <Compile Include="Domain\WebsiteEntities\Shot.cs" />
+    <Compile Include="Domain\WebsiteEntities\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
