@@ -76,7 +76,7 @@
     <Compile Include="Application\WebClientTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
+    <ProjectReference Include="..\WTM.CorePCL\WTM.CorePCL.csproj">
       <Project>{4baa5f43-f837-449c-9c41-5ee9ee0f2ddc}</Project>
       <Name>WTM.Core</Name>
     </ProjectReference>
