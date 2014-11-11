@@ -1,30 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace WTM.Core.Application.Attributes
 {
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class HtmlParserAttribute : Attribute
     {
-        public string jQuery { get; set; }
+        public string XPathExpression { get; private set; }
 
-        public string Pattern { get; set; }
+        public string RegexPattern { get; private set; }
       
         public bool PatternIsDefined 
         {
             get
             {
-                return string.IsNullOrEmpty(Pattern); ;
+                return string.IsNullOrEmpty(RegexPattern);
             }
         }
 
-        public HtmlParserAttribute(string jQuerySelector, string regexPattern = null)
+        public HtmlParserAttribute(string xPathExpression, string regexPattern = null)
         {
-            jQuery = jQuery = jQuerySelector;
-            Pattern = regexPattern;
+            XPathExpression = xPathExpression;
+            RegexPattern = regexPattern;
         }
     }
 }

@@ -1,15 +1,3 @@
 C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.csprojResolveAssemblyReference.cache
 C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.Properties.Resources.resources
 C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.csproj.GenerateResource.Cache
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\WTM.Test.dll
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\WTM.Test.pdb
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\HtmlAgilityPack.dll
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\NFluent.dll
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\nunit.framework.dll
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\WTM.Core.dll
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\WTM.Core.pdb
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\HtmlAgilityPack.pdb
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\NFluent.xml
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\bin\Debug\nunit.framework.xml
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.dll
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.pdb

@@ -35,7 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Application\Helpers\" />
     <Folder Include="Infrastructure\" />
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +42,7 @@
     <Compile Include="Application\Attributes\HtmlParserAttribute.cs" />
     <Compile Include="Application\Attributes\MandatoryAttribute.cs" />
     <Compile Include="Application\Attributes\NeedCallback.cs" />
+    <Compile Include="Application\Game.cs" />
     <Compile Include="Application\HtmlParser.cs" />
     <Compile Include="Application\IHtmlParser.cs" />
     <Compile Include="Application\IWebClient.cs" />
@@ -69,12 +69,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\portable-net45+netcore45+wp8+MonoAndroid+MonoTouch\HtmlAgilityPack.dll</HintPath>
-    </Reference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\Dependances\HtmlAgilityPack.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

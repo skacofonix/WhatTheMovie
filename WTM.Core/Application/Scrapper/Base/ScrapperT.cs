@@ -1,14 +1,8 @@
 ﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WTM.Core.Application.Scrapper;
 using WTM.Core.Domain.WebsiteEntities.Base;
 using System.Reflection;
-using WTM.Core.Application.Attributes;
 
 namespace WTM.Core.Application
 {
@@ -54,7 +48,7 @@ namespace WTM.Core.Application
             //    var htmlParserAttr = property as HtmlParserAttribute;
             //    if (htmlParserAttr != null)
             //    {
-            //        var jQueryResult = htmlParserAttr.jQuery;
+            //        var jQueryResult = htmlParserAttr.XPathExpression;
             //        // TODO 
             //    }
 

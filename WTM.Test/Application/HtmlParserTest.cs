@@ -1,8 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WTM.Core.Application;
-using NFluent;
-using HtmlAgilityPack;
 
 namespace WTM.Test.Application
 {

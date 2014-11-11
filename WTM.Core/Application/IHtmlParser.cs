@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WTM.Core.Application
+﻿namespace WTM.Core.Application
 {
     public interface IHtmlParser
     {

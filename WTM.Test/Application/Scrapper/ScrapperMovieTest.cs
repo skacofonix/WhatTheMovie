@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WTM.Core.Application;
 using WTM.Core.Domain.WebsiteEntities;
 using WTM.Core.Application.Scrapper;

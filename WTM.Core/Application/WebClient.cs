@@ -27,10 +27,11 @@ namespace WTM.Core.Application
 
         private WebResponse GetWebResponse(HttpWebRequest webRequest)
         {
-            var asyncResult = webRequest.BeginGetResponse(new AsyncCallback(state =>
-            {
-            }), null);
-            return webRequest.EndGetResponse(asyncResult);
+            var task = webRequest.GetResponseAsync();
+
+            task.Wait();
+
+            return task.Result;
         }
 
         private Stream GetStream(WebResponse webResponse)
