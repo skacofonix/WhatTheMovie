@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using WTM.Core.Domain.WebsiteEntities;
 
-namespace WTM.Core.Application
+namespace WTM.Core.Application.Scrapper
 {
     public class ShotScrapper : ScrapperT<IShot>
     {
@@ -12,14 +12,14 @@ namespace WTM.Core.Application
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
         private readonly Regex regexNumber = new Regex(@"([0-9]*)", RegexOptions.IgnorePatternWhitespace);
 
-        public ShotScrapper(IWebClient webClient, IHtmlParser htmlParser)
-            : base(webClient, htmlParser)
-        { }
-
         protected override string Identifier
         {
             get { return "shot"; }
         }
+
+        public ShotScrapper(IWebClient webClient, IHtmlParser htmlParser)
+            : base(webClient, htmlParser)
+        { }
 
         protected override IShot Scrappe()
         {
