@@ -57,7 +57,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Application\Scrapper\ShotScrapperTest.cs" />
+    <Compile Include="Application\WebClientFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -67,6 +73,18 @@
       <Project>{0a433949-dd18-4b4f-a31e-61415fc2a38a}</Project>
       <Name>WTM.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\movie.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shot10.htm" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using WTM.CorePCL.Domain.WebsiteEntities.Base;
 
 namespace WTM.CorePCL.Domain.WebsiteEntities
 {
     public interface IShot : IWebsiteEntityBase
     {
-        System.Collections.Generic.List<string> Comments { get; set; }
+        List<string> Comments { get; set; }
         string Difficulty { get; set; }
         int? FirstShotId { get; set; }
         string FirstSolver { get; set; }
@@ -17,7 +18,7 @@ namespace WTM.CorePCL.Domain.WebsiteEntities
         bool? IsSolutionAvailible { get; set; }
         bool? IsSolved { get; set; }
         bool? IsVoteDeletation { get; set; }
-        System.Collections.Generic.List<string> Languages { get; set; }
+        List<string> Languages { get; set; }
         int? LastShotId { get; set; }
         string MovieTitle { get; set; }
         int? NbFavourited { get; set; }
@@ -33,6 +34,6 @@ namespace WTM.CorePCL.Domain.WebsiteEntities
         int? RemainingDaysBeforeSolution { get; set; }
         int? ShotId { get; set; }
         DateTime SolutionAvailableDate { get; set; }
-        System.Collections.Generic.List<string> Tags { get; set; }
+        List<string> Tags { get; set; }
     }
 }

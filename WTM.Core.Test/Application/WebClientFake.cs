@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using WTM.CorePCL.Application;
-using WTM.CorePCL.Test.Properties;
+using WTM.Core.Application;
+using WTM.Core.Test.Properties;
 
-namespace WTM.CorePCL.Test.Application
+namespace WTM.Core.Test.Application
 {
-    class StubWebClientShot : IWebClient
+    internal class WebClientFake : IWebClient
     {
         public Stream GetStream(Uri uri)
         {

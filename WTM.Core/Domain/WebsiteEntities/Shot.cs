@@ -7,7 +7,7 @@ namespace WTM.Core.Domain.WebsiteEntities
     public class Shot : IShot
     {
         #region Navigation
-        
+
         public int? FirstShotId { get; set; }
 
         public int? PreviousShotId { get; set; }

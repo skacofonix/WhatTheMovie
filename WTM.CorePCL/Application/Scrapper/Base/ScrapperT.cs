@@ -28,9 +28,9 @@ namespace WTM.CorePCL.Application
         public T Scrappe(string parameter = null)
         {
             this.parameter = parameter;
-            var uri = this.MakeUri();
+            var uri = MakeUri();
             var stream = webClient.GetStream(uri);
-            this.document = htmlParser.GetHtmlDocument(stream);
+            document = htmlParser.GetHtmlDocument(stream);
             return Scrappe();
         }
 

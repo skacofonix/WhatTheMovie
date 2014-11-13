@@ -1,7 +1,10 @@
-﻿namespace WTM.Core.Application
+﻿using System.IO;
+using HtmlAgilityPack;
+
+namespace WTM.Core.Application
 {
     public interface IHtmlParser
     {
-        HtmlAgilityPack.HtmlDocument GetHtmlDocument(System.IO.Stream stream);
+        HtmlDocument GetHtmlDocument(Stream stream);
     }
 }

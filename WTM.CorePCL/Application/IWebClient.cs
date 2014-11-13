@@ -1,9 +1,10 @@
 ﻿using System;
+using System.IO;
 
 namespace WTM.CorePCL.Application
 {
     public interface IWebClient
     {
-        System.IO.Stream GetStream(Uri uri);
+        Stream GetStream(Uri uri);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using WTM.CorePCL.Domain.WebsiteEntities;
 using WTM.CorePCL.Domain.WebsiteEntities;
 
@@ -144,7 +145,7 @@ namespace WTM.CorePCL.Application
                                     .InnerText;
         }
 
-        private int? GetNumberOfSolver(HtmlAgilityPack.HtmlNode sectionShotInfo)
+        private int? GetNumberOfSolver(HtmlNode sectionShotInfo)
         {
             var sectionNbSolved = sectionShotInfo.Descendants("li")
                                                  .FirstOrDefault(li => li.Attributes.Any(attr => attr.Name == "class" && attr.Value == "solved"))
@@ -152,7 +153,7 @@ namespace WTM.CorePCL.Application
             return ExtractAndParseInt(sectionNbSolved, new Regex(@"status: solved \((\d*)\)")).GetValueOrDefault(0);
         }
 
-        private string GetFirstSolver(HtmlAgilityPack.HtmlNode sectionShotInfo)
+        private string GetFirstSolver(HtmlNode sectionShotInfo)
         {
             return sectionShotInfo.Descendants("li")
                                   .FirstOrDefault(li => li.InnerText.StartsWith("first solved by:"))
@@ -188,7 +189,7 @@ namespace WTM.CorePCL.Application
             return false;
         }
 
-        private List<string> GetLanguages(HtmlAgilityPack.HtmlNode sectionSolution)
+        private List<string> GetLanguages(HtmlNode sectionSolution)
         {
             var regexLanguage = new Regex("//static.whatthemovie.com/images/flags/([a-z]{2,3}).png");
             return sectionSolution.Descendants("ul")

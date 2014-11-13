@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Scrapper
@@ -21,49 +22,49 @@ namespace WTM.Core.Application.Scrapper
             : base(webClient, htmlParser)
         { }
 
-        protected override IShot Scrappe()
-        {
-            var shot = new Shot();
+        //protected override IShot Scrappe()
+        //{
+        //    var shot = new Shot();
 
-            try
-            {
-                shot.FirstShotId = GetFirstShotId();
-                shot.PreviousShotId = GetPreviousShotId();
-                shot.PreviousUnsolvedShotId = GetPreviousUnsolvedShotId();
-                shot.ShotId = GetCurrentShotId();
-                shot.NextShotId = GetNextShotId();
-                shot.PreviousUnsolvedShotId = GetNextUnsolvedShotId();
-                shot.LastShotId = GetLastShotId();
+        //    try
+        //    {
+        //        shot.FirstShotId = GetFirstShotId();
+        //        shot.PreviousShotId = GetPreviousShotId();
+        //        shot.PreviousUnsolvedShotId = GetPreviousUnsolvedShotId();
+        //        shot.ShotId = GetCurrentShotId();
+        //        shot.NextShotId = GetNextShotId();
+        //        shot.PreviousUnsolvedShotId = GetNextUnsolvedShotId();
+        //        shot.LastShotId = GetLastShotId();
 
-                shot.ImageUrl = GetImageUrl(shot);
-                shot.PostedDate = GetPostedDate(shot);
-                //shot.PostedBy = GetPostedBy();
+        //        shot.ImageUrl = GetImageUrl(shot);
+        //        shot.PostedDate = GetPostedDate(shot);
+        //        //shot.PostedBy = GetPostedBy();
 
-                var sectionShotInfo = document.GetElementbyId("main_shot")
-                                              .Descendants("ul")
-                                              .FirstOrDefault(ul => ul.Attributes.Any(attr => attr.Name == "class" && attr.Value == "nav_shotinfo"));
-                shot.NbSolver = GetNumberOfSolver(sectionShotInfo);
-                //shot.FirstSolver = GetFirstSolver(sectionShotInfo);
+        //        var sectionShotInfo = document.GetElementbyId("main_shot")
+        //                                      .Descendants("ul")
+        //                                      .FirstOrDefault(ul => ul.Attributes.Any(attr => attr.Name == "class" && attr.Value == "nav_shotinfo"));
+        //        shot.NbSolver = GetNumberOfSolver(sectionShotInfo);
+        //        //shot.FirstSolver = GetFirstSolver(sectionShotInfo);
 
-                var sectionSolution = document.GetElementbyId("solve_station");
-                //shot.IsFavourite = GetIsFavourited();
-                //shot.IsBookmark = GetIsBookmarked();
-                //shot.IsVoteDeletation = GetIsVoteDeletation();
-                //shot.IsSolutionAvailible = GetIsSolutionAvailable();
+        //        var sectionSolution = document.GetElementbyId("solve_station");
+        //        //shot.IsFavourite = GetIsFavourited();
+        //        //shot.IsBookmark = GetIsBookmarked();
+        //        //shot.IsVoteDeletation = GetIsVoteDeletation();
+        //        //shot.IsSolutionAvailible = GetIsSolutionAvailable();
 
-                shot.Languages = GetLanguages(sectionSolution);
+        //        shot.Languages = GetLanguages(sectionSolution);
 
-                shot.Tags = GetTags();
-                //shot.NbFavourited = GetNumberOfFavourited();
+        //        shot.Tags = GetTags();
+        //        //shot.NbFavourited = GetNumberOfFavourited();
 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
 
-            return shot;
-        }
+        //    return shot;
+        //}
 
         private int? GetFirstShotId()
         {
@@ -130,8 +131,7 @@ namespace WTM.Core.Application.Scrapper
         {
             DateTime date;
             var sectionDate = document.GetElementbyId("hidden_date").InnerText;
-            if (DateTime.TryParse(sectionDate, out date))
-                shot.PostedDate = date;
+            DateTime.TryParse(sectionDate, out date);
             return date;
         }
 
@@ -143,7 +143,7 @@ namespace WTM.Core.Application.Scrapper
                                     .InnerText;
         }
 
-        private int? GetNumberOfSolver(HtmlAgilityPack.HtmlNode sectionShotInfo)
+        private int? GetNumberOfSolver(HtmlNode sectionShotInfo)
         {
             var sectionNbSolved = sectionShotInfo.Descendants("li")
                                                  .FirstOrDefault(li => li.Attributes.Any(attr => attr.Name == "class" && attr.Value == "solved"))
@@ -151,7 +151,7 @@ namespace WTM.Core.Application.Scrapper
             return ExtractAndParseInt(sectionNbSolved, new Regex(@"status: solved \((\d*)\)")).GetValueOrDefault(0);
         }
 
-        private string GetFirstSolver(HtmlAgilityPack.HtmlNode sectionShotInfo)
+        private string GetFirstSolver(HtmlNode sectionShotInfo)
         {
             return sectionShotInfo.Descendants("li")
                                   .FirstOrDefault(li => li.InnerText.StartsWith("first solved by:"))
@@ -187,7 +187,7 @@ namespace WTM.Core.Application.Scrapper
             return false;
         }
 
-        private List<string> GetLanguages(HtmlAgilityPack.HtmlNode sectionSolution)
+        private List<string> GetLanguages(HtmlNode sectionSolution)
         {
             var regexLanguage = new Regex("//static.whatthemovie.com/images/flags/([a-z]{2,3}).png");
             return sectionSolution.Descendants("ul")

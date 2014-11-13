@@ -1,8 +1,10 @@
 ﻿using HtmlAgilityPack;
 using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using WTM.Core.Application.Attributes;
 using WTM.Core.Application.Scrapper;
 using WTM.Core.Domain.WebsiteEntities.Base;
-using System.Reflection;
 
 namespace WTM.Core.Application
 {
@@ -28,33 +30,50 @@ namespace WTM.Core.Application
         public T Scrappe(string parameter = null)
         {
             this.parameter = parameter;
-            var uri = this.MakeUri();
+            var uri = MakeUri();
             var stream = webClient.GetStream(uri);
-            this.document = htmlParser.GetHtmlDocument(stream);
+            document = htmlParser.GetHtmlDocument(stream);
             return Scrappe();
         }
 
-        protected abstract T Scrappe();
-
-        private void Scrappe<T>()
+        protected virtual T Scrappe()
         {
-            var type = typeof(T);
-            var properties = type.GetTypeInfo()
-                                 .DeclaredProperties
-                                 .Where(p => p.CustomAttributes.Any());
+            var properties = typeof(T).GetTypeInfo().DeclaredProperties;
 
-            //foreach (var property in properties)
-            //{
-            //    var htmlParserAttr = property as HtmlParserAttribute;
-            //    if (htmlParserAttr != null)
-            //    {
-            //        var jQueryResult = htmlParserAttr.XPathExpression;
-            //        // TODO 
-            //    }
+            foreach (var property in properties)
+            {
+                string stringValue = null;
+                var htmlParserAttr = property.GetCustomAttribute<HtmlParserAttribute>();
 
-            //    var authenticatedAttr = property as AuthenticatedUser;
-            //    var mandatoryAttr = property as MandatoryAttribute;
-            //}
+                if (htmlParserAttr != null)
+                {
+                    var xPath = htmlParserAttr.XPathExpression;
+                    
+                    var navigator = document.CreateNavigator();
+                    var xPathNode = navigator.Select(xPath);
+                    
+                    if (xPathNode.MoveNext())
+                    {
+                        var tagValue = xPathNode.Current.InnerXml;
+
+                        var pattern = htmlParserAttr.RegexPattern;
+                        if (!string.IsNullOrEmpty(pattern))
+                        {
+                            var regex = new Regex(pattern);
+                            var match = regex.Match(tagValue);
+                            stringValue = match.Groups[1].Value;
+                        }
+                        else
+                        {
+                            stringValue = tagValue;
+                        }
+                    }
+                }
+
+                var authenticatedAttr = property.GetCustomAttribute<AuthenticatedUser>();
+                var mandatoryAttr = property.GetCustomAttribute<MandatoryAttribute>();
+            }
+            return default(T);
         }
     }
 }
