@@ -1,4 +1,5 @@
-﻿using WTM.Core.Domain.WebsiteEntities;
+﻿using WTM.Core.Application.Scrapper.Base;
+using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application
 {
@@ -13,13 +14,11 @@ namespace WTM.Core.Application
             : base(webClient, htmlParser)
         { }
 
-        protected override IUser Scrappe(IUser instance)
+        protected override void Scrappe(IUser instance)
         {
             var user = new User();
 
             // TODO
-
-            return user;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using WTM.Core.Application.Attributes;
+using WTM.Core.Application.Scrapper.Base;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Scrapper
@@ -13,7 +14,6 @@ namespace WTM.Core.Application.Scrapper
     {
         private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
-        private readonly Regex regexNumber = new Regex(@"([0-9]*)", RegexOptions.IgnorePatternWhitespace);
 
         protected override string Identifier
         {
@@ -24,83 +24,30 @@ namespace WTM.Core.Application.Scrapper
             : base(webClient, htmlParser)
         { }
 
-        protected override IShot Scrappe(IShot instance)
-        {
-            var properties = instance.GetType().GetTypeInfo().DeclaredProperties;
-
-            foreach (var property in properties)
-            {
-
-                var htmlParserAttr = property.GetCustomAttribute<HtmlParserAttribute>();
-
-                if (htmlParserAttr != null)
-                {
-                    var xPath = htmlParserAttr.XPathExpression;
-
-                    var navigator = document.CreateNavigator();
-                    if (navigator != null)
-                    {
-                        var xPathNode = navigator.Select(xPath);
-
-                        if (xPathNode.MoveNext())
-                        {
-                            var tagValue = xPathNode.Current.InnerXml;
-                            string stringValue;
-
-                            var pattern = htmlParserAttr.RegexPattern;
-                            if (!string.IsNullOrEmpty(pattern))
-                            {
-                                var regex = new Regex(pattern);
-                                var match = regex.Match(tagValue);
-                                stringValue = match.Groups[1].Value;
-                            }
-                            else
-                            {
-                                stringValue = tagValue;
-                            }
-
-                            var propertyType = property.PropertyType;
-
-                            if (propertyType == typeof (int?))
-                                propertyType = typeof (int);
-
-                            var convertedType = Convert.ChangeType(stringValue, propertyType);
-
-                            property.SetValue(instance, convertedType);
-                        }
-                    }
-                }
-
-                var authenticatedAttr = property.GetCustomAttribute<AuthenticatedUser>();
-                var mandatoryAttr = property.GetCustomAttribute<MandatoryAttribute>();
-            }
-            return instance;
-        }
-
         int? GetFirstShotId()
         {
-            var firstShotIdLink = document.GetElementbyId("first_shot_link")
+            var firstShotIdLink = Document.GetElementbyId("first_shot_link")
                                           .GetAttributeValue("href", string.Empty);
             return ExtractAndParseInt(firstShotIdLink, regexShotId);
         }
 
         private int? GetPreviousShotId()
         {
-            var previousShotIdLink = document.GetElementbyId("prev_shot")
+            var previousShotIdLink = Document.GetElementbyId("prev_shot")
                                              .GetAttributeValue("href", string.Empty);
             return ExtractAndParseInt(previousShotIdLink, regexShotId);
         }
 
         private int? GetPreviousUnsolvedShotId()
         {
-            var previousUnsolvedShotIdLink = document.GetElementbyId("prev_unsolved_shot")
+            var previousUnsolvedShotIdLink = Document.GetElementbyId("prev_unsolved_shot")
                                                      .GetAttributeValue("href", string.Empty);
             return ExtractAndParseInt(previousUnsolvedShotIdLink, regexShotId);
         }
 
         private int? GetCurrentShotId()
         {
-            var currentShotIdString = document.GetElementbyId("nav_shots")
+            var currentShotIdString = Document.GetElementbyId("nav_shots")
                                               .ChildNodes.Where(n => n.Name == "li" && n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "number"))
                                               .FirstOrDefault()
                                               .InnerText;
@@ -110,28 +57,28 @@ namespace WTM.Core.Application.Scrapper
 
         private int? GetNextShotId()
         {
-            var nextShotId = document.GetElementbyId("next_shot")
+            var nextShotId = Document.GetElementbyId("next_shot")
                                      .GetAttributeValue("href", string.Empty);
             return ExtractAndParseInt(nextShotId, regexShotId);
         }
 
         private int? GetNextUnsolvedShotId()
         {
-            var nextUnsolvedShotIdLink = document.GetElementbyId("next_unsolved_shot")
+            var nextUnsolvedShotIdLink = Document.GetElementbyId("next_unsolved_shot")
                                                  .GetAttributeValue("href", string.Empty);
             return ExtractAndParseInt(nextUnsolvedShotIdLink, regexShotId);
         }
 
         private int? GetLastShotId()
         {
-            var LastShotIdLink = document.GetElementbyId("last_shot_link")
+            var LastShotIdLink = Document.GetElementbyId("last_shot_link")
                                          .GetAttributeValue("href", string.Empty);
             return ExtractAndParseInt(LastShotIdLink, regexShotId).Value;
         }
 
         private string GetImageUrl(IShot shot)
         {
-            var imageUrlSection = document.DocumentNode.Descendants("script")
+            var imageUrlSection = Document.DocumentNode.Descendants("script")
                                                        .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
                                                        .Select(s => s.InnerText)
                                                        .FirstOrDefault(w => w.Contains("var imageSrc"));
@@ -141,14 +88,14 @@ namespace WTM.Core.Application.Scrapper
         private DateTime? GetPostedDate(IShot shot)
         {
             DateTime date;
-            var sectionDate = document.GetElementbyId("hidden_date").InnerText;
+            var sectionDate = Document.GetElementbyId("hidden_date").InnerText;
             DateTime.TryParse(sectionDate, out date);
             return date;
         }
 
         private string GetPostedBy()
         {
-            return document.GetElementbyId("postername")
+            return Document.GetElementbyId("postername")
                                     .Descendants("a")
                                     .FirstOrDefault()
                                     .InnerText;
@@ -175,7 +122,7 @@ namespace WTM.Core.Application.Scrapper
         {
             bool isFavourite = false;
 
-            var isFavouriteOnclickContent = document.GetElementbyId("favbutton")
+            var isFavouriteOnclickContent = Document.GetElementbyId("favbutton")
                                                     .GetAttributeValue("onclick", string.Empty);
             var value = ExtractValue(isFavouriteOnclickContent, new Regex(@"new Ajax.Request\('/shot/\d*/(fav|unfav)'"));
             isFavourite = (value == "unfav");
@@ -211,7 +158,7 @@ namespace WTM.Core.Application.Scrapper
 
         private List<string> GetTags()
         {
-            return document.GetElementbyId("shot_tag_list")
+            return Document.GetElementbyId("shot_tag_list")
                            .Descendants("a")
                            .Where(a => a.Attributes.Any(attr => attr.Name == "href" && attr.Value.StartsWith("/search?t=tag")))
                            .Select(s => s.InnerText)
@@ -222,7 +169,7 @@ namespace WTM.Core.Application.Scrapper
         {
             int numberOfFavourited = 0;
 
-            var numberOfFavouritedSection = document.GetElementbyId("shot_tags")
+            var numberOfFavouritedSection = Document.GetElementbyId("shot_tags")
                                                     .Descendants("script")
                                                     .Where(script => script.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
                                                     .FirstOrDefault(script => script.InnerText.Contains("This snapshot has been favourites"));
@@ -238,19 +185,19 @@ namespace WTM.Core.Application.Scrapper
 
         private string GetDifficulty()
         {
-            var isEasy = document.GetElementbyId("difficulty_easy")
+            var isEasy = Document.GetElementbyId("difficulty_easy")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
             if (isEasy)
                 return "easy";
 
-            var isMedium = document.GetElementbyId("difficulty_medium")
+            var isMedium = Document.GetElementbyId("difficulty_medium")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
             if (isMedium)
                 return "medium";
 
-            var isHard = document.GetElementbyId("difficulty_hard")
+            var isHard = Document.GetElementbyId("difficulty_hard")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
             if (isHard)

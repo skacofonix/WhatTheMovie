@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using WTM.Core.Application.Attributes;
 using WTM.Core.Domain.WebsiteEntities.Base;
 
 namespace WTM.Core.Domain.WebsiteEntities
@@ -9,38 +8,28 @@ namespace WTM.Core.Domain.WebsiteEntities
     {
         #region Navigation
 
-        [HtmlParser(@"//a[@id='first_shot_link']/@href", @"/shot/(\d)")]
         int? FirstShotId { get; }
 
-        [HtmlParser(@"//a[@id='prev_shot_link']/@href", @"/shot/(\d)")]
         int? PreviousShotId { get; }
 
-        [HtmlParser(@"//li[@id='prev_unsolved_shot']/a/@href", @"/shot/(\d)")]
         int? PreviousUnsolvedShotId { get; }
 
-        [HtmlParser(@"//li[@class='number']", @"(\d)")]
         int? ShotId { get; }
 
-        [HtmlParser(@"//li[@id='next_unsolved_shot']/a/@href", @"/shot/(\d)")]
         int? NextUnsolvedShotId { get; }
 
-        [HtmlParser(@"//a[@id='next_shot_link']/@href", @"/shot/(\d)")]
         int? NextShotId { get; }
 
-        [HtmlParser(@"//a[@id='last_shot_link']/@href", @"/shot/(\d)")]
         int? LastShotId { get; }
 
         #endregion
 
         #region Snapshot
 
-        [HtmlParser(@"//div[@id='hidden_date']")]
         DateTime? PostedDate { get; }
 
-        [HtmlParser(@"//li[@id='postername']/a")]
         string PostedBy { get; }
 
-        //[HtmlParser(@"//li[@id='postername']/a")]
         string FirstSolver { get; }
 
         bool? IsSolved { get; }

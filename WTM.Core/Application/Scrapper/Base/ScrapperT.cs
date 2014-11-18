@@ -1,21 +1,20 @@
 ﻿using HtmlAgilityPack;
-using System.Linq;
+using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using WTM.Core.Application.Attributes;
-using WTM.Core.Application.Scrapper;
 using WTM.Core.Domain.WebsiteEntities.Base;
 
-namespace WTM.Core.Application
+namespace WTM.Core.Application.Scrapper.Base
 {
     public abstract class ScrapperT<T> : BaseScrapper
         where T : IWebsiteEntityBase
     {
-        private IWebClient webClient;
-        private IHtmlParser htmlParser;
-        protected HtmlDocument document;
+        private readonly IWebClient webClient;
+        private readonly IHtmlParser htmlParser;
+        protected HtmlDocument Document;
 
-        public ScrapperT(IWebClient webClient, IHtmlParser htmlParser)
+        protected ScrapperT(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             this.htmlParser = htmlParser;
@@ -27,34 +26,32 @@ namespace WTM.Core.Application
         }
         private string parameter;
 
-        public T Scrappe(T instance, string parameter = null)
+        public void Scrappe(T instance, string parameter = null)
         {
             this.parameter = parameter;
             var uri = MakeUri();
             var stream = webClient.GetStream(uri);
-            document = htmlParser.GetHtmlDocument(stream);
-            return Scrappe(instance);
+            Document = htmlParser.GetHtmlDocument(stream);
+            Scrappe(instance);
         }
 
-        protected virtual T Scrappe(T instance)
+        protected virtual void Scrappe(T instance)
         {
-            var properties = typeof(T).GetTypeInfo().DeclaredProperties;
+            var properties = instance.GetType().GetTypeInfo().DeclaredProperties;
 
             foreach (var property in properties)
             {
-                var propertyType = property.PropertyType;
-
                 var htmlParserAttr = property.GetCustomAttribute<HtmlParserAttribute>();
 
                 if (htmlParserAttr != null)
                 {
                     var xPath = htmlParserAttr.XPathExpression;
-                    
-                    var navigator = document.CreateNavigator();
+
+                    var navigator = Document.CreateNavigator();
                     if (navigator != null)
                     {
                         var xPathNode = navigator.Select(xPath);
-                    
+
                         if (xPathNode.MoveNext())
                         {
                             var tagValue = xPathNode.Current.InnerXml;
@@ -72,9 +69,15 @@ namespace WTM.Core.Application
                                 stringValue = tagValue;
                             }
 
-                            // TODO converssion here ?
+                            object convertedType = null;
+                            if (!string.IsNullOrEmpty(stringValue))
+                            {
+                                var propertyType = property.PropertyType;
+                                propertyType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+                                convertedType = Convert.ChangeType(stringValue, propertyType);
+                            }
 
-                            property.SetValue(instance, stringValue);
+                            property.SetValue(instance, convertedType);
                         }
                     }
                 }
@@ -82,7 +85,6 @@ namespace WTM.Core.Application
                 var authenticatedAttr = property.GetCustomAttribute<AuthenticatedUser>();
                 var mandatoryAttr = property.GetCustomAttribute<MandatoryAttribute>();
             }
-            return default(T);
         }
     }
 }

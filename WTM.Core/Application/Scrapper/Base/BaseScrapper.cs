@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace WTM.Core.Application.Scrapper
+namespace WTM.Core.Application.Scrapper.Base
 {
     public abstract class BaseScrapper
     {
-        protected const string host = "www.whatthemovie.com";
+        private const string Host = "www.whatthemovie.com";
         protected abstract string Identifier { get; }
         protected abstract string Parameter { get; }
 
         protected virtual Uri MakeUri()
         {
-            var uriBuilder = new UriBuilder("http", host, 80, Identifier + "/" + Parameter);
+            var uriBuilder = new UriBuilder("http", Host, 80, Identifier + "/" + Parameter);
             var uri = uriBuilder.Uri;
             return uri;
         }
@@ -19,7 +19,7 @@ namespace WTM.Core.Application.Scrapper
         protected T TryParseElement<T>(Func<T> func)
             where T : class
         {
-            T value = null;
+            T value;
 
             try
             {
@@ -36,12 +36,10 @@ namespace WTM.Core.Application.Scrapper
 
         protected string ExtractValue(string value, Regex regex)
         {
-            string valueExtracted = value;
-
             var match = regex.Match(value);
-            value = match.Groups[1].Value;
+            var valueExtracted = match.Groups[1].Value;
 
-            return value;
+            return valueExtracted;
         }
 
         protected int? ExtractAndParseInt(string value, Regex regex)

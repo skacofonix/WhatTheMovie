@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using WTM.Core.Application.Scrapper.Base;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Scrapper
@@ -15,11 +16,11 @@ namespace WTM.Core.Application.Scrapper
             : base(webClient, htmlParser)
         { }
 
-        protected override IMovie Scrappe(IMovie instance)
+        protected override void Scrappe(IMovie instance)
         {
             var movie = new Movie();
 
-            var headerTitleSection = document.GetElementbyId("main_white")
+            var headerTitleSection = Document.GetElementbyId("main_white")
                                              .Descendants("div")
                                              .FirstOrDefault(d => d.Attributes.Any(attr => attr.Name == "class" && attr.Value == "header clearfix"));
 
@@ -33,8 +34,6 @@ namespace WTM.Core.Application.Scrapper
             movie.OriginalTitle = GetOriginalTitle();
 
             // TODO
-
-            return movie;
         }
 
         private string GetOriginalTitle()
