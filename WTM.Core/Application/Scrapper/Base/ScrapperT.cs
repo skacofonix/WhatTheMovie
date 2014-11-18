@@ -27,22 +27,23 @@ namespace WTM.Core.Application
         }
         private string parameter;
 
-        public T Scrappe(string parameter = null)
+        public T Scrappe(T instance, string parameter = null)
         {
             this.parameter = parameter;
             var uri = MakeUri();
             var stream = webClient.GetStream(uri);
             document = htmlParser.GetHtmlDocument(stream);
-            return Scrappe();
+            return Scrappe(instance);
         }
 
-        protected virtual T Scrappe()
+        protected virtual T Scrappe(T instance)
         {
             var properties = typeof(T).GetTypeInfo().DeclaredProperties;
 
             foreach (var property in properties)
             {
-                string stringValue = null;
+                var propertyType = property.PropertyType;
+
                 var htmlParserAttr = property.GetCustomAttribute<HtmlParserAttribute>();
 
                 if (htmlParserAttr != null)
@@ -50,22 +51,30 @@ namespace WTM.Core.Application
                     var xPath = htmlParserAttr.XPathExpression;
                     
                     var navigator = document.CreateNavigator();
-                    var xPathNode = navigator.Select(xPath);
-                    
-                    if (xPathNode.MoveNext())
+                    if (navigator != null)
                     {
-                        var tagValue = xPathNode.Current.InnerXml;
+                        var xPathNode = navigator.Select(xPath);
+                    
+                        if (xPathNode.MoveNext())
+                        {
+                            var tagValue = xPathNode.Current.InnerXml;
+                            string stringValue;
 
-                        var pattern = htmlParserAttr.RegexPattern;
-                        if (!string.IsNullOrEmpty(pattern))
-                        {
-                            var regex = new Regex(pattern);
-                            var match = regex.Match(tagValue);
-                            stringValue = match.Groups[1].Value;
-                        }
-                        else
-                        {
-                            stringValue = tagValue;
+                            var pattern = htmlParserAttr.RegexPattern;
+                            if (!string.IsNullOrEmpty(pattern))
+                            {
+                                var regex = new Regex(pattern);
+                                var match = regex.Match(tagValue);
+                                stringValue = match.Groups[1].Value;
+                            }
+                            else
+                            {
+                                stringValue = tagValue;
+                            }
+
+                            // TODO converssion here ?
+
+                            property.SetValue(instance, stringValue);
                         }
                     }
                 }

@@ -2,7 +2,7 @@
 
 namespace WTM.Core.Application.Attributes
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class HtmlParserAttribute : Attribute
     {
         public string XPathExpression { get; private set; }

@@ -13,7 +13,7 @@ namespace WTM.Core.Application
             : base(webClient, htmlParser)
         { }
 
-        protected override IUser Scrappe()
+        protected override IUser Scrappe(IUser instance)
         {
             var user = new User();
 

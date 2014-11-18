@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using WTM.Core.Application.Attributes;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Scrapper
@@ -22,51 +24,60 @@ namespace WTM.Core.Application.Scrapper
             : base(webClient, htmlParser)
         { }
 
-        //protected override IShot Scrappe()
-        //{
-        //    var shot = new Shot();
+        protected override IShot Scrappe(IShot instance)
+        {
+            var properties = instance.GetType().GetTypeInfo().DeclaredProperties;
 
-        //    try
-        //    {
-        //        shot.FirstShotId = GetFirstShotId();
-        //        shot.PreviousShotId = GetPreviousShotId();
-        //        shot.PreviousUnsolvedShotId = GetPreviousUnsolvedShotId();
-        //        shot.ShotId = GetCurrentShotId();
-        //        shot.NextShotId = GetNextShotId();
-        //        shot.PreviousUnsolvedShotId = GetNextUnsolvedShotId();
-        //        shot.LastShotId = GetLastShotId();
+            foreach (var property in properties)
+            {
 
-        //        shot.ImageUrl = GetImageUrl(shot);
-        //        shot.PostedDate = GetPostedDate(shot);
-        //        //shot.PostedBy = GetPostedBy();
+                var htmlParserAttr = property.GetCustomAttribute<HtmlParserAttribute>();
 
-        //        var sectionShotInfo = document.GetElementbyId("main_shot")
-        //                                      .Descendants("ul")
-        //                                      .FirstOrDefault(ul => ul.Attributes.Any(attr => attr.Name == "class" && attr.Value == "nav_shotinfo"));
-        //        shot.NbSolver = GetNumberOfSolver(sectionShotInfo);
-        //        //shot.FirstSolver = GetFirstSolver(sectionShotInfo);
+                if (htmlParserAttr != null)
+                {
+                    var xPath = htmlParserAttr.XPathExpression;
 
-        //        var sectionSolution = document.GetElementbyId("solve_station");
-        //        //shot.IsFavourite = GetIsFavourited();
-        //        //shot.IsBookmark = GetIsBookmarked();
-        //        //shot.IsVoteDeletation = GetIsVoteDeletation();
-        //        //shot.IsSolutionAvailible = GetIsSolutionAvailable();
+                    var navigator = document.CreateNavigator();
+                    if (navigator != null)
+                    {
+                        var xPathNode = navigator.Select(xPath);
 
-        //        shot.Languages = GetLanguages(sectionSolution);
+                        if (xPathNode.MoveNext())
+                        {
+                            var tagValue = xPathNode.Current.InnerXml;
+                            string stringValue;
 
-        //        shot.Tags = GetTags();
-        //        //shot.NbFavourited = GetNumberOfFavourited();
+                            var pattern = htmlParserAttr.RegexPattern;
+                            if (!string.IsNullOrEmpty(pattern))
+                            {
+                                var regex = new Regex(pattern);
+                                var match = regex.Match(tagValue);
+                                stringValue = match.Groups[1].Value;
+                            }
+                            else
+                            {
+                                stringValue = tagValue;
+                            }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
+                            var propertyType = property.PropertyType;
 
-        //    return shot;
-        //}
+                            if (propertyType == typeof (int?))
+                                propertyType = typeof (int);
 
-        private int? GetFirstShotId()
+                            var convertedType = Convert.ChangeType(stringValue, propertyType);
+
+                            property.SetValue(instance, convertedType);
+                        }
+                    }
+                }
+
+                var authenticatedAttr = property.GetCustomAttribute<AuthenticatedUser>();
+                var mandatoryAttr = property.GetCustomAttribute<MandatoryAttribute>();
+            }
+            return instance;
+        }
+
+        int? GetFirstShotId()
         {
             var firstShotIdLink = document.GetElementbyId("first_shot_link")
                                           .GetAttributeValue("href", string.Empty);

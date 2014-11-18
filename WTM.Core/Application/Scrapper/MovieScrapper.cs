@@ -15,7 +15,7 @@ namespace WTM.Core.Application.Scrapper
             : base(webClient, htmlParser)
         { }
 
-        protected override IMovie Scrappe()
+        protected override IMovie Scrappe(IMovie instance)
         {
             var movie = new Movie();
 

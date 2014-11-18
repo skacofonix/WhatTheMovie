@@ -8,18 +8,25 @@ namespace WTM.Core.Domain.WebsiteEntities
     {
         #region Navigation
 
+        [HtmlParser(@"//a[@id='first_shot_link']/@href", @"/shot/(\d)")]
         public int? FirstShotId { get; set; }
 
+        [HtmlParser(@"//a[@id='prev_shot_link']/@href", @"/shot/(\d)")]
         public int? PreviousShotId { get; set; }
 
+        [HtmlParser(@"//li[@id='prev_unsolved_shot']/a/@href", @"/shot/(\d)")]
         public int? PreviousUnsolvedShotId { get; set; }
 
+        [HtmlParser(@"//li[@class='number']", @"(\d)")]
         public int? ShotId { get; set; }
 
-        public int? NextShotId { get; set; }
-
+        [HtmlParser(@"//li[@id='next_unsolved_shot']/a/@href", @"/shot/(\d)")]
         public int? NextUnsolvedShotId { get; set; }
 
+        [HtmlParser(@"//a[@id='next_shot_link']/@href", @"/shot/(\d)")]
+        public int? NextShotId { get; set; }
+
+        [HtmlParser(@"//a[@id='last_shot_link']/@href", @"/shot/(\d)")]
         public int? LastShotId { get; set; }
 
         #endregion
