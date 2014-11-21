@@ -20,9 +20,22 @@ namespace WTM.Core.Application.Scrapper
             get { return "shot"; }
         }
 
+        private IWebClient webClient;
+
         public ShotScrapper(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
-        { }
+        {
+            this.webClient = webClient;
+        }
+
+        protected override void Scrappe(IShot instance)
+        {
+            base.Scrappe(instance);
+
+            // Callback
+
+
+        }
 
         int? GetFirstShotId()
         {

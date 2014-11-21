@@ -41,7 +41,7 @@ namespace WTM.Core.Application.Scrapper.Base
 
             foreach (var property in properties)
             {
-                var htmlParserAttr = property.GetCustomAttribute<HtmlParserAttribute>();
+                var htmlParserAttr = property.GetCustomAttribute<BaseParserAttribute>();
 
                 if (htmlParserAttr != null)
                 {
@@ -62,7 +62,11 @@ namespace WTM.Core.Application.Scrapper.Base
                             {
                                 var regex = new Regex(pattern);
                                 var match = regex.Match(tagValue);
-                                stringValue = match.Groups[1].Value;
+
+                                if (htmlParserAttr is BooleanParserAttribute)
+                                    stringValue = match.Success.ToString();
+                                else
+                                    stringValue = match.Groups[1].Value;
                             }
                             else
                             {
@@ -81,9 +85,6 @@ namespace WTM.Core.Application.Scrapper.Base
                         }
                     }
                 }
-
-                var authenticatedAttr = property.GetCustomAttribute<AuthenticatedUser>();
-                var mandatoryAttr = property.GetCustomAttribute<MandatoryAttribute>();
             }
         }
     }

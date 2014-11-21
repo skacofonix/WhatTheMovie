@@ -3,21 +3,13 @@
 namespace WTM.Core.Application.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public class HtmlParserAttribute : Attribute
+    public abstract class BaseParserAttribute : Attribute
     {
         public string XPathExpression { get; private set; }
 
         public string RegexPattern { get; private set; }
-      
-        public bool PatternIsDefined 
-        {
-            get
-            {
-                return string.IsNullOrEmpty(RegexPattern);
-            }
-        }
 
-        public HtmlParserAttribute(string xPathExpression, string regexPattern = null)
+        protected BaseParserAttribute(string xPathExpression, string regexPattern = null)
         {
             XPathExpression = xPathExpression;
             RegexPattern = regexPattern;

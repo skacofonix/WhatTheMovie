@@ -45,7 +45,6 @@ namespace WTM.Core.Domain.WebsiteEntities
         bool? IsBookmark { get; }
         bool? IsFavourite { get; }
         bool? IsSolutionAvailible { get; }
-        bool? IsVoteDeletation { get; }
         List<string> Languages { get; }
         string MovieTitle { get; }
         int? NbFavourited { get; }
