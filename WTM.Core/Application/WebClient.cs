@@ -13,6 +13,23 @@ namespace WTM.Core.Application
             return stream;
         }
 
+        public WebResponse Post(Uri uri, string data)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(uri);
+            request.CookieContainer = new CookieContainer();
+            request.Method = "POST";
+            //request.Host = "whatthemovie.com";
+            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+            //request.Referer = Properties.Resources.URLroot;
+            request.ContentLength = data.Length;
+
+            var sw = new StreamWriter(request.GetRequestStream());
+            sw.Write(data);
+            sw.Close();
+
+            return request.GetResponse();
+        }
+
         private WebResponse GetWebResponse(Uri uri)
         {
             var webRequest = GetWebRequest(uri);

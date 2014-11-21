@@ -64,6 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="AuthentifierTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

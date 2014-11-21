@@ -43,6 +43,7 @@
     <Compile Include="Application\Attributes\StringParserAttribute.cs" />
     <Compile Include="Application\Attributes\BaseParserAttribute.cs" />
     <Compile Include="Application\Game.cs" />
+    <Compile Include="Application\GetRequestBuilder.cs" />
     <Compile Include="Application\HtmlParser.cs" />
     <Compile Include="Application\IHtmlParser.cs" />
     <Compile Include="Application\IWebClient.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Application\Scrapper\ShotScrapper.cs" />
     <Compile Include="Application\UserScrapper.cs" />
     <Compile Include="Application\WebClient.cs" />
+    <Compile Include="Authentifier.cs" />
     <Compile Include="Domain\BusinessEntities\Base\BaseClass.cs" />
     <Compile Include="Domain\BusinessEntities\Culture.cs" />
     <Compile Include="Domain\BusinessEntities\Movie.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Domain\WebsiteEntities\Movie.cs" />
     <Compile Include="Domain\WebsiteEntities\Shot.cs" />
     <Compile Include="Domain\WebsiteEntities\User.cs" />
+    <Compile Include="OverviewDisplayOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

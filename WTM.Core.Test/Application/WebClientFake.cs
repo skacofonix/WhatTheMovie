@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using WTM.Core.Application;
 using WTM.Core.Test.Properties;
 
@@ -17,6 +18,11 @@ namespace WTM.Core.Test.Application
             ms.Position = 0;
 
             return ms;
+        }
+
+        public WebResponse Post(Uri uri, string data)
+        {
+            throw new NotImplementedException();
         }
     }
 }
