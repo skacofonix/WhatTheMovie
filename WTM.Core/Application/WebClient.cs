@@ -1,11 +1,26 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 
 namespace WTM.Core.Application
 {
     internal class WebClient : IWebClient
     {
+        private IList<Cookie> cookies = new List<Cookie>();
+
+        internal void SetCookie(Cookie cookie)
+        {
+            cookies.Add(cookie);
+        }
+
+        internal void RemoveCookie(Cookie cookie)
+        {
+            cookies.Remove(cookie);
+        }
+
         public Stream GetStream(Uri uri)
         {
             var webResponse = GetWebResponse(uri);
@@ -18,9 +33,7 @@ namespace WTM.Core.Application
             var request = (HttpWebRequest)WebRequest.Create(uri);
             request.CookieContainer = new CookieContainer();
             request.Method = "POST";
-            //request.Host = "whatthemovie.com";
             request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
-            //request.Referer = Properties.Resources.URLroot;
             request.ContentLength = data.Length;
 
             var sw = new StreamWriter(request.GetRequestStream());
@@ -33,6 +46,14 @@ namespace WTM.Core.Application
         private WebResponse GetWebResponse(Uri uri)
         {
             var webRequest = GetWebRequest(uri);
+
+            if (cookies != null && cookies.Any())
+            {
+                webRequest.CookieContainer = new CookieContainer();
+                foreach (var cookie in cookies)
+                    webRequest.CookieContainer.Add(cookie);
+            }
+
             var webResponse = GetWebResponse(webRequest);
             return webResponse;
         }
