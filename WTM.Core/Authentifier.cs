@@ -14,17 +14,16 @@ namespace WTM.Core
         private IWebClient webClient;
         private readonly Uri baseUri;
 
-        public Authentifier(IWebClient webClient, Uri baseUri)
+        public Authentifier(IWebClient webClient)
         {
             this.webClient = webClient;
-            this.baseUri = baseUri;
         }
 
         public bool Login(string login, string password)
         {
             var loginSuccess = false;
 
-            var uri = new Uri(baseUri, "user/login");
+            var uri = new Uri(webClient.UriBase, "user/login");
 
             var getRequestBuilder = new GetRequestBuilder();
             getRequestBuilder.AddParameter("name", login);

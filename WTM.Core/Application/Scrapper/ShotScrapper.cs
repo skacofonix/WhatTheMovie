@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -28,15 +30,46 @@ namespace WTM.Core.Application.Scrapper
             this.webClient = webClient;
         }
 
-        protected override void Scrappe(IShot instance)
+        public bool GuessTitle(string title, int idShot)
         {
-            base.Scrappe(instance);
+            bool guessRight = false;
 
-            // Callback
+            var titleFormatted = WebUtility.UrlEncode(title.Trim());
 
+            var requestBuilder = new GetRequestBuilder();
+            requestBuilder.AddParameter("guess", titleFormatted);
+            requestBuilder.AddParameter("commit", "Guess");
+            var data = requestBuilder.ToString();
 
+            string response = null;
+
+            var post = string.Format("/shot/{0}/guess", idShot);
+            var uri = new Uri(webClient.UriBase, post);
+
+            var webResponse = webClient.Post(uri, data);
+            using (var stream = webResponse.GetResponseStream())
+            using(var sr = new StreamReader(stream))
+            {
+                response = sr.ReadToEnd();
+            }
+
+            if (response.Contains("guess_right"))
+            {
+                guessRight = true;
+
+                var regex = new Regex("guess_right\\(\"(.*)\", (\\d*), \"(.*) \\((\\d{4})\\)\"");
+                var match = regex.Match(response);
+                var guess = match.Groups[1];
+                var idMovie = match.Groups[2];
+                var originalTitle = match.Groups[3];
+                var year = match.Groups[4];
+            }
+
+            return guessRight;
         }
 
+        #region Custom implementation
+        
         int? GetFirstShotId()
         {
             var firstShotIdLink = Document.GetElementbyId("first_shot_link")
@@ -218,5 +251,7 @@ namespace WTM.Core.Application.Scrapper
 
             return "all";
         }
+
+        #endregion
     }
 }

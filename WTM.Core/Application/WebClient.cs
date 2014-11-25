@@ -9,6 +9,13 @@ namespace WTM.Core.Application
 {
     internal class WebClient : IWebClient
     {
+        public Uri UriBase { get; private set; }
+
+        public WebClient(Uri uriBase)
+        {
+            UriBase = uriBase;
+        }
+
         private IList<Cookie> cookies = new List<Cookie>();
 
         internal void SetCookie(Cookie cookie)

@@ -8,6 +8,8 @@ namespace WTM.Core.Test.Application
 {
     internal class WebClientFake : IWebClient
     {
+        public Uri UriBase { get; private set; }
+
         public Stream GetStream(Uri uri)
         {
             var htmlContent = Resources.shot10;
