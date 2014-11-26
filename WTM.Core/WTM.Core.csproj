@@ -47,7 +47,6 @@
     <Compile Include="Application\HtmlParser.cs" />
     <Compile Include="Application\IHtmlParser.cs" />
     <Compile Include="Application\IWebClient.cs" />
-    <Compile Include="Application\Scrapper\Base\BaseScrapper.cs" />
     <Compile Include="Application\Scrapper\Base\ScrapperT.cs" />
     <Compile Include="Application\Scrapper\MovieScrapper.cs" />
     <Compile Include="Application\Scrapper\ShotScrapper.cs" />
@@ -62,9 +61,6 @@
     <Compile Include="Domain\BusinessEntities\Tag.cs" />
     <Compile Include="Domain\BusinessEntities\User.cs" />
     <Compile Include="Domain\WebsiteEntities\Base\IWebsiteEntityBase.cs" />
-    <Compile Include="Domain\WebsiteEntities\IMovie.cs" />
-    <Compile Include="Domain\WebsiteEntities\IShot.cs" />
-    <Compile Include="Domain\WebsiteEntities\IUser.cs" />
     <Compile Include="Domain\WebsiteEntities\Movie.cs" />
     <Compile Include="Domain\WebsiteEntities\Shot.cs" />
     <Compile Include="Domain\WebsiteEntities\User.cs" />

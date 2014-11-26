@@ -12,7 +12,7 @@ using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Scrapper
 {
-    public class ShotScrapper : ScrapperT<IShot>
+    internal class ShotScrapper : ScrapperT<Shot>
     {
         private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
@@ -122,7 +122,7 @@ namespace WTM.Core.Application.Scrapper
             return ExtractAndParseInt(LastShotIdLink, regexShotId).Value;
         }
 
-        private string GetImageUrl(IShot shot)
+        private string GetImageUrl(Shot shot)
         {
             var imageUrlSection = Document.DocumentNode.Descendants("script")
                                                        .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
@@ -131,7 +131,7 @@ namespace WTM.Core.Application.Scrapper
             return ExtractValue(imageUrlSection, new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
         }
 
-        private DateTime? GetPostedDate(IShot shot)
+        private DateTime? GetPostedDate(Shot shot)
         {
             DateTime date;
             var sectionDate = Document.GetElementbyId("hidden_date").InnerText;

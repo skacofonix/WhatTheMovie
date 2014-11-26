@@ -3,22 +3,12 @@ using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application
 {
-    public class UserScrapper : ScrapperT<IUser>
+    internal class UserScrapper : ScrapperT<User>
     {
-        protected override string Identifier
-        {
-            get { return "user"; }
-        }
+        protected override string Identifier { get { return "user"; } }
 
         public UserScrapper(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
         { }
-
-        protected override void Scrappe(IUser instance)
-        {
-            var user = new User();
-
-            // TODO
-        }
     }
 }

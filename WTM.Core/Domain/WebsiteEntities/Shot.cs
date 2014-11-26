@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using WTM.Core.Application.Attributes;
+using WTM.Core.Domain.WebsiteEntities.Base;
 
 namespace WTM.Core.Domain.WebsiteEntities
 {
-    public class Shot : IShot
+    internal class Shot : IWebsiteEntityBase
     {
+        public Shot()
+        { }
+
         #region Navigation
 
         [StringParser(@"//a[@id='first_shot_link']/@href", @"/shot/(\d*)")]
@@ -52,7 +56,7 @@ namespace WTM.Core.Domain.WebsiteEntities
         public string ImageUrl { get; private set; }
 
         #endregion
-        
+
         #region Solution
 
         [AuthenticatedUser]
@@ -101,6 +105,6 @@ namespace WTM.Core.Domain.WebsiteEntities
         public bool? IncludeArchive { get; private set; }
         public bool? IncludeSolvedSHots { get; private set; }
 
-	    #endregion
+        #endregion
     }
 }

@@ -7,12 +7,14 @@ using WTM.Core.Domain.WebsiteEntities.Base;
 
 namespace WTM.Core.Application.Scrapper.Base
 {
-    public abstract class ScrapperT<T> : BaseScrapper
-        where T : IWebsiteEntityBase
+    public abstract class ScrapperT<T> where T : IWebsiteEntityBase, new()
     {
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
         protected HtmlDocument Document;
+
+        protected abstract string Identifier { get; }
+        private string parameter;
 
         protected ScrapperT(IWebClient webClient, IHtmlParser htmlParser)
         {
@@ -20,24 +22,27 @@ namespace WTM.Core.Application.Scrapper.Base
             this.htmlParser = htmlParser;
         }
 
-        protected override string Parameter
-        {
-            get { return parameter; }
-        }
-        private string parameter;
-
-        public void Scrappe(T instance, string parameter = null)
+        public T Scrappe(string parameter = null)
         {
             this.parameter = parameter;
             var uri = MakeUri();
-            var stream = webClient.GetStream(uri);
-            Document = htmlParser.GetHtmlDocument(stream);
-            Scrappe(instance);
+            using (var stream = webClient.GetStream(uri))
+            {
+                Document = htmlParser.GetHtmlDocument(stream);
+            }
+            return Scrappe();
         }
 
-        protected virtual void Scrappe(T instance)
+        protected virtual Uri MakeUri()
         {
-            var properties = instance.GetType().GetTypeInfo().DeclaredProperties;
+            return new Uri(webClient.UriBase, Identifier + "/" + parameter);
+        }
+
+        protected virtual T Scrappe()
+        {
+            var instance = new T();
+
+            var properties = typeof(T).GetTypeInfo().DeclaredProperties;
 
             foreach (var property in properties)
             {
@@ -86,6 +91,58 @@ namespace WTM.Core.Application.Scrapper.Base
                     }
                 }
             }
+
+            return instance;
+        }
+
+        protected T TryParseElement<T>(Func<T> func)
+            where T : class
+        {
+            T value;
+
+            try
+            {
+                value = func();
+            }
+            catch (Exception ex)
+            {
+                // Log
+                value = null;
+            }
+
+            return value;
+        }
+
+        protected string ExtractValue(string value, Regex regex)
+        {
+            var match = regex.Match(value);
+            var valueExtracted = match.Groups[1].Value;
+
+            return valueExtracted;
+        }
+
+        protected int? ExtractAndParseInt(string value, Regex regex)
+        {
+            var valueExctracted = ExtractValue(value, regex);
+
+            if (string.IsNullOrWhiteSpace(valueExctracted))
+                return null;
+
+            int valueConverted;
+            if (int.TryParse(valueExctracted, out valueConverted))
+                return valueConverted;
+
+            return null;
+        }
+
+        protected DateTime ExtractAndParseDateTime(string value, Regex regex)
+        {
+            var valueExctracted = ExtractValue(value, regex);
+
+            DateTime valueConverted;
+            DateTime.TryParse(valueExctracted, out valueConverted);
+
+            return valueConverted;
         }
     }
 }

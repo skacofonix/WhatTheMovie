@@ -5,7 +5,7 @@ using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Scrapper
 {
-    public class MovieScrapper : ScrapperT<IMovie>
+    internal class MovieScrapper : ScrapperT<Movie>
     {
         protected override string Identifier
         {
@@ -16,7 +16,7 @@ namespace WTM.Core.Application.Scrapper
             : base(webClient, htmlParser)
         { }
 
-        protected override void Scrappe(IMovie instance)
+        protected override Movie Scrappe()
         {
             var movie = new Movie();
 
@@ -33,7 +33,7 @@ namespace WTM.Core.Application.Scrapper
 
             movie.OriginalTitle = GetOriginalTitle();
 
-            // TODO
+            return movie;
         }
 
         private string GetOriginalTitle()

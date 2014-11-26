@@ -4,6 +4,6 @@ namespace WTM.Core.Application
 {
     public class Game
     {
-        private IShot currentShot;
+        private Shot currentShot;
     }
 }
