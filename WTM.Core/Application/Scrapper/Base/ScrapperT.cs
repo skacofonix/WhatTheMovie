@@ -9,33 +9,35 @@ namespace WTM.Core.Application.Scrapper.Base
 {
     public abstract class ScrapperT<T> where T : IWebsiteEntityBase, new()
     {
-        private readonly IWebClient webClient;
-        private readonly IHtmlParser htmlParser;
+        protected readonly IWebClient WebClient;
+        protected readonly IHtmlParser HtmlParser;
         protected HtmlDocument Document;
 
         protected abstract string Identifier { get; }
         private string parameter;
+        protected T Instance { get; private set; }
 
-        protected ScrapperT(IWebClient webClient, IHtmlParser htmlParser)
+        protected ScrapperT(IWebClient webClient, IHtmlParser htmlParser, string parameter = null)
         {
-            this.webClient = webClient;
-            this.htmlParser = htmlParser;
+            WebClient = webClient;
+            HtmlParser = htmlParser;
+            this.parameter = parameter;
+            Instance = ParseAndScrappe();
         }
 
-        public T Scrappe(string parameter = null)
+        public T ParseAndScrappe()
         {
-            this.parameter = parameter;
             var uri = MakeUri();
-            using (var stream = webClient.GetStream(uri))
+            using (var stream = WebClient.GetStream(uri))
             {
-                Document = htmlParser.GetHtmlDocument(stream);
+                Document = HtmlParser.GetHtmlDocument(stream);
             }
             return Scrappe();
         }
 
         protected virtual Uri MakeUri()
         {
-            return new Uri(webClient.UriBase, Identifier + "/" + parameter);
+            return new Uri(WebClient.UriBase, Identifier + "/" + parameter);
         }
 
         protected virtual T Scrappe()
@@ -48,69 +50,45 @@ namespace WTM.Core.Application.Scrapper.Base
             {
                 var htmlParserAttr = property.GetCustomAttribute<BaseParserAttribute>();
 
-                if (htmlParserAttr != null)
+                if (htmlParserAttr == null) continue;
+                var xPath = htmlParserAttr.XPathExpression;
+
+                var navigator = Document.CreateNavigator();
+                if (navigator == null) continue;
+                var xPathNode = navigator.Select(xPath);
+
+                if (!xPathNode.MoveNext()) continue;
+                var tagValue = xPathNode.Current.InnerXml;
+                string stringValue;
+
+                var pattern = htmlParserAttr.RegexPattern;
+                if (!string.IsNullOrEmpty(pattern))
                 {
-                    var xPath = htmlParserAttr.XPathExpression;
+                    var regex = new Regex(pattern);
+                    var match = regex.Match(tagValue);
 
-                    var navigator = Document.CreateNavigator();
-                    if (navigator != null)
-                    {
-                        var xPathNode = navigator.Select(xPath);
-
-                        if (xPathNode.MoveNext())
-                        {
-                            var tagValue = xPathNode.Current.InnerXml;
-                            string stringValue;
-
-                            var pattern = htmlParserAttr.RegexPattern;
-                            if (!string.IsNullOrEmpty(pattern))
-                            {
-                                var regex = new Regex(pattern);
-                                var match = regex.Match(tagValue);
-
-                                if (htmlParserAttr is BooleanParserAttribute)
-                                    stringValue = match.Success.ToString();
-                                else
-                                    stringValue = match.Groups[1].Value;
-                            }
-                            else
-                            {
-                                stringValue = tagValue;
-                            }
-
-                            object convertedType = null;
-                            if (!string.IsNullOrEmpty(stringValue))
-                            {
-                                var propertyType = property.PropertyType;
-                                propertyType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-                                convertedType = Convert.ChangeType(stringValue, propertyType);
-                            }
-
-                            property.SetValue(instance, convertedType);
-                        }
-                    }
+                    if (htmlParserAttr is BooleanParserAttribute)
+                        stringValue = match.Success.ToString();
+                    else
+                        stringValue = match.Groups[1].Value;
                 }
+                else
+                {
+                    stringValue = tagValue;
+                }
+
+                object convertedType = null;
+                if (!string.IsNullOrEmpty(stringValue))
+                {
+                    var propertyType = property.PropertyType;
+                    propertyType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+                    convertedType = Convert.ChangeType(stringValue, propertyType);
+                }
+
+                property.SetValue(instance, convertedType);
             }
 
             return instance;
-        }
-
-        protected T TryParseElement<T>(Func<T> func)
-            where T : class
-        {
-            T value;
-
-            try
-            {
-                value = func();
-            }
-            catch (Exception ex)
-            {
-                // Log
-                value = null;
-            }
-
-            return value;
         }
 
         protected string ExtractValue(string value, Regex regex)

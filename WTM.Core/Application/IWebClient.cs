@@ -8,6 +8,6 @@ namespace WTM.Core.Application
     {
         Uri UriBase { get; }
         Stream GetStream(Uri uri);
-        WebResponse Post(Uri uri, string data);
+        WebResponse Post(Uri uri, string data = null);
     }
 }

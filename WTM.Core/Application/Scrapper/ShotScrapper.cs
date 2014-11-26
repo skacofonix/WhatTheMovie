@@ -17,22 +17,16 @@ namespace WTM.Core.Application.Scrapper
         private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
 
-        protected override string Identifier
-        {
-            get { return "shot"; }
-        }
+        protected override string Identifier { get { return "shot"; } }
+        public Shot Shot { get { return Instance; } }
 
-        private IWebClient webClient;
+        public ShotScrapper(IWebClient webClient, IHtmlParser htmlParser, string parameter)
+            : base(webClient, htmlParser, parameter)
+        { }
 
-        public ShotScrapper(IWebClient webClient, IHtmlParser htmlParser)
-            : base(webClient, htmlParser)
+        public bool GuessTitle(string title)
         {
-            this.webClient = webClient;
-        }
-
-        public bool GuessTitle(string title, int idShot)
-        {
-            bool guessRight = false;
+            bool isSuccess = false;
 
             var titleFormatted = WebUtility.UrlEncode(title.Trim());
 
@@ -41,21 +35,20 @@ namespace WTM.Core.Application.Scrapper
             requestBuilder.AddParameter("commit", "Guess");
             var data = requestBuilder.ToString();
 
+            var post = string.Join("/", Identifier, Instance.ShotId, "guess");
+            var uri = new Uri(WebClient.UriBase, post);
+            var webResponse = WebClient.Post(uri, data);
+
             string response = null;
-
-            var post = string.Format("/shot/{0}/guess", idShot);
-            var uri = new Uri(webClient.UriBase, post);
-
-            var webResponse = webClient.Post(uri, data);
+            StreamReader sr;
             using (var stream = webResponse.GetResponseStream())
-            using(var sr = new StreamReader(stream))
-            {
-                response = sr.ReadToEnd();
-            }
+                if (stream != null)
+                    using (sr = new StreamReader(stream))
+                        response = sr.ReadToEnd();
 
-            if (response.Contains("guess_right"))
+            if (response != null && response.Contains("guess_right"))
             {
-                guessRight = true;
+                isSuccess = true;
 
                 var regex = new Regex("guess_right\\(\"(.*)\", (\\d*), \"(.*) \\((\\d{4})\\)\"");
                 var match = regex.Match(response);
@@ -65,11 +58,41 @@ namespace WTM.Core.Application.Scrapper
                 var year = match.Groups[4];
             }
 
-            return guessRight;
+            return isSuccess;
+        }
+
+        public bool ShowSolution()
+        {
+            bool isSuccess = false;
+
+            var post = string.Join("/", Identifier, Instance.ShotId, "showsolution");
+
+            var uri = new Uri(WebClient.UriBase, post);
+            var webResponse = WebClient.Post(uri);
+
+            string response;
+            using (var stream = webResponse.GetResponseStream())
+            using (var sr = new StreamReader(stream))
+            {
+                response = sr.ReadToEnd();
+            }
+
+            var regexTitle = new Regex("Element.update\\(\"shot_title\", \"<strong>(.*) \\((\\d{4})\\)</strong> <a href=\"http://whatthemovie.com/movie/(.*)\\\"");
+            var match = regexTitle.Match(response);
+
+            if (match.Success)
+            {
+                isSuccess = false;
+                var originalTitle = match.Groups[1];
+                var year = match.Groups[2];
+                var movieLink = match.Groups[3];
+            }
+
+            return isSuccess;
         }
 
         #region Custom implementation
-        
+
         int? GetFirstShotId()
         {
             var firstShotIdLink = Document.GetElementbyId("first_shot_link")

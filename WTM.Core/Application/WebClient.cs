@@ -35,17 +35,20 @@ namespace WTM.Core.Application
             return stream;
         }
 
-        public WebResponse Post(Uri uri, string data)
+        public WebResponse Post(Uri uri, string data = null)
         {
             var request = (HttpWebRequest)WebRequest.Create(uri);
             request.CookieContainer = new CookieContainer();
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
-            request.ContentLength = data.Length;
 
-            var sw = new StreamWriter(request.GetRequestStream());
-            sw.Write(data);
-            sw.Close();
+            if (data != null)
+            {
+                request.ContentLength = data.Length;
+                var sw = new StreamWriter(request.GetRequestStream());
+                sw.Write(data);
+                sw.Close();
+            }
 
             return request.GetResponse();
         }
