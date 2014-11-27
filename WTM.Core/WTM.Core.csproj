@@ -46,11 +46,13 @@
     <Compile Include="Application\GetRequestBuilder.cs" />
     <Compile Include="Application\HtmlParser.cs" />
     <Compile Include="Application\IHtmlParser.cs" />
+    <Compile Include="Application\IPageIdentifier.cs" />
     <Compile Include="Application\IWebClient.cs" />
-    <Compile Include="Application\Scrapper\Base\ScrapperT.cs" />
-    <Compile Include="Application\Scrapper\MovieScrapper.cs" />
-    <Compile Include="Application\Scrapper\ShotScrapper.cs" />
-    <Compile Include="Application\UserScrapper.cs" />
+    <Compile Include="Application\Parsers\ParserBase.cs" />
+    <Compile Include="Application\Parsers\MovieParser.cs" />
+    <Compile Include="Application\Parsers\ShotParser.cs" />
+    <Compile Include="Services\ShotService.cs" />
+    <Compile Include="Application\Parsers\UserParser.cs" />
     <Compile Include="Application\WebClient.cs" />
     <Compile Include="Authentifier.cs" />
     <Compile Include="Domain\BusinessEntities\Base\BaseClass.cs" />

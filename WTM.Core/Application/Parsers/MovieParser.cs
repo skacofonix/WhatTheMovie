@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Linq;
-using WTM.Core.Application.Scrapper.Base;
 using WTM.Core.Domain.WebsiteEntities;
 
-namespace WTM.Core.Application.Scrapper
+namespace WTM.Core.Application.Parsers
 {
-    internal class MovieScrapper : ScrapperT<Movie>
+    internal class MovieParser : ParserBase<Movie>
     {
-        protected override string Identifier
-        {
-            get { return "movies"; }
-        }
+        public override string Identifier { get { return "movies"; } }
 
-        public MovieScrapper(IWebClient webClient, IHtmlParser htmlParser)
+        public MovieParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
         { }
 
-        protected override Movie Scrappe()
+        protected override Movie Parse()
         {
             var movie = new Movie();
 
@@ -40,6 +36,5 @@ namespace WTM.Core.Application.Scrapper
         {
             throw new NotImplementedException();
         }
-
     }
 }

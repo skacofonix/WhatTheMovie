@@ -43,6 +43,9 @@ namespace WTM.Core.Domain.WebsiteEntities
         [StringParser(@"//li[@id='postername']/a")]
         public string PostedBy { get; private set; }
 
+        [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo2']/li/a")]
+        public string UpdatedBy { get; private set; }
+
         [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo']/li[3]/a[@class='nametaglink']")]
         public string FirstSolver { get; private set; }
 
@@ -52,7 +55,7 @@ namespace WTM.Core.Domain.WebsiteEntities
         [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo']/li[@class='solved']", @"status: solved \(\d*\)")]
         public int? NbSolver { get; private set; }
 
-        [StringParser(@"/html/body[@class='black']/div[@id='container']/script", @"var imageSrc = '(/system/images/stills/normal/({a-z0-9})*/({a-z0-9})*.jpg)';")]
+        [StringParser(@"/html/body[@class='black']/div[@id='container']/script", @"var imageSrc = '(/system/images/stills/normal/([a-z0-9]*)/([a-z0-9]*.jpg))';")]
         public string ImageUrl { get; private set; }
 
         #endregion

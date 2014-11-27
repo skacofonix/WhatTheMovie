@@ -2,7 +2,6 @@
 using NFluent;
 using WTM.CorePCL.Application;
 using WTM.CorePCL.Domain.WebsiteEntities;
-using WTM.CorePCL.Test.Application;
 
 namespace WTM.CorePCL.Test.Application.Scrapper
 {

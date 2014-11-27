@@ -1,5 +1,4 @@
 ﻿using WTM.CorePCL.Domain.WebsiteEntities;
-using WTM.CorePCL.Domain.WebsiteEntities;
 
 namespace WTM.CorePCL.Application
 {

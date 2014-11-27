@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using WTM.CorePCL.Domain.WebsiteEntities;
-using WTM.CorePCL.Domain.WebsiteEntities;
 
 namespace WTM.CorePCL.Application
 {

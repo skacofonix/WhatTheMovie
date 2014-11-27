@@ -1,94 +1,27 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Reflection;
 using System.Text.RegularExpressions;
-using HtmlAgilityPack;
-using WTM.Core.Application.Attributes;
-using WTM.Core.Application.Scrapper.Base;
 using WTM.Core.Domain.WebsiteEntities;
 
-namespace WTM.Core.Application.Scrapper
+namespace WTM.Core.Application.Parsers
 {
-    internal class ShotScrapper : ScrapperT<Shot>
+    internal class ShotParser : ParserBase<Shot>
     {
+        public override string Identifier { get { return "shot"; } }
+
         private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
 
-        protected override string Identifier { get { return "shot"; } }
-        public Shot Shot { get { return Instance; } }
-
-        public ShotScrapper(IWebClient webClient, IHtmlParser htmlParser, string parameter)
-            : base(webClient, htmlParser, parameter)
+        public ShotParser(IWebClient webClient, IHtmlParser htmlParser)
+            : base(webClient, htmlParser)
         { }
 
-        public bool GuessTitle(string title)
+        public Shot Parse(int id)
         {
-            bool isSuccess = false;
-
-            var titleFormatted = WebUtility.UrlEncode(title.Trim());
-
-            var requestBuilder = new GetRequestBuilder();
-            requestBuilder.AddParameter("guess", titleFormatted);
-            requestBuilder.AddParameter("commit", "Guess");
-            var data = requestBuilder.ToString();
-
-            var post = string.Join("/", Identifier, Instance.ShotId, "guess");
-            var uri = new Uri(WebClient.UriBase, post);
-            var webResponse = WebClient.Post(uri, data);
-
-            string response = null;
-            StreamReader sr;
-            using (var stream = webResponse.GetResponseStream())
-                if (stream != null)
-                    using (sr = new StreamReader(stream))
-                        response = sr.ReadToEnd();
-
-            if (response != null && response.Contains("guess_right"))
-            {
-                isSuccess = true;
-
-                var regex = new Regex("guess_right\\(\"(.*)\", (\\d*), \"(.*) \\((\\d{4})\\)\"");
-                var match = regex.Match(response);
-                var guess = match.Groups[1];
-                var idMovie = match.Groups[2];
-                var originalTitle = match.Groups[3];
-                var year = match.Groups[4];
-            }
-
-            return isSuccess;
-        }
-
-        public bool ShowSolution()
-        {
-            bool isSuccess = false;
-
-            var post = string.Join("/", Identifier, Instance.ShotId, "showsolution");
-
-            var uri = new Uri(WebClient.UriBase, post);
-            var webResponse = WebClient.Post(uri);
-
-            string response;
-            using (var stream = webResponse.GetResponseStream())
-            using (var sr = new StreamReader(stream))
-            {
-                response = sr.ReadToEnd();
-            }
-
-            var regexTitle = new Regex("Element.update\\(\"shot_title\", \"<strong>(.*) \\((\\d{4})\\)</strong> <a href=\"http://whatthemovie.com/movie/(.*)\\\"");
-            var match = regexTitle.Match(response);
-
-            if (match.Success)
-            {
-                isSuccess = false;
-                var originalTitle = match.Groups[1];
-                var year = match.Groups[2];
-                var movieLink = match.Groups[3];
-            }
-
-            return isSuccess;
+            return Parse(id.ToString(CultureInfo.InvariantCulture));
         }
 
         #region Custom implementation

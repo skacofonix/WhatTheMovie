@@ -1,46 +1,43 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using WTM.Core.Application.Attributes;
 using WTM.Core.Domain.WebsiteEntities.Base;
 
-namespace WTM.Core.Application.Scrapper.Base
+namespace WTM.Core.Application.Parsers
 {
-    public abstract class ScrapperT<T> where T : IWebsiteEntityBase, new()
+    public abstract class ParserBase<T> : IPageIdentifier
+        where T : IWebsiteEntityBase, new()
     {
         protected readonly IWebClient WebClient;
         protected readonly IHtmlParser HtmlParser;
         protected HtmlDocument Document;
 
-        protected abstract string Identifier { get; }
-        private string parameter;
-        protected T Instance { get; private set; }
+        public abstract string Identifier { get; }
 
-        protected ScrapperT(IWebClient webClient, IHtmlParser htmlParser, string parameter = null)
+        protected ParserBase(IWebClient webClient, IHtmlParser htmlParser)
         {
             WebClient = webClient;
             HtmlParser = htmlParser;
-            this.parameter = parameter;
-            Instance = ParseAndScrappe();
         }
 
-        public T ParseAndScrappe()
+        public T Parse(string parameter)
         {
-            var uri = MakeUri();
+            var uri = MakeUri(parameter);
             using (var stream = WebClient.GetStream(uri))
             {
                 Document = HtmlParser.GetHtmlDocument(stream);
             }
-            return Scrappe();
+            return Parse();
         }
 
-        protected virtual Uri MakeUri()
+        protected virtual Uri MakeUri(string parameter)
         {
             return new Uri(WebClient.UriBase, Identifier + "/" + parameter);
         }
 
-        protected virtual T Scrappe()
+        protected virtual T Parse()
         {
             var instance = new T();
 
@@ -58,7 +55,7 @@ namespace WTM.Core.Application.Scrapper.Base
                 var xPathNode = navigator.Select(xPath);
 
                 if (!xPathNode.MoveNext()) continue;
-                var tagValue = xPathNode.Current.InnerXml;
+                var tagValue = xPathNode.Current.InnerXml.Trim();
                 string stringValue;
 
                 var pattern = htmlParserAttr.RegexPattern;
