@@ -12,7 +12,6 @@ namespace WTM.Core.Application.Parsers
     {
         protected readonly IWebClient WebClient;
         protected readonly IHtmlParser HtmlParser;
-        protected HtmlDocument Document;
 
         public abstract string Identifier { get; }
 
@@ -25,11 +24,19 @@ namespace WTM.Core.Application.Parsers
         public T Parse(string parameter)
         {
             var uri = MakeUri(parameter);
+            HtmlDocument document;
             using (var stream = WebClient.GetStream(uri))
             {
-                Document = HtmlParser.GetHtmlDocument(stream);
+                document = HtmlParser.GetHtmlDocument(stream);
             }
-            return Parse();
+
+            var instance = new T();
+
+            BeforeParse(instance, document);
+            Parse(instance, document);
+            AfterParse(instance, document);
+
+            return instance;
         }
 
         protected virtual Uri MakeUri(string parameter)
@@ -37,10 +44,11 @@ namespace WTM.Core.Application.Parsers
             return new Uri(WebClient.UriBase, Identifier + "/" + parameter);
         }
 
-        protected virtual T Parse()
-        {
-            var instance = new T();
+        protected virtual void BeforeParse(T instance, HtmlDocument htmlDocument)
+        { }
 
+        protected virtual void Parse(T instance, HtmlDocument htmlDocument)
+        {
             var properties = typeof(T).GetTypeInfo().DeclaredProperties;
 
             foreach (var property in properties)
@@ -84,9 +92,10 @@ namespace WTM.Core.Application.Parsers
 
                 property.SetValue(instance, convertedType);
             }
-
-            return instance;
         }
+
+        protected virtual void AfterParse(T instance, HtmlDocument htmlDocument)
+        { }
 
         protected string ExtractValue(string value, Regex regex)
         {

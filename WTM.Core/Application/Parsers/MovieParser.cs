@@ -12,10 +12,8 @@ namespace WTM.Core.Application.Parsers
             : base(webClient, htmlParser)
         { }
 
-        protected override Movie Parse()
+        protected override void Parse(Movie movie)
         {
-            var movie = new Movie();
-
             var headerTitleSection = Document.GetElementbyId("main_white")
                                              .Descendants("div")
                                              .FirstOrDefault(d => d.Attributes.Any(attr => attr.Name == "class" && attr.Value == "header clearfix"));
@@ -28,8 +26,6 @@ namespace WTM.Core.Application.Parsers
                                           .InnerText;
 
             movie.OriginalTitle = GetOriginalTitle();
-
-            return movie;
         }
 
         private string GetOriginalTitle()
