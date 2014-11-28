@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using HtmlAgilityPack;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Parsers
@@ -12,9 +13,9 @@ namespace WTM.Core.Application.Parsers
             : base(webClient, htmlParser)
         { }
 
-        protected override void Parse(Movie movie)
+        protected override void Parse(Movie movie, HtmlDocument document)
         {
-            var headerTitleSection = Document.GetElementbyId("main_white")
+            var headerTitleSection = document.GetElementbyId("main_white")
                                              .Descendants("div")
                                              .FirstOrDefault(d => d.Attributes.Any(attr => attr.Name == "class" && attr.Value == "header clearfix"));
 

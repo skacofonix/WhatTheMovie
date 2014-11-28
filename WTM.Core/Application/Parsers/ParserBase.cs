@@ -10,24 +10,24 @@ namespace WTM.Core.Application.Parsers
     public abstract class ParserBase<T> : IPageIdentifier
         where T : IWebsiteEntityBase, new()
     {
-        protected readonly IWebClient WebClient;
-        protected readonly IHtmlParser HtmlParser;
+        private readonly IWebClient webClient;
+        private readonly IHtmlParser htmlParser;
 
         public abstract string Identifier { get; }
 
         protected ParserBase(IWebClient webClient, IHtmlParser htmlParser)
         {
-            WebClient = webClient;
-            HtmlParser = htmlParser;
+            this.webClient = webClient;
+            this.htmlParser = htmlParser;
         }
 
         public T Parse(string parameter)
         {
             var uri = MakeUri(parameter);
             HtmlDocument document;
-            using (var stream = WebClient.GetStream(uri))
+            using (var stream = webClient.GetStream(uri))
             {
-                document = HtmlParser.GetHtmlDocument(stream);
+                document = htmlParser.GetHtmlDocument(stream);
             }
 
             var instance = new T();
@@ -41,7 +41,7 @@ namespace WTM.Core.Application.Parsers
 
         protected virtual Uri MakeUri(string parameter)
         {
-            return new Uri(WebClient.UriBase, Identifier + "/" + parameter);
+            return new Uri(webClient.UriBase, Identifier + "/" + parameter);
         }
 
         protected virtual void BeforeParse(T instance, HtmlDocument htmlDocument)
@@ -58,7 +58,7 @@ namespace WTM.Core.Application.Parsers
                 if (htmlParserAttr == null) continue;
                 var xPath = htmlParserAttr.XPathExpression;
 
-                var navigator = Document.CreateNavigator();
+                var navigator = htmlDocument.CreateNavigator();
                 if (navigator == null) continue;
                 var xPathNode = navigator.Select(xPath);
 
@@ -96,37 +96,5 @@ namespace WTM.Core.Application.Parsers
 
         protected virtual void AfterParse(T instance, HtmlDocument htmlDocument)
         { }
-
-        protected string ExtractValue(string value, Regex regex)
-        {
-            var match = regex.Match(value);
-            var valueExtracted = match.Groups[1].Value;
-
-            return valueExtracted;
-        }
-
-        protected int? ExtractAndParseInt(string value, Regex regex)
-        {
-            var valueExctracted = ExtractValue(value, regex);
-
-            if (string.IsNullOrWhiteSpace(valueExctracted))
-                return null;
-
-            int valueConverted;
-            if (int.TryParse(valueExctracted, out valueConverted))
-                return valueConverted;
-
-            return null;
-        }
-
-        protected DateTime ExtractAndParseDateTime(string value, Regex regex)
-        {
-            var valueExctracted = ExtractValue(value, regex);
-
-            DateTime valueConverted;
-            DateTime.TryParse(valueExctracted, out valueConverted);
-
-            return valueConverted;
-        }
     }
 }

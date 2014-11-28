@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using WTM.Core.Domain.WebsiteEntities;
+using WTM.Core.Helpers;
 
 namespace WTM.Core.Application.Parsers
 {
@@ -26,30 +27,30 @@ namespace WTM.Core.Application.Parsers
 
         #region Custom implementation
 
-        int? GetFirstShotId()
+        int? GetFirstShotId(HtmlDocument document)
         {
-            var firstShotIdLink = Document.GetElementbyId("first_shot_link")
+            var firstShotIdLink = document.GetElementbyId("first_shot_link")
                                           .GetAttributeValue("href", string.Empty);
-            return ExtractAndParseInt(firstShotIdLink, regexShotId);
+            return firstShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
-        private int? GetPreviousShotId()
+        private int? GetPreviousShotId(HtmlDocument document)
         {
-            var previousShotIdLink = Document.GetElementbyId("prev_shot")
+            var previousShotIdLink = document.GetElementbyId("prev_shot")
                                              .GetAttributeValue("href", string.Empty);
-            return ExtractAndParseInt(previousShotIdLink, regexShotId);
+            return previousShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
-        private int? GetPreviousUnsolvedShotId()
+        private int? GetPreviousUnsolvedShotId(HtmlDocument document)
         {
-            var previousUnsolvedShotIdLink = Document.GetElementbyId("prev_unsolved_shot")
+            var previousUnsolvedShotIdLink = document.GetElementbyId("prev_unsolved_shot")
                                                      .GetAttributeValue("href", string.Empty);
-            return ExtractAndParseInt(previousUnsolvedShotIdLink, regexShotId);
+            return previousUnsolvedShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
-        private int? GetCurrentShotId()
+        private int? GetCurrentShotId(HtmlDocument document)
         {
-            var currentShotIdString = Document.GetElementbyId("nav_shots")
+            var currentShotIdString = document.GetElementbyId("nav_shots")
                                               .ChildNodes.Where(n => n.Name == "li" && n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "number"))
                                               .FirstOrDefault()
                                               .InnerText;
@@ -57,47 +58,47 @@ namespace WTM.Core.Application.Parsers
             return int.Parse(currentShotIdCleaned);
         }
 
-        private int? GetNextShotId()
+        private int? GetNextShotId(HtmlDocument document)
         {
-            var nextShotId = Document.GetElementbyId("next_shot")
+            var nextShotId = document.GetElementbyId("next_shot")
                                      .GetAttributeValue("href", string.Empty);
-            return ExtractAndParseInt(nextShotId, regexShotId);
+            return nextShotId.ExtractAndParseInt(regexShotId);
         }
 
-        private int? GetNextUnsolvedShotId()
+        private int? GetNextUnsolvedShotId(HtmlDocument document)
         {
-            var nextUnsolvedShotIdLink = Document.GetElementbyId("next_unsolved_shot")
+            var nextUnsolvedShotIdLink = document.GetElementbyId("next_unsolved_shot")
                                                  .GetAttributeValue("href", string.Empty);
-            return ExtractAndParseInt(nextUnsolvedShotIdLink, regexShotId);
+            return nextUnsolvedShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
-        private int? GetLastShotId()
+        private int? GetLastShotId(HtmlDocument document)
         {
-            var LastShotIdLink = Document.GetElementbyId("last_shot_link")
+            var LastShotIdLink = document.GetElementbyId("last_shot_link")
                                          .GetAttributeValue("href", string.Empty);
-            return ExtractAndParseInt(LastShotIdLink, regexShotId).Value;
+            return LastShotIdLink.ExtractAndParseInt(regexShotId).Value;
         }
 
-        private string GetImageUrl(Shot shot)
+        private string GetImageUrl(HtmlDocument document, Shot shot)
         {
-            var imageUrlSection = Document.DocumentNode.Descendants("script")
+            var imageUrlSection = document.DocumentNode.Descendants("script")
                                                        .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
                                                        .Select(s => s.InnerText)
                                                        .FirstOrDefault(w => w.Contains("var imageSrc"));
-            return ExtractValue(imageUrlSection, new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
+            return imageUrlSection.ExtractValue(new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
         }
 
-        private DateTime? GetPostedDate(Shot shot)
+        private DateTime? GetPostedDate(HtmlDocument document, Shot shot)
         {
             DateTime date;
-            var sectionDate = Document.GetElementbyId("hidden_date").InnerText;
+            var sectionDate = document.GetElementbyId("hidden_date").InnerText;
             DateTime.TryParse(sectionDate, out date);
             return date;
         }
 
-        private string GetPostedBy()
+        private string GetPostedBy(HtmlDocument document)
         {
-            return Document.GetElementbyId("postername")
+            return document.GetElementbyId("postername")
                                     .Descendants("a")
                                     .FirstOrDefault()
                                     .InnerText;
@@ -108,7 +109,7 @@ namespace WTM.Core.Application.Parsers
             var sectionNbSolved = sectionShotInfo.Descendants("li")
                                                  .FirstOrDefault(li => li.Attributes.Any(attr => attr.Name == "class" && attr.Value == "solved"))
                                                  .InnerText;
-            return ExtractAndParseInt(sectionNbSolved, new Regex(@"status: solved \((\d*)\)")).GetValueOrDefault(0);
+            return sectionNbSolved.ExtractAndParseInt(new Regex(@"status: solved \((\d*)\)")).GetValueOrDefault(0);
         }
 
         private string GetFirstSolver(HtmlNode sectionShotInfo)
@@ -120,29 +121,29 @@ namespace WTM.Core.Application.Parsers
                                   .FirstOrDefault();
         }
 
-        private bool? GetIsFavourited()
+        private bool? GetIsFavourited(HtmlDocument document)
         {
             bool isFavourite = false;
 
-            var isFavouriteOnclickContent = Document.GetElementbyId("favbutton")
+            var isFavouriteOnclickContent = document.GetElementbyId("favbutton")
                                                     .GetAttributeValue("onclick", string.Empty);
-            var value = ExtractValue(isFavouriteOnclickContent, new Regex(@"new Ajax.Request\('/shot/\d*/(fav|unfav)'"));
+            var value = isFavouriteOnclickContent.ExtractValue(new Regex(@"new Ajax.Request\('/shot/\d*/(fav|unfav)'"));
             isFavourite = (value == "unfav");
 
             return isFavourite;
         }
 
-        private bool? GetIsBookmarked()
+        private bool? GetIsBookmarked(HtmlDocument document)
         {
             return false;
         }
 
-        private bool? GetIsVoteDeletation()
+        private bool? GetIsVoteDeletation(HtmlDocument document)
         {
             return false;
         }
 
-        private bool? GetIsSolutionAvailable()
+        private bool? GetIsSolutionAvailable(HtmlDocument document)
         {
             return false;
         }
@@ -158,48 +159,48 @@ namespace WTM.Core.Application.Parsers
                                   .ToList();
         }
 
-        private List<string> GetTags()
+        private List<string> GetTags(HtmlDocument document)
         {
-            return Document.GetElementbyId("shot_tag_list")
+            return document.GetElementbyId("shot_tag_list")
                            .Descendants("a")
                            .Where(a => a.Attributes.Any(attr => attr.Name == "href" && attr.Value.StartsWith("/search?t=tag")))
                            .Select(s => s.InnerText)
                            .ToList();
         }
 
-        private int GetNumberOfFavourited()
+        private int GetNumberOfFavourited(HtmlDocument document)
         {
             int numberOfFavourited = 0;
 
-            var numberOfFavouritedSection = Document.GetElementbyId("shot_tags")
+            var numberOfFavouritedSection = document.GetElementbyId("shot_tags")
                                                     .Descendants("script")
                                                     .Where(script => script.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
                                                     .FirstOrDefault(script => script.InnerText.Contains("This snapshot has been favourites"));
 
             if (numberOfFavouritedSection != null)
             {
-                var value = ExtractAndParseInt(numberOfFavouritedSection.InnerText, new Regex(@"This snapshot has been favourited (\d*) time"));
+                var value = numberOfFavouritedSection.InnerText.ExtractAndParseInt(new Regex(@"This snapshot has been favourited (\d*) time"));
                 numberOfFavourited = value.GetValueOrDefault(0);
             }
 
             return numberOfFavourited;
         }
 
-        private string GetDifficulty()
+        private string GetDifficulty(HtmlDocument document)
         {
-            var isEasy = Document.GetElementbyId("difficulty_easy")
+            var isEasy = document.GetElementbyId("difficulty_easy")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
             if (isEasy)
                 return "easy";
 
-            var isMedium = Document.GetElementbyId("difficulty_medium")
+            var isMedium = document.GetElementbyId("difficulty_medium")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
             if (isMedium)
                 return "medium";
 
-            var isHard = Document.GetElementbyId("difficulty_hard")
+            var isHard = document.GetElementbyId("difficulty_hard")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
             if (isHard)
