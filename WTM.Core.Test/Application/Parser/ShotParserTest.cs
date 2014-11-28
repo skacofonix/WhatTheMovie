@@ -25,9 +25,16 @@ namespace WTM.Core.Test.Application.Parser
         public void WhenParseThenReturnValidEntity()
         {
             var shot = parser.Parse(10);
-            Check.That(shot).IsNotNull();
-            Check.That(shot.ShotId).HasAValue();
-            Check.That(shot.ShotId.GetValueOrDefault()).Equals(10);
+
+            Check.That(shot.FirstShotId).HasAValue();
+            Check.That(shot.PreviousShotId).HasAValue();
+            Check.That(shot.FirstShotId).HasAValue();
+            Check.That(shot.NextShotId).HasAValue();
+            Check.That(shot.LastShotId).HasAValue();
+
+            Check.That(shot.PostedDate).IsNotNull();
+            Check.That(shot.PostedBy).IsNotNull();
+            Check.That(shot.NbSolver).HasAValue();
             Check.That(shot.ImageUrl).IsNotNull();
         }
     }

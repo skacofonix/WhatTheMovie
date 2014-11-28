@@ -52,7 +52,7 @@ namespace WTM.Core.Domain.WebsiteEntities
         [BooleanParser(@"//li[@class='unsolved']", null, true)]
         public bool? IsSolved { get; private set; }
 
-        [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo']/li[@class='solved']", @"status: solved \(\d*\)")]
+        [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo']/li[@class='solved']", @"status: solved \((\d*)\)")]
         public int? NbSolver { get; private set; }
 
         [StringParser(@"/html/body[@class='black']/div[@id='container']/script", @"var imageSrc = '(/system/images/stills/normal/([a-z0-9]*)/([a-z0-9]*.jpg))';")]
