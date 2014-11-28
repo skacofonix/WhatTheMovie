@@ -6,16 +6,16 @@ using System.Net;
 
 namespace WTM.Core.Application
 {
-    internal class WebClient : IWebClient
+    internal abstract class WebClient : IWebClient
     {
         public Uri UriBase { get; private set; }
 
-        public WebClient(Uri uriBase)
+        protected WebClient(Uri uriBase)
         {
             UriBase = uriBase;
         }
 
-        private IList<Cookie> cookies = new List<Cookie>();
+        private readonly IList<Cookie> cookies = new List<Cookie>();
 
         internal void SetCookie(Cookie cookie)
         {

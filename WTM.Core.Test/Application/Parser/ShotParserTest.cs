@@ -16,7 +16,7 @@ namespace WTM.Core.Test.Application.Parser
         [SetUp]
         public void Init()
         {
-            webClient = new WebClient(new Uri("http://whatthemovie.com"));
+            webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             parser = new ShotParser(webClient, htmlParser);
         }
