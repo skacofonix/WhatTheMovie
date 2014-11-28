@@ -1,5 +1,4 @@
-﻿using System;
-using NFluent;
+﻿using NFluent;
 using NUnit.Framework;
 using WTM.Core.Application;
 using WTM.Core.Services;
@@ -24,22 +23,29 @@ namespace WTM.Core.Test.Services
         [Test]
         public void WhenGuessRightTitleThenReturnTrue()
         {
-            var success = shotService.GuessTitle(10, "Eternal sunshine of the splotless mind");
-            Check.That(success).IsTrue();
+            var response = shotService.GuessTitle(10, "Eternal sunshine of the splotless mind");
+            Check.That(response).IsNotNull();
+            Check.That(response.Guess).IsNotNull();
+            Check.That(response.MovieId).IsNotNull();
+            Check.That(response.OriginalTitle).IsNotNull();
+            Check.That(response.Year).IsNotNull();
         }
 
         [Test]
         public void WhenGuessWrongTitleThenReturnFalse()
         {
-            var success = shotService.GuessTitle(10, "Truman show");
-            Check.That(success).IsFalse();
+            var response = shotService.GuessTitle(10, "Truman show");
+            Check.That(response).IsNull();
         }
 
         [Test]
         public void WhenShowSolutionThenReceiveSolution()
         {
-            var success = shotService.ShowSolution(10);
-            Check.That(success).IsTrue();
+            var response = shotService.ShowSolution(10);
+            Check.That(response).IsNotNull();
+            Check.That(response.OriginalTitle).IsNotNull();
+            Check.That(response.Year).IsNotNull();
+            Check.That(response.MovieLink).IsNotNull();
         }
     }
 }

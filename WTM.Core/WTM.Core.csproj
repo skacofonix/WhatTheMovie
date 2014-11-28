@@ -53,7 +53,7 @@
     <Compile Include="Application\Parsers\ParserBase.cs" />
     <Compile Include="Application\Parsers\MovieParser.cs" />
     <Compile Include="Application\Parsers\ShotParser.cs" />
-    <Compile Include="Services\IServiceResponse.cs" />
+    <Compile Include="Services\GuessTitleResponse.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Application\Parsers\UserParser.cs" />
     <Compile Include="Application\WebClient.cs" />
