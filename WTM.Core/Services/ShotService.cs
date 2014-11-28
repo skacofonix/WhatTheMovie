@@ -84,14 +84,12 @@ namespace WTM.Core.Services
                 response = sr.ReadToEnd();
             }
 
-            // Try with json deserializer
-
-            var regexTitle = new Regex("Element.update\\(\"shot_title\", \"<strong>(.*)\\.\\.\\. \\((\\d{4})\\)</strong> <a href=\\\"http://whatthemovie.com/movie/(.*)\\\"");
+            var regexTitle = new Regex("Element.update\\(\"shot_title\", \"<strong>(.*)\\.{3} \\((\\d{4})\\)<\\/strong> <a href=\\\\\"http:\\/\\/whatthemovie.com\\/movie\\/(.*)\\\\\">visit movie page<\\/a>\"\\);");
             var match = regexTitle.Match(response);
 
             if (match.Success)
             {
-                isSuccess = false;
+                isSuccess = true;
                 var originalTitle = match.Groups[1];
                 var year = match.Groups[2];
                 var movieLink = match.Groups[3];
