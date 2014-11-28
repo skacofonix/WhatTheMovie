@@ -84,7 +84,9 @@ namespace WTM.Core.Services
                 response = sr.ReadToEnd();
             }
 
-            var regexTitle = new Regex("Element.update\\(\"shot_title\", \"<strong>(.*)\\.\\.\\. \\((\\d{4})\\)</strong> <a href=\"http://whatthemovie.com/movie/(.*)\\\"");
+            // Try with json deserializer
+
+            var regexTitle = new Regex("Element.update\\(\"shot_title\", \"<strong>(.*)\\.\\.\\. \\((\\d{4})\\)</strong> <a href=\\\"http://whatthemovie.com/movie/(.*)\\\"");
             var match = regexTitle.Match(response);
 
             if (match.Success)
