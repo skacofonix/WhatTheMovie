@@ -20,6 +20,11 @@ namespace WTM.Core.Application.Parsers
             : base(webClient, htmlParser)
         { }
 
+        public Shot ParseRandom()
+        {
+            return Parse("random");
+        }
+
         public Shot Parse(int id)
         {
             return Parse(id.ToString(CultureInfo.InvariantCulture));

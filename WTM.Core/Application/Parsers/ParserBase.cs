@@ -21,7 +21,7 @@ namespace WTM.Core.Application.Parsers
             this.htmlParser = htmlParser;
         }
 
-        public T Parse(string parameter)
+        protected virtual T Parse(string parameter)
         {
             var uri = MakeUri(parameter);
             HtmlDocument document;

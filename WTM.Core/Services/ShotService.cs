@@ -28,7 +28,7 @@ namespace WTM.Core.Services
 
         public Shot ParseRandom()
         {
-            return shotParser.Parse("random");
+            return shotParser.ParseRandom();
         }
 
         public GuessTitleResponse GuessTitle(int shotId, string title)

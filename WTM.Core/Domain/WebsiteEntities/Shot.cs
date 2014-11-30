@@ -7,9 +7,6 @@ namespace WTM.Core.Domain.WebsiteEntities
 {
     internal class Shot : IWebsiteEntityBase
     {
-        public Shot()
-        { }
-
         #region Navigation
 
         [StringParser(@"//a[@id='first_shot_link']/@href", @"/shot/(\d*)")]

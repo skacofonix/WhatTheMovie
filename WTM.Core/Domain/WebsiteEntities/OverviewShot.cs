@@ -2,7 +2,8 @@
 
 namespace WTM.Core.Domain.WebsiteEntities
 {
-    internal class User : IWebsiteEntityBase
+    internal class OverviewShot : IWebsiteEntityBase
     {
+        public string ImageUrl { get; set; }
     }
 }
