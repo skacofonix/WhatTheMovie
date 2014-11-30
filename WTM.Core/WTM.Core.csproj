@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Application\Attributes\AuthenticatedUser.cs" />
     <Compile Include="Application\Attributes\BooleanParserAttribute.cs" />
+    <Compile Include="Application\Attributes\ListParserAttribute.cs" />
     <Compile Include="Application\Attributes\StringParserAttribute.cs" />
     <Compile Include="Application\Attributes\BaseParserAttribute.cs" />
     <Compile Include="Application\Game.cs" />

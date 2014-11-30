@@ -56,6 +56,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Application\Parser\FeatureFilmeParserTest.cs" />
     <Compile Include="Application\Parser\ShotParserTest.cs" />
     <Compile Include="Application\WebClientFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

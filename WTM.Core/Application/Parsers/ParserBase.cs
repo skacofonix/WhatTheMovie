@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -49,49 +52,81 @@ namespace WTM.Core.Application.Parsers
 
         protected virtual void Parse(T instance, HtmlDocument htmlDocument)
         {
-            var properties = typeof(T).GetTypeInfo().DeclaredProperties;
+            var navigator = htmlDocument.CreateNavigator();
+            if (navigator == null)
+                throw new ArgumentException("Impossible to create navigator over HtmlDocument");
+
+            var properties = GetPropertiesWithParserAttribute(instance);
 
             foreach (var property in properties)
             {
+                var propertyType = property.PropertyType;
                 var htmlParserAttr = property.GetCustomAttribute<BaseParserAttribute>();
-
-                if (htmlParserAttr == null) continue;
                 var xPath = htmlParserAttr.XPathExpression;
 
-                var navigator = htmlDocument.CreateNavigator();
-                if (navigator == null) continue;
                 var xPathNode = navigator.Select(xPath);
 
-                if (!xPathNode.MoveNext()) continue;
-                var tagValue = xPathNode.Current.InnerXml.Trim();
-                string stringValue;
-
-                var pattern = htmlParserAttr.RegexPattern;
-                if (!string.IsNullOrEmpty(pattern))
+                if (IsEnumerableProperty(propertyType))
                 {
-                    var regex = new Regex(pattern);
-                    var match = regex.Match(tagValue);
+                    var typeOfList = propertyType.GetGenericArguments().FirstOrDefault();
+                    if (typeOfList != null)
+                    {
+                        // TODO : Check if type of list using ParserAttribute
+                        // Useless, beacause this control was run into reflection call
+                    }
 
-                    if (htmlParserAttr is BooleanParserAttribute)
-                        stringValue = match.Success.ToString();
-                    else
-                        stringValue = match.Groups[1].Value;
+                    while (xPathNode.MoveNext())
+                    {
+                        var blop = xPathNode.Current.InnerXml.Trim();
+
+                        // TODO : Work in progress
+                    }
                 }
                 else
                 {
-                    stringValue = tagValue;
-                }
+                    if (!xPathNode.MoveNext()) continue;
+                    var tagValue = xPathNode.Current.InnerXml.Trim();
+                    string stringValue;
 
-                object convertedType = null;
-                if (!string.IsNullOrEmpty(stringValue))
-                {
-                    var propertyType = property.PropertyType;
-                    propertyType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-                    convertedType = Convert.ChangeType(stringValue, propertyType);
-                }
+                    var pattern = htmlParserAttr.RegexPattern;
+                    if (!string.IsNullOrEmpty(pattern))
+                    {
+                        var regex = new Regex(pattern);
+                        var match = regex.Match(tagValue);
 
-                property.SetValue(instance, convertedType);
+                        if (htmlParserAttr is BooleanParserAttribute)
+                            stringValue = match.Success.ToString();
+                        else
+                            stringValue = match.Groups[1].Value;
+                    }
+                    else
+                    {
+                        stringValue = tagValue;
+                    }
+
+                    object convertedType = null;
+                    if (!string.IsNullOrEmpty(stringValue))
+                    {
+                        propertyType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+                        convertedType = Convert.ChangeType(stringValue, propertyType);
+                    }
+
+                    property.SetValue(instance, convertedType);
+                }
             }
+        }
+
+        private static bool IsEnumerableProperty(Type propertyType)
+        {
+            return propertyType.GetInterfaces().Any(interfaceType => interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+        }
+
+        private static IEnumerable<PropertyInfo> GetPropertiesWithParserAttribute<U>(U instance) where U : IWebsiteEntityBase
+        {
+            var properties = typeof(U).GetTypeInfo()
+                .DeclaredProperties
+                .Where(t => t.GetCustomAttributes(typeof(BaseParserAttribute)).Any());
+            return properties;
         }
 
         protected virtual void AfterParse(T instance, HtmlDocument htmlDocument)

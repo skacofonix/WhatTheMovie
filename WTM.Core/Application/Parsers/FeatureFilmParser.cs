@@ -22,6 +22,11 @@ namespace WTM.Core.Application.Parsers
             return base.Parse(null);
         }
 
+        public FeatureFilm Parse()
+        {
+            return base.Parse(null);
+        }
+
         public FeatureFilm Parse(int year, int month, int day)
         {
             var date = new DateTime(year, month, day);

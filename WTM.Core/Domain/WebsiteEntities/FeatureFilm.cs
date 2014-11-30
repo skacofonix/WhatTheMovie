@@ -7,9 +7,10 @@ namespace WTM.Core.Domain.WebsiteEntities
 {
     internal class FeatureFilm : IWebsiteEntityBase
     {
+        [StringParser(@"//div[@id='hidden_date']")]
         public DateTime? DateTime { get; set; }
 
-        [StringParser(@"//a[@id='first_shot_link']/@href", @"/shot/(\d*)")]
+        [StringParser(@"//ul[@id='overview_movie_list']/li/div[@class='box']/div")]
         public IList<OverviewShot> Shots { get; set; }
     }
 }
