@@ -35,9 +35,7 @@ namespace WTM.Core.Application.Parsers
 
             var instance = new T();
 
-            BeforeParse(instance, document);
             Parse(instance, document);
-            AfterParse(instance, document);
 
             return instance;
         }
@@ -47,9 +45,6 @@ namespace WTM.Core.Application.Parsers
             return new Uri(webClient.UriBase, Identifier + "/" + parameter);
         }
 
-        protected virtual void BeforeParse(T instance, HtmlDocument htmlDocument)
-        { }
-
         protected virtual void Parse(T instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
@@ -58,9 +53,6 @@ namespace WTM.Core.Application.Parsers
 
             ParseObject(instance, navigator);
         }
-
-        protected virtual void AfterParse(T instance, HtmlDocument htmlDocument)
-        { }
 
         //
 
