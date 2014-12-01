@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Linq;
 using WTM.Core.Application;
 using WTM.Core.Application.Parsers;
+using WTM.Core.Test.Properties;
 
 namespace WTM.Core.Test.Application.Parser
 {
@@ -16,7 +17,7 @@ namespace WTM.Core.Test.Application.Parser
         [SetUp]
         public void Init()
         {
-            webClient = new WebClientWTM();
+            webClient = new WebClientFake(Resources.FeatureFilms20141201);
             htmlParser = new HtmlParser();
             parser = new FeatureFilmParser(webClient, htmlParser);
         }
@@ -26,6 +27,8 @@ namespace WTM.Core.Test.Application.Parser
         {
             var featureFilm = parser.Parse();
 
+            Check.That(featureFilm).IsNotNull();
+            Check.That(featureFilm.DateTime).IsNotNull();
             Check.That(featureFilm.Shots).IsNotNull();
             Check.That(featureFilm.Shots.Any()).IsTrue();
         }

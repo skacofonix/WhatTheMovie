@@ -89,6 +89,9 @@
   <ItemGroup>
     <None Include="Resources\shot10.htm" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FeatureFilms20141201.html" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

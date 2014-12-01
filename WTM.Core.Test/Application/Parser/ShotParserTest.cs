@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using WTM.Core.Application;
 using WTM.Core.Application.Parsers;
+using WTM.Core.Test.Properties;
 
 namespace WTM.Core.Test.Application.Parser
 {
@@ -15,7 +16,7 @@ namespace WTM.Core.Test.Application.Parser
         [SetUp]
         public void Init()
         {
-            webClient = new WebClientWTM();
+            webClient = new WebClientFake(Resources.shot10);
             htmlParser = new HtmlParser();
             parser = new ShotParser(webClient, htmlParser);
         }

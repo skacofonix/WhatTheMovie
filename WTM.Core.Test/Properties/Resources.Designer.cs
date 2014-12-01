@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace WTM.Core.Test.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
     /// </summary>
@@ -54,6 +57,18 @@ namespace WTM.Core.Test.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+        ///&lt;!-- saved from url=(0043)http://whatthemovie.com/overview/2014/12/01 --&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot; style=&quot;background-color:#000000&quot;&gt;&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        ///	&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;./WTMFeatureFilms20141201_files/ga.js&quot;&gt;&lt;/script&gt;&lt;script type=&quot;text/javascript&quot;&gt;var _sf_startpt=( [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        internal static string FeatureFilms20141201 {
+            get {
+                return ResourceManager.GetString("FeatureFilms20141201", resourceCulture);
             }
         }
         

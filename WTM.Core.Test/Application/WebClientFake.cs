@@ -2,18 +2,15 @@
 using System.IO;
 using System.Net;
 using WTM.Core.Application;
-using WTM.Core.Test.Properties;
 
 namespace WTM.Core.Test.Application
 {
-    internal class WebClientFake : IWebClient
+    internal class WebClientFake : WebClientWTM
     {
-        public Uri UriBase { get; private set; }
+        private readonly string htmlContent;
 
-        public Stream GetStream(Uri uri)
+        public new Stream GetStream(Uri uri)
         {
-            var htmlContent = Resources.shot10;
-
             var ms = new MemoryStream();
             var sw = new StreamWriter(ms);
             sw.Write(htmlContent);
@@ -22,9 +19,14 @@ namespace WTM.Core.Test.Application
             return ms;
         }
 
-        public WebResponse Post(Uri uri, string data)
+        public new WebResponse Post(Uri uri, string data)
         {
             throw new NotImplementedException();
+        }
+
+        public WebClientFake(string htmlContent)
+        {
+            this.htmlContent = htmlContent;
         }
     }
 }
