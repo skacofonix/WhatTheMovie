@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Xml.XPath;
+using HtmlAgilityPack;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Parsers
@@ -37,6 +41,49 @@ namespace WTM.Core.Application.Parsers
         {
             var stringDate = date.ToString(DateFormat);
             return base.Parse(stringDate);
+        }
+
+        private string GetFirstValue(XPathNavigator navigator, string xPath)
+        {
+            var singleNode = navigator.SelectSingleNode(xPath);
+            return singleNode != null ? singleNode.InnerXml : null;
+        }
+
+        protected override void Parse(FeatureFilm instance, HtmlDocument htmlDocument)
+        {
+            var navigator = htmlDocument.CreateNavigator();
+            if (navigator == null) return;
+
+            var dateString = GetFirstValue(navigator, "//div[@id='hidden_date']");
+            if (dateString != null)
+            {
+                DateTime date;
+                if (DateTime.TryParse(dateString, out date))
+                    instance.Date = date;
+            }
+
+            var xPathItemRoot = @"//ul[@id='overview_movie_list']/li/div[@class='box']/div";
+            var nodeIterator = navigator.Select(xPathItemRoot);
+
+            var overviewShotList = new List<OverviewShot>();
+            while (nodeIterator.MoveNext())
+            {
+                var nodeImageUrl = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/a/img/@src");
+
+                int? shotId = null;
+                var nodeShotUrl = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/a[1]/@href");
+                var regexLastDecimal = new Regex(@"(\d*)$");
+                if (!string.IsNullOrEmpty(nodeShotUrl))
+                {
+                    var match = regexLastDecimal.Match(nodeShotUrl);
+                    var shotIdString = match.Groups[1].Value;
+                    shotId = Convert.ToInt32(shotIdString);
+                }
+
+                overviewShotList.Add(new OverviewShot(nodeImageUrl, shotId));
+            }
+
+            instance.Shots = overviewShotList;
         }
     }
 }

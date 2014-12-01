@@ -28,7 +28,7 @@ namespace WTM.Core.Test.Application.Parser
             var featureFilm = parser.Parse();
 
             Check.That(featureFilm).IsNotNull();
-            Check.That(featureFilm.DateTime).IsNotNull();
+            Check.That(featureFilm.Date).IsNotNull();
             Check.That(featureFilm.Shots).IsNotNull();
             Check.That(featureFilm.Shots.Any()).IsTrue();
         }

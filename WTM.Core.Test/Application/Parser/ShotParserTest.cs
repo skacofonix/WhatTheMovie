@@ -16,7 +16,7 @@ namespace WTM.Core.Test.Application.Parser
         [SetUp]
         public void Init()
         {
-            webClient = new WebClientFake(Resources.shot10);
+            webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             parser = new ShotParser(webClient, htmlParser);
         }

@@ -5,11 +5,13 @@ using WTM.Core.Application;
 
 namespace WTM.Core.Test.Application
 {
-    internal class WebClientFake : WebClientWTM
+    internal class WebClientFake : IWebClient
     {
         private readonly string htmlContent;
 
-        public new Stream GetStream(Uri uri)
+        public Uri UriBase {get { return new Uri("http://whatthemovie.com"); }}
+
+        public Stream GetStream(Uri uri)
         {
             var ms = new MemoryStream();
             var sw = new StreamWriter(ms);
@@ -19,7 +21,7 @@ namespace WTM.Core.Test.Application
             return ms;
         }
 
-        public new WebResponse Post(Uri uri, string data)
+        public WebResponse Post(Uri uri, string data)
         {
             throw new NotImplementedException();
         }
