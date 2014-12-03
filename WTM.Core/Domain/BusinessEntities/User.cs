@@ -1,6 +1,4 @@
-﻿using WTM.Core.Domain.BusinessEntities.Base;
-
-namespace WTM.Core.Domain.BusinessEntities
+﻿namespace WTM.Core.Domain.BusinessEntities
 {
     public class User : BaseClass
     {

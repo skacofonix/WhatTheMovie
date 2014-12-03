@@ -44,16 +44,16 @@ namespace WTM.Core
             GenerateCookie();
         }
 
-        private const string show = "show";
-        private const string hide = "dontshow";
+        private const string Show = "show";
+        private const string Hide = "dontshow";
 
         public override string ToString()
         {
             const string format = "{\"solved\":\"{0}\"@@@\"unsolved\":\"{1}\"@@@\"posted\":\"{2}\"}";
             return string.Format(format,
-                ShowSolved ? show : hide,
-                ShowUnsolved ? show : hide,
-                ShowPosted ? show : hide);
+                ShowSolved ? Show : Hide,
+                ShowUnsolved ? Show : Hide,
+                ShowPosted ? Show : Hide);
         }
 
         private void GenerateCookie()

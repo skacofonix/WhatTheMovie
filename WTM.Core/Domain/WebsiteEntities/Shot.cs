@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using WTM.Core.Application.Attributes;
-using WTM.Core.Domain.WebsiteEntities.Base;
 
 namespace WTM.Core.Domain.WebsiteEntities
 {

@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using WTM.Core.Application.Attributes;
-using WTM.Core.Domain.WebsiteEntities.Base;
+using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Parsers
 {

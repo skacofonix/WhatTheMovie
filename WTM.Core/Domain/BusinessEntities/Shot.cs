@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using WTM.Core.Domain.BusinessEntities.Base;
 
 namespace WTM.Core.Domain.BusinessEntities
 {

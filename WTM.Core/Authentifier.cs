@@ -2,17 +2,13 @@
 using System.Net;
 using WTM.Core.Application;
 
-
 namespace WTM.Core
 {
     internal class Authentifier
     {
         public Cookie CookieSession { get; private set; }
 
-        private string login;
-        private string password;
-        private IWebClient webClient;
-        private readonly Uri baseUri;
+        private readonly IWebClient webClient;
 
         public Authentifier(IWebClient webClient)
         {

@@ -12,14 +12,14 @@ namespace WTM.Core.Test.Application.Parser
     {
         private IWebClient webClient;
         private IHtmlParser htmlParser;
-        private FeatureFilmParser parser;
+        private OverviewParser parser;
 
         [SetUp]
         public void Init()
         {
             webClient = new WebClientFake(Resources.FeatureFilms20141201);
             htmlParser = new HtmlParser();
-            parser = new FeatureFilmParser(webClient, htmlParser);
+            parser = new OverviewParser(webClient, htmlParser);
         }
 
         [Test]

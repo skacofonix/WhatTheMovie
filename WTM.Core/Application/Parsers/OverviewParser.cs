@@ -1,24 +1,24 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
-using HtmlAgilityPack;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Parsers
 {
-    internal class FeatureFilmParser : ParserBase<FeatureFilm>
+    internal class OverviewParser : ParserBase<OverviewShotCollection>
     {
         public override string Identifier { get { return "overview"; } }
 
-        public FeatureFilmParser(IWebClient webClient, IHtmlParser htmlParser)
+        public OverviewParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
         { }
 
         const string DateFormat = "yyyy/MM/dd";
 
-        protected override FeatureFilm Parse(string parameter)
+        protected override OverviewShotCollection Parse(string parameter)
         {
             DateTime date;
             if (parameter != null && DateTime.TryParseExact(parameter, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
@@ -26,18 +26,18 @@ namespace WTM.Core.Application.Parsers
             return base.Parse(null);
         }
 
-        public FeatureFilm Parse()
+        public OverviewShotCollection Parse()
         {
             return base.Parse(null);
         }
 
-        public FeatureFilm Parse(int year, int month, int day)
+        public OverviewShotCollection Parse(int year, int month, int day)
         {
             var date = new DateTime(year, month, day);
             return Parse(date);
         }
 
-        private FeatureFilm Parse(DateTime date)
+        private OverviewShotCollection Parse(DateTime date)
         {
             var stringDate = date.ToString(DateFormat);
             return base.Parse(stringDate);
@@ -49,7 +49,7 @@ namespace WTM.Core.Application.Parsers
             return singleNode != null ? singleNode.InnerXml : null;
         }
 
-        protected override void Parse(FeatureFilm instance, HtmlDocument htmlDocument)
+        protected override void Parse(OverviewShotCollection instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;
@@ -62,7 +62,7 @@ namespace WTM.Core.Application.Parsers
                     instance.Date = date;
             }
 
-            var xPathItemRoot = @"//ul[@id='overview_movie_list']/li";
+            const string xPathItemRoot = @"//ul[@id='overview_movie_list']/li";
             var nodeIterator = navigator.Select(xPathItemRoot);
 
             var overviewShotList = new List<OverviewShot>();

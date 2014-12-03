@@ -1,4 +1,4 @@
-﻿namespace WTM.Core.Domain.BusinessEntities.Base
+﻿namespace WTM.Core.Domain.BusinessEntities
 {
     public class BaseClass
     {
