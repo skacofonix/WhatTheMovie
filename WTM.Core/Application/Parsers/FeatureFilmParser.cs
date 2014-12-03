@@ -62,16 +62,24 @@ namespace WTM.Core.Application.Parsers
                     instance.Date = date;
             }
 
-            var xPathItemRoot = @"//ul[@id='overview_movie_list']/li/div[@class='box']/div";
+            var xPathItemRoot = @"//ul[@id='overview_movie_list']/li";
             var nodeIterator = navigator.Select(xPathItemRoot);
 
             var overviewShotList = new List<OverviewShot>();
             while (nodeIterator.MoveNext())
             {
-                var nodeImageUrl = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/a/img/@src");
+                var unsolved = false;
+                var nodeUnsolved = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/@class");
+                if (!string.IsNullOrEmpty(nodeUnsolved))
+                {
+                    if (nodeUnsolved == "unsolved")
+                        unsolved = true;
+                }
+
+                var nodeImageUrl = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/div[@class='box']/div/a/img/@src");
 
                 int? shotId = null;
-                var nodeShotUrl = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/a[1]/@href");
+                var nodeShotUrl = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/div[@class='box']/div/a[1]/@href");
                 var regexLastDecimal = new Regex(@"(\d*)$");
                 if (!string.IsNullOrEmpty(nodeShotUrl))
                 {
@@ -80,7 +88,7 @@ namespace WTM.Core.Application.Parsers
                     shotId = Convert.ToInt32(shotIdString);
                 }
 
-                overviewShotList.Add(new OverviewShot(nodeImageUrl, shotId));
+                overviewShotList.Add(new OverviewShot(nodeImageUrl, shotId, unsolved));
             }
 
             instance.Shots = overviewShotList;

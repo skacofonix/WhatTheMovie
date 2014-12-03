@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using WTM.Core.Application;
 using WTM.Core.Application.Parsers;
-using WTM.Core.Test.Properties;
 
 namespace WTM.Core.Test.Application.Parser
 {
