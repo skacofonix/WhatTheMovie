@@ -1,4 +1,7 @@
-﻿using HtmlAgilityPack;
+﻿using System.IO;
+using System.Runtime.Serialization.Formatters;
+using System.Xml.XPath;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,6 +19,8 @@ namespace WTM.Core.Application.Parsers
         private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
 
+
+
         public ShotParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
         { }
@@ -28,6 +33,82 @@ namespace WTM.Core.Application.Parsers
         public Shot Parse(int id)
         {
             return Parse(id.ToString(CultureInfo.InvariantCulture));
+        }
+
+        protected override void Parse(Shot instance, HtmlDocument htmlDocument)
+        {
+            base.Parse(instance, htmlDocument);
+
+            var navigator = htmlDocument.CreateNavigator();
+            if (navigator == null) return;
+
+            instance.Languages = GetLanguages(navigator);
+            instance.Tags= GetTags(navigator);
+            GetRate(instance, navigator);
+
+            HtmlDocument shoutDocument = null;
+            var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId.GetValueOrDefault());
+            using (var stream = WebClient.GetStream(uriShout))
+            {
+                // TODO : Clean data before parse to HtmlDocument
+                shoutDocument = HtmlParser.GetHtmlDocument(stream);
+            }
+            var shoutNavigator = shoutDocument.CreateNavigator();
+            if (shoutNavigator == null)
+                return;
+
+            var shoutRootNode = shoutNavigator.Select("//ul[@id='shoutlist']/li");
+            while (shoutRootNode.MoveNext())
+            {
+                shoutRootNode.Current.SelectSingleNode(".//div/div/strong/a/@title");
+            }
+        }
+
+        private static void GetRate(Shot instance, XPathNavigator navigator)
+        {
+            var node = navigator.SelectSingleNode("//div[@id='main_shot']/script[4]");
+            if (node == null) return;
+
+            var rateRegex = new Regex(@"Overall rating: &lt;strong&gt;(\d.?\d{2})&lt;/strong&gt; \((\d*) votes\)");
+            
+            var match = rateRegex.Match(node.InnerXml);
+            if (!match.Success) return;
+
+            var culture = new CultureInfo("en-US");
+
+            decimal rate;
+            if (decimal.TryParse(match.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rate))
+                instance.Rate = rate;
+
+            int nbRaters;
+            if (int.TryParse(match.Groups[2].Value, out nbRaters))
+                instance.NbRaters = nbRaters;
+        }
+
+        private static List<string> GetTags(XPathNavigator navigator)
+        {
+            var nodes = navigator.Select("//ul[@id='shot_tag_list']/li/a");
+            var tagList = new List<string>(nodes.Count);
+            while (nodes.MoveNext())
+            {
+                tagList.Add(nodes.Current.InnerXml);
+            }
+            return tagList;
+        }
+
+        private static List<string> GetLanguages(XPathNavigator navigator)
+        {
+            var languageRegex = new Regex(@"images/flags/([a-z]*).png");
+            var nodes = navigator.Select("//div[@id='solve_station']/div[@class='col_center clearfix']/ul[@class='language_flags']/li/img/@src");
+            var languageList = new List<string>(nodes.Count);
+            while (nodes.MoveNext())
+            {
+                var match = languageRegex.Match(nodes.Current.InnerXml);
+                if (!match.Success) continue;
+
+                languageList.Add(match.Groups[1].Value);
+            }
+            return languageList;
         }
 
         #region Custom implementation
@@ -84,7 +165,7 @@ namespace WTM.Core.Application.Parsers
             return LastShotIdLink.ExtractAndParseInt(regexShotId).Value;
         }
 
-        private string GetImageUrl(HtmlDocument document, Shot shot)
+        private string GetImageUrl(HtmlDocument document)
         {
             var imageUrlSection = document.DocumentNode.Descendants("script")
                                                        .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
@@ -93,7 +174,7 @@ namespace WTM.Core.Application.Parsers
             return imageUrlSection.ExtractValue(new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
         }
 
-        private DateTime? GetPostedDate(HtmlDocument document, Shot shot)
+        private DateTime? GetPostedDate(HtmlDocument document)
         {
             DateTime date;
             var sectionDate = document.GetElementbyId("hidden_date").InnerText;
@@ -151,26 +232,6 @@ namespace WTM.Core.Application.Parsers
         private bool? GetIsSolutionAvailable(HtmlDocument document)
         {
             return false;
-        }
-
-        private List<string> GetLanguages(HtmlNode sectionSolution)
-        {
-            var regexLanguage = new Regex("//static.whatthemovie.com/images/flags/([a-z]{2,3}).png");
-            return sectionSolution.Descendants("ul")
-                                  .FirstOrDefault(ul => ul.Attributes.Any(attr => attr.Name == "class" && attr.Value == "language_flags"))
-                                  .Descendants("img")
-                                  .Select(img => img.Attributes.FirstOrDefault(attr => attr.Name == "src").Value)
-                                  .Select(s => regexLanguage.Match(s).Groups[1].Value)
-                                  .ToList();
-        }
-
-        private List<string> GetTags(HtmlDocument document)
-        {
-            return document.GetElementbyId("shot_tag_list")
-                           .Descendants("a")
-                           .Where(a => a.Attributes.Any(attr => attr.Name == "href" && attr.Value.StartsWith("/search?t=tag")))
-                           .Select(s => s.InnerText)
-                           .ToList();
         }
 
         private int GetNumberOfFavourited(HtmlDocument document)

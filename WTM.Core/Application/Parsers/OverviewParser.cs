@@ -69,17 +69,17 @@ namespace WTM.Core.Application.Parsers
             while (nodeIterator.MoveNext())
             {
                 var unsolved = false;
-                var nodeUnsolved = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/@class");
+                var nodeUnsolved = GetFirstValue(nodeIterator.Current, ".//@class");
                 if (!string.IsNullOrEmpty(nodeUnsolved))
                 {
                     if (nodeUnsolved == "unsolved")
                         unsolved = true;
                 }
 
-                var nodeImageUrl = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/div[@class='box']/div/a/img/@src");
+                var nodeImageUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a/img/@src");
 
                 int? shotId = null;
-                var nodeShotUrl = GetFirstValue(nodeIterator.Current, xPathItemRoot + "/div[@class='box']/div/a[1]/@href");
+                var nodeShotUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a[1]/@href");
                 var regexLastDecimal = new Regex(@"(\d*)$");
                 if (!string.IsNullOrEmpty(nodeShotUrl))
                 {

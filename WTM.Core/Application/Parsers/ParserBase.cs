@@ -13,24 +13,24 @@ namespace WTM.Core.Application.Parsers
     public abstract class ParserBase<T> : IPageIdentifier
         where T : IWebsiteEntityBase, new()
     {
-        private readonly IWebClient webClient;
-        private readonly IHtmlParser htmlParser;
+        protected readonly IWebClient WebClient;
+        protected readonly IHtmlParser HtmlParser;
 
         public abstract string Identifier { get; }
 
         protected ParserBase(IWebClient webClient, IHtmlParser htmlParser)
         {
-            this.webClient = webClient;
-            this.htmlParser = htmlParser;
+            this.WebClient = webClient;
+            this.HtmlParser = htmlParser;
         }
 
         protected virtual T Parse(string parameter)
         {
             var uri = MakeUri(parameter);
             HtmlDocument document;
-            using (var stream = webClient.GetStream(uri))
+            using (var stream = WebClient.GetStream(uri))
             {
-                document = htmlParser.GetHtmlDocument(stream);
+                document = HtmlParser.GetHtmlDocument(stream);
             }
 
             var instance = new T();
@@ -42,7 +42,7 @@ namespace WTM.Core.Application.Parsers
 
         protected virtual Uri MakeUri(string parameter)
         {
-            return new Uri(webClient.UriBase, Identifier + "/" + parameter);
+            return new Uri(WebClient.UriBase, Identifier + "/" + parameter);
         }
 
         protected virtual void Parse(T instance, HtmlDocument htmlDocument)
