@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters;
+using System.Text;
 using System.Xml.XPath;
 using HtmlAgilityPack;
 using System;
@@ -18,8 +19,6 @@ namespace WTM.Core.Application.Parsers
 
         private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
-
-
 
         public ShotParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
@@ -43,16 +42,40 @@ namespace WTM.Core.Application.Parsers
             if (navigator == null) return;
 
             instance.Languages = GetLanguages(navigator);
-            instance.Tags= GetTags(navigator);
+            instance.Tags = GetTags(navigator);
             GetRate(instance, navigator);
 
-            HtmlDocument shoutDocument = null;
             var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId.GetValueOrDefault());
+            string shoutString = null;
+
             using (var stream = WebClient.GetStream(uriShout))
+            using (var sr = new StreamReader(stream))
             {
-                // TODO : Clean data before parse to HtmlDocument
-                shoutDocument = HtmlParser.GetHtmlDocument(stream);
+                shoutString = sr.ReadToEnd();
             }
+
+            var regexClean = new Regex("[\t\n]*");
+            var shoutStringClean = regexClean.Replace(shoutString, string.Empty);
+
+            var regexShout = new Regex("Element.update\\(\"shoutbox\", \"(.*)\"\\);");
+
+            string shoutBodyHtml = null;
+            var match = regexShout.Match(shoutStringClean);
+            if (match.Success)
+            {
+                shoutBodyHtml = match.Groups[1].Value;
+            }
+
+            var sb = new StringBuilder();
+            sb.Append("<html><body>");
+            sb.Append(shoutBodyHtml);
+            sb.Append("</html></body>");
+            
+            var shoutHtml = sb.ToString();
+
+
+            var shoutDocument = HtmlParser.GetHtmlDocument(shoutHtml);
+
             var shoutNavigator = shoutDocument.CreateNavigator();
             if (shoutNavigator == null)
                 return;
@@ -70,7 +93,7 @@ namespace WTM.Core.Application.Parsers
             if (node == null) return;
 
             var rateRegex = new Regex(@"Overall rating: &lt;strong&gt;(\d.?\d{2})&lt;/strong&gt; \((\d*) votes\)");
-            
+
             var match = rateRegex.Match(node.InnerXml);
             if (!match.Success) return;
 

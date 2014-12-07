@@ -1,7 +1,11 @@
-﻿namespace WTM.Core.Domain.WebsiteEntities
+﻿using System;
+
+namespace WTM.Core.Domain.WebsiteEntities
 {
     internal class OverviewShot : IWebsiteEntityBase
     {
+        public DateTime ParseDateTime { get; private set; }
+
         public string ImageUrl { get; private set; }
         public int? ShotId { get; private set; }
         public bool Unsolved { get; set; }
@@ -12,5 +16,6 @@
             ShotId = shotId;
             Unsolved = unsolved;
         }
+
     }
 }

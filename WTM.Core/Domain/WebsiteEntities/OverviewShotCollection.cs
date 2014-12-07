@@ -6,6 +6,8 @@ namespace WTM.Core.Domain.WebsiteEntities
 {
     internal class OverviewShotCollection : IWebsiteEntityBase
     {
+        public DateTime ParseDateTime { get; private set; }
+
         [StringParser(@"//div[@id='hidden_date']")]
         public DateTime? Date { get; set; }
 

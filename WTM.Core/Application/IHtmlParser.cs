@@ -5,6 +5,7 @@ namespace WTM.Core.Application
 {
     public interface IHtmlParser
     {
-        HtmlDocument GetHtmlDocument(Stream stream);
+        HtmlDocument GetHtmlDocument(Stream s);
+        HtmlDocument GetHtmlDocument(string s);
     }
 }
