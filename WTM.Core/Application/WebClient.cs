@@ -52,6 +52,12 @@ namespace WTM.Core.Application
             return request.GetResponse();
         }
 
+        public void DownloadFile(Uri uri, string destinationFile)
+        {
+            var webClient = new System.Net.WebClient();
+            webClient.DownloadFile(uri, destinationFile);
+        }
+
         private WebResponse GetWebResponse(Uri uri)
         {
             var webRequest = GetWebRequest(uri);

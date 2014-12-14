@@ -26,6 +26,11 @@ namespace WTM.Core.Test.Application
             throw new NotImplementedException();
         }
 
+        public void DownloadFile(Uri uri, string destinationFile)
+        {
+            throw new NotImplementedException();
+        }
+
         public WebClientFake(string htmlContent)
         {
             this.htmlContent = htmlContent;

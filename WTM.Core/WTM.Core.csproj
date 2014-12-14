@@ -58,6 +58,7 @@
     <Compile Include="Application\Parsers\ParserBase.cs" />
     <Compile Include="Application\Parsers\MovieParser.cs" />
     <Compile Include="Application\Parsers\ShotParser.cs" />
+    <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\GuessTitleResponse.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Application\Parsers\UserParser.cs" />

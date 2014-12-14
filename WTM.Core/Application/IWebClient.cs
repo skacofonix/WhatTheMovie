@@ -9,5 +9,6 @@ namespace WTM.Core.Application
         Uri UriBase { get; }
         Stream GetStream(Uri uri);
         WebResponse Post(Uri uri, string data = null);
+        void DownloadFile(Uri uri, string destinationFile);
     }
 }
