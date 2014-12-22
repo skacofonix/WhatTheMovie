@@ -23,6 +23,10 @@ namespace WTM.Core.Test.Application.Parser
         [Test]
         public void WhenParseThenReturnValidEntity()
         {
+            var authentifier = new Authentifier(webClient, htmlParser);
+            if (authentifier.Login("captainOblivious", "captainOblivious"))
+                webClient.SetCookie(authentifier.CookieSession);
+
             var settings = parser.Parse();
 
             Check.That(settings.ShowGore).IsNotNull();

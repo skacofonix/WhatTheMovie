@@ -31,6 +31,16 @@ namespace WTM.Core.Test.Application
             throw new NotImplementedException();
         }
 
+        public void SetCookie(Cookie cookie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveCookie(Cookie cookie)
+        {
+            throw new NotImplementedException();
+        }
+
         public WebClientFake(string htmlContent)
         {
             this.htmlContent = htmlContent;

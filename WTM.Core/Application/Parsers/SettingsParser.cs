@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Parsers
@@ -20,12 +21,20 @@ namespace WTM.Core.Application.Parsers
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;
+            
+            const string trueHtmlInputValue ="value=\"(true|false)\"";
 
-            var filterGoreTrueTag = navigator.Select("//input[@id='user_prefers_filter_gore_true']");
-            var blop = filterGoreTrueTag.MoveNext();
-            var blip = filterGoreTrueTag.Current;
+            var showGore = false;
+            var filterGoreTrueTag = navigator.SelectSingleNode("//input[@id='user_prefers_filter_gore_true']");
+            if (filterGoreTrueTag != null && Regex.IsMatch(filterGoreTrueTag.OuterXml, trueHtmlInputValue))
+                showGore = true;
+            instance.ShowGore = showGore;
 
-            var filterGoreFalseTag = navigator.SelectSingleNode("//input[@id='user_prefers_filter_gore_false']");
+            var showNudity = false;
+            var filterNudityTrueTag = navigator.SelectSingleNode("//input[@id='user_prefers_filter_nudity_true']");
+            if (filterNudityTrueTag != null && Regex.IsMatch(filterNudityTrueTag.OuterXml, trueHtmlInputValue))
+                showNudity = true;
+            instance.ShowNudity = showNudity;
         }
     }
 }

@@ -17,12 +17,12 @@ namespace WTM.Core.Application
 
         private readonly IList<Cookie> cookies = new List<Cookie>();
 
-        internal void SetCookie(Cookie cookie)
+        public void SetCookie(Cookie cookie)
         {
             cookies.Add(cookie);
         }
 
-        internal void RemoveCookie(Cookie cookie)
+        public void RemoveCookie(Cookie cookie)
         {
             cookies.Remove(cookie);
         }
