@@ -67,6 +67,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="AuthentifierTest.cs" />
+    <Compile Include="Services\SettingsServiceTest.cs" />
     <Compile Include="Services\ShotServiceTest.cs" />
     <Compile Include="Services\DownloadServiceTest.cs" />
   </ItemGroup>
