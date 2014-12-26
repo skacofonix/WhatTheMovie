@@ -24,7 +24,7 @@ namespace WTM.Core.Application.Parsers
             this.HtmlParser = htmlParser;
         }
 
-        protected virtual T Parse(string parameter)
+        protected virtual T Parse(string parameter = null)
         {
             var uri = MakeUri(parameter);
             HtmlDocument document;
@@ -116,8 +116,6 @@ namespace WTM.Core.Application.Parsers
             var value = GetNextValue(nodeIterator);
             while (value != null)
             {
-
-
                 value = GetNextValue(nodeIterator);
             }
         }

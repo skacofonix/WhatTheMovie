@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NFluent;
 using NUnit.Framework;
 using WTM.Core.Application;

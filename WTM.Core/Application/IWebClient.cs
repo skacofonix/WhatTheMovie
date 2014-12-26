@@ -9,6 +9,7 @@ namespace WTM.Core.Application
         Uri UriBase { get; }
         Stream GetStream(Uri uri);
         WebResponse Post(Uri uri, string data = null);
+        WebResponse Post(Uri source, Uri destination, string data);
         void DownloadFile(Uri uri, string destinationFile);
         void SetCookie(Cookie cookie);
         void RemoveCookie(Cookie cookie);

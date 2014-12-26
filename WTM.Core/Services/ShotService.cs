@@ -37,7 +37,7 @@ namespace WTM.Core.Services
 
             var titleFormatted = WebUtility.UrlEncode(title.Trim());
 
-            var requestBuilder = new GetRequestBuilder();
+            var requestBuilder = new HttpRequestBuilder();
             requestBuilder.AddParameter("guess", titleFormatted);
             requestBuilder.AddParameter("commit", "Guess");
             var data = requestBuilder.ToString();

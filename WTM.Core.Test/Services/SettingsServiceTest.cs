@@ -19,6 +19,10 @@ namespace WTM.Core.Test.Services
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             settingsService = new SettingsService(webClient, htmlParser);
+
+            var authentifier = new Authentifier(webClient, htmlParser);
+            if(authentifier.Login("captainOblivious", "captainOblivious"))
+                webClient.SetCookie(authentifier.CookieSession);
         }
 
         [Test]
@@ -31,7 +35,28 @@ namespace WTM.Core.Test.Services
         public void WhenWriteSettingsThenReturnTrue()
         {
             var settings = new Settings();
+            settings.ShowGore = false;
+            settings.ShowNudity = true;
             Check.That(settingsService.Write(settings)).IsTrue();
+        }
+
+        [Test]
+        public void WhenInverseBoolParametersThenSettingsChange()
+        {
+            var initialSettings = settingsService.Read();
+
+            var inverseSettings = new Settings
+            {
+                ShowGore = !initialSettings.ShowGore,
+                ShowNudity = !initialSettings.ShowNudity
+            };
+
+            settingsService.Write(inverseSettings);
+
+            var finalSettings = settingsService.Read();
+
+            Check.That(initialSettings.ShowGore.GetValueOrDefault(false)).IsNotEqualTo(finalSettings.ShowGore.GetValueOrDefault(false));
+            Check.That(initialSettings.ShowNudity.GetValueOrDefault(false)).IsNotEqualTo(finalSettings.ShowNudity.GetValueOrDefault(false));
         }
     }
 }

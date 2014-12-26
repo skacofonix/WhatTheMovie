@@ -4,11 +4,11 @@ using System.Text;
 
 namespace WTM.Core.Application
 {
-    class GetRequestBuilder
+    class HttpRequestBuilder
     {
         private readonly Dictionary<string, string> parameters;
 
-        public GetRequestBuilder()
+        public HttpRequestBuilder()
         {
             parameters = new Dictionary<string, string>();
         }

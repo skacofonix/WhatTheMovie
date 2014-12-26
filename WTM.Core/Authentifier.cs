@@ -26,7 +26,7 @@ namespace WTM.Core
 
             var uri = new Uri(webClient.UriBase, "user/login");
 
-            var getRequestBuilder = new GetRequestBuilder();
+            var getRequestBuilder = new HttpRequestBuilder();
             getRequestBuilder.AddParameter("name", login);
             getRequestBuilder.AddParameter("upassword", password);
             var data = getRequestBuilder.ToString();

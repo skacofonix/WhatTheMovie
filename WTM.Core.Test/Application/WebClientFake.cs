@@ -26,6 +26,11 @@ namespace WTM.Core.Test.Application
             throw new NotImplementedException();
         }
 
+        public WebResponse Post(Uri source, Uri destination, string data)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DownloadFile(Uri uri, string destinationFile)
         {
             throw new NotImplementedException();

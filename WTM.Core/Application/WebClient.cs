@@ -30,16 +30,30 @@ namespace WTM.Core.Application
         public Stream GetStream(Uri uri)
         {
             var webResponse = GetWebResponse(uri);
-            var stream = GetStream(webResponse);
+            var stream = webResponse.GetResponseStream();
             return stream;
+        }
+
+        public WebResponse Post(Uri source, Uri destination, string data)
+        {
+            var request = CreateHttpWebRequest(destination);
+
+            request.Referer = source.AbsoluteUri;
+
+            if (data != null)
+            {
+                request.ContentLength = data.Length;
+                var sw = new StreamWriter(request.GetRequestStream());
+                sw.Write(data);
+                sw.Close();
+            }
+
+            return request.GetResponse();
         }
 
         public WebResponse Post(Uri uri, string data = null)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uri);
-            request.CookieContainer = new CookieContainer();
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+            var request = CreateHttpWebRequest(uri);
 
             if (data != null)
             {
@@ -60,37 +74,45 @@ namespace WTM.Core.Application
 
         private WebResponse GetWebResponse(Uri uri)
         {
-            var webRequest = GetWebRequest(uri);
-
-            if (cookies != null && cookies.Any())
-            {
-                webRequest.CookieContainer = new CookieContainer();
-                foreach (var cookie in cookies)
-                    webRequest.CookieContainer.Add(cookie);
-            }
-
-            var webResponse = GetWebResponse(webRequest);
-            return webResponse;
-        }
-
-        private HttpWebRequest GetWebRequest(Uri uri)
-        {
-            return WebRequest.CreateHttp(uri);
+            var webRequest = CreateHttpWebRequest(uri);
+            return GetWebResponse(webRequest);
         }
 
         private WebResponse GetWebResponse(HttpWebRequest webRequest)
         {
             var task = webRequest.GetResponseAsync();
-
             task.Wait();
-
             return task.Result;
         }
 
-        private Stream GetStream(WebResponse webResponse)
+        private HttpWebRequest CreateHttpWebRequest(Uri uri)
         {
-            var stream = webResponse.GetResponseStream();
-            return stream;
+            var httpWebRequest = WebRequest.CreateHttp(uri);
+
+            SetupWebRequest(httpWebRequest);
+            SetupHttpWebRequest(httpWebRequest, uri);
+
+            return httpWebRequest;
+        }
+
+        private void SetupWebRequest(WebRequest webRequest)
+        {
+            webRequest.Proxy = new WebProxy("localhost:8888");
+        }
+
+        private void SetupHttpWebRequest(HttpWebRequest httpWebRequest, Uri uri)
+        {
+            httpWebRequest.CookieContainer = new CookieContainer();
+            if (cookies != null && cookies.Any())
+            {
+                foreach (var cookie in cookies)
+                    httpWebRequest.CookieContainer.Add(cookie);
+            }
+
+            httpWebRequest.KeepAlive = true;
+            httpWebRequest.Host = uri.Host;
+            httpWebRequest.Method = "POST";
+            httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
         }
     }
 }
