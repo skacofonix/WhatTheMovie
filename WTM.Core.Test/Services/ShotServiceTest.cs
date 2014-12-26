@@ -47,5 +47,25 @@ namespace WTM.Core.Test.Services
             Check.That(response.Year).IsNotNull();
             Check.That(response.MovieLink).IsNotNull();
         }
+
+        [Test]
+        public void WhenRandomizeShotThenReturnValidEntity()
+        {
+            var shot = shotService.ParseRandom();
+
+            Check.That(shot).IsNotNull();
+            Check.That(shot.ShotId).IsNotNull();
+        }
+
+        [Test]
+        public void WhenParseSpecificIdThenReturnShot()
+        {
+            const int expectedShotId = 10;
+
+            var shot = shotService.Parse(expectedShotId);
+
+            Check.That(shot).IsNotNull();
+            Check.That(shot.ShotId).Equals(expectedShotId);
+        }
     }
 }

@@ -1,6 +1,5 @@
-﻿using System;
-using System.IO;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
+using System;
 using WTM.Core.Application;
 using WTM.Core.Application.Parsers;
 using WTM.Core.Domain.WebsiteEntities;

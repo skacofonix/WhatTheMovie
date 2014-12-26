@@ -73,7 +73,6 @@ namespace WTM.Core.Application.Parsers
             
             var shoutHtml = sb.ToString();
 
-
             var shoutDocument = HtmlParser.GetHtmlDocument(shoutHtml);
 
             var shoutNavigator = shoutDocument.CreateNavigator();

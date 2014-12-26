@@ -61,6 +61,11 @@
     <Compile Include="Application\Parsers\ParserBase.cs" />
     <Compile Include="Application\Parsers\MovieParser.cs" />
     <Compile Include="Application\Parsers\ShotParser.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\GuessTitleResponse.cs" />
     <Compile Include="Services\SettingsService.cs" />
@@ -84,7 +89,12 @@
     <Compile Include="Services\ShowSolutionResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

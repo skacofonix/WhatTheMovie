@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace WTM.Core.Application
 {
     public class AppSettings : IAppSettings
@@ -11,5 +6,11 @@ namespace WTM.Core.Application
         public string Proxy { get; set; }
 
         public string UserAgent { get; set; }
+
+        public AppSettings()
+        {
+            Proxy = Properties.Settings.Default.Proxy;
+            UserAgent = Properties.Settings.Default.UserAgent;
+        }
     }
 }

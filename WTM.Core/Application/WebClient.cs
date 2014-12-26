@@ -36,7 +36,7 @@ namespace WTM.Core.Application
 
         public WebResponse Post(Uri source, Uri destination, string data)
         {
-            var request = CreateHttpWebRequest(destination);
+            var request = CreateHttpPostWebRequest(destination);
 
             request.Referer = source.AbsoluteUri;
 
@@ -53,7 +53,7 @@ namespace WTM.Core.Application
 
         public WebResponse Post(Uri uri, string data = null)
         {
-            var request = CreateHttpWebRequest(uri);
+            var request = CreateHttpPostWebRequest(uri);
 
             if (data != null)
             {
@@ -74,7 +74,7 @@ namespace WTM.Core.Application
 
         private WebResponse GetWebResponse(Uri uri)
         {
-            var webRequest = CreateHttpWebRequest(uri);
+            var webRequest = CreateHttpGetWebRequest(uri);
             return GetWebResponse(webRequest);
         }
 
@@ -85,12 +85,23 @@ namespace WTM.Core.Application
             return task.Result;
         }
 
-        private HttpWebRequest CreateHttpWebRequest(Uri uri)
+        private HttpWebRequest CreateHttpGetWebRequest(Uri uri)
         {
             var httpWebRequest = WebRequest.CreateHttp(uri);
 
             SetupWebRequest(httpWebRequest);
-            SetupHttpWebRequest(httpWebRequest, uri);
+            SetupHttpRequest(httpWebRequest, uri);
+
+            return httpWebRequest;
+        }
+
+        private HttpWebRequest CreateHttpPostWebRequest(Uri uri)
+        {
+            var httpWebRequest = WebRequest.CreateHttp(uri);
+
+            SetupWebRequest(httpWebRequest);
+            SetupHttpRequest(httpWebRequest, uri);
+            SetupHttpPostRequest(httpWebRequest);
 
             return httpWebRequest;
         }
@@ -100,7 +111,7 @@ namespace WTM.Core.Application
             webRequest.Proxy = new WebProxy("localhost:8888");
         }
 
-        private void SetupHttpWebRequest(HttpWebRequest httpWebRequest, Uri uri)
+        private void SetupHttpRequest(HttpWebRequest httpWebRequest, Uri uri)
         {
             httpWebRequest.CookieContainer = new CookieContainer();
             if (cookies != null && cookies.Any())
@@ -111,8 +122,12 @@ namespace WTM.Core.Application
 
             httpWebRequest.KeepAlive = true;
             httpWebRequest.Host = uri.Host;
-            httpWebRequest.Method = "POST";
             httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+        }
+
+        private void SetupHttpPostRequest(HttpWebRequest httpWebRequest)
+        {
+            httpWebRequest.Method = "POST";
         }
     }
 }
