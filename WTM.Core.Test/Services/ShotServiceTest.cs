@@ -51,7 +51,7 @@ namespace WTM.Core.Test.Services
         [Test]
         public void WhenRandomizeShotThenReturnValidEntity()
         {
-            var shot = shotService.ParseRandom();
+            var shot = shotService.GetRandom();
 
             Check.That(shot).IsNotNull();
             Check.That(shot.ShotId).IsNotNull();
@@ -62,7 +62,7 @@ namespace WTM.Core.Test.Services
         {
             const int expectedShotId = 10;
 
-            var shot = shotService.Parse(expectedShotId);
+            var shot = shotService.GetById(expectedShotId);
 
             Check.That(shot).IsNotNull();
             Check.That(shot.ShotId).Equals(expectedShotId);

@@ -8,18 +8,18 @@ using WTM.Core.Test.Properties;
 namespace WTM.Core.Test.Application.Parser
 {
     [TestFixture]
-    public class FeatureFilmeParserTest
+    public class OverviewShotParserTest
     {
         private IWebClient webClient;
         private IHtmlParser htmlParser;
-        private OverviewParser parser;
+        private OverviewShotParser parser;
 
         [SetUp]
         public void Init()
         {
             webClient = new WebClientFake(Resources.FeatureFilms20141201);
             htmlParser = new HtmlParser();
-            parser = new OverviewParser(webClient, htmlParser);
+            parser = new OverviewShotParser(webClient, htmlParser);
         }
 
         [Test]

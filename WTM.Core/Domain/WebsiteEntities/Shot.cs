@@ -8,6 +8,11 @@ namespace WTM.Core.Domain.WebsiteEntities
     {
         public DateTime ParseDateTime { get; private set; }
 
+        public Shot()
+        {
+            ParseDateTime = DateTime.Now;
+        }
+
         #region Navigation
 
         [StringParser(@"//a[@id='first_shot_link']/@href", @"/shot/(\d*)")]

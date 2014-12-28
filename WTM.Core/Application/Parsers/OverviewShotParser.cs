@@ -8,11 +8,11 @@ using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Application.Parsers
 {
-    internal class OverviewParser : ParserBase<OverviewShotCollection>
+    internal class OverviewShotParser : ParserBase<OverviewShotCollection>
     {
         public override string Identifier { get { return "overview"; } }
 
-        public OverviewParser(IWebClient webClient, IHtmlParser htmlParser)
+        public OverviewShotParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
         { }
 

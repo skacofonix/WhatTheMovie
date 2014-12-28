@@ -1,13 +1,12 @@
-﻿using System.IO;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using System.Xml.XPath;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.XPath;
 using WTM.Core.Domain.WebsiteEntities;
 using WTM.Core.Helpers;
 

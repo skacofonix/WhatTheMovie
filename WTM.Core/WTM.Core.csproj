@@ -47,7 +47,7 @@
     <Compile Include="Application\Attributes\BaseParserAttribute.cs" />
     <Compile Include="Application\HttpRequestBuilder.cs" />
     <Compile Include="Application\IAppSettings.cs" />
-    <Compile Include="Application\Parsers\OverviewParser.cs" />
+    <Compile Include="Application\Parsers\OverviewShotParser.cs" />
     <Compile Include="Application\Parsers\SettingsParser.cs" />
     <Compile Include="Application\WebClientWTM.cs" />
     <Compile Include="Domain\WebsiteEntities\OverviewShotCollection.cs" />
@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\GuessTitleResponse.cs" />
+    <Compile Include="Services\MovieService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Application\Parsers\UserParser.cs" />

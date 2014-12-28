@@ -14,6 +14,11 @@ namespace WTM.Core.Domain.WebsiteEntities
 
         #endregion
 
+        public Settings()
+        {
+            ParseDateTime = DateTime.Now;            
+        }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;

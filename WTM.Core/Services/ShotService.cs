@@ -21,12 +21,12 @@ namespace WTM.Core.Services
             shotParser = new ShotParser(webClient, htmlParser);
         }
 
-        public Shot Parse(int id)
+        public Shot GetById(int id)
         {
             return shotParser.Parse(id);
         }
 
-        public Shot ParseRandom()
+        public Shot GetRandom()
         {
             return shotParser.ParseRandom();
         }
