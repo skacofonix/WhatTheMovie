@@ -11,6 +11,8 @@ namespace WTM.Core.Domain.WebsiteEntities
         public string Director { get; set; }
         public string Abstract { get; set; }
         public int? Year { get; set; }
+        public int? NumberOfRate { get; set; }
+        public decimal? Rate { get; set; }
 
         public Movie()
         {

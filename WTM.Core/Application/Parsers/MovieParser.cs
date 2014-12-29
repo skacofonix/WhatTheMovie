@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using System.Globalization;
+using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using WTM.Core.Domain.WebsiteEntities;
@@ -8,6 +9,8 @@ namespace WTM.Core.Application.Parsers
     internal class MovieParser : ParserBase<Movie>
     {
         public override string Identifier { get { return "movie"; } }
+
+        private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n]");
 
         public MovieParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
@@ -51,9 +54,32 @@ namespace WTM.Core.Application.Parsers
 
             var nodeAbstract = navigator.SelectSingleNode("//p[@class='movie_abstract']");
             if (nodeAbstract != null)
-                movie.Abstract = nodeAbstract.InnerXml;
+                movie.Abstract = regexCleanHtml.Replace(nodeAbstract.InnerXml, string.Empty);
 
+            var nodeRate = navigator.SelectSingleNode("//div[@class='movie_rating clearfix']");
+            if (nodeRate != null)
+            {
+                var nodeNumberOfRate = nodeRate.SelectSingleNode("./h4/span");
+                if (nodeNumberOfRate != null)
+                {
+                    var matchNumberOfRate = Regex.Match(nodeNumberOfRate.InnerXml, "\\((\\d*) votes\\)");
+                    int numberOfRate;
+                    if (int.TryParse(matchNumberOfRate.Groups[1].Value, out numberOfRate))
+                        movie.NumberOfRate = numberOfRate;
+                }
 
+                var nodeRateNote = nodeRate.SelectSingleNode("./strong");
+                if (nodeRateNote != null)
+                {
+                    var matchRateNote = Regex.Match(nodeRateNote.InnerXml, "(\\d.\\d*) / 10");
+
+                    var culture = new CultureInfo("en-US");
+
+                    decimal rateNote;
+                    if (decimal.TryParse(matchRateNote.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateNote))
+                        movie.Rate = rateNote;
+                }
+            }
         }
     }
 }
