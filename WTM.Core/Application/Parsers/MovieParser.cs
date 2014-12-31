@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
+using System.IO;
 using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -16,9 +18,51 @@ namespace WTM.Core.Application.Parsers
             : base(webClient, htmlParser)
         { }
 
+        private string titleParameter;
+
         public Movie Parse(string title)
         {
-            return base.Parse(title);
+            var movie = base.Parse(title);
+
+            var baseUri = base.MakeUri(title);
+
+            HtmlDocument movieInfoHtmlDocument = null;
+
+            var movieInfo = new Uri(baseUri + "/info");
+            using (var stream = WebClient.GetStream(movieInfo))
+            {
+                movieInfoHtmlDocument = HtmlParser.GetHtmlDocument(stream);
+            }
+            if (movieInfoHtmlDocument == null)
+                return movie;
+
+            var movieTitles = new Uri(baseUri + "/titles");
+            var webResponse = WebClient.Post(movieTitles);
+            string titlesRawData = null;
+            using (var stream = webResponse.GetResponseStream())
+                if (stream != null)
+                    using (var reader = new StreamReader(stream))
+                        titlesRawData = reader.ReadToEnd();
+
+            if (string.IsNullOrEmpty(titlesRawData))
+                return movie;
+
+            var titlesMathes = Regex.Match(titlesRawData, "^Element.update\\(\"movie_title_list\", \"(.*)\"\\);$");
+            var nodeTitles = movieInfoHtmlDocument.GetElementbyId("movie_title_list");
+            nodeTitles.InnerHtml = titlesMathes.Groups[1].Value;
+
+            var navigator = movieInfoHtmlDocument.CreateNavigator();
+
+            var titleList = new List<string>();
+            if (navigator != null)
+            {
+                var nodesTitles = navigator.Select("//ul[@id='movie_title_list']/li");
+                while (nodesTitles.MoveNext())
+                    titleList.Add(regexCleanHtml.Replace(nodesTitles.Current.TypedValue.ToString(), string.Empty));
+            }
+            movie.AlternativeTitles = titleList;
+
+            return movie;
         }
 
         protected override void Parse(Movie movie, HtmlDocument document)

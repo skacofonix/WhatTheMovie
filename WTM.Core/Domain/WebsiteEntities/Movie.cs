@@ -13,6 +13,7 @@ namespace WTM.Core.Domain.WebsiteEntities
         public int? Year { get; set; }
         public int? NumberOfRate { get; set; }
         public decimal? Rate { get; set; }
+        public List<string> AlternativeTitles { get; set; }
 
         public Movie()
         {
