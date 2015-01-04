@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace WTM.Core.Services
+﻿namespace WTM.Core.Services
 {
     internal class ShowSolutionResponse
     {

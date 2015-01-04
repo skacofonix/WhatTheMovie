@@ -34,7 +34,39 @@ namespace WTM.Core.Application.Parsers
             movie.AlternativeTitles = GetTitles(baseUri, movieInfoHtmlDocument, navigator);
             movie.Tags = GetTags(baseUri, movieInfoHtmlDocument, navigator);
 
+            ParseStats(navigator, movie);
+
             return movie;
+        }
+
+        private static void ParseStats(XPathNavigator navigator, Movie movie)
+        {
+            var statsRootNode =
+                navigator.SelectSingleNode(
+                    "//div[@id='main_white']/div[@class='col_right nopadding']/div[@class='box_blank last']/div[@class='box_black']/ul[@class='stats clearfix']");
+
+            var numberOfSnapshotNode = statsRootNode.SelectSingleNode("./li[1]/strong");
+            int numberOfSnaphot;
+            if (int.TryParse(numberOfSnapshotNode.InnerXml, out numberOfSnaphot))
+                movie.NumberOfSnapshot = numberOfSnaphot;
+
+            var totalSolvesNode = statsRootNode.SelectSingleNode("./li[2]/strong");
+            double totalSolves;
+            if (double.TryParse(totalSolvesNode.InnerXml, out totalSolves))
+                movie.TotalSolves = totalSolves;
+
+            var introducedByNode = statsRootNode.SelectSingleNode("./li[3]/span/a[@class='nametaglink']");
+            movie.IntroducedBy = introducedByNode.InnerXml;
+
+            var introducedOnNode = statsRootNode.SelectSingleNode("li[4]/span");
+            DateTime introducedOn;
+            if (DateTime.TryParse(introducedOnNode.InnerXml, out introducedOn))
+                movie.IntroducedOn = introducedOn;
+
+            var numberOfReviewsNode = statsRootNode.SelectSingleNode("./li[@class='last']/span");
+            int numberOfReviews;
+            if (int.TryParse(numberOfReviewsNode.InnerXml, out numberOfReviews))
+                movie.NumberOfReviews = numberOfReviews;
         }
 
         private HtmlDocument GetMovieInfo(Uri baseUri)

@@ -15,6 +15,11 @@ namespace WTM.Core.Domain.WebsiteEntities
         public decimal? Rate { get; set; }
         public List<string> AlternativeTitles { get; set; }
         public List<string> Tags { get; set; }
+        public int? NumberOfSnapshot { get; set; }
+        public double? TotalSolves { get; set; }
+        public DateTime? IntroducedOn { get; set; }
+        public string IntroducedBy { get; set; }
+        public int? NumberOfReviews { get; set; }
 
         public Movie()
         {
