@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using WTM.Core.Domain.WebsiteEntities;
+using WTM.Core.Helpers;
 
 namespace WTM.Core.Application.Parsers
 {
@@ -60,6 +61,25 @@ namespace WTM.Core.Application.Parsers
                 DateTime date;
                 if (DateTime.TryParse(dateString, out date))
                     instance.Date = date;
+            }
+
+            var subTitleNode = navigator.SelectSingleNode("//div[@id='topbar']/h2[@class='topbar_title']");
+            var subTitleString = subTitleNode.InnerXml.CleanString();
+            if (EnumHelpers.GetDescription(OverviewShotType.Archive).Equals(subTitleString))
+            {
+                instance.OverviewShotType = OverviewShotType.Archive;
+            }
+            else if (EnumHelpers.GetDescription(OverviewShotType.FeatureFilms).Equals(subTitleString))
+            {
+                instance.OverviewShotType = OverviewShotType.FeatureFilms;
+            }
+            else if (EnumHelpers.GetDescription(OverviewShotType.NewSubmissions).Equals(subTitleString))
+            {
+                instance.OverviewShotType = OverviewShotType.NewSubmissions;
+            }
+            else
+            {
+                instance.OverviewShotType = OverviewShotType.Undefinied;
             }
 
             const string xPathItemRoot = @"//ul[@id='overview_movie_list']/li";

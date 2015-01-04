@@ -13,5 +13,7 @@ namespace WTM.Core.Domain.WebsiteEntities
 
         [StringParser(@"//ul[@id='overview_movie_list']/li/div[@class='box']/div")]
         public IList<OverviewShot> Shots { get; set; }
+
+        public OverviewShotType OverviewShotType { get; set; }
     }
 }

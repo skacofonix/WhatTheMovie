@@ -36,5 +36,10 @@ namespace WTM.Core.Helpers
 
             return valueConverted;
         }
+
+        public static string CleanString(this string s)
+        {
+            return Regex.Replace(s, @"[\r\t\n]", string.Empty);
+        }
     }
 }

@@ -6,14 +6,13 @@ using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using WTM.Core.Domain.WebsiteEntities;
+using WTM.Core.Helpers;
 
 namespace WTM.Core.Application.Parsers
 {
     internal class MovieParser : ParserBase<Movie>
     {
         public override string Identifier { get { return "movie"; } }
-
-        private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n]");
 
         public MovieParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
@@ -71,7 +70,7 @@ namespace WTM.Core.Application.Parsers
 
             var titleNodeIterator = navigator.Select("//ul[@id='movie_title_list']/li");
             while (titleNodeIterator.MoveNext())
-                titleList.Add(regexCleanHtml.Replace(titleNodeIterator.Current.TypedValue.ToString(), string.Empty));
+                titleList.Add(titleNodeIterator.Current.TypedValue.ToString().CleanString());
 
             return titleList;
         }
@@ -97,7 +96,7 @@ namespace WTM.Core.Application.Parsers
 
             var tagNodeIterator = navigator.Select("//ul[@id='movie_tag_list']/li/a");
             while (tagNodeIterator.MoveNext())
-                tagList.Add(regexCleanHtml.Replace(tagNodeIterator.Current.InnerXml, string.Empty));
+                tagList.Add(tagNodeIterator.Current.InnerXml.CleanString());
 
             return tagList;
         }
@@ -135,7 +134,7 @@ namespace WTM.Core.Application.Parsers
 
             var nodeAbstract = navigator.SelectSingleNode("//p[@class='movie_abstract']");
             if (nodeAbstract != null)
-                movie.Abstract = regexCleanHtml.Replace(nodeAbstract.InnerXml, string.Empty);
+                movie.Abstract = nodeAbstract.InnerXml.CleanString();
 
             var nodeRate = navigator.SelectSingleNode("//div[@class='movie_rating clearfix']");
             if (nodeRate == null) return;

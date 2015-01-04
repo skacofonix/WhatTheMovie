@@ -52,7 +52,9 @@
     <Compile Include="Application\WebClientWTM.cs" />
     <Compile Include="Domain\WebsiteEntities\OverviewShotCollection.cs" />
     <Compile Include="Domain\WebsiteEntities\OverviewShot.cs" />
+    <Compile Include="Domain\WebsiteEntities\OverviewShotType.cs" />
     <Compile Include="Domain\WebsiteEntities\Settings.cs" />
+    <Compile Include="Helpers\EnumHelpers.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Application\HtmlParser.cs" />
     <Compile Include="Application\IHtmlParser.cs" />
