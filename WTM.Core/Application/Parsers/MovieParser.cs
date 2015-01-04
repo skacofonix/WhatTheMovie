@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Xml.XPath;
 using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -18,14 +19,27 @@ namespace WTM.Core.Application.Parsers
             : base(webClient, htmlParser)
         { }
 
-        private string titleParameter;
-
-        public Movie Parse(string title)
+        public new Movie Parse(string title)
         {
             var movie = base.Parse(title);
 
             var baseUri = base.MakeUri(title);
 
+            var movieInfoHtmlDocument = GetMovieInfo(baseUri);
+
+            if (movieInfoHtmlDocument == null)
+                return movie;
+
+            var navigator = movieInfoHtmlDocument.CreateNavigator();
+
+            movie.AlternativeTitles = GetTitles(baseUri, movieInfoHtmlDocument, navigator);
+            movie.Tags = GetTags(baseUri, movieInfoHtmlDocument, navigator);
+
+            return movie;
+        }
+
+        private HtmlDocument GetMovieInfo(Uri baseUri)
+        {
             HtmlDocument movieInfoHtmlDocument = null;
 
             var movieInfo = new Uri(baseUri + "/info");
@@ -33,36 +47,59 @@ namespace WTM.Core.Application.Parsers
             {
                 movieInfoHtmlDocument = HtmlParser.GetHtmlDocument(stream);
             }
-            if (movieInfoHtmlDocument == null)
-                return movie;
+            return movieInfoHtmlDocument;
+        }
 
-            var movieTitles = new Uri(baseUri + "/titles");
-            var webResponse = WebClient.Post(movieTitles);
+        private List<string> GetTitles(Uri baseUri, HtmlDocument movieInfoHtmlDocument, XPathNavigator navigator)
+        {
+            var titleList = new List<string>();
+
+            var titlesUri = new Uri(baseUri + "/titles");
+            var titlesWebResponse = WebClient.Post(titlesUri);
             string titlesRawData = null;
-            using (var stream = webResponse.GetResponseStream())
+            using (var stream = titlesWebResponse.GetResponseStream())
                 if (stream != null)
                     using (var reader = new StreamReader(stream))
                         titlesRawData = reader.ReadToEnd();
 
             if (string.IsNullOrEmpty(titlesRawData))
-                return movie;
+                return titleList;
 
-            var titlesMathes = Regex.Match(titlesRawData, "^Element.update\\(\"movie_title_list\", \"(.*)\"\\);$");
-            var nodeTitles = movieInfoHtmlDocument.GetElementbyId("movie_title_list");
-            nodeTitles.InnerHtml = titlesMathes.Groups[1].Value;
+            var titlesNode = movieInfoHtmlDocument.GetElementbyId("movie_title_list");
+            var titlesMatches = Regex.Match(titlesRawData, "^Element.update\\(\"movie_title_list\", \"(.*)\"\\);$");
+            titlesNode.InnerHtml = titlesMatches.Groups[1].Value;
 
-            var navigator = movieInfoHtmlDocument.CreateNavigator();
+            var titleNodeIterator = navigator.Select("//ul[@id='movie_title_list']/li");
+            while (titleNodeIterator.MoveNext())
+                titleList.Add(regexCleanHtml.Replace(titleNodeIterator.Current.TypedValue.ToString(), string.Empty));
 
-            var titleList = new List<string>();
-            if (navigator != null)
-            {
-                var nodesTitles = navigator.Select("//ul[@id='movie_title_list']/li");
-                while (nodesTitles.MoveNext())
-                    titleList.Add(regexCleanHtml.Replace(nodesTitles.Current.TypedValue.ToString(), string.Empty));
-            }
-            movie.AlternativeTitles = titleList;
+            return titleList;
+        }
 
-            return movie;
+        private List<string> GetTags(Uri baseUri, HtmlDocument movieInfoHtmlDocument, XPathNavigator navigator)
+        {
+            var tagList = new List<string>();
+
+            var tagsUri = new Uri(baseUri + "/tags");
+            var tagsWebResponse = WebClient.Post(tagsUri);
+            string tagsRawData = null;
+            using (var stream = tagsWebResponse.GetResponseStream())
+                if (stream != null)
+                    using (var reader = new StreamReader(stream))
+                        tagsRawData = reader.ReadToEnd();
+
+            if (string.IsNullOrEmpty(tagsRawData))
+                return tagList;
+
+            var tagsNode = movieInfoHtmlDocument.GetElementbyId("movie_tag_list");
+            var tagsMatches = Regex.Match(tagsRawData, "^Element.update\\(\"movie_tag_list\", \"(.*)\"\\);$");
+            tagsNode.InnerHtml = tagsMatches.Groups[1].Value;
+
+            var tagNodeIterator = navigator.Select("//ul[@id='movie_tag_list']/li/a");
+            while (tagNodeIterator.MoveNext())
+                tagList.Add(regexCleanHtml.Replace(tagNodeIterator.Current.InnerXml, string.Empty));
+
+            return tagList;
         }
 
         protected override void Parse(Movie movie, HtmlDocument document)
@@ -101,29 +138,25 @@ namespace WTM.Core.Application.Parsers
                 movie.Abstract = regexCleanHtml.Replace(nodeAbstract.InnerXml, string.Empty);
 
             var nodeRate = navigator.SelectSingleNode("//div[@class='movie_rating clearfix']");
-            if (nodeRate != null)
+            if (nodeRate == null) return;
+            var nodeNumberOfRate = nodeRate.SelectSingleNode("./h4/span");
+            if (nodeNumberOfRate != null)
             {
-                var nodeNumberOfRate = nodeRate.SelectSingleNode("./h4/span");
-                if (nodeNumberOfRate != null)
-                {
-                    var matchNumberOfRate = Regex.Match(nodeNumberOfRate.InnerXml, "\\((\\d*) votes\\)");
-                    int numberOfRate;
-                    if (int.TryParse(matchNumberOfRate.Groups[1].Value, out numberOfRate))
-                        movie.NumberOfRate = numberOfRate;
-                }
-
-                var nodeRateNote = nodeRate.SelectSingleNode("./strong");
-                if (nodeRateNote != null)
-                {
-                    var matchRateNote = Regex.Match(nodeRateNote.InnerXml, "(\\d.\\d*) / 10");
-
-                    var culture = new CultureInfo("en-US");
-
-                    decimal rateNote;
-                    if (decimal.TryParse(matchRateNote.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateNote))
-                        movie.Rate = rateNote;
-                }
+                var matchNumberOfRate = Regex.Match(nodeNumberOfRate.InnerXml, "\\((\\d*) votes\\)");
+                int numberOfRate;
+                if (int.TryParse(matchNumberOfRate.Groups[1].Value, out numberOfRate))
+                    movie.NumberOfRate = numberOfRate;
             }
+
+            var nodeRateNote = nodeRate.SelectSingleNode("./strong");
+            if (nodeRateNote == null) return;
+            var matchRateNote = Regex.Match(nodeRateNote.InnerXml, "(\\d.\\d*) / 10");
+
+            var culture = new CultureInfo("en-US");
+
+            decimal rateNote;
+            if (decimal.TryParse(matchRateNote.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateNote))
+                movie.Rate = rateNote;
         }
     }
 }
