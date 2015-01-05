@@ -7,12 +7,14 @@ namespace WTM.Core.Services
     internal class MovieService
     {
         private readonly IWebClient webClient;
+        private readonly IHtmlParser htmlParser;
         private readonly MovieParser movieParser;
 
-        public MovieService (IWebClient webClient)
+        public MovieService (IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
-            movieParser = new MovieParser();
+            this.htmlParser = htmlParser;
+            movieParser = new MovieParser(webClient, htmlParser);
         }
 
         public Movie GetById(string id)
