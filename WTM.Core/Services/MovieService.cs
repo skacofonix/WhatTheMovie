@@ -1,13 +1,23 @@
-﻿using System;
+﻿using WTM.Core.Application;
+using WTM.Core.Application.Parsers;
 using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Services
 {
     internal class MovieService
     {
-        public Movie GetById(int id)
+        private readonly IWebClient webClient;
+        private readonly MovieParser movieParser;
+
+        public MovieService (IWebClient webClient)
         {
-            throw new NotImplementedException();
+            this.webClient = webClient;
+            movieParser = new MovieParser();
+        }
+
+        public Movie GetById(string id)
+        {
+            return movieParser.Parse(id);
         }
     }
 }
