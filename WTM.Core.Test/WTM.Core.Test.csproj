@@ -61,6 +61,7 @@
     <Compile Include="Application\Parser\SettingsParserTest.cs" />
     <Compile Include="Application\HttpRequestBuilderTest.cs" />
     <Compile Include="Application\Parser\MovieParserTest.cs" />
+    <Compile Include="Application\Parser\UserParserTest.cs" />
     <Compile Include="Application\WebClientFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
