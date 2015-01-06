@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WTM.Core.Domain.WebsiteEntities
 {
@@ -18,6 +19,20 @@ namespace WTM.Core.Domain.WebsiteEntities
         public int? SnapshotSolved { get; set; }
         public decimal? ReceivingRating { get; set; }
         public decimal? FavouritedRating { get; set; }
+        public int? UploadFeatureFilmSnapshots { get; set; }
+        public int? UploadSnapshotsOfTheDay { get; set; }
+        public int? UploadVaultSnapshots { get; set; }
+        public int? UploadRejectedSnapshots { get; set; }
+        public int? UploadCharacterSnapshots { get; set; }
+        public int? UploadTitleSnapshots { get; set; }
+        public int? UploadReplacementSnapshots { get; set; }
+        public int? FavouriteSnapshots { get; set; }
+        public int? FavouriteMovies { get; set; }
+        public int? FavouriteCharacters { get; set; }
+        public int? FavouriteSeries { get; set; }
+        public List<string> Friends { get; set; }
+        public List<KeyValuePair<string, string>> MemorabiliaList { get; set; }
+        public string ImageUrl { get; set; }
 
         public User()
         {

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NFluent;
+﻿using NFluent;
 using NUnit.Framework;
 using WTM.Core.Application;
 using WTM.Core.Application.Parsers;
