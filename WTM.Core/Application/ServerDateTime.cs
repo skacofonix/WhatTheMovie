@@ -4,7 +4,7 @@ namespace WTM.Core.Application
 {
     public class ServerDateTime : IServerDateTime
     {
-        public DateTime? GetDateTime()
+        public DateTime GetDateTime()
         {
             return DateTime.Now;
         }

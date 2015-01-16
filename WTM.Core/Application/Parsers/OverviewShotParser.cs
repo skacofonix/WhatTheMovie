@@ -45,7 +45,7 @@ namespace WTM.Core.Application.Parsers
 
         public OverviewShotCollection ParseNewSubmission()
         {
-            return ParseCustomOverview("newsubmission");
+            return ParseCustomOverview("newsubmissions");
         }
 
         public OverviewShotCollection ParseFeatureFilmsToday()

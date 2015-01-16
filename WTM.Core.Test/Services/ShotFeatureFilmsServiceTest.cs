@@ -22,10 +22,6 @@ namespace WTM.Core.Test.Services
             htmlParser = new HtmlParser();
             shotFeatureFilmService = new ShotFeatureFilmsService(webClient, htmlParser);
             serverDateTime = new ServerDateTime();
-
-            var authentifier = new Authentifier(webClient, htmlParser);
-            if (authentifier.Login("captainOblivious", "captainOblivious"))
-                webClient.SetCookie(authentifier.CookieSession);
         }
 
         [Test]
@@ -37,13 +33,13 @@ namespace WTM.Core.Test.Services
             Check.That(overviewShotCollection.OverviewShotType).Equals(OverviewShotType.FeatureFilms);
             Check.That(overviewShotCollection.Shots).IsNotNull();
             Check.That(overviewShotCollection.Shots.Any()).IsTrue();
-            Check.That(overviewShotCollection.Date.Value.Date).Equals(today.Value.Date);
+            Check.That(overviewShotCollection.Date.Value.Date).Equals(today.Date);
         }
 
         [Test]
         public void WhenParseFeatureFilmsOfYesterdayThenReturnOverviewShotCollection()
         {
-            var yesterday = serverDateTime.GetDateTime().Value.AddDays(-1);
+            var yesterday = serverDateTime.GetDateTime().AddDays(-1);
             var overviewShotCollection = shotFeatureFilmService.GetShotyByDate(yesterday);
             Check.That(overviewShotCollection).IsNotNull();
             Check.That(overviewShotCollection.OverviewShotType).Equals(OverviewShotType.FeatureFilms);

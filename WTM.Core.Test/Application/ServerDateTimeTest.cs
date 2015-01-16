@@ -1,4 +1,5 @@
-﻿using NFluent;
+﻿using System;
+using NFluent;
 using NUnit.Framework;
 using WTM.Core.Application;
 
@@ -11,7 +12,7 @@ namespace WTM.Core.Test.Application
         public void WhenInvokeGetDateTimeMethodThenReturnDateTimeOfTheServer()
         {
             var serverDateTime = new ServerDateTime();
-            Check.That(serverDateTime.GetDateTime()).IsNotNull();
+            Check.That(serverDateTime.GetDateTime()).IsNotEqualTo(DateTime.MinValue);
         }
     }
 }
