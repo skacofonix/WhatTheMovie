@@ -11,13 +11,13 @@ namespace WTM.Core.Services
 
         Shot GetFirstShot(Shot currentShot = null);
 
-        Shot GetPreviousShot(Shot currentShot = null);
+        Shot GetPreviousShot(Shot currentShot);
 
-        Shot GetPreviousUnsolvdShot(Shot currentShot = null);
+        Shot GetPreviousUnsolvdShot(Shot currentShot);
 
-        Shot GetNextUnsolvedShot(Shot currentShot = null);
+        Shot GetNextUnsolvedShot(Shot currentShot);
 
-        Shot GetNextShot(Shot currentShot = null);
+        Shot GetNextShot(Shot currentShot);
 
         Shot GetLastShot(Shot currentShot = null);
 

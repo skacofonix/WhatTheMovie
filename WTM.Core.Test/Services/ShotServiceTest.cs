@@ -1,6 +1,7 @@
 ﻿using NFluent;
 using NUnit.Framework;
 using WTM.Core.Application;
+using WTM.Core.Domain.BusinessEntities;
 using WTM.Core.Services;
 
 namespace WTM.Core.Test.Services
@@ -66,6 +67,40 @@ namespace WTM.Core.Test.Services
 
             Check.That(shot).IsNotNull();
             Check.That(shot.ShotId).Equals(expectedShotId);
+        }
+
+        [Test]
+        public void WhenGetFirstShotThenReturnShot()
+        {
+            var shot = shotService.GetFirstShot();
+            Check.That(shot).IsNotNull();
+            Check.That(shot.FirstShotId).IsNull();
+        }
+
+        [Test]
+        public void WhenGetLastShotThenReturnLast()
+        {
+            var shot = shotService.GetFirstShot();
+            Check.That(shot).IsNotNull();
+            Check.That(shot.FirstShotId).IsNull();
+        }
+
+        [Test]
+        public void WhenGetPreviousShotThenReturnPreviousShot()
+        {
+            var lastShot = shotService.GetLastShot();
+            var shot = shotService.GetPreviousShot(lastShot);
+            Check.That(shot).IsNotNull();
+            Check.That(shot.ShotId < lastShot.ShotId);
+        }
+
+        [Test]
+        public void WhenGetNextShotThenReturnShot()
+        {
+            var firstShot = shotService.GetFirstShot();
+            var shot = shotService.GetNextShot(firstShot);
+            Check.That(shot).IsNotNull();
+            Check.That(shot.ShotId > firstShot.ShotId);
         }
     }
 }

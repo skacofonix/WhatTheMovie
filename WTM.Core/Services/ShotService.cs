@@ -35,15 +35,15 @@ namespace WTM.Core.Services
             return null;
         }
 
-        public Shot GetPreviousShot(Shot currentShot = null)
+        public Shot GetPreviousShot(Shot currentShot)
         {
-            var tempShot = currentShot ?? shotParser.ParseRandom();
+            var tempShot = currentShot;
             if (tempShot != null && tempShot.PreviousShotId.HasValue)
                 return shotParser.Parse(tempShot.PreviousShotId.Value);
             return null;
         }
 
-        public Shot GetPreviousUnsolvdShot(Shot currentShot = null)
+        public Shot GetPreviousUnsolvdShot(Shot currentShot)
         {
             var tempShot = currentShot ?? shotParser.ParseRandom();
             if (tempShot != null && tempShot.PreviousUnsolvedShotId.HasValue)
@@ -51,7 +51,7 @@ namespace WTM.Core.Services
             return null;
         }
 
-        public Shot GetNextUnsolvedShot(Shot currentShot = null)
+        public Shot GetNextUnsolvedShot(Shot currentShot)
         {
             var tempShot = currentShot ?? shotParser.ParseRandom();
             if (tempShot != null && tempShot.NextUnsolvedShotId.HasValue)
@@ -59,7 +59,7 @@ namespace WTM.Core.Services
             return null;
         }
 
-        public Shot GetNextShot(Shot currentShot = null)
+        public Shot GetNextShot(Shot currentShot)
         {
             var tempShot = currentShot ?? shotParser.ParseRandom();
             if (tempShot != null && tempShot.NextShotId.HasValue)
