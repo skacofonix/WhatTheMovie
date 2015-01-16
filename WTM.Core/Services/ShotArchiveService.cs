@@ -18,7 +18,7 @@ namespace WTM.Core.Services
 
         public OverviewShotCollection GetArhciveOneMonthOld()
         {
-            return overviewShotParser.ParseFeatureFilmsToday();
+            return overviewShotParser.ParseArchiveOneMonthOld();
         }
     }
 }

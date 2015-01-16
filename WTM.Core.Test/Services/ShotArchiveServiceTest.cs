@@ -25,11 +25,11 @@ namespace WTM.Core.Test.Services
         }
 
         [Test]
-        public void WhenParseTheARcgiveThenReturnOverviewShotCollection()
+        public void WhenParseTheArchiveThenReturnOverviewShotCollection()
         {
             var overviewShotCollection = shotArchiveService.GetArhciveOneMonthOld();
             Check.That(overviewShotCollection).IsNotNull();
-            Check.That(overviewShotCollection.OverviewShotType).Equals(OverviewShotType.FeatureFilms);
+            Check.That(overviewShotCollection.OverviewShotType).Equals(OverviewShotType.Archive);
             Check.That(overviewShotCollection.Shots).IsNotNull();
             Check.That(overviewShotCollection.Shots.Any()).IsTrue();
         }

@@ -53,7 +53,7 @@ namespace WTM.Core.Application.Parsers
             return ParseCustomOverview("featurefilms");
         }
 
-        public OverviewShotCollection ParseArchiveOneMonth()
+        public OverviewShotCollection ParseArchiveOneMonthOld()
         {
             return ParseCustomOverview("thearchive");
         }
@@ -114,7 +114,7 @@ namespace WTM.Core.Application.Parsers
 
                 switch (subTitleString)
                 {
-                    case "Archive":
+                    case "The Archive":
                         instance.OverviewShotType = OverviewShotType.Archive;
                         break;
                     case "Feature Films":
