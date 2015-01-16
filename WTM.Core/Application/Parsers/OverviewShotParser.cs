@@ -19,29 +19,66 @@ namespace WTM.Core.Application.Parsers
 
         const string DateFormat = "yyyy/MM/dd";
 
-        protected override OverviewShotCollection Parse(string parameter)
+        protected override OverviewShotCollection ParseOverviewShotByDate(string parameter)
         {
             DateTime date;
             if (parameter != null && DateTime.TryParseExact(parameter, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                return Parse(date);
-            return base.Parse(null);
+                return ParseOverviewShotByDate(date);
+            return base.ParseOverviewShotByDate(null);
         }
 
-        public OverviewShotCollection Parse()
+        public OverviewShotCollection ParseOverviewShotByDate()
         {
-            return base.Parse(null);
+            return base.ParseOverviewShotByDate(null);
         }
 
-        public OverviewShotCollection Parse(int year, int month, int day)
+        public OverviewShotCollection ParseByDate(DateTime date)
+        {
+            return ParseOverviewShotByDate(date);
+        }
+
+        public OverviewShotCollection ParseByDate(int year, int month, int day)
         {
             var date = new DateTime(year, month, day);
-            return Parse(date);
+            return ParseOverviewShotByDate(date);
         }
 
-        private OverviewShotCollection Parse(DateTime date)
+        public OverviewShotCollection ParseNewSubmission()
+        {
+            return ParseCustomOverview("newsubmission");
+        }
+
+        public OverviewShotCollection ParseFeatureFilmsToday()
+        {
+            return ParseCustomOverview("featurefilms");
+        }
+
+        public OverviewShotCollection ParseArchiveOneMonth()
+        {
+            return ParseCustomOverview("thearchive");
+        }
+
+        private OverviewShotCollection ParseCustomOverview(string identifier)
+        {
+            var uri = new Uri(WebClient.UriBase, identifier);
+            HtmlDocument document;
+
+            using (var stream = WebClient.GetStream(uri))
+            {
+                document = HtmlParser.GetHtmlDocument(stream);
+            }
+
+            var instance = new OverviewShotCollection();
+
+            ParseOverviewShotByDate(instance, document);
+
+            return instance;
+        }
+
+        private OverviewShotCollection ParseOverviewShotByDate(DateTime date)
         {
             var stringDate = date.ToString(DateFormat);
-            return base.Parse(stringDate);
+            return base.ParseOverviewShotByDate(stringDate);
         }
 
         private string GetFirstValue(XPathNavigator navigator, string xPath)
@@ -50,7 +87,7 @@ namespace WTM.Core.Application.Parsers
             return singleNode != null ? singleNode.InnerXml : null;
         }
 
-        protected override void Parse(OverviewShotCollection instance, HtmlDocument htmlDocument)
+        protected override void ParseOverviewShotByDate(OverviewShotCollection instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;
@@ -58,28 +95,35 @@ namespace WTM.Core.Application.Parsers
             var dateString = GetFirstValue(navigator, "//div[@id='hidden_date']");
             if (dateString != null)
             {
-                DateTime date;
-                if (DateTime.TryParse(dateString, out date))
+                var dateMatch = Regex.Match(dateString.CleanString(), "(\\d{2}) (\\d{2}) (\\d{4})");
+                if (dateMatch.Success)
+                {
+                    var year = int.Parse(dateMatch.Groups[3].Value);
+                    var month = int.Parse(dateMatch.Groups[1].Value);
+                    var day = int.Parse(dateMatch.Groups[2].Value);
+
+                    var date = new DateTime(year, month, day);
                     instance.Date = date;
+                }
             }
 
             var subTitleNode = navigator.SelectSingleNode("//div[@id='topbar']/h2[@class='topbar_title']");
-            var subTitleString = subTitleNode.InnerXml.CleanString();
-            if (EnumHelpers.GetDescription(OverviewShotType.Archive).Equals(subTitleString))
+            if (subTitleNode != null)
             {
-                instance.OverviewShotType = OverviewShotType.Archive;
-            }
-            else if (EnumHelpers.GetDescription(OverviewShotType.FeatureFilms).Equals(subTitleString))
-            {
-                instance.OverviewShotType = OverviewShotType.FeatureFilms;
-            }
-            else if (EnumHelpers.GetDescription(OverviewShotType.NewSubmissions).Equals(subTitleString))
-            {
-                instance.OverviewShotType = OverviewShotType.NewSubmissions;
-            }
-            else
-            {
-                instance.OverviewShotType = OverviewShotType.Undefinied;
+                var subTitleString = subTitleNode.InnerXml.CleanString();
+
+                switch (subTitleString)
+                {
+                    case "Archive":
+                        instance.OverviewShotType = OverviewShotType.Archive;
+                        break;
+                    case "Feature Films":
+                        instance.OverviewShotType = OverviewShotType.FeatureFilms;
+                        break;
+                    case "New Submissions":
+                        instance.OverviewShotType = OverviewShotType.NewSubmissions;
+                        break;
+                }
             }
 
             const string xPathItemRoot = @"//ul[@id='overview_movie_list']/li";
@@ -88,12 +132,23 @@ namespace WTM.Core.Application.Parsers
             var overviewShotList = new List<OverviewShot>();
             while (nodeIterator.MoveNext())
             {
-                var unsolved = false;
+                ShotSolveStatus? shotSolveStatus = null;
+
                 var nodeUnsolved = GetFirstValue(nodeIterator.Current, ".//@class");
                 if (!string.IsNullOrEmpty(nodeUnsolved))
                 {
-                    if (nodeUnsolved == "unsolved")
-                        unsolved = true;
+                    switch (nodeUnsolved)
+                    {
+                        case "unsolved":
+                            shotSolveStatus = ShotSolveStatus.Unsolved;
+                            break;
+                        case "punsolved":
+                            shotSolveStatus = ShotSolveStatus.PlayerUnsolved;
+                            break;
+                        case "solved":
+                            shotSolveStatus = ShotSolveStatus.Solved;
+                            break;
+                    }
                 }
 
                 var nodeImageUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a/img/@src");
@@ -108,7 +163,7 @@ namespace WTM.Core.Application.Parsers
                     shotId = Convert.ToInt32(shotIdString);
                 }
 
-                overviewShotList.Add(new OverviewShot(nodeImageUrl, shotId, unsolved));
+                overviewShotList.Add(new OverviewShot(nodeImageUrl, shotId, shotSolveStatus));
             }
 
             instance.Shots = overviewShotList;

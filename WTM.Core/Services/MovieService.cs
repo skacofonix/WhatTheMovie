@@ -19,7 +19,7 @@ namespace WTM.Core.Services
 
         public Movie GetById(string id)
         {
-            return movieParser.Parse(id);
+            return movieParser.GetById(id);
         }
     }
 }

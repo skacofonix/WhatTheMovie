@@ -8,14 +8,13 @@ namespace WTM.Core.Domain.WebsiteEntities
 
         public string ImageUrl { get; private set; }
         public int? ShotId { get; private set; }
-        public bool Unsolved { get; set; }
+        public ShotSolveStatus? ShotSolveStatus { get; private set; }
 
-        public OverviewShot(string imageUrl, int? shotId, bool unsolved)
+        public OverviewShot(string imageUrl, int? shotId, ShotSolveStatus? shotSolveStatus)
         {
             ImageUrl = imageUrl;
             ShotId = shotId;
-            Unsolved = unsolved;
+            ShotSolveStatus = shotSolveStatus;
         }
-
     }
 }

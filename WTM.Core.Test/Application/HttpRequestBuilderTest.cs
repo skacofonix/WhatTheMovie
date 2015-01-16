@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NFluent;
+﻿using NFluent;
+using NUnit.Framework;
 using WTM.Core.Application;
 
 namespace WTM.Core.Test.Application
 {
-    [TestClass]
+    [TestFixture]
     public class HttpRequestBuilderTest
     {
-        [TestMethod]
+        [Test]
         public void WhenBuildPutRequestThenRetunrnFormattedString()
         {
             var putRequestBuilder = new HttpRequestBuilder();

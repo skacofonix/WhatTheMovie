@@ -17,7 +17,7 @@ namespace WTM.Core.Test.Services
         {
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
-            shotService = new ShotService(webClient, htmlParser);
+            shotService = new ShotArchiveService(webClient, htmlParser);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace WTM.Core.Test.Services
         [Test]
         public void WhenRandomizeShotThenReturnValidEntity()
         {
-            var shot = shotService.GetRandom();
+            var shot = shotService.GetRandomShot();
 
             Check.That(shot).IsNotNull();
             Check.That(shot.ShotId).IsNotNull();
@@ -62,7 +62,7 @@ namespace WTM.Core.Test.Services
         {
             const int expectedShotId = 10;
 
-            var shot = shotService.GetById(expectedShotId);
+            var shot = shotService.GetShotById(expectedShotId);
 
             Check.That(shot).IsNotNull();
             Check.That(shot.ShotId).Equals(expectedShotId);

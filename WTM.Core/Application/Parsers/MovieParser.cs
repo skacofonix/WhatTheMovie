@@ -18,9 +18,9 @@ namespace WTM.Core.Application.Parsers
             : base(webClient, htmlParser)
         { }
 
-        public new Movie Parse(string title)
+        public Movie GetById(string title)
         {
-            var movie = base.Parse(title);
+            var movie = base.ParseOverviewShotByDate(title);
 
             var baseUri = base.MakeUri(title);
 
@@ -39,39 +39,99 @@ namespace WTM.Core.Application.Parsers
             return movie;
         }
 
+        protected override void ParseOverviewShotByDate(Movie movie, HtmlDocument document)
+        {
+            var navigator = document.CreateNavigator();
+            if (navigator == null) return;
+
+            var nodeTitle = navigator.SelectSingleNode("//div[@class='header clearfix']/h1");
+            if (nodeTitle != null)
+            {
+                var regexTitle = new Regex("(.*)<span>\\((\\d{4})\\)</span>");
+                var match = regexTitle.Match(nodeTitle.InnerXml);
+
+                movie.OriginalTitle = match.Groups[1].Value;
+
+                int year;
+                if (int.TryParse(match.Groups[2].Value, out year))
+                    movie.Year = year;
+            }
+
+            var genreList = new List<string>();
+            var nodeGenre = navigator.Select("//div[@id='main_white']/div[@class='col_left nopadding']/div[@class='shot_focus_box']/div[@class='movie_info clearfix']/ul[@class='info_list']/li[@class='clearfix'][1]/ul[@class='clearfix']/li");
+            if (nodeGenre.Count > 0)
+            {
+                while (nodeGenre.MoveNext())
+                    genreList.Add(nodeGenre.Current.InnerXml);
+                movie.GenreList = genreList;
+            }
+
+            var nodeDirector = navigator.SelectSingleNode("//div[@id='main_white']/div[@class='col_left nopadding']/div[@class='shot_focus_box']/div[@class='movie_info clearfix']/ul[@class='info_list']/li[@class='clearfix'][2]/ul[@class='clearfix']/li");
+            if (nodeDirector != null)
+                movie.Director = nodeDirector.InnerXml;
+
+            var nodeAbstract = navigator.SelectSingleNode("//p[@class='movie_abstract']");
+            if (nodeAbstract != null)
+                movie.Abstract = nodeAbstract.InnerXml.CleanString();
+
+            var nodeRate = navigator.SelectSingleNode("//div[@class='movie_rating clearfix']");
+            if (nodeRate == null) return;
+            var nodeNumberOfRate = nodeRate.SelectSingleNode("./h4/span");
+            if (nodeNumberOfRate != null)
+            {
+                var matchNumberOfRate = Regex.Match(nodeNumberOfRate.InnerXml, "\\((\\d*) votes\\)");
+                int numberOfRate;
+                if (int.TryParse(matchNumberOfRate.Groups[1].Value, out numberOfRate))
+                    movie.NumberOfRate = numberOfRate;
+            }
+
+            var nodeRateNote = nodeRate.SelectSingleNode("./strong");
+            if (nodeRateNote == null) return;
+            var matchRateNote = Regex.Match(nodeRateNote.InnerXml, "(\\d.\\d*) / 10");
+
+            var culture = new CultureInfo("en-US");
+
+            decimal rateNote;
+            if (decimal.TryParse(matchRateNote.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateNote))
+                movie.Rate = rateNote;
+        }
+
         private static void ParseStats(XPathNavigator navigator, Movie movie)
         {
             var statsRootNode =
                 navigator.SelectSingleNode(
                     "//div[@id='main_white']/div[@class='col_right nopadding']/div[@class='box_blank last']/div[@class='box_black']/ul[@class='stats clearfix']");
 
+            if(statsRootNode == null)
+                return;
+
             var numberOfSnapshotNode = statsRootNode.SelectSingleNode("./li[1]/strong");
             int numberOfSnaphot;
-            if (int.TryParse(numberOfSnapshotNode.InnerXml, out numberOfSnaphot))
+            if (numberOfSnapshotNode != null && int.TryParse(numberOfSnapshotNode.InnerXml, out numberOfSnaphot))
                 movie.NumberOfSnapshot = numberOfSnaphot;
 
             var totalSolvesNode = statsRootNode.SelectSingleNode("./li[2]/strong");
             double totalSolves;
-            if (double.TryParse(totalSolvesNode.InnerXml, out totalSolves))
+            if (totalSolvesNode != null && double.TryParse(totalSolvesNode.InnerXml, out totalSolves))
                 movie.TotalSolves = totalSolves;
 
             var introducedByNode = statsRootNode.SelectSingleNode("./li[3]/span/a[@class='nametaglink']");
-            movie.IntroducedBy = introducedByNode.InnerXml;
+            if (introducedByNode != null) movie.IntroducedBy = introducedByNode.InnerXml;
 
             var introducedOnNode = statsRootNode.SelectSingleNode("li[4]/span");
             DateTime introducedOn;
-            if (DateTime.TryParse(introducedOnNode.InnerXml, out introducedOn))
+            if (introducedOnNode != null && DateTime.TryParse(introducedOnNode.InnerXml, out introducedOn))
                 movie.IntroducedOn = introducedOn;
 
             var numberOfReviewsNode = statsRootNode.SelectSingleNode("./li[@class='last']/span");
             int numberOfReviews;
-            if (int.TryParse(numberOfReviewsNode.InnerXml, out numberOfReviews))
+            if (numberOfReviewsNode != null && int.TryParse(numberOfReviewsNode.InnerXml, out numberOfReviews))
                 movie.NumberOfReviews = numberOfReviews;
         }
 
         private HtmlDocument GetMovieInfo(Uri baseUri)
         {
-            HtmlDocument movieInfoHtmlDocument = null;
+            HtmlDocument movieInfoHtmlDocument;
 
             var movieInfo = new Uri(baseUri + "/info");
             using (var stream = WebClient.GetStream(movieInfo))
@@ -131,63 +191,6 @@ namespace WTM.Core.Application.Parsers
                 tagList.Add(tagNodeIterator.Current.InnerXml.CleanString());
 
             return tagList;
-        }
-
-        protected override void Parse(Movie movie, HtmlDocument document)
-        {
-            var navigator = document.CreateNavigator();
-            if (navigator == null) return;
-
-            var nodeTitle = navigator.SelectSingleNode("//div[@class='header clearfix']/h1");
-            if (nodeTitle != null)
-            {
-                var regexTitle = new Regex("(.*)<span>\\((\\d{4})\\)</span>");
-                var match = regexTitle.Match(nodeTitle.InnerXml);
-
-                movie.OriginalTitle = match.Groups[1].Value;
-
-                int year;
-                if (int.TryParse(match.Groups[2].Value, out year))
-                    movie.Year = year;
-            }
-
-            var genreList = new List<string>();
-            var nodeGenre = navigator.Select("//div[@id='main_white']/div[@class='col_left nopadding']/div[@class='shot_focus_box']/div[@class='movie_info clearfix']/ul[@class='info_list']/li[@class='clearfix'][1]/ul[@class='clearfix']/li");
-            if (nodeGenre.Count > 0)
-            {
-                while (nodeGenre.MoveNext())
-                    genreList.Add(nodeGenre.Current.InnerXml);
-                movie.GenreList = genreList;
-            }
-
-            var nodeDirector = navigator.SelectSingleNode("//div[@id='main_white']/div[@class='col_left nopadding']/div[@class='shot_focus_box']/div[@class='movie_info clearfix']/ul[@class='info_list']/li[@class='clearfix'][2]/ul[@class='clearfix']/li");
-            if (nodeDirector != null)
-                movie.Director = nodeDirector.InnerXml;
-
-            var nodeAbstract = navigator.SelectSingleNode("//p[@class='movie_abstract']");
-            if (nodeAbstract != null)
-                movie.Abstract = nodeAbstract.InnerXml.CleanString();
-
-            var nodeRate = navigator.SelectSingleNode("//div[@class='movie_rating clearfix']");
-            if (nodeRate == null) return;
-            var nodeNumberOfRate = nodeRate.SelectSingleNode("./h4/span");
-            if (nodeNumberOfRate != null)
-            {
-                var matchNumberOfRate = Regex.Match(nodeNumberOfRate.InnerXml, "\\((\\d*) votes\\)");
-                int numberOfRate;
-                if (int.TryParse(matchNumberOfRate.Groups[1].Value, out numberOfRate))
-                    movie.NumberOfRate = numberOfRate;
-            }
-
-            var nodeRateNote = nodeRate.SelectSingleNode("./strong");
-            if (nodeRateNote == null) return;
-            var matchRateNote = Regex.Match(nodeRateNote.InnerXml, "(\\d.\\d*) / 10");
-
-            var culture = new CultureInfo("en-US");
-
-            decimal rateNote;
-            if (decimal.TryParse(matchRateNote.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateNote))
-                movie.Rate = rateNote;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace WTM.Core.Test.Application.Parser
         [Test]
         public void WhenParseThenReturnValidEntity()
         {
-            var featureFilm = parser.Parse();
+            var featureFilm = parser.ParseOverviewShotByDate();
 
             Check.That(featureFilm).IsNotNull();
             Check.That(featureFilm.Date).IsNotNull();

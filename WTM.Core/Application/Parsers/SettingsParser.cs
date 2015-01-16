@@ -14,17 +14,17 @@ namespace WTM.Core.Application.Parsers
 
         public Settings Parse()
         {
-            return base.Parse(null);
+            return base.ParseOverviewShotByDate(null);
         }
 
         public Settings Parse(HtmlDocument htmlDocument)
         {
             var settings = new Settings();
-            Parse(settings, htmlDocument);
+            ParseOverviewShotByDate(settings, htmlDocument);
             return settings;
         }
 
-        protected override void Parse(Settings instance, HtmlDocument htmlDocument)
+        protected override void ParseOverviewShotByDate(Settings instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;

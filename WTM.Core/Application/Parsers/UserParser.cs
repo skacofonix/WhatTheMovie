@@ -19,7 +19,7 @@ namespace WTM.Core.Application.Parsers
 
         public new User Parse(string username)
         {
-            var user = base.Parse(username);
+            var user = base.ParseOverviewShotByDate(username);
 
             var baseUri = base.MakeUri(username);
 
@@ -31,7 +31,7 @@ namespace WTM.Core.Application.Parsers
             return user;
         }
 
-        protected override void Parse(User instance, HtmlDocument htmlDocument)
+        protected override void ParseOverviewShotByDate(User instance, HtmlDocument htmlDocument)
         {
             instance.ParseDateTime = DateTime.Now;
 

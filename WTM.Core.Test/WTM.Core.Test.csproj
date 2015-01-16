@@ -62,6 +62,7 @@
     <Compile Include="Application\HttpRequestBuilderTest.cs" />
     <Compile Include="Application\Parser\MovieParserTest.cs" />
     <Compile Include="Application\Parser\UserParserTest.cs" />
+    <Compile Include="Application\ServerDateTimeTest.cs" />
     <Compile Include="Application\WebClientFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -74,6 +75,7 @@
     <Compile Include="Services\ShotServiceTest.cs" />
     <Compile Include="Services\DownloadServiceTest.cs" />
     <Compile Include="Services\MovieServiceTest.cs" />
+    <Compile Include="Services\ShotFeatureFilmsServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

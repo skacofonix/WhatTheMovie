@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -8,27 +9,80 @@ using WTM.Core.Domain.WebsiteEntities;
 
 namespace WTM.Core.Services
 {
-    internal class ShotService
+    internal abstract class ShotService : IShotService
     {
-        private const string Identifier = "shot";
+        protected abstract string PageIdentifier { get; }
 
         private readonly IWebClient webClient;
         private readonly ShotParser shotParser;
 
-        public ShotService(IWebClient webClient, IHtmlParser htmlParser)
+        protected ShotService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             shotParser = new ShotParser(webClient, htmlParser);
         }
 
-        public Shot GetById(int id)
+        public Shot GetRandomShot()
+        {
+            return shotParser.ParseRandom();
+        }
+
+        public Shot GetFirstShot(Shot currentShot = null)
+        {
+            var tempShot = currentShot ?? shotParser.ParseRandom();
+            if (tempShot != null && tempShot.FirstShotId.HasValue)
+                return shotParser.Parse(tempShot.FirstShotId.Value);
+            return null;
+        }
+
+        public Shot GetPreviousShot(Shot currentShot = null)
+        {
+            var tempShot = currentShot ?? shotParser.ParseRandom();
+            if (tempShot != null && tempShot.PreviousShotId.HasValue)
+                return shotParser.Parse(tempShot.PreviousShotId.Value);
+            return null;
+        }
+
+        public Shot GetPreviousUnsolvdShot(Shot currentShot = null)
+        {
+            var tempShot = currentShot ?? shotParser.ParseRandom();
+            if (tempShot != null && tempShot.PreviousUnsolvedShotId.HasValue)
+                return shotParser.Parse(tempShot.PreviousUnsolvedShotId.Value);
+            return null;
+        }
+
+        public Shot GetNextUnsolvedShot(Shot currentShot = null)
+        {
+            var tempShot = currentShot ?? shotParser.ParseRandom();
+            if (tempShot != null && tempShot.NextUnsolvedShotId.HasValue)
+                return shotParser.Parse(tempShot.NextUnsolvedShotId.Value);
+            return null;
+        }
+
+        public Shot GetNextShot(Shot currentShot = null)
+        {
+            var tempShot = currentShot ?? shotParser.ParseRandom();
+            if (tempShot != null && tempShot.NextShotId.HasValue)
+                return shotParser.Parse(tempShot.NextShotId.Value);
+            return null;
+        }
+
+        public Shot GetLastShot(Shot currentShot = null)
+        {
+            var tempShot = currentShot ?? shotParser.ParseRandom();
+            if (tempShot != null && tempShot.LastShotId.HasValue)
+                return shotParser.Parse(tempShot.LastShotId.Value);
+            return null;
+        }
+
+        public Shot GetShotById(int id)
         {
             return shotParser.Parse(id);
         }
 
-        public Shot GetRandom()
+        public IEnumerable<Shot> Search(string criteria)
         {
-            return shotParser.ParseRandom();
+            throw new NotImplementedException();
         }
 
         public GuessTitleResponse GuessTitle(int shotId, string title)
@@ -42,7 +96,7 @@ namespace WTM.Core.Services
             requestBuilder.AddParameter("commit", "Guess");
             var data = requestBuilder.ToString();
 
-            var post = string.Join("/", Identifier, shotId, "guess");
+            var post = string.Join("/", "shot", shotId, "guess");
             var uri = new Uri(webClient.UriBase, post);
             var webResponse = webClient.Post(uri, data);
 
@@ -71,7 +125,7 @@ namespace WTM.Core.Services
         {
             ShowSolutionResponse response = null;
 
-            var relativeUri = string.Join("/", Identifier, shotId, "showsolution");
+            var relativeUri = string.Join("/", "shot", shotId, "showsolution");
             var uri = new Uri(webClient.UriBase, relativeUri);
             var webResponse = webClient.Post(uri);
 
@@ -93,6 +147,11 @@ namespace WTM.Core.Services
             }
 
             return response;
+        }
+
+        public bool Rate(int score)
+        {
+            throw new NotImplementedException();
         }
     }
 }
