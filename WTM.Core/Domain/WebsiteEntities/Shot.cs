@@ -55,6 +55,8 @@ namespace WTM.Core.Domain.WebsiteEntities
         [BooleanParser(@"//li[@class='unsolved']", null, true)]
         public bool? IsSolved { get; set; }
 
+        public bool? IsSolvedByUser { get; set; }
+
         [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo']/li[@class='solved']", @"status: solved \((\d*)\)")]
         public int? NbSolver { get; set; }
 

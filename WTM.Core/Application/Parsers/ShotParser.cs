@@ -44,6 +44,10 @@ namespace WTM.Core.Application.Parsers
             instance.Tags = GetTags(navigator);
             GetRate(instance, navigator);
 
+            var isSolvedByUserNode = navigator.SelectSingleNode("//input[@id='guess']/@class");
+            if (isSolvedByUserNode != null && isSolvedByUserNode.InnerXml.Contains("right_already"))
+                instance.IsSolvedByUser = true;
+
             var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId.GetValueOrDefault());
             string shoutString = null;
 
@@ -157,12 +161,11 @@ namespace WTM.Core.Application.Parsers
 
         private int? GetCurrentShotId(HtmlDocument document)
         {
-            var currentShotIdString = document.GetElementbyId("nav_shots")
-                                              .ChildNodes.Where(n => n.Name == "li" && n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "number"))
-                                              .FirstOrDefault()
-                                              .InnerText;
-            var currentShotIdCleaned = regexCleanHtml.Replace(currentShotIdString, string.Empty);
-            return int.Parse(currentShotIdCleaned);
+            var firstOrDefault = document.GetElementbyId("nav_shots")
+                .ChildNodes.FirstOrDefault(n => n.Name == "li" && n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "number"));
+                var currentShotIdString = firstOrDefault.InnerText;
+                var currentShotIdCleaned = regexCleanHtml.Replace(currentShotIdString, string.Empty);
+                return int.Parse(currentShotIdCleaned);
         }
 
         private int? GetNextShotId(HtmlDocument document)
