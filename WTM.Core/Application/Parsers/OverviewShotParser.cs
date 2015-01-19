@@ -24,12 +24,12 @@ namespace WTM.Core.Application.Parsers
             DateTime date;
             if (parameter != null && DateTime.TryParseExact(parameter, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                 return ParseOverviewShotByDate(date);
-            return base.Parse(null);
+            return base.Parse();
         }
 
         public OverviewShotCollection ParseOverviewShotByDate()
         {
-            return base.Parse(null);
+            return base.Parse();
         }
 
         public OverviewShotCollection ParseByDate(DateTime date)

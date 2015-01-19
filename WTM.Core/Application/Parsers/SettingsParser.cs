@@ -14,7 +14,7 @@ namespace WTM.Core.Application.Parsers
 
         public Settings Parse()
         {
-            return base.Parse(null);
+            return base.Parse();
         }
 
         public Settings Parse(HtmlDocument htmlDocument)

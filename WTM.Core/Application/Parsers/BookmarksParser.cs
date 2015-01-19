@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,9 +18,44 @@ namespace WTM.Core.Application.Parsers
             : base(webClient, htmlParser)
         { }
 
+        public bool OrderBookmarksNewestToOlder
+        {
+            get { return orderBookmarksNewestToOlder; }
+            set
+            {
+                if (orderBookmarksNewestToOlder != value)
+                {
+                    orderBookmarksNewestToOlder = value;
+                    ChangeOrderOfBookmarks(orderBookmarksNewestToOlder);
+                }
+            }
+        }
+        private bool orderBookmarksNewestToOlder;
+
+
         public BookmarkCollection GetFirst30Bookmarks()
         {
             return base.Parse();
+        }
+
+        public BookmarkCollection GetBookmarksByPage(int page)
+        {
+            var uri = new Uri(MakeUri(), "?page=" + page);
+            return base.Parse(uri);
+        }
+
+        private bool ChangeOrderOfBookmarks(bool isOrderNewestToOlder)
+        {
+            var uri = new Uri(WebClient.UriBase, "/user/set");
+            var requestBuilder = new HttpRequestBuilder();
+            requestBuilder.AddParameter("setting", "show_newest_bookmarks");
+            requestBuilder.AddParameter("value", isOrderNewestToOlder ? "true" : "false");
+            var data = requestBuilder.ToString();
+
+            var httpWebResponse = WebClient.Post(uri, data) as HttpWebResponse;
+            if (httpWebResponse != null && httpWebResponse.StatusCode == HttpStatusCode.OK)
+                return true;
+            return false;
         }
 
         protected override void ParseHtmlDocument(BookmarkCollection instance, HtmlDocument htmlDocument)

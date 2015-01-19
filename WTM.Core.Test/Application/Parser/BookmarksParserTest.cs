@@ -13,7 +13,6 @@ namespace WTM.Core.Test.Application.Parser
         private IHtmlParser htmlParser;
         private BookmarksParser bookmarksParser;
 
-
         [SetUp]
         public void Init()
         {
@@ -34,6 +33,40 @@ namespace WTM.Core.Test.Application.Parser
             Check.That(bookmarks).IsNotNull();
             Check.That(bookmarks.Bookmarks).IsNotNull();
             Check.That(bookmarks.Bookmarks.Any()).IsTrue();
+        }
+
+        [Test]
+        public void WhenSpecifyPageThenParseBookmars()
+        {
+            for (var i = 1; i <= 3; i++)
+            {
+                var bookmarks = bookmarksParser.GetBookmarksByPage(i);
+                Check.That(bookmarks).IsNotNull();
+                Check.That(bookmarks.Bookmarks).IsNotNull();
+                Check.That(bookmarks.Bookmarks.Any()).IsTrue();
+            }
+        }
+
+        [Test]
+        public void WhenChangeOrderBookmargsThenOrderOfBookmarkChanged()
+        {
+            var bookmarks = bookmarksParser.GetFirst30Bookmarks().Bookmarks;
+
+            Check.That(bookmarks.Count).IsGreaterThan(1);
+
+            var firstBookmarkShotId = bookmarks.First().ShotId;
+
+            bookmarksParser.OrderBookmarksNewestToOlder = true;
+
+            var lastBookmarksShotId = bookmarksParser.GetFirst30Bookmarks().Bookmarks.First().ShotId;
+
+            Check.That(firstBookmarkShotId).IsDistinctFrom(lastBookmarksShotId);
+
+            bookmarksParser.OrderBookmarksNewestToOlder = false;
+
+            var firstBookmarkShotIdAgain = bookmarksParser.GetFirst30Bookmarks().Bookmarks.First().ShotId;
+
+            Check.That(firstBookmarkShotId).Equals(firstBookmarkShotIdAgain);
         }
     }
 }

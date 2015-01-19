@@ -28,6 +28,24 @@ namespace WTM.Core.Application.Parsers
         protected virtual T Parse(string parameter = null)
         {
             var uri = MakeUri(parameter);
+            return Parse(uri);
+        }
+
+        protected virtual Uri MakeUri(string parameter = null)
+        {
+            var relativeUri = Identifier;
+            if (!string.IsNullOrEmpty(parameter))
+            {
+                if (!parameter.StartsWith("/"))
+                    relativeUri += "/";
+                relativeUri += parameter;
+            }
+
+            return new Uri(WebClient.UriBase, relativeUri);
+        }
+
+        protected virtual T Parse(Uri uri)
+        {
             HtmlDocument document;
 
             using (var stream = WebClient.GetStream(uri))
@@ -40,19 +58,6 @@ namespace WTM.Core.Application.Parsers
             ParseHtmlDocument(instance, document);
 
             return instance;
-        }
-
-        protected virtual Uri MakeUri(string parameter)
-        {
-            var relativeUri = Identifier;
-            if (!string.IsNullOrEmpty(parameter))
-            {
-                if (!parameter.StartsWith("/"))
-                    relativeUri += "/";
-                relativeUri += parameter;
-            }
-
-            return new Uri(WebClient.UriBase, relativeUri);
         }
 
         protected virtual void ParseHtmlDocument(T instance, HtmlDocument htmlDocument)
