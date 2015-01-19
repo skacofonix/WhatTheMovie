@@ -19,17 +19,17 @@ namespace WTM.Core.Application.Parsers
 
         const string DateFormat = "yyyy/MM/dd";
 
-        protected override OverviewShotCollection ParseOverviewShotByDate(string parameter)
+        protected override OverviewShotCollection Parse(string parameter)
         {
             DateTime date;
             if (parameter != null && DateTime.TryParseExact(parameter, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                 return ParseOverviewShotByDate(date);
-            return base.ParseOverviewShotByDate(null);
+            return base.Parse(null);
         }
 
         public OverviewShotCollection ParseOverviewShotByDate()
         {
-            return base.ParseOverviewShotByDate(null);
+            return base.Parse(null);
         }
 
         public OverviewShotCollection ParseByDate(DateTime date)
@@ -70,7 +70,7 @@ namespace WTM.Core.Application.Parsers
 
             var instance = new OverviewShotCollection();
 
-            ParseOverviewShotByDate(instance, document);
+            ParseHtmlDocument(instance, document);
 
             return instance;
         }
@@ -78,7 +78,7 @@ namespace WTM.Core.Application.Parsers
         private OverviewShotCollection ParseOverviewShotByDate(DateTime date)
         {
             var stringDate = date.ToString(DateFormat);
-            return base.ParseOverviewShotByDate(stringDate);
+            return base.Parse(stringDate);
         }
 
         private string GetFirstValue(XPathNavigator navigator, string xPath)
@@ -87,7 +87,7 @@ namespace WTM.Core.Application.Parsers
             return singleNode != null ? singleNode.InnerXml : null;
         }
 
-        protected override void ParseOverviewShotByDate(OverviewShotCollection instance, HtmlDocument htmlDocument)
+        protected override void ParseHtmlDocument(OverviewShotCollection instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;

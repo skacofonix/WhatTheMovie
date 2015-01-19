@@ -56,6 +56,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Application\Parser\BookmarksParserTest.cs" />
     <Compile Include="Application\Parser\OverviewShotParserTest.cs" />
     <Compile Include="Application\Parser\ShotParserTest.cs" />
     <Compile Include="Application\Parser\SettingsParserTest.cs" />

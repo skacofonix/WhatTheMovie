@@ -25,17 +25,17 @@ namespace WTM.Core.Application.Parsers
 
         public Shot ParseRandom()
         {
-            return ParseOverviewShotByDate("random");
+            return Parse("random");
         }
 
         public Shot Parse(int id)
         {
-            return ParseOverviewShotByDate(id.ToString(CultureInfo.InvariantCulture));
+            return Parse(id.ToString(CultureInfo.InvariantCulture));
         }
 
-        protected override void ParseOverviewShotByDate(Shot instance, HtmlDocument htmlDocument)
+        protected override void ParseHtmlDocument(Shot instance, HtmlDocument htmlDocument)
         {
-            base.ParseOverviewShotByDate(instance, htmlDocument);
+            base.ParseHtmlDocument(instance, htmlDocument);
 
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;

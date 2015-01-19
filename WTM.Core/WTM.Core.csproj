@@ -48,10 +48,13 @@
     <Compile Include="Application\HttpRequestBuilder.cs" />
     <Compile Include="Application\IAppSettings.cs" />
     <Compile Include="Application\IServerDateTime.cs" />
+    <Compile Include="Application\Parsers\BookmarksParser.cs" />
     <Compile Include="Application\Parsers\OverviewShotParser.cs" />
     <Compile Include="Application\Parsers\SettingsParser.cs" />
     <Compile Include="Application\ServerDateTime.cs" />
     <Compile Include="Application\WebClientWTM.cs" />
+    <Compile Include="Domain\WebsiteEntities\Bookmark.cs" />
+    <Compile Include="Domain\WebsiteEntities\BookmarkCollection.cs" />
     <Compile Include="Domain\WebsiteEntities\OverviewShotCollection.cs" />
     <Compile Include="Domain\WebsiteEntities\OverviewShot.cs" />
     <Compile Include="Domain\WebsiteEntities\OverviewShotType.cs" />

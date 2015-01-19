@@ -25,7 +25,7 @@ namespace WTM.Core.Application.Parsers
             this.HtmlParser = htmlParser;
         }
 
-        protected virtual T ParseOverviewShotByDate(string parameter = null)
+        protected virtual T Parse(string parameter = null)
         {
             var uri = MakeUri(parameter);
             HtmlDocument document;
@@ -37,17 +37,25 @@ namespace WTM.Core.Application.Parsers
 
             var instance = new T();
 
-            ParseOverviewShotByDate(instance, document);
+            ParseHtmlDocument(instance, document);
 
             return instance;
         }
 
         protected virtual Uri MakeUri(string parameter)
         {
-            return new Uri(WebClient.UriBase, Identifier + "/" + parameter);
+            var relativeUri = Identifier;
+            if (!string.IsNullOrEmpty(parameter))
+            {
+                if (!parameter.StartsWith("/"))
+                    relativeUri += "/";
+                relativeUri += parameter;
+            }
+
+            return new Uri(WebClient.UriBase, relativeUri);
         }
 
-        protected virtual void ParseOverviewShotByDate(T instance, HtmlDocument htmlDocument)
+        protected virtual void ParseHtmlDocument(T instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null)

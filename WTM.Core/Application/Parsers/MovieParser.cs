@@ -20,7 +20,7 @@ namespace WTM.Core.Application.Parsers
 
         public Movie GetById(string title)
         {
-            var movie = base.ParseOverviewShotByDate(title);
+            var movie = base.Parse(title);
 
             var baseUri = base.MakeUri(title);
 
@@ -39,7 +39,7 @@ namespace WTM.Core.Application.Parsers
             return movie;
         }
 
-        protected override void ParseOverviewShotByDate(Movie movie, HtmlDocument document)
+        protected override void ParseHtmlDocument(Movie movie, HtmlDocument document)
         {
             var navigator = document.CreateNavigator();
             if (navigator == null) return;
