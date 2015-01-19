@@ -50,6 +50,10 @@
     <Compile Include="Application\IServerDateTime.cs" />
     <Compile Include="Application\Parsers\BookmarksParser.cs" />
     <Compile Include="Application\Parsers\OverviewShotParser.cs" />
+    <Compile Include="Application\Parsers\SearchMovieTvParser.cs" />
+    <Compile Include="Application\Parsers\SearchBaseParser.cs" />
+    <Compile Include="Application\Parsers\SearchTagParser.cs" />
+    <Compile Include="Application\Parsers\SearchUserParser.cs" />
     <Compile Include="Application\Parsers\SettingsParser.cs" />
     <Compile Include="Application\ServerDateTime.cs" />
     <Compile Include="Application\WebClientWTM.cs" />
@@ -58,6 +62,9 @@
     <Compile Include="Domain\WebsiteEntities\OverviewShotCollection.cs" />
     <Compile Include="Domain\WebsiteEntities\OverviewShot.cs" />
     <Compile Include="Domain\WebsiteEntities\OverviewShotType.cs" />
+    <Compile Include="Domain\WebsiteEntities\SearchResultBase.cs" />
+    <Compile Include="Domain\WebsiteEntities\SearchResultCollection.cs" />
+    <Compile Include="Domain\WebsiteEntities\SearchResultMovieTv.cs" />
     <Compile Include="Domain\WebsiteEntities\Settings.cs" />
     <Compile Include="Domain\WebsiteEntities\ShotSolveStatus.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
