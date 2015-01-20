@@ -16,7 +16,7 @@ namespace WTM.Core.Test.Application.Parser
         [SetUp]
         public void Init()
         {
-            webClient = new WebClientFake(Resources.FeatureFilms20141201);
+            webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             parser = new SearchMovieTvParser(webClient, htmlParser);
         }

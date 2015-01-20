@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using WTM.Core.Domain.WebsiteEntities;
 using WTM.Core.Helpers;
@@ -20,7 +20,7 @@ namespace WTM.Core.Application.Parsers
             if (navigator == null)
                 return;
 
-            var regexTitle = new Regex("\"(.*)\" <span>(\\d{4})</span>");
+            var regexTitle = new Regex("(.*) <span>(\\d{4})</span>");
 
             instance.Items = new List<SearchResultMovieTv>();
 
