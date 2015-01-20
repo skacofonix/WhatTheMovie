@@ -9,6 +9,8 @@ namespace WTM.Core.Domain.WebsiteEntities
 
         public List<Bookmark> Bookmarks { get; set; }
 
+        public int NumberOfPage { get; set; }
+
         public BookmarkCollection()
         {
             ParseDateTime = DateTime.Now;

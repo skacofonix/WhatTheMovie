@@ -112,6 +112,18 @@ namespace WTM.Core.Application.Parsers
                         }
                     }
                 }
+
+                var regexNbPage = new Regex("/mybookmarks?page=(\\d*)");
+                var nodeNbPage = navigator.Select("//div[@class='black_pagination']/a");
+                int totalPageNumber = 1;
+                while (nodeNbPage.MoveNext())
+                {
+                    int pageNumber;
+                    if (int.TryParse(nodeNbPage.Current.InnerXml, out pageNumber))
+                        if (pageNumber > totalPageNumber)
+                            totalPageNumber = pageNumber;
+                }
+                instance.NumberOfPage = totalPageNumber;
             }
         }
     }

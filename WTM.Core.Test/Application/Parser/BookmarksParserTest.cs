@@ -48,6 +48,13 @@ namespace WTM.Core.Test.Application.Parser
         }
 
         [Test]
+        public void WhenParseBookmarksThenCountNumberOfPage()
+        {
+            var bookmarks = bookmarksParser.GetFirst30Bookmarks();
+            Check.That(bookmarks.NumberOfPage).IsGreaterThan(1);
+        }
+
+        [Test]
         public void WhenChangeOrderBookmargsThenOrderOfBookmarkChanged()
         {
             var bookmarks = bookmarksParser.GetFirst30Bookmarks().Bookmarks;

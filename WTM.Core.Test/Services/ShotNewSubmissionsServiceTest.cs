@@ -27,6 +27,7 @@ namespace WTM.Core.Test.Services
         {
             var overviewShotCollection = shotNewSubmissionsService.GetShots();
             Check.That(overviewShotCollection).IsNotNull();
+            Check.That(overviewShotCollection.OverviewShotType).IsNotNull();
             Check.That(overviewShotCollection.OverviewShotType).Equals(OverviewShotType.NewSubmissions);
             Check.That(overviewShotCollection.Shots).IsNotNull();
             Check.That(overviewShotCollection.Shots.Any()).IsTrue();
