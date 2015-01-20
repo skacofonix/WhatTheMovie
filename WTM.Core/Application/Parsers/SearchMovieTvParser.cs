@@ -42,6 +42,9 @@ namespace WTM.Core.Application.Parsers
                         if (int.TryParse(titleMatch.Groups[2].Value, out year))
                             searchMovie.Year = year;
                     }
+
+                    if (titleNode.InnerXml.Contains("TV Series"))
+                        searchMovie.IsTvSeries = true;
                 }
 
                 var movieUrl = rootNode.Current.SelectSingleNode("./a/@href");
