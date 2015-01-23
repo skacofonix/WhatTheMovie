@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteClient", "WTM.Core\WTM.WebsiteClient.csproj", "{0A433949-DD18-4B4F-A31E-61415FC2A38A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteClient", "WTM.WebsiteClient\WTM.WebsiteClient.csproj", "{0A433949-DD18-4B4F-A31E-61415FC2A38A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteClient.Test", "WTM.Core.Test\WTM.WebsiteClient.Test.csproj", "{1022C2E5-EF1A-474A-BE00-46BF578DCEAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteClient.Test", "WTM.WebsiteClient.Test\WTM.WebsiteClient.Test.csproj", "{1022C2E5-EF1A-474A-BE00-46BF578DCEAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
