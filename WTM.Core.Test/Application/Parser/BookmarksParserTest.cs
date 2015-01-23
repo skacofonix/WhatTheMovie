@@ -2,9 +2,10 @@
 using NFluent;
 using NUnit.Framework;
 using WTM.Core.Application;
-using WTM.Core.Application.Parsers;
+using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Application.Parsers;
 
-namespace WTM.Core.Test.Application.Parser
+namespace WTM.WebsiteClient.Test.Application.Parser
 {
     [TestFixture]
     public class BookmarksParserTest

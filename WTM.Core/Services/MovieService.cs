@@ -1,8 +1,8 @@
 ﻿using WTM.Core.Application;
-using WTM.Core.Application.Parsers;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.WebsiteClient.Application.Parsers;
+using WTM.WebsiteClient.Domain;
 
-namespace WTM.Core.Services
+namespace WTM.WebsiteClient.Services
 {
     internal class MovieService
     {

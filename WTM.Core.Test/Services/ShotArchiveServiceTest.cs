@@ -1,11 +1,12 @@
-﻿using NFluent;
+﻿using System.Linq;
+using NFluent;
 using NUnit.Framework;
-using System.Linq;
 using WTM.Core.Application;
-using WTM.Core.Domain.WebsiteEntities;
-using WTM.Core.Services;
+using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Domain;
+using WTM.WebsiteClient.Services;
 
-namespace WTM.Core.Test.Services
+namespace WTM.WebsiteClient.Test.Services
 {
     [TestFixture]
     public class ShotArchiveServiceTest

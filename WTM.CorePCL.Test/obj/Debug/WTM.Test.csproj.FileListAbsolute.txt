@@ -1,3 +1,0 @@
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.csprojResolveAssemblyReference.cache
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.Properties.Resources.resources
-C:\Repository\WhatTheMovie\WhatTheMovie\WTM.Test\obj\Debug\WTM.Test.csproj.GenerateResource.Cache

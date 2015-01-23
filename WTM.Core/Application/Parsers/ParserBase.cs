@@ -1,15 +1,15 @@
-﻿using System.Diagnostics;
-using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
+using HtmlAgilityPack;
+using WTM.Core.Application;
 using WTM.Core.Application.Attributes;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.WebsiteClient.Domain;
 
-namespace WTM.Core.Application.Parsers
+namespace WTM.WebsiteClient.Application.Parsers
 {
     public abstract class ParserBase<T> : IPageIdentifier
         where T : IWebsiteEntityBase, new()

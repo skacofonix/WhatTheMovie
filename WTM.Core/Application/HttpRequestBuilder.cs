@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace WTM.Core.Application
+namespace WTM.WebsiteClient.Application
 {
     class HttpRequestBuilder
     {

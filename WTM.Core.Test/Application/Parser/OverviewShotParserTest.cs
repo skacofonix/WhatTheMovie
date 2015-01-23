@@ -1,11 +1,13 @@
-﻿using NFluent;
+﻿using System.Linq;
+using NFluent;
 using NUnit.Framework;
-using System.Linq;
 using WTM.Core.Application;
-using WTM.Core.Application.Parsers;
-using WTM.Core.Test.Properties;
+using WTM.Core.Test.Application;
+using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Application.Parsers;
+using WTM.WebsiteClient.Test.Properties;
 
-namespace WTM.Core.Test.Application.Parser
+namespace WTM.WebsiteClient.Test.Application.Parser
 {
     [TestFixture]
     public class OverviewShotParserTest

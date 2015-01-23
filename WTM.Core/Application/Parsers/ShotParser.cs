@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -7,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
-using WTM.Core.Domain.WebsiteEntities;
+using HtmlAgilityPack;
+using WTM.Core.Application;
 using WTM.Core.Helpers;
+using WTM.WebsiteClient.Domain;
 
-namespace WTM.Core.Application.Parsers
+namespace WTM.WebsiteClient.Application.Parsers
 {
     internal class ShotParser : ParserBase<Shot>
     {

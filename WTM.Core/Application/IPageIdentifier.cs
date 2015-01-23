@@ -1,4 +1,4 @@
-﻿namespace WTM.Core.Application
+﻿namespace WTM.WebsiteClient.Application
 {
     interface IPageIdentifier
     {

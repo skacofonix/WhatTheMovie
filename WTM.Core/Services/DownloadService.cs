@@ -1,7 +1,7 @@
 ﻿using System;
 using WTM.Core.Application;
 
-namespace WTM.Core.Services
+namespace WTM.WebsiteClient.Services
 {
     internal class DownloadService
     {

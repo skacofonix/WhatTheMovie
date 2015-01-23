@@ -1,8 +1,9 @@
 ﻿using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.Core.Application;
+using WTM.WebsiteClient.Domain;
 
-namespace WTM.Core.Application.Parsers
+namespace WTM.WebsiteClient.Application.Parsers
 {
     internal class SettingsParser : ParserBase<Settings>
     {

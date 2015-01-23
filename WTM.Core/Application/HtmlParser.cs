@@ -1,7 +1,8 @@
-﻿using HtmlAgilityPack;
-using System.IO;
+﻿using System.IO;
+using HtmlAgilityPack;
+using WTM.Core.Application;
 
-namespace WTM.Core.Application
+namespace WTM.WebsiteClient.Application
 {
     public class HtmlParser : IHtmlParser
     {

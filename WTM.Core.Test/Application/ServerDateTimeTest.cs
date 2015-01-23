@@ -1,9 +1,9 @@
 ﻿using System;
 using NFluent;
 using NUnit.Framework;
-using WTM.Core.Application;
+using WTM.WebsiteClient.Application;
 
-namespace WTM.Core.Test.Application
+namespace WTM.WebsiteClient.Test.Application
 {
     [TestFixture]
     public class ServerDateTimeTest

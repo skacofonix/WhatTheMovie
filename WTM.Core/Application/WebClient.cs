@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using WTM.Core.Application;
 
-namespace WTM.Core.Application
+namespace WTM.WebsiteClient.Application
 {
     internal abstract class WebClient : IWebClient
     {

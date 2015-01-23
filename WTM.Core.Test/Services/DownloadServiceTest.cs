@@ -3,9 +3,10 @@ using System.IO;
 using NFluent;
 using NUnit.Framework;
 using WTM.Core.Application;
-using WTM.Core.Services;
+using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Services;
 
-namespace WTM.Core.Test.Services
+namespace WTM.WebsiteClient.Test.Services
 {
     [TestFixture]
     public class DownloadServiceTest

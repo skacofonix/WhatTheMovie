@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.Core.Services;
+using WTM.WebsiteClient.Domain;
 
-namespace WTM.Core.Services
+namespace WTM.WebsiteClient.Services
 {
     internal interface IShotService
     {

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using WTM.Core.Domain.BusinessEntities;
 
-namespace WTM.Core.Domain.BusinessEntities
+namespace WTM.WebsiteClient.Domain.BusinessEntities
 {
     public class Shot : BaseClass
     {
-        public User PostedBy { get; set; }
+        public Core.Domain.BusinessEntities.User PostedBy { get; set; }
         
-        public User FirstSolvedBy { get; set; }
+        public Core.Domain.BusinessEntities.User FirstSolvedBy { get; set; }
         
         public DateTime PublidationDate { get; set; }
         

@@ -4,10 +4,12 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using WTM.Core.Application;
-using WTM.Core.Application.Parsers;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.Core.Services;
+using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Application.Parsers;
+using WTM.WebsiteClient.Domain;
 
-namespace WTM.Core.Services
+namespace WTM.WebsiteClient.Services
 {
     internal abstract class ShotService : IShotService
     {

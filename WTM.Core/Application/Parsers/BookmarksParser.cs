@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using HtmlAgilityPack;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.Core.Application;
+using WTM.WebsiteClient.Domain;
 
-namespace WTM.Core.Application.Parsers
+namespace WTM.WebsiteClient.Application.Parsers
 {
     internal class BookmarksParser : ParserBase<BookmarkCollection>
     {

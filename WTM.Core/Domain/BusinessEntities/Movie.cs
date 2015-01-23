@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using WTM.Core.Domain.BusinessEntities;
 
-namespace WTM.Core.Domain.BusinessEntities
+namespace WTM.WebsiteClient.Domain.BusinessEntities
 {
     public class Movie : BaseClass
     {

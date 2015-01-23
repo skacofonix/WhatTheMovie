@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Net;
-using WTM.Core.Domain.WebsiteEntities;
+using WTM.Core.Application;
+using WTM.WebsiteClient.Domain;
 
-namespace WTM.Core.Application.Parsers
+namespace WTM.WebsiteClient.Application.Parsers
 {
     internal abstract class SearchBaseParser<T> : ParserBase<SearchResultCollection> 
     {

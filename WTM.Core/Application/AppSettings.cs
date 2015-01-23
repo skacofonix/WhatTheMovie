@@ -1,5 +1,6 @@
-﻿
-namespace WTM.Core.Application
+﻿using WTM.Core.Application;
+
+namespace WTM.WebsiteClient.Application
 {
     public class AppSettings : IAppSettings
     {
