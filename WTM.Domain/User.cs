@@ -2,6 +2,11 @@
 {
     public class User : BaseClass
     {
-        public string Name { get; set; }
+        public User(string Username)
+        {
+            this.Username = Username;
+        }
+
+        public string Username { get; set; }
     }
 }

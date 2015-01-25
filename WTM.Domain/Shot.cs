@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WTM.Domain
 {
-    public class Shot : BaseClass
+    public class Shot : BaseClass, IShot
     {
         public User PostedBy { get; set; }
         
