@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WTM.Core.Domain;
+using WTM.Domain;
 
 namespace WTM.Core.Services
 {

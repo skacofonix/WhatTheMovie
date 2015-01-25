@@ -2,15 +2,19 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{72080394-C300-4C0A-93FE-7D6EA0FA34D1}</ProjectGuid>
+    <ProjectGuid>{260C6A5F-983C-43B5-BADE-AD285CDBA2B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WTM.Core</RootNamespace>
-    <AssemblyName>WTM.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>WTM.Domain</RootNamespace>
+    <AssemblyName>WTM.Domain</AssemblyName>
+    <DefaultLanguage>fr-FR</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,32 +34,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClass.cs" />
+    <Compile Include="Culture.cs" />
+    <Compile Include="Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\MovieService.cs" />
-    <Compile Include="Services\ShotService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Shot.cs" />
+    <Compile Include="SnapshotDifficulty.cs" />
+    <Compile Include="Tag.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
-      <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
-      <Name>WTM.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WTM.WebsiteClient\WTM.WebsiteClient.csproj">
-      <Project>{0a433949-dd18-4b4f-a31e-61415fc2a38a}</Project>
-      <Name>WTM.WebsiteClient</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

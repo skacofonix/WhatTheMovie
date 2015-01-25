@@ -1,4 +1,4 @@
-﻿namespace WTM.Core.Domain
+﻿namespace WTM.Domain
 {
     public enum SnapshotDifficulty
     {
