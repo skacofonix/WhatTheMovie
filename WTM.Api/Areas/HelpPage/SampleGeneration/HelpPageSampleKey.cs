@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http.Headers;
+using WTM.Api.Areas.HelpPage.SampleGeneration;
 
 namespace WTM.Api.Areas.HelpPage
 {

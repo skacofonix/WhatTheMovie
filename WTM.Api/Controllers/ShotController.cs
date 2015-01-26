@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
+using WTM.Core;
 using WTM.Core.Services;
 using WTM.Domain;
 
@@ -11,11 +7,12 @@ namespace WTM.Api.Controllers
 {
     public class ShotController : ApiController
     {
-        private ShotService shotService;
+        private readonly ShotService shotService;
 
         public ShotController()
         {
-            shotService = new ShotService();
+            var context = new Context();
+            shotService = new ShotService(context);
         }
 
         // GET: api/Shot
@@ -27,7 +24,13 @@ namespace WTM.Api.Controllers
         // GET: api/Shot/5
         public Shot Get(int id)
         {
-            return "value";
+            return shotService.GetShotById(id);
+        }
+
+        // GET: api/Random
+        public Shot Random()
+        {
+            return shotService.GetRandomShot();
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WTM.Core.Application;
+using WTM.Core.Adapter;
 using WTM.Domain;
 using WTM.WebsiteClient.Application.Parsers;
 
@@ -11,23 +8,23 @@ namespace WTM.Core.Services
 {
     public class ShotService : IShotService
     {
-        private readonly IWebClient webClient;
         private readonly ShotParser shotParser;
+        private readonly ShotAdapter shotAdapter;
 
-        protected ShotService(IWebClient webClient, IHtmlParser htmlParser)
+        public ShotService(IContext context)
         {
-            this.webClient = webClient;
-            shotParser = new ShotParser(webClient, htmlParser);
+            shotParser = new ShotParser(context.WebClient, context.HtmlParser);
+            shotAdapter = new ShotAdapter();
         }
 
         public Shot GetRandomShot()
         {
-            return shotParser.ParseRandom();
+            return ShotAdapter.ConvertToCore(shotParser.ParseRandom());
         }
 
         public Shot GetShotById(int id)
         {
-            throw new NotImplementedException();
+            return ShotAdapter.ConvertToCore(shotParser.Parse(id));
         }
 
         public Shot GetFirstShot(Shot currentShot = null)

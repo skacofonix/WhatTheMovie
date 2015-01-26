@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WTM.Domain
 {
-    public class Movie : BaseClass
+    public class Movie
     {
         public string OriginalTitle { get; set; }
 

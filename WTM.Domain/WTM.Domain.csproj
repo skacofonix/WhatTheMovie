@@ -37,7 +37,6 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseClass.cs" />
     <Compile Include="Culture.cs" />
     <Compile Include="IShot.cs" />
     <Compile Include="Movie.cs" />

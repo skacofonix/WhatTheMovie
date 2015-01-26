@@ -15,6 +15,7 @@ using System.Web.Http;
 #if Handle_PageResultOfT
 using System.Web.Http.OData;
 #endif
+using WTM.Api.Areas.HelpPage.SampleGeneration;
 
 namespace WTM.Api.Areas.HelpPage
 {

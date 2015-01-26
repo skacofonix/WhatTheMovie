@@ -1,6 +1,6 @@
 ﻿namespace WTM.Domain
 {
-    public class User : BaseClass
+    public class User
     {
         public User(string Username)
         {

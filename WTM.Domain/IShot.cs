@@ -5,6 +5,8 @@ namespace WTM.Domain
 {
     public interface IShot
     {
+        int WtmId { get; set; }
+        string ImageUri { get; set; }
         User PostedBy { get; set; }
         User FirstSolvedBy { get; set; }
         DateTime PublidationDate { get; set; }
@@ -15,6 +17,5 @@ namespace WTM.Domain
         Movie Movie { get; set; }
         int DayRemainingBeforeSolution { get; set; }
         DateTime DateSolution { get; set; }
-        int Id { get; set; }
     }
 }

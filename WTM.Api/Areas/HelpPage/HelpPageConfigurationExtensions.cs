@@ -13,6 +13,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using WTM.Api.Areas.HelpPage.ModelDescriptions;
 using WTM.Api.Areas.HelpPage.Models;
+using WTM.Api.Areas.HelpPage.SampleGeneration;
 
 namespace WTM.Api.Areas.HelpPage
 {

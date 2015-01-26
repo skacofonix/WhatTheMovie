@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WTM.Core.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
     }
 }
