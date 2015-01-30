@@ -17,6 +17,9 @@ namespace WTM.Api
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
+            // Remove the XML formatter
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();
 

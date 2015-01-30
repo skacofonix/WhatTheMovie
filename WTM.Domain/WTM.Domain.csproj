@@ -40,7 +40,9 @@
     <Compile Include="Culture.cs" />
     <Compile Include="IShot.cs" />
     <Compile Include="Movie.cs" />
+    <Compile Include="Navigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rate.cs" />
     <Compile Include="Shot.cs" />
     <Compile Include="SnapshotDifficulty.cs" />
     <Compile Include="Tag.cs" />

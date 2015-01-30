@@ -8,39 +8,54 @@ namespace WTM.Domain
     public class Shot : IShot
     {
         [DataMember(IsRequired = true, Order = 1)]
-        public int WtmId { get; set; }
+        public int ShotId { get; set; }
 
         [DataMember(IsRequired = true, Order = 2)]
         public string ImageUri { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
-        public User PostedBy { get; set; }
+        [DataMember(IsRequired = true)]
+        public Navigation Navigation { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public User FirstSolvedBy { get; set; }
+        public int? MovieId { get; set; }
+
+        [DataMember(IsRequired = true)]
+        public string Poster { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
+        public string Updater { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public string FirstSolver { get; set; }
+
+        [DataMember(IsRequired = true)]
+        public int NbSolver { get; set; }
+
+        [DataMember(IsRequired = true)]
         public DateTime PublidationDate { get; set; }
 
-        [DataMember(EmitDefaultValue = false)]
-        public SnapshotDifficulty Difficulty { get; set; }
+        [DataMember(IsRequired = true)]
+        public DateTime SolutionDate { get; set; }
 
-        [IgnoreDataMember]
+        [DataMember(EmitDefaultValue = false)]
+        public SnapshotDifficulty? Difficulty { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
         public bool IsGore { get; set; }
 
-        [IgnoreDataMember]
+        [DataMember(EmitDefaultValue = false)]
         public bool IsNudity { get; set; }
 
-        [IgnoreDataMember]
-        public List<Tag> Tags { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public List<string> Tags { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public List<string> Languages { get; set; }
+
+        [DataMember(IsRequired = true)]
+        public Rate Rate { get; set; }
 
         [IgnoreDataMember]
         public Movie Movie { get; set; }
-
-        [IgnoreDataMember]
-        public int DayRemainingBeforeSolution { get; set; }
-
-        [DataMember]
-        public DateTime DateSolution { get; set; }
     }
 }
