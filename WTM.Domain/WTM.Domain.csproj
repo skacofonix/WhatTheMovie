@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Culture.cs" />
+    <Compile Include="GuessTitleResponse.cs" />
     <Compile Include="IShot.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Navigation.cs" />

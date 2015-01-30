@@ -27,10 +27,19 @@ namespace WTM.Api.Controllers
             return shotService.GetShotById(id);
         }
 
-        // GET: api/Random
+        // GET: api/Shot/Random
         public Shot Random()
         {
             return shotService.GetRandomShot();
+        }
+
+        // POST: api/Shot/5
+        public GuessTitleResponse GuessTitle(int id, [FromBody]string guessTitle)
+        {
+            // Don't forget fucking guillmet lorsque l'on forge la trame sous fidler
+            // Content-Type: application/json
+
+            return shotService.GuessTitle(id, guessTitle);
         }
     }
 }

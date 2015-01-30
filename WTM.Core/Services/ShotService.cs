@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using WTM.Core.Adapter;
 using WTM.Domain;
 using WTM.WebsiteClient.Application.Parsers;
+using GuessTitleResponse = WTM.Domain.GuessTitleResponse;
 
 namespace WTM.Core.Services
 {
@@ -10,11 +11,13 @@ namespace WTM.Core.Services
     {
         private readonly ShotParser shotParser;
         private readonly ShotAdapter shotAdapter;
+        private readonly WebsiteClient.Services.ShotService shotService;
 
         public ShotService(IContext context)
         {
             shotParser = new ShotParser(context.WebClient, context.HtmlParser);
             shotAdapter = new ShotAdapter();
+            shotService = new WebsiteClient.Services.ShotService(context.WebClient, context.HtmlParser);
         }
 
         public Shot GetRandomShot()
@@ -62,9 +65,10 @@ namespace WTM.Core.Services
             throw new NotImplementedException();
         }
 
-        public bool GuessTitle(Shot shot, string title)
+        public GuessTitleResponse GuessTitle(int shotId, string title)
         {
-            throw new NotImplementedException();
+            var result = shotService.GuessTitle(shotId, title);
+            return GuessTitleResponseAdapter.ConvertToCore(result);
         }
 
         public bool ShowSolution(Shot shot)

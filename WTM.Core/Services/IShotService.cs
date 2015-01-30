@@ -23,7 +23,7 @@ namespace WTM.Core.Services
 
         IEnumerable<Shot> Search(string tag);
 
-        bool GuessTitle(Shot shot, string title);
+        GuessTitleResponse GuessTitle(int shotId, string title);
 
         bool ShowSolution(Shot shot);
 

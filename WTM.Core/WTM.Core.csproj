@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter\GuessTitleResponseAdapter.cs" />
     <Compile Include="Adapter\ShotAdapter.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="DisplayOptions.cs" />
