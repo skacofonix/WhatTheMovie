@@ -17,7 +17,7 @@ namespace WTM.Domain
         public Navigation Navigation { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public int? MovieId { get; set; }
+        public string MovieId { get; set; }
 
         [DataMember(IsRequired = true)]
         public string Poster { get; set; }
@@ -40,6 +40,8 @@ namespace WTM.Domain
         [DataMember(EmitDefaultValue = false)]
         public SnapshotDifficulty? Difficulty { get; set; }
 
+        public ShotUserStatus UserStatus { get; private set; }
+
         [DataMember(EmitDefaultValue = false)]
         public bool IsGore { get; set; }
 
@@ -47,13 +49,13 @@ namespace WTM.Domain
         public bool IsNudity { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public List<string> Tags { get; set; }
+        public IList<string> Tags { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public List<string> Languages { get; set; }
+        public IList<string> Languages { get; set; }
 
         [DataMember(IsRequired = true)]
-        public Rate Rate { get; set; }
+        public IRate Rate { get; set; }
 
         [IgnoreDataMember]
         public Movie Movie { get; set; }

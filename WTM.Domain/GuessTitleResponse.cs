@@ -3,7 +3,7 @@
 namespace WTM.Domain
 {
     [DataContract]
-    public class GuessTitleResponse
+    public class GuessTitleResponse : IGuessTitleResponse
     {
         [DataMember(EmitDefaultValue = false)]
         public bool? RightGuess { get; set; }
@@ -16,5 +16,8 @@ namespace WTM.Domain
 
         [DataMember(EmitDefaultValue = false)]
         public int? Year { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public IMovie Movie { get; private set; }
     }
 }

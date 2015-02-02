@@ -3,7 +3,7 @@
 namespace WTM.Domain
 {
     [DataContract]
-    public class Navigation
+    public class Navigation : INavigation
     {
         [DataMember(EmitDefaultValue = false)]
         public int? FirstiId { get; set; }

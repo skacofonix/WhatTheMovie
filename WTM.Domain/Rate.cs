@@ -3,7 +3,7 @@
 namespace WTM.Domain
 {
     [DataContract]
-    public class Rate
+    public class Rate : IRate
     {
         [DataMember(IsRequired = true)]
         public decimal Score { get; set; }

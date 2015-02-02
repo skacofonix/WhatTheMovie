@@ -3,12 +3,12 @@
 namespace WTM.Domain
 {
     [DataContract]
-    public enum SnapshotDifficulty
+    public enum Gender
     {
-        Easy,
+        Unknow,
 
-        Medium,
+        Male,
 
-        Hard
+        Femal
     }
 }
