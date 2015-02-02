@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0A433949-DD18-4B4F-A31E-61415FC2A38A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WTM.WebsiteClient</RootNamespace>
+    <AssemblyName>WTM.WebsiteClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\AppSettings.cs" />
+    <Compile Include="Application\Attributes\AuthenticatedUser.cs" />
+    <Compile Include="Application\Attributes\BooleanParserAttribute.cs" />
+    <Compile Include="Application\Attributes\ListParserAttribute.cs" />
+    <Compile Include="Application\Attributes\StringParserAttribute.cs" />
+    <Compile Include="Application\Attributes\BaseParserAttribute.cs" />
+    <Compile Include="Application\HttpRequestBuilder.cs" />
+    <Compile Include="Application\IAppSettings.cs" />
+    <Compile Include="Application\IServerDateTime.cs" />
+    <Compile Include="Application\Parsers\BookmarksParser.cs" />
+    <Compile Include="Application\Parsers\OverviewShotParser.cs" />
+    <Compile Include="Application\Parsers\SearchMovieTvParser.cs" />
+    <Compile Include="Application\Parsers\SearchBaseParser.cs" />
+    <Compile Include="Application\Parsers\SearchTagParser.cs" />
+    <Compile Include="Application\Parsers\SearchUserParser.cs" />
+    <Compile Include="Application\Parsers\SettingsParser.cs" />
+    <Compile Include="Application\ServerDateTime.cs" />
+    <Compile Include="Application\WebClientWTM.cs" />
+    <Compile Include="Domain\Bookmark.cs" />
+    <Compile Include="Domain\BookmarkCollection.cs" />
+    <Compile Include="Domain\IShot.cs" />
+    <Compile Include="Domain\OverviewShotCollection.cs" />
+    <Compile Include="Domain\OverviewShot.cs" />
+    <Compile Include="Domain\OverviewShotType.cs" />
+    <Compile Include="Domain\SearchResultBase.cs" />
+    <Compile Include="Domain\SearchResultCollection.cs" />
+    <Compile Include="Domain\SearchResultMovieTv.cs" />
+    <Compile Include="Domain\Settings.cs" />
+    <Compile Include="Domain\ShotSolveStatus.cs" />
+    <Compile Include="Helpers\EnumHelpers.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Application\HtmlParser.cs" />
+    <Compile Include="Application\IHtmlParser.cs" />
+    <Compile Include="Application\IPageIdentifier.cs" />
+    <Compile Include="Application\IWebClient.cs" />
+    <Compile Include="Application\Parsers\ParserBase.cs" />
+    <Compile Include="Application\Parsers\MovieParser.cs" />
+    <Compile Include="Application\Parsers\ShotParser.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Services\DownloadService.cs" />
+    <Compile Include="Services\IShotService.cs" />
+    <Compile Include="Services\ShotFeatureFilmsService.cs" />
+    <Compile Include="Services\GuessTitleResponse.cs" />
+    <Compile Include="Services\MovieService.cs" />
+    <Compile Include="Services\ShotNewSubmissionsService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\ShotService.cs" />
+    <Compile Include="Application\Parsers\UserParser.cs" />
+    <Compile Include="Application\WebClient.cs" />
+    <Compile Include="Application\Authentifier.cs" />
+    <Compile Include="Domain\IWebsiteEntityBase.cs" />
+    <Compile Include="Domain\Movie.cs" />
+    <Compile Include="Domain\Shot.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Application\OverviewDisplayOption.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ShowSolutionResponse.cs" />
+    <Compile Include="Services\ShotArchiveService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
