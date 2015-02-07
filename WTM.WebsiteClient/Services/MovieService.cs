@@ -1,10 +1,13 @@
-﻿using WTM.WebsiteClient.Application;
+﻿using System.Collections.Generic;
+using WTM.Api.Core.Services;
+using WTM.Domain;
+using WTM.Domain.Interfaces;
+using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Application.Parsers;
-using WTM.WebsiteClient.Domain;
 
 namespace WTM.WebsiteClient.Services
 {
-    internal class MovieService
+    internal class MovieService : IMovieService
     {
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
@@ -20,6 +23,16 @@ namespace WTM.WebsiteClient.Services
         public Movie GetById(string id)
         {
             return movieParser.GetById(id);
+        }
+
+        public IMovie GetByTitle(string title)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<IMovieSummary> Search(string title)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

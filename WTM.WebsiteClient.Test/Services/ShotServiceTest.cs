@@ -44,7 +44,7 @@ namespace WTM.WebsiteClient.Test.Services
             Check.That(response).IsNotNull();
             Check.That(response.OriginalTitle).IsNotNull();
             Check.That(response.Year).IsNotNull();
-            Check.That(response.MovieLink).IsNotNull();
+            Check.That(response.MovieId).IsNotNull();
         }
 
         [Test]
@@ -53,7 +53,6 @@ namespace WTM.WebsiteClient.Test.Services
             var shot = shotService.GetRandomShot();
 
             Check.That(shot).IsNotNull();
-            Check.That(shot.ShotId).IsNotNull();
         }
 
         [Test]

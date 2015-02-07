@@ -25,16 +25,14 @@ namespace WTM.WebsiteClient.Test.Application.Parser
         {
             var shot = parser.Parse(10);
 
-            Check.That(shot.FirstShotId).HasAValue();
-            Check.That(shot.PreviousShotId).HasAValue();
-            Check.That(shot.FirstShotId).HasAValue();
-            Check.That(shot.NextShotId).HasAValue();
-            Check.That(shot.LastShotId).HasAValue();
-
-            Check.That(shot.PostedDate).IsNotNull();
-            Check.That(shot.PostedBy).IsNotNull();
-            Check.That(shot.NbSolver).HasAValue();
-            Check.That(shot.ImageUrl).IsNotNull();
+            Check.That(shot.Navigation.FirstId).HasAValue();
+            Check.That(shot.Navigation.LastId).HasAValue();
+            Check.That(shot.Navigation.PreviousId).HasAValue();
+            Check.That(shot.Navigation.PreviousUnsolvedId).HasAValue();
+            Check.That(shot.Navigation.NextId).HasAValue();
+            Check.That(shot.Navigation.NextUnsolvedId).HasAValue();
+            Check.That(shot.Poster).IsNotNull();
+            Check.That(shot.ImageUri).IsNotNull();
         }
     }
 }

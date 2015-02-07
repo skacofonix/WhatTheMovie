@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using WTM.Domain.Interfaces;
 
 namespace WTM.WebsiteClient.Domain
 {
-    public class Movie : IWebsiteEntityBase
+    public class MovieOld : IWebsiteEntityBase
     {
         public DateTime ParseDateTime { get; private set; }
         public string OriginalTitle { get; set; }

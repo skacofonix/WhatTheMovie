@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using WTM.Domain;
+using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application.Attributes;
 
 namespace WTM.WebsiteClient.Domain

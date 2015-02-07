@@ -4,7 +4,7 @@ using WTM.WebsiteClient.Application.Attributes;
 
 namespace WTM.WebsiteClient.Domain
 {
-    public interface IShot
+    public interface IShotOld
     {
         DateTime ParseDateTime { get; }
 

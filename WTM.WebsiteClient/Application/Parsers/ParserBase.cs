@@ -5,13 +5,14 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using HtmlAgilityPack;
+using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application.Attributes;
 using WTM.WebsiteClient.Domain;
 
 namespace WTM.WebsiteClient.Application.Parsers
 {
     public abstract class ParserBase<T> : IPageIdentifier
-        where T : IWebsiteEntityBase, new()
+        where T : IWebsiteEntity, new()
     {
         protected readonly IWebClient WebClient;
         protected readonly IHtmlParser HtmlParser;
@@ -146,7 +147,7 @@ namespace WTM.WebsiteClient.Application.Parsers
 
         private bool IsCustomType(PropertyInfo propertyInfo)
         {
-            return propertyInfo.PropertyType.IsInstanceOfType(typeof (IWebsiteEntityBase));
+            return propertyInfo.PropertyType.IsInstanceOfType(typeof (IWebsiteEntity));
         }
 
         private BaseParserAttribute GetParserAttribute(PropertyInfo property)

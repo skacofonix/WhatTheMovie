@@ -1,11 +1,11 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
-using HtmlAgilityPack;
-using WTM.WebsiteClient.Domain;
+using WTM.Domain;
 using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Application.Parsers
@@ -74,6 +74,8 @@ namespace WTM.WebsiteClient.Application.Parsers
             if (nodeAbstract != null)
                 movie.Abstract = nodeAbstract.InnerXml.CleanString();
 
+            var rate = new Rate();
+
             var nodeRate = navigator.SelectSingleNode("//div[@class='movie_rating clearfix']");
             if (nodeRate == null) return;
             var nodeNumberOfRate = nodeRate.SelectSingleNode("./h4/span");
@@ -82,7 +84,7 @@ namespace WTM.WebsiteClient.Application.Parsers
                 var matchNumberOfRate = Regex.Match(nodeNumberOfRate.InnerXml, "\\((\\d*) votes\\)");
                 int numberOfRate;
                 if (int.TryParse(matchNumberOfRate.Groups[1].Value, out numberOfRate))
-                    movie.NumberOfRate = numberOfRate;
+                    rate.NbRaters= numberOfRate;
             }
 
             var nodeRateNote = nodeRate.SelectSingleNode("./strong");
@@ -93,7 +95,9 @@ namespace WTM.WebsiteClient.Application.Parsers
 
             decimal rateNote;
             if (decimal.TryParse(matchRateNote.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateNote))
-                movie.Rate = rateNote;
+                rate.Score = rateNote;
+
+            movie.Rate = rate;
         }
 
         private static void ParseStats(XPathNavigator navigator, Movie movie)

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WTM.Api.Core;
 using WTM.Domain;
 using WTM.WebsiteClient.Application;
 
-namespace WTM.Api.Core
+namespace WTM.WebsiteClient
 {
     public interface IContext
     {

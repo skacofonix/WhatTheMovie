@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WTM.WebsiteClient.Domain
 {
-    public class User : IWebsiteEntityBase
+    public class UserOld : IWebsiteEntityBase
     {
         public DateTime ParseDateTime { get; set; }
         public string Name { get; set; }

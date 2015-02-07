@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using HtmlAgilityPack;
-using WTM.WebsiteClient.Domain;
+using WTM.Domain;
 using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Application.Parsers
@@ -46,9 +46,9 @@ namespace WTM.WebsiteClient.Application.Parsers
 
             var isSolvedByUserNode = navigator.SelectSingleNode("//input[@id='guess']/@class");
             if (isSolvedByUserNode != null && isSolvedByUserNode.InnerXml.Contains("right_already"))
-                instance.IsSolvedByUser = true;
-
-            var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId.GetValueOrDefault());
+               instance.UserStatus = ShotUserStatus.Solved;
+            
+            var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId);
             string shoutString = null;
 
             using (var stream = WebClient.GetStream(uriShout))
@@ -101,13 +101,17 @@ namespace WTM.WebsiteClient.Application.Parsers
 
             var culture = new CultureInfo("en-US");
 
-            decimal rate;
-            if (decimal.TryParse(match.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rate))
-                instance.Rate = rate;
+            var rate = new Rate();
+            decimal rateScore;
+            if (decimal.TryParse(match.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateScore))
+                rate.Score = rateScore;
 
             int nbRaters;
             if (int.TryParse(match.Groups[2].Value, out nbRaters))
-                instance.NbRaters = nbRaters;
+            {
+                rate.NbRaters = nbRaters;
+            }
+            instance.Rate = rate;
         }
 
         private static List<string> GetTags(XPathNavigator navigator)

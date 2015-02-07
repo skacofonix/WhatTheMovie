@@ -14,42 +14,48 @@ namespace WTM.Domain
         }
 
         [DataMember(IsRequired = true)]
-        public string OriginalTitle { get; private set; }
+        public string OriginalTitle { get;  set; }
 
         [DataMember]
-        public IList<string> GenreList { get; private set; }
+        public IList<string> GenreList { get;  set; }
 
         [DataMember]
-        public string Director { get; private set; }
+        public string Director { get;  set; }
 
         [DataMember]
-        public string Abstract { get; private set; }
+        public string Abstract { get;  set; }
 
         [DataMember]
-        public int? Year { get; private set; }
+        public int? Year { get;  set; }
 
         [DataMember]
-        public IRate Rate { get; private set; }
+        public IRate Rate { get;  set; }
 
         [DataMember]
-        public IList<string> AlternativeTitles { get; private set; }
+        public IList<string> AlternativeTitles { get;  set; }
 
         [DataMember]
-        public IList<string> Tags { get; private set; }
+        public IList<string> Tags { get;  set; }
 
         [DataMember]
-        public int? NumberOfSnapshot { get; private set; }
+        public int? NumberOfSnapshot { get;  set; }
 
         [DataMember]
-        public double? TotalSolves { get; private set; }
+        public double? TotalSolves { get;  set; }
 
         [DataMember]
-        public DateTime? IntroducedOn { get; private set; }
+        public DateTime? IntroducedOn { get;  set; }
 
         [DataMember]
-        public string IntroducedBy { get; private set; }
+        public string IntroducedBy { get;  set; }
 
         [DataMember]
-        public int? NumberOfReviews { get; private set; }
+        public int? NumberOfReviews { get;  set; }
+
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get;  set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get;  set; }
     }
 }

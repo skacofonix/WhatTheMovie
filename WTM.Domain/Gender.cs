@@ -9,6 +9,6 @@ namespace WTM.Domain
 
         Male,
 
-        Femal
+        Female
     }
 }

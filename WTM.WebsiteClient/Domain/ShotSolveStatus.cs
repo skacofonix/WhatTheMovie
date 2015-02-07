@@ -1,6 +1,6 @@
 ﻿namespace WTM.WebsiteClient.Domain
 {
-    public enum ShotSolveStatus
+    public enum ShotSolveStatusOld
     {
         /// <summary>
         /// Never solved by anyone

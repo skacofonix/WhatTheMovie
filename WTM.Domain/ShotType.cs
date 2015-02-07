@@ -1,6 +1,6 @@
-﻿namespace WTM.WebsiteClient.Domain
+﻿namespace WTM.Domain
 {
-    public enum OverviewShotTypeOld
+    public enum ShotType
     {
         Archive,
 

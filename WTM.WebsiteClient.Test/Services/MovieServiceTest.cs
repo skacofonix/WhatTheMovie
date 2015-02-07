@@ -32,7 +32,8 @@ namespace WTM.WebsiteClient.Test.Services
             Check.That(movie.Director).IsNotNull();
             Check.That(movie.Abstract).IsNotNull();
             Check.That(movie.Year).IsNotNull();
-            Check.That(movie.NumberOfRate).IsNotNull();
+            Check.That(movie.Rate).IsNotNull();
+            Check.That(movie.Rate).IsNotNull();
             Check.That(movie.AlternativeTitles).IsNotNull();
             Check.That(movie.Tags).IsNotNull();
             Check.That(movie.NumberOfSnapshot).IsNotNull();

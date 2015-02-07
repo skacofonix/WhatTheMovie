@@ -2,7 +2,7 @@
 {
     public interface INavigation
     {
-        int? FirstiId { get;  }
+        int? FirstId { get;  }
 
         int? PreviousId { get;  }
 

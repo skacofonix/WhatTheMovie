@@ -1,4 +1,5 @@
 ﻿using System;
+using WTM.Domain;
 using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Application.Parsers;
 using WTM.WebsiteClient.Domain;
@@ -7,8 +8,6 @@ namespace WTM.WebsiteClient.Services
 {
     internal class ShotFeatureFilmsService : ShotService
     {
-        protected override string PageIdentifier { get { return "overview"; } }
-
         public ShotFeatureFilmsService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
         {
@@ -19,12 +18,12 @@ namespace WTM.WebsiteClient.Services
         private readonly ShotParser shotParser;
         private readonly OverviewShotParser overviewShotParser;
 
-        public OverviewShotCollection GetTodayShots()
+        public ShotSummaryCollection GetTodayShots()
         {
             return overviewShotParser.ParseFeatureFilmsToday();
         }
 
-        public OverviewShotCollection GetShotyByDate(DateTime date)
+        public ShotSummaryCollection GetShotyByDate(DateTime date)
         {
             return overviewShotParser.ParseByDate(date);
         }

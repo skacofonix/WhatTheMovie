@@ -6,7 +6,7 @@ namespace WTM.Domain
     public class Navigation : INavigation
     {
         [DataMember(EmitDefaultValue = false)]
-        public int? FirstiId { get; set; }
+        public int? FirstId { get; set; }
         
         [DataMember(EmitDefaultValue = false)]
         public int? PreviousId { get; set; }

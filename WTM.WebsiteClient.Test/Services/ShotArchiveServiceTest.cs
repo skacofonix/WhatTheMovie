@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using NFluent;
 using NUnit.Framework;
+using WTM.Domain;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Domain;
 using WTM.WebsiteClient.Services;
 
 namespace WTM.WebsiteClient.Test.Services
@@ -29,7 +29,7 @@ namespace WTM.WebsiteClient.Test.Services
         {
             var overviewShotCollection = shotArchiveService.GetArhciveOneMonthOld();
             Check.That(overviewShotCollection).IsNotNull();
-            Check.That(overviewShotCollection.OverviewShotType).Equals(OverviewShotType.Archive);
+            Check.That(overviewShotCollection.ShotType).Equals(ShotType.Archive);
             Check.That(overviewShotCollection.Shots).IsNotNull();
             Check.That(overviewShotCollection.Shots.Any()).IsTrue();
         }

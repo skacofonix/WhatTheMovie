@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
-    public interface IMovie
+    public interface IMovie : IWebsiteEntity
     {
         string OriginalTitle { get;  }
 

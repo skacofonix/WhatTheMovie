@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using WTM.Domain;
+using WTM.Domain.Interfaces;
 
 namespace WTM.Api.Core.Services
 {
     public interface IMovieService
     {
-        Movie GetByTitle(string title);
+        IMovie GetByTitle(string title);
 
-        IEnumerable<MovieOverview> Search(string title);
-    }
-
-    public class MovieOverview
-    {
+        IEnumerable<IMovieSummary> Search(string title);
     }
 }

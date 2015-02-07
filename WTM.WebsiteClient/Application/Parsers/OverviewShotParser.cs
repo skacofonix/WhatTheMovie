@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using HtmlAgilityPack;
+using WTM.Domain;
 using WTM.WebsiteClient.Domain;
 using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Application.Parsers
 {
-    internal class OverviewShotParser : ParserBase<OverviewShotCollection>
+    internal class OverviewShotParser : ParserBase<ShotSummaryCollection>
     {
         public override string Identifier { get { return "overview"; } }
 
@@ -19,7 +21,7 @@ namespace WTM.WebsiteClient.Application.Parsers
 
         const string DateFormat = "yyyy/MM/dd";
 
-        protected override OverviewShotCollection Parse(string parameter)
+        protected override ShotSummaryCollection Parse(string parameter)
         {
             DateTime date;
             if (parameter != null && DateTime.TryParseExact(parameter, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
@@ -27,38 +29,38 @@ namespace WTM.WebsiteClient.Application.Parsers
             return base.Parse();
         }
 
-        public OverviewShotCollection ParseOverviewShotByDate()
+        public ShotSummaryCollection ParseOverviewShotByDate()
         {
             return base.Parse();
         }
 
-        public OverviewShotCollection ParseByDate(DateTime date)
+        public ShotSummaryCollection ParseByDate(DateTime date)
         {
             return ParseOverviewShotByDate(date);
         }
 
-        public OverviewShotCollection ParseByDate(int year, int month, int day)
+        public ShotSummaryCollection ParseByDate(int year, int month, int day)
         {
             var date = new DateTime(year, month, day);
             return ParseOverviewShotByDate(date);
         }
 
-        public OverviewShotCollection ParseNewSubmission()
+        public ShotSummaryCollection ParseNewSubmission()
         {
             return ParseCustomOverview("newsubmissions");
         }
 
-        public OverviewShotCollection ParseFeatureFilmsToday()
+        public ShotSummaryCollection ParseFeatureFilmsToday()
         {
             return ParseCustomOverview("featurefilms");
         }
 
-        public OverviewShotCollection ParseArchiveOneMonthOld()
+        public ShotSummaryCollection ParseArchiveOneMonthOld()
         {
             return ParseCustomOverview("thearchive");
         }
 
-        private OverviewShotCollection ParseCustomOverview(string identifier)
+        private ShotSummaryCollection ParseCustomOverview(string identifier)
         {
             var uri = new Uri(WebClient.UriBase, identifier);
             HtmlDocument document;
@@ -68,14 +70,14 @@ namespace WTM.WebsiteClient.Application.Parsers
                 document = HtmlParser.GetHtmlDocument(stream);
             }
 
-            var instance = new OverviewShotCollection();
+            var instance = new ShotSummaryCollection();
 
             ParseHtmlDocument(instance, document);
 
             return instance;
         }
 
-        private OverviewShotCollection ParseOverviewShotByDate(DateTime date)
+        private ShotSummaryCollection ParseOverviewShotByDate(DateTime date)
         {
             var stringDate = date.ToString(DateFormat);
             return base.Parse(stringDate);
@@ -87,7 +89,7 @@ namespace WTM.WebsiteClient.Application.Parsers
             return singleNode != null ? singleNode.InnerXml : null;
         }
 
-        protected override void ParseHtmlDocument(OverviewShotCollection instance, HtmlDocument htmlDocument)
+        protected override void ParseHtmlDocument(ShotSummaryCollection instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;
@@ -115,13 +117,13 @@ namespace WTM.WebsiteClient.Application.Parsers
                 switch (subTitleString)
                 {
                     case "The Archive":
-                        instance.OverviewShotType = OverviewShotType.Archive;
+                        instance.ShotType = ShotType.Archive;
                         break;
                     case "Feature Films":
-                        instance.OverviewShotType = OverviewShotType.FeatureFilms;
+                        instance.ShotType = ShotType.FeatureFilms;
                         break;
                     case "New Submissions":
-                        instance.OverviewShotType = OverviewShotType.NewSubmissions;
+                        instance.ShotType = ShotType.NewSubmissions;
                         break;
                 }
             }
@@ -129,10 +131,10 @@ namespace WTM.WebsiteClient.Application.Parsers
             const string xPathItemRoot = @"//ul[@id='overview_movie_list']/li";
             var nodeIterator = navigator.Select(xPathItemRoot);
 
-            var overviewShotList = new List<OverviewShot>();
+            var overviewShotList = new List<ShotSummary>();
             while (nodeIterator.MoveNext())
             {
-                ShotSolveStatus? shotSolveStatus = null;
+                var shotSummary = new ShotSummary();
 
                 var nodeUnsolved = GetFirstValue(nodeIterator.Current, ".//@class");
                 if (!string.IsNullOrEmpty(nodeUnsolved))
@@ -140,18 +142,18 @@ namespace WTM.WebsiteClient.Application.Parsers
                     switch (nodeUnsolved)
                     {
                         case "unsolved":
-                            shotSolveStatus = ShotSolveStatus.Unsolved;
+                            shotSummary.UserStatus = ShotUserStatus.NeverSolved;
                             break;
                         case "punsolved":
-                            shotSolveStatus = ShotSolveStatus.PlayerUnsolved;
+                            shotSummary.UserStatus = ShotUserStatus.Unsolved;
                             break;
                         case "solved":
-                            shotSolveStatus = ShotSolveStatus.Solved;
+                            shotSummary.UserStatus = ShotUserStatus.Solved;
                             break;
                     }
                 }
 
-                var nodeImageUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a/img/@src");
+                shotSummary.ImageUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a/img/@src");
 
                 int? shotId = null;
                 var nodeShotUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a[1]/@href");
@@ -160,13 +162,13 @@ namespace WTM.WebsiteClient.Application.Parsers
                 {
                     var match = regexLastDecimal.Match(nodeShotUrl);
                     var shotIdString = match.Groups[1].Value;
-                    shotId = Convert.ToInt32(shotIdString);
+                    shotSummary.ShotId = Convert.ToInt32(shotIdString);
                 }
 
-                overviewShotList.Add(new OverviewShot(nodeImageUrl, shotId, shotSolveStatus));
+                overviewShotList.Add(shotSummary);
             }
 
-            instance.Shots = overviewShotList;
+            instance.Shots = overviewShotList.Cast<IShotSummary>().ToList();
         }
     }
 }

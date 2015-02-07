@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
     [DataContract]
-    public class Shot : IShot
+    public class Shot : IShot, IWebsiteEntity
     {
         [DataMember(IsRequired = true, Order = 1)]
         public int ShotId { get; set; }
@@ -40,7 +41,8 @@ namespace WTM.Domain
         [DataMember(EmitDefaultValue = false)]
         public SnapshotDifficulty? Difficulty { get; set; }
 
-        public ShotUserStatus UserStatus { get; private set; }
+        [DataMember(EmitDefaultValue = false)]
+        public ShotUserStatus UserStatus { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public bool IsGore { get; set; }
@@ -59,5 +61,11 @@ namespace WTM.Domain
 
         [IgnoreDataMember]
         public Movie Movie { get; set; }
+
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
     }
 }

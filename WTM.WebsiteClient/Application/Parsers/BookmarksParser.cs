@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using WTM.Domain;
+using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Domain;
 
 namespace WTM.WebsiteClient.Application.Parsers
@@ -28,7 +30,6 @@ namespace WTM.WebsiteClient.Application.Parsers
             }
         }
         private bool orderBookmarksNewestToOlder;
-
 
         public BookmarkCollection GetFirst30Bookmarks()
         {

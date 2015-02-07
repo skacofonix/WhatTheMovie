@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using NFluent;
 using NUnit.Framework;
+using WTM.Domain;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Domain;
 using WTM.WebsiteClient.Services;
 
 namespace WTM.WebsiteClient.Test.Services
@@ -27,8 +27,8 @@ namespace WTM.WebsiteClient.Test.Services
         {
             var overviewShotCollection = shotNewSubmissionsService.GetShots();
             Check.That(overviewShotCollection).IsNotNull();
-            Check.That(overviewShotCollection.OverviewShotType).IsNotNull();
-            Check.That(overviewShotCollection.OverviewShotType).Equals(OverviewShotType.NewSubmissions);
+            Check.That(overviewShotCollection.ShotType).IsNotNull();
+            Check.That(overviewShotCollection.ShotType).Equals(ShotType.NewSubmissions);
             Check.That(overviewShotCollection.Shots).IsNotNull();
             Check.That(overviewShotCollection.Shots.Any()).IsTrue();
         }

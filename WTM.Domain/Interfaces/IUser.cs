@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
-    public interface IUser
+    public interface IUser : IWebsiteEntity
     {
         string Name { get; }
 

@@ -1,7 +1,8 @@
-﻿using WTM.Domain;
+﻿using WTM.Api.Core;
+using WTM.Domain;
 using WTM.WebsiteClient.Application;
 
-namespace WTM.Api.Core
+namespace WTM.WebsiteClient
 {
     public class Context : IContext
     {

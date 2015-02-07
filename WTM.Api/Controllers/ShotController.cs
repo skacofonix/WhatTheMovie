@@ -11,23 +11,31 @@ namespace WTM.Api.Controllers
 
         public ShotController()
         {
-            var context = new WTM.Api.Core.Context();
-            shotService = new ShotService(context);
+            //var context = new Context();
+            //shotService = new ShotService(context);
         }
 
         public Shot Get()
         {
-            return (Shot)shotService.GetRandomShot();
+            //return (Shot)shotService.GetRandomShot();
+
+            throw new NotImplementedException();
         }
 
         public Shot Get(int id)
         {
-            return (Shot)shotService.GetShotById(id);
+            //return (Shot)shotService.GetShotById(id);
+
+            throw new NotImplementedException();
+
         }
 
         public Shot Random()
         {
-            return (Shot)shotService.GetRandomShot();
+            //return (Shot)shotService.GetRandomShot();
+
+            throw new NotImplementedException();
+
         }
 
         public GuessTitleResponse GuessTitle(int id, [FromBody]string guessTitle)

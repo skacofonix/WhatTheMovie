@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
-using HtmlAgilityPack;
-using WTM.WebsiteClient.Domain;
+using WTM.Domain;
 using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Application.Parsers
@@ -81,7 +82,18 @@ namespace WTM.WebsiteClient.Application.Parsers
                     if (int.TryParse(personalInfosMatch.Groups[1].Value, out age))
                         instance.Age = age;
 
-                    instance.Gender = personalInfosMatch.Groups[2].Value;
+                    switch (personalInfosMatch.Groups[2].Value)
+                    {
+                        case "male":
+                            instance.Gender = Gender.Male;
+                            break;
+                        case "female":
+                            instance.Gender = Gender.Female;
+                            break;
+                        case "unknow":
+                            instance.Gender = Gender.Unknow;
+                            break;
+                    }
 
                     instance.Country = personalInfosMatch.Groups[3].Value;
                 }
@@ -225,7 +237,7 @@ namespace WTM.WebsiteClient.Application.Parsers
                 if(match.Success)
                     memorabiliaList.Add(new KeyValuePair<string, string>(match.Groups[0].Value, match.Groups[1].Value));
             }
-            user.MemorabiliaList = memorabiliaList;
+            user.MemorabiliaList = memorabiliaList.Cast<IMemorabilia>().ToList();
         }
 
         private XPathNavigator ParsePageAndReturnNavigator(Uri baseUri, string pageName)
@@ -243,7 +255,5 @@ namespace WTM.WebsiteClient.Application.Parsers
 
             return htmlDocument.CreateNavigator();
         }
-
-        
     }
 }

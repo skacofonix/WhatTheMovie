@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace WTM.Domain
@@ -11,86 +12,92 @@ namespace WTM.Domain
             Friends = new List<string>();
             MemorabiliaList = new List<IMemorabilia>();
         }
-        
+
         [DataMember]
-        public string Name { get; private set; }
-        
+        public string Name { get; set; }
+
         [DataMember]
-        public string Level { get; private set; }
-        
+        public string Level { get; set; }
+
         [DataMember]
-        public double? Score { get; private set; }
-        
+        public double? Score { get; set; }
+
         [DataMember]
-        public int? Age { get; private set; }
-        
+        public int? Age { get; set; }
+
         [DataMember]
-        public Gender Gender { get; private set; }
-        
+        public Gender Gender { get; set; }
+
         [DataMember]
-        public string Country { get; private set; }
-        
+        public string Country { get; set; }
+
         [DataMember]
-        public int? PlayingSinceYear { get; private set; }
-        
+        public int? PlayingSinceYear { get; set; }
+
         [DataMember]
-        public int? PlayingSinceMonth { get; private set; }
-        
+        public int? PlayingSinceMonth { get; set; }
+
         [DataMember]
-        public string About { get; private set; }
-        
+        public string About { get; set; }
+
         [DataMember]
-        public int? FeatureFilmsSolved { get; private set; }
-        
+        public int? FeatureFilmsSolved { get; set; }
+
         [DataMember]
-        public int? SnapshotSolved { get; private set; }
-        
+        public int? SnapshotSolved { get; set; }
+
         [DataMember]
-        public decimal? ReceivingRating { get; private set; }
-        
+        public decimal? ReceivingRating { get; set; }
+
         [DataMember]
-        public decimal? FavouritedRating { get; private set; }
-        
+        public decimal? FavouritedRating { get; set; }
+
         [DataMember]
-        public int? UploadFeatureFilmSnapshots { get; private set; }
-        
+        public int? UploadFeatureFilmSnapshots { get; set; }
+
         [DataMember]
-        public int? UploadSnapshotsOfTheDay { get; private set; }
-        
+        public int? UploadSnapshotsOfTheDay { get; set; }
+
         [DataMember]
-        public int? UploadVaultSnapshots { get; private set; }
-        
+        public int? UploadVaultSnapshots { get; set; }
+
         [DataMember]
-        public int? UploadRejectedSnapshots { get; private set; }
-        
+        public int? UploadRejectedSnapshots { get; set; }
+
         [DataMember]
-        public int? UploadCharacterSnapshots { get; private set; }
-        
+        public int? UploadCharacterSnapshots { get; set; }
+
         [DataMember]
-        public int? UploadTitleSnapshots { get; private set; }
-        
+        public int? UploadTitleSnapshots { get; set; }
+
         [DataMember]
-        public int? UploadReplacementSnapshots { get; private set; }
-        
+        public int? UploadReplacementSnapshots { get; set; }
+
         [DataMember]
-        public int? FavouriteSnapshots { get; private set; }
-        
+        public int? FavouriteSnapshots { get; set; }
+
         [DataMember]
-        public int? FavouriteMovies { get; private set; }
-        
+        public int? FavouriteMovies { get; set; }
+
         [DataMember]
-        public int? FavouriteCharacters { get; private set; }
-        
+        public int? FavouriteCharacters { get; set; }
+
         [DataMember]
-        public int? FavouriteSeries { get; private set; }
-        
+        public int? FavouriteSeries { get; set; }
+
         [DataMember]
-        public IList<string> Friends { get; private set; }
-        
+        public IList<string> Friends { get; set; }
+
         [DataMember]
-        public IList<IMemorabilia> MemorabiliaList { get; private set; }
-        
+        public IList<IMemorabilia> MemorabiliaList { get; set; }
+
         [DataMember]
-        public string ImageUrl { get; private set; }
+        public string ImageUrl { get; set; }
+
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
     }
 }

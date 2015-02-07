@@ -1,45 +1,38 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+using WTM.Api.Core.Services;
+using WTM.Domain;
 using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Application.Parsers;
-using WTM.WebsiteClient.Domain;
 
 namespace WTM.WebsiteClient.Services
 {
     public class ShotService : IShotService
     {
-        protected virtual string PageIdentifier {
-            get { return string.Empty; }
-        }
-
         private readonly IWebClient webClient;
         private readonly ShotParser shotParser;
 
-        public ShotService(IWebClient webClient, IHtmlParser htmlParser)
+        protected ShotService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             shotParser = new ShotParser(webClient, htmlParser);
         }
 
-        public Shot GetRandomShot()
+        public IShot GetRandomShot()
         {
-            return shotParser.ParseRandom();
+            return (IShot)shotParser.ParseRandom();
         }
 
-        public Shot GetShotById(int id)
+        public IShot GetShotById(int id)
         {
-            return shotParser.Parse(id);
+            return (IShot)shotParser.Parse(id);
         }
 
-        public IEnumerable<Shot> Search(string criteria)
-        {
-            throw new NotImplementedException();
-        }
-
-        public GuessTitleResponse GuessTitle(int shotId, string title)
+        public IGuessTitleResponse GuessTitle(int shotId, string title)
         {
             GuessTitleResponse response = null;
 
@@ -65,18 +58,19 @@ namespace WTM.WebsiteClient.Services
                 var regex = new Regex("guess_right\\(\"(.*)\", (\\d*), \"(.*) \\((\\d{4})\\)\"");
                 var match = regex.Match(webResponseString);
                 if (match.Success)
-                    response = new GuessTitleResponse(
-                        Convert.ToInt32(match.Groups[2].Value), 
-                        match.Groups[3].Value, 
-                        Convert.ToInt32(match.Groups[4].Value));
+                    response = new GuessTitleResponse
+                    {
+                        MovieId = match.Groups[3].Value,
+                        Year = Convert.ToInt32(match.Groups[4].Value)
+                    };
             }
 
-            return response;
+            return (IGuessTitleResponse)response;
         }
 
-        public ShowSolutionResponse ShowSolution(int shotId)
+        public IGuessTitleResponse ShowSolution(int shotId)
         {
-            ShowSolutionResponse response = null;
+            IGuessTitleResponse response = null;
 
             var relativeUri = string.Join("/", "shot", shotId, "showsolution");
             var uri = new Uri(webClient.UriBase, relativeUri);
@@ -93,16 +87,35 @@ namespace WTM.WebsiteClient.Services
                 var regexTitle = new Regex("Element.update\\(\"shot_title\", \"<strong>(.*)\\.{3} \\((\\d{4})\\)<\\/strong> <a href=\\\\\"http:\\/\\/whatthemovie.com\\/movie\\/(.*)\\\\\">visit movie page<\\/a>\"\\);");
                 var match = regexTitle.Match(webResponseString);
                 if (match.Success)
-                    response = new ShowSolutionResponse(
-                        match.Groups[1].Value,
-                        Convert.ToInt32(match.Groups[2].Value),
-                        match.Groups[3].Value);
+                {
+                    response = new GuessTitleResponse
+                    {
+                        OriginalTitle = match.Groups[1].Value,
+                        Year = Convert.ToInt32(match.Groups[2].Value),
+                        MovieId = match.Groups[3].Value
+                    };
+                }
             }
 
-            return response;
+            return (IGuessTitleResponse)response;
         }
 
-        public bool Rate(int score)
+        public IRate Rate(int score)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable Search(string tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        IMovie IShotService.ShowSolution(int shotId)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<IShot> IShotService.Search(string tag)
         {
             throw new NotImplementedException();
         }

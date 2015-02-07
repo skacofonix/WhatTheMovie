@@ -37,8 +37,14 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bookmark.cs" />
+    <Compile Include="BookmarkCollection.cs" />
+    <Compile Include="DisplayOptions.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="GuessTitleResponse.cs" />
+    <Compile Include="Interfaces\IBookmark.cs" />
+    <Compile Include="Interfaces\IBookmarkCollection.cs" />
+    <Compile Include="Interfaces\IDisplayOptions.cs" />
     <Compile Include="Interfaces\INavigation.cs" />
     <Compile Include="Interfaces\IGuessTitleResponse.cs" />
     <Compile Include="Interfaces\IMemorabilia.cs" />
@@ -48,12 +54,22 @@
     <Compile Include="Interfaces\IShot.cs" />
     <Compile Include="Interfaces\INewSubmissionSummary.cs" />
     <Compile Include="Interfaces\IShotSummary.cs" />
+    <Compile Include="Interfaces\IShotSummaryCollection.cs" />
     <Compile Include="Interfaces\IUser.cs" />
+    <Compile Include="Interfaces\IWebsiteEntity.cs" />
+    <Compile Include="Interfaces\ISettings.cs" />
+    <Compile Include="Interfaces\ISearchResultCollection.cs" />
     <Compile Include="Memorabilia.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieSummary.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="NewSubmissionSummary.cs" />
+    <Compile Include="SearchResultBase.cs" />
+    <Compile Include="SearchResultCollection.cs" />
+    <Compile Include="SearchResultMovieTv.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="ShotSummaryCollection.cs" />
+    <Compile Include="ShotType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rate.cs" />
     <Compile Include="Shot.cs" />

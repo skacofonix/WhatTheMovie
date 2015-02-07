@@ -1,5 +1,6 @@
 ﻿using System;
 using HtmlAgilityPack;
+using WTM.Domain;
 using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Application.Parsers;
 using WTM.WebsiteClient.Domain;

@@ -4,7 +4,7 @@ using WTM.WebsiteClient.Application.Attributes;
 
 namespace WTM.WebsiteClient.Domain
 {
-    public class OverviewShotCollection : IWebsiteEntityBase
+    public class OverviewShotCollectionOld : IWebsiteEntityBase
     {
         public DateTime ParseDateTime { get; private set; }
 

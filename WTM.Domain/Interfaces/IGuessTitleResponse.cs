@@ -4,7 +4,7 @@
     {
         bool? RightGuess { get; }
 
-        int? MovieId { get; }
+        string MovieId { get; }
 
         string OriginalTitle { get; }
 
