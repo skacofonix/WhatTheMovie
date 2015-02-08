@@ -155,7 +155,6 @@ namespace WTM.WebsiteClient.Application.Parsers
 
                 shotSummary.ImageUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a/img/@src");
 
-                int? shotId = null;
                 var nodeShotUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a[1]/@href");
                 var regexLastDecimal = new Regex(@"(\d*)$");
                 if (!string.IsNullOrEmpty(nodeShotUrl))

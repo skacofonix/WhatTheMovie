@@ -7,35 +7,26 @@ namespace WTM.Api.Controllers
 {
     public class ShotController : ApiController
     {
-        private readonly WTM.Api.Core.Services.IShotService shotService;
+        private readonly IShotService shotService;
 
-        public ShotController()
+        public ShotController(IShotService shotService)
         {
-            //var context = new Context();
-            //shotService = new ShotService(context);
+            this.shotService = shotService;
         }
 
         public Shot Get()
         {
-            //return (Shot)shotService.GetRandomShot();
-
-            throw new NotImplementedException();
+            return (Shot)shotService.GetRandomShot();
         }
 
         public Shot Get(int id)
         {
-            //return (Shot)shotService.GetShotById(id);
-
-            throw new NotImplementedException();
-
+            return (Shot)shotService.GetShotById(id);
         }
 
         public Shot Random()
         {
-            //return (Shot)shotService.GetRandomShot();
-
-            throw new NotImplementedException();
-
+            return (Shot)shotService.GetRandomShot();
         }
 
         public GuessTitleResponse GuessTitle(int id, [FromBody]string guessTitle)
