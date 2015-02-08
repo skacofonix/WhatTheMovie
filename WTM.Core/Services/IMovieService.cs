@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using WTM.Domain;
+﻿using WTM.Domain;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Core.Services
@@ -8,6 +7,6 @@ namespace WTM.Core.Services
     {
         IMovie GetByTitle(string title);
 
-        IEnumerable<IMovieSummary> Search(string title);
+        IMovieSummaryCollection Search(string title);
     }
 }

@@ -30,7 +30,7 @@ namespace WTM.WebsiteClient.Services
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<IMovieSummary> Search(string title)
+        public IMovieSummaryCollection Search(string title)
         {
             throw new System.NotImplementedException();
         }
