@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteClient", "WTM.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteClient.Test", "WTM.WebsiteClient.Test\WTM.WebsiteClient.Test.csproj", "{1022C2E5-EF1A-474A-BE00-46BF578DCEAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Api.Core", "WTM.Api.Core\WTM.Api.Core.csproj", "{72080394-C300-4C0A-93FE-7D6EA0FA34D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Core", "WTM.Core\WTM.Core.csproj", "{72080394-C300-4C0A-93FE-7D6EA0FA34D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2FD81C3D-787D-46B8-8062-3701330371F6}"
 EndProject
@@ -25,8 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 	ProjectSection(SolutionItems) = preProject
 		PublishScripts\Configurations\WTMApi-WAWS-dev.json = PublishScripts\Configurations\WTMApi-WAWS-dev.json
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Api.Core.Test", "WTM.Api.Core.Test\WTM.Api.Core.Test.csproj", "{4DEB6B2B-64A3-4911-BBCE-96846AF1C185}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,10 +52,6 @@ Global
 		{9FE02934-4052-4389-A196-F83DCAF2613F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FE02934-4052-4389-A196-F83DCAF2613F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FE02934-4052-4389-A196-F83DCAF2613F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4DEB6B2B-64A3-4911-BBCE-96846AF1C185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DEB6B2B-64A3-4911-BBCE-96846AF1C185}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DEB6B2B-64A3-4911-BBCE-96846AF1C185}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DEB6B2B-64A3-4911-BBCE-96846AF1C185}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +59,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1022C2E5-EF1A-474A-BE00-46BF578DCEAE} = {2FD81C3D-787D-46B8-8062-3701330371F6}
 		{6F79842E-956B-466C-AD6D-C6A94881B799} = {97602895-82C2-4982-A093-893C4CCC965A}
-		{4DEB6B2B-64A3-4911-BBCE-96846AF1C185} = {2FD81C3D-787D-46B8-8062-3701330371F6}
 	EndGlobalSection
 EndGlobal

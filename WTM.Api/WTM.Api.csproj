@@ -279,9 +279,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WTM.Api.Core\WTM.Api.Core.csproj">
+    <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
       <Project>{72080394-c300-4c0a-93fe-7d6ea0fa34d1}</Project>
-      <Name>WTM.Api.Core</Name>
+      <Name>WTM.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
       <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
