@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Http;
-using WTM.Api.Core.Services;
+using WTM.Core.Services;
 using WTM.Domain;
 
 namespace WTM.Api.Controllers

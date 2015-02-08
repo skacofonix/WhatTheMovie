@@ -1,6 +1,6 @@
 ﻿using WTM.Domain;
 
-namespace WTM.Api.Core.Services
+namespace WTM.Core.Services
 {
     public interface IUserService
     {

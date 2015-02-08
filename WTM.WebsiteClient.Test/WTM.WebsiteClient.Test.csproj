@@ -97,7 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
-      <Project>{72080394-c300-4c0a-93fe-7d6ea0fa34d1}</Project>
+      <Project>{0d34cc8d-817b-419d-8ec6-f524e65f0fcc}</Project>
       <Name>WTM.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">

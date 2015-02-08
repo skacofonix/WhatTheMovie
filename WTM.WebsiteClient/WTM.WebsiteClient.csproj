@@ -75,10 +75,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\DownloadService.cs" />
+    <Compile Include="Services\RateService.cs" />
     <Compile Include="Services\ShotFeatureFilmsService.cs" />
     <Compile Include="Services\MovieService.cs" />
     <Compile Include="Services\ShotNewSubmissionsService.cs" />
     <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\ShotOverviewService.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Application\Parsers\UserParser.cs" />
     <Compile Include="Application\WebClient.cs" />
@@ -97,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
-      <Project>{72080394-c300-4c0a-93fe-7d6ea0fa34d1}</Project>
+      <Project>{0D34CC8D-817B-419D-8EC6-F524E65F0FCC}</Project>
       <Name>WTM.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">

@@ -28,7 +28,7 @@ namespace WTM.WebsiteClient.Test.Services
         public void WhenParseFeatureFilmsOfTheDayThenReturnOverviewShotCollection()
         {
             var today = serverDateTime.GetDateTime();
-            var overviewShotCollection = shotFeatureFilmService.GetTodayShots();
+            var overviewShotCollection = shotFeatureFilmService.GetShotSummaryToday();
             Check.That(overviewShotCollection).IsNotNull();
             Check.That(overviewShotCollection.ShotType).Equals(ShotType.FeatureFilms);
             Check.That(overviewShotCollection.Shots).IsNotNull();
@@ -40,7 +40,7 @@ namespace WTM.WebsiteClient.Test.Services
         public void WhenParseFeatureFilmsOfYesterdayThenReturnOverviewShotCollection()
         {
             var yesterday = serverDateTime.GetDateTime().AddDays(-1);
-            var overviewShotCollection = shotFeatureFilmService.GetShotyByDate(yesterday);
+            var overviewShotCollection = shotFeatureFilmService.GetShotSummaryByDate(yesterday);
             Check.That(overviewShotCollection).IsNotNull();
             Check.That(overviewShotCollection.ShotType).Equals(ShotType.FeatureFilms);
             Check.That(overviewShotCollection.Shots).IsNotNull();

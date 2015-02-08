@@ -11,7 +11,7 @@ using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Application.Parsers
 {
-    internal class OverviewShotParser : ParserBase<ShotSummaryCollection>
+    public class OverviewShotParser : ParserBase<ShotSummaryCollection>
     {
         public override string Identifier { get { return "overview"; } }
 

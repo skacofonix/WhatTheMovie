@@ -1,23 +1,17 @@
-﻿using WTM.Domain;
+﻿using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Application.Parsers;
-using WTM.WebsiteClient.Domain;
 
 namespace WTM.WebsiteClient.Services
 {
-    internal class ShotArchiveService : ShotService
+    internal class ShotArchiveService : ShotOverviewService
     {
         public ShotArchiveService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
-        {
-            overviewShotParser = new OverviewShotParser(webClient, htmlParser);
-        }
+        { }
 
-        private readonly OverviewShotParser overviewShotParser;
-
-        public ShotSummaryCollection GetArhciveOneMonthOld()
+        public IShotSummaryCollection GetArchiveOneMonthOld()
         {
-            return overviewShotParser.ParseArchiveOneMonthOld();
+            return OverviewShotParser.ParseArchiveOneMonthOld();
         }
     }
-}
+}   

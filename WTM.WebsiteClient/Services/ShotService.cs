@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
-using WTM.Api.Core.Services;
+using WTM.Core.Services;
 using WTM.Domain;
 using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Application.Parsers;
@@ -14,27 +13,31 @@ namespace WTM.WebsiteClient.Services
     public class ShotService : IShotService
     {
         private readonly IWebClient webClient;
+        private readonly IHtmlParser htmlParser;
         private readonly ShotParser shotParser;
 
         protected ShotService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
+            this.htmlParser = htmlParser;
             shotParser = new ShotParser(webClient, htmlParser);
         }
 
         public IShot GetRandomShot()
         {
-            return (IShot)shotParser.ParseRandom();
+            IShot shot = shotParser.ParseRandom();
+            return shot;
         }
 
         public IShot GetShotById(int id)
         {
-            return (IShot)shotParser.Parse(id);
+            IShot shot = shotParser.Parse(id);
+            return shot;
         }
 
         public IGuessTitleResponse GuessTitle(int shotId, string title)
         {
-            GuessTitleResponse response = null;
+            IGuessTitleResponse response = null;
 
             var titleFormatted = WebUtility.UrlEncode(title.Trim());
 
@@ -65,7 +68,7 @@ namespace WTM.WebsiteClient.Services
                     };
             }
 
-            return (IGuessTitleResponse)response;
+            return response;
         }
 
         public IGuessTitleResponse ShowSolution(int shotId)
@@ -97,7 +100,7 @@ namespace WTM.WebsiteClient.Services
                 }
             }
 
-            return (IGuessTitleResponse)response;
+            return response;
         }
 
         public IRate Rate(int score)
@@ -105,14 +108,18 @@ namespace WTM.WebsiteClient.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable Search(string tag)
-        {
-            throw new NotImplementedException();
-        }
-
         IMovie IShotService.ShowSolution(int shotId)
         {
-            throw new NotImplementedException();
+            IMovie movie = null;
+
+            var guessTitleResponse = ShowSolution(shotId);
+            if (guessTitleResponse.RightGuess.HasValue && guessTitleResponse.RightGuess.Value)
+            {
+                var movieParser = new MovieParser(webClient, htmlParser);
+                movie = movieParser.GetById(guessTitleResponse.MovieId);
+            }
+
+            return movie;
         }
 
         IEnumerable<IShot> IShotService.Search(string tag)

@@ -2,7 +2,7 @@
 using WTM.Domain;
 using WTM.Domain.Interfaces;
 
-namespace WTM.Api.Core.Services
+namespace WTM.Core.Services
 {
     public interface IMovieService
     {

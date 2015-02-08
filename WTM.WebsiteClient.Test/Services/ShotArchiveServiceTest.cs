@@ -27,7 +27,7 @@ namespace WTM.WebsiteClient.Test.Services
         [Test]
         public void WhenParseTheArchiveThenReturnOverviewShotCollection()
         {
-            var overviewShotCollection = shotArchiveService.GetArhciveOneMonthOld();
+            var overviewShotCollection = shotArchiveService.GetArchiveOneMonthOld();
             Check.That(overviewShotCollection).IsNotNull();
             Check.That(overviewShotCollection.ShotType).Equals(ShotType.Archive);
             Check.That(overviewShotCollection.Shots).IsNotNull();

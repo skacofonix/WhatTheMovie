@@ -1,31 +1,17 @@
-﻿using System;
-using WTM.Domain;
+﻿using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Application.Parsers;
-using WTM.WebsiteClient.Domain;
 
 namespace WTM.WebsiteClient.Services
 {
-    internal class ShotFeatureFilmsService : ShotService
+    internal class ShotFeatureFilmsService : ShotOverviewService
     {
         public ShotFeatureFilmsService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
-        {
-            shotParser = new ShotParser(webClient, htmlParser);
-            overviewShotParser = new OverviewShotParser(webClient, htmlParser);
-        }
+        { }
 
-        private readonly ShotParser shotParser;
-        private readonly OverviewShotParser overviewShotParser;
-
-        public ShotSummaryCollection GetTodayShots()
+        public IShotSummaryCollection GetShotSummaryToday()
         {
-            return overviewShotParser.ParseFeatureFilmsToday();
-        }
-
-        public ShotSummaryCollection GetShotyByDate(DateTime date)
-        {
-            return overviewShotParser.ParseByDate(date);
+            return OverviewShotParser.ParseFeatureFilmsToday();
         }
     }
 }

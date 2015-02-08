@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using WTM.Api.Core.Services;
+using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application;

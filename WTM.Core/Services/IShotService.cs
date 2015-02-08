@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WTM.Domain;
 
-namespace WTM.Api.Core.Services
+namespace WTM.Core.Services
 {
     public interface IShotService
     {
