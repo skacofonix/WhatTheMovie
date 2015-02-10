@@ -7,6 +7,6 @@ namespace WTM.Domain.Interfaces
     {
         DateTime? Date { get; }
 
-        IList<IMovieSummary> Movies { get;}
+        IList<IMovieSummary> Movies { get; }
     }
 }

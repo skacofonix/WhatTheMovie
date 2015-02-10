@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
@@ -12,12 +13,14 @@ namespace WTM.WebsiteClient.Services
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
         private readonly MovieParser movieParser;
+        private readonly SearchMovieTvParser movieSearcher;
 
-        public MovieService (IWebClient webClient, IHtmlParser htmlParser)
+        public MovieService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             this.htmlParser = htmlParser;
             movieParser = new MovieParser(webClient, htmlParser);
+            movieSearcher = new SearchMovieTvParser(webClient, htmlParser);
         }
 
         public Movie GetById(string id)
@@ -27,12 +30,19 @@ namespace WTM.WebsiteClient.Services
 
         public IMovie GetByTitle(string title)
         {
-            throw new System.NotImplementedException();
+            return movieParser.GetById(title);
         }
 
         public IMovieSummaryCollection Search(string title)
         {
-            throw new System.NotImplementedException();
+            var result = movieSearcher.Search(title);
+
+            IMovieSummaryCollection movieSummaryCollection = new MovieSummaryCollection
+            {
+                Movies = result.Items.Cast<IMovieSummary>().ToList()
+            };
+
+            return movieSummaryCollection;
         }
     }
 }

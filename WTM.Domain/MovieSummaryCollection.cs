@@ -8,7 +8,7 @@ namespace WTM.Domain
     {
         public DateTime ParseDateTime { get; private set; }
         public TimeSpan ParseDuration { get; private set; }
-        public DateTime? Date { get; private set; }
-        public IList<IMovieSummary> Movies { get; private set; }
+        public DateTime? Date { get; set; }
+        public IList<IMovieSummary> Movies { get; set; }
     }
 }

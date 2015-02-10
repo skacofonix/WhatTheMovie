@@ -35,10 +35,30 @@ namespace WTM.WebsiteClient.Application.Parsers
 
         protected override void ParseHtmlDocument(Shot instance, HtmlDocument htmlDocument)
         {
-            base.ParseHtmlDocument(instance, htmlDocument);
+            //base.ParseHtmlDocument(instance, htmlDocument);
 
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;
+
+            instance.ShotId = GetShotId(htmlDocument).GetValueOrDefault();
+            instance.ImageUri = GetImageUrl(htmlDocument);
+
+            // Navigation
+            instance.Navigation = new Navigation();
+            instance.Navigation.FirstId = GetFirstShotId(htmlDocument);
+            instance.Navigation.PreviousId = GetPreviousShotId(htmlDocument);
+            instance.Navigation.PreviousUnsolvedId = GetPreviousUnsolvedShotId(htmlDocument);
+            instance.Navigation.NextUnsolvedId = GetNextUnsolvedShotId(htmlDocument);
+            instance.Navigation.NextId = GetNextShotId(htmlDocument);
+            instance.Navigation.LastId = GetLastShotId(htmlDocument);
+
+            instance.Poster = GetPostedBy(htmlDocument);
+            instance.Updater = GetUpdater(navigator);
+            instance.FirstSolver = GetFirstSolver(navigator);
+
+            //
+
+
 
             instance.Languages = GetLanguages(navigator);
             instance.Tags = GetTags(navigator);
@@ -46,8 +66,8 @@ namespace WTM.WebsiteClient.Application.Parsers
 
             var isSolvedByUserNode = navigator.SelectSingleNode("//input[@id='guess']/@class");
             if (isSolvedByUserNode != null && isSolvedByUserNode.InnerXml.Contains("right_already"))
-               instance.UserStatus = ShotUserStatus.Solved;
-            
+                instance.UserStatus = ShotUserStatus.Solved;
+
             var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId);
             string shoutString = null;
 
@@ -73,7 +93,7 @@ namespace WTM.WebsiteClient.Application.Parsers
             sb.Append("<html><body>");
             sb.Append(shoutBodyHtml);
             sb.Append("</html></body>");
-            
+
             var shoutHtml = sb.ToString();
 
             var shoutDocument = HtmlParser.GetHtmlDocument(shoutHtml);
@@ -87,6 +107,27 @@ namespace WTM.WebsiteClient.Application.Parsers
             {
                 shoutRootNode.Current.SelectSingleNode(".//div/div/strong/a/@title");
             }
+        }
+
+        private string GetUpdater(XPathNavigator navigator)
+        {
+            var nodeUpdater = navigator.SelectSingleNode("//div[@id='main_shot']/ul[@class='nav_shotinfo2']/li/a");
+            if (nodeUpdater == null) return null;
+            return nodeUpdater.InnerXml;
+        }
+
+        private int? GetShotId(IXPathNavigable htmlDocument)
+        {
+            var navigator = htmlDocument.CreateNavigator();
+            if (navigator == null)
+                return null;
+
+            var nodeShotId = navigator.SelectSingleNode("//li[@class='number']");
+
+            if (nodeShotId == null)
+                return null;
+
+            return nodeShotId.ValueAsInt;
         }
 
         private static void GetRate(Shot instance, XPathNavigator navigator)
@@ -151,46 +192,39 @@ namespace WTM.WebsiteClient.Application.Parsers
 
         private int? GetPreviousShotId(HtmlDocument document)
         {
-            var previousShotIdLink = document.GetElementbyId("prev_shot")
+            var previousShotIdLink = document.GetElementbyId("prev_shot_link")
                                              .GetAttributeValue("href", string.Empty);
             return previousShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
         private int? GetPreviousUnsolvedShotId(HtmlDocument document)
         {
-            var previousUnsolvedShotIdLink = document.GetElementbyId("prev_unsolved_shot")
-                                                     .GetAttributeValue("href", string.Empty);
-            return previousUnsolvedShotIdLink.ExtractAndParseInt(regexShotId);
-        }
-
-        private int? GetCurrentShotId(HtmlDocument document)
-        {
-            var firstOrDefault = document.GetElementbyId("nav_shots")
-                .ChildNodes.FirstOrDefault(n => n.Name == "li" && n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "number"));
-                var currentShotIdString = firstOrDefault.InnerText;
-                var currentShotIdCleaned = regexCleanHtml.Replace(currentShotIdString, string.Empty);
-                return int.Parse(currentShotIdCleaned);
+            var previousUnsolvedShotIdNode = document.GetElementbyId("prev_unsolved_shot_link");
+            if (previousUnsolvedShotIdNode == null) return null;
+            return previousUnsolvedShotIdNode
+                        .GetAttributeValue("href", string.Empty)
+                        .ExtractAndParseInt(regexShotId);
         }
 
         private int? GetNextShotId(HtmlDocument document)
         {
-            var nextShotId = document.GetElementbyId("next_shot")
+            var nextShotId = document.GetElementbyId("next_shot_link")
                                      .GetAttributeValue("href", string.Empty);
             return nextShotId.ExtractAndParseInt(regexShotId);
         }
 
         private int? GetNextUnsolvedShotId(HtmlDocument document)
         {
-            var nextUnsolvedShotIdLink = document.GetElementbyId("next_unsolved_shot")
+            var nextUnsolvedShotIdLink = document.GetElementbyId("next_unsolved_shot_link")
                                                  .GetAttributeValue("href", string.Empty);
             return nextUnsolvedShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
         private int? GetLastShotId(HtmlDocument document)
         {
-            var LastShotIdLink = document.GetElementbyId("last_shot_link")
+            var lastShotIdLink = document.GetElementbyId("last_shot_link")
                                          .GetAttributeValue("href", string.Empty);
-            return LastShotIdLink.ExtractAndParseInt(regexShotId).Value;
+            return lastShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
         private string GetImageUrl(HtmlDocument document)
@@ -226,13 +260,12 @@ namespace WTM.WebsiteClient.Application.Parsers
             return sectionNbSolved.ExtractAndParseInt(new Regex(@"status: solved \((\d*)\)")).GetValueOrDefault(0);
         }
 
-        private string GetFirstSolver(HtmlNode sectionShotInfo)
+        private string GetFirstSolver(XPathNavigator navigator)
         {
-            return sectionShotInfo.Descendants("li")
-                                  .FirstOrDefault(li => li.InnerText.StartsWith("first solved by:"))
-                                  .Descendants("a")
-                                  .Select(s => s.InnerText)
-                                  .FirstOrDefault();
+            var nodeFirstSolver = navigator.SelectSingleNode("//div[@id='main_shot']/ul[@class='nav_shotinfo']/li[3]/a[@class='nametaglink']");
+            if (nodeFirstSolver == null)
+                return null;
+            return nodeFirstSolver.InnerXml;
         }
 
         private bool? GetIsFavourited(HtmlDocument document)
