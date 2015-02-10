@@ -22,24 +22,18 @@ namespace WTM.WebsiteClient.Services
 
         public DifficultyOptions Read()
         {
-            var difficultyOptions = new DifficultyOptions();
-
             var htmlDocument = GetHtmlDocument();
             if (htmlDocument == null) return null;
 
+            var difficultyOptions = new DifficultyOptions();
+
             difficultyOptions.SnapshotDifficultyFilter = GetDifficulty(htmlDocument);
 
-            var keywordNode = htmlDocument.GetElementbyId("keyword");
-            if (keywordNode != null)
-                difficultyOptions.TagFilter = keywordNode.GetAttributeValue("value", null);
+            GetTags(htmlDocument, difficultyOptions);
 
-            var includeArchiveNode = htmlDocument.GetElementbyId("include_archive");
-            if (includeArchiveNode != null)
-                difficultyOptions.IncludeArchive = IsChecked(includeArchiveNode);
+            GetIncludeArchive(htmlDocument, difficultyOptions);
 
-            var includeSolvedShots = htmlDocument.GetElementbyId("include_solvedshots");
-            if (includeSolvedShots != null)
-                difficultyOptions.IncludeSolvedShots = IsChecked(includeSolvedShots);
+            GetIncludeSolvedShots(htmlDocument, difficultyOptions);
 
             return difficultyOptions;
         }
@@ -89,6 +83,27 @@ namespace WTM.WebsiteClient.Services
 
             // TODO : Log
             return SnapshotDifficulty.Easy;
+        }
+
+        private static void GetTags(HtmlDocument htmlDocument, DifficultyOptions difficultyOptions)
+        {
+            var keywordNode = htmlDocument.GetElementbyId("keyword");
+            if (keywordNode != null)
+                difficultyOptions.TagFilter = keywordNode.GetAttributeValue("value", null);
+        }
+
+        private static void GetIncludeArchive(HtmlDocument htmlDocument, DifficultyOptions difficultyOptions)
+        {
+            var includeArchiveNode = htmlDocument.GetElementbyId("include_archive");
+            if (includeArchiveNode != null)
+                difficultyOptions.IncludeArchive = IsChecked(includeArchiveNode);
+        }
+
+        private static void GetIncludeSolvedShots(HtmlDocument htmlDocument, DifficultyOptions difficultyOptions)
+        {
+            var includeSolvedShots = htmlDocument.GetElementbyId("include_solvedshots");
+            if (includeSolvedShots != null)
+                difficultyOptions.IncludeSolvedShots = IsChecked(includeSolvedShots);
         }
 
         private static bool IsChecked(HtmlNode htmlNode)
