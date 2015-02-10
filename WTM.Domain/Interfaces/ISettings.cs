@@ -1,5 +1,4 @@
-﻿using System;
-using WTM.Domain.Interfaces;
+﻿using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {

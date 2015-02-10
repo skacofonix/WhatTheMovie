@@ -39,14 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\AppSettings.cs" />
-    <Compile Include="Application\Attributes\AuthenticatedUser.cs" />
-    <Compile Include="Application\Attributes\BooleanParserAttribute.cs" />
-    <Compile Include="Application\Attributes\ListParserAttribute.cs" />
-    <Compile Include="Application\Attributes\StringParserAttribute.cs" />
-    <Compile Include="Application\Attributes\BaseParserAttribute.cs" />
+    <Compile Include="Application\DifficultyOptions.cs" />
     <Compile Include="Application\HttpRequestBuilder.cs" />
-    <Compile Include="Application\IAppSettings.cs" />
     <Compile Include="Application\IServerDateTime.cs" />
     <Compile Include="Application\Parsers\BookmarksParser.cs" />
     <Compile Include="Application\Parsers\OverviewShotParser.cs" />
@@ -65,7 +59,7 @@
     <Compile Include="Application\Parsers\MovieParser.cs" />
     <Compile Include="Application\Parsers\ShotParser.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="Helpers\StringExtensions.cs">
+    <Compile Include="Extensions\StringExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IContext.cs" />
@@ -74,6 +68,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\DifficultyOptionsService.cs" />
     <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\RateService.cs" />
     <Compile Include="Services\ShotFeatureFilmsService.cs" />

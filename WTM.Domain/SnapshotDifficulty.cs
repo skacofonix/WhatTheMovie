@@ -1,14 +1,16 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace WTM.Domain
 {
     [DataContract]
+    [Flags]
     public enum SnapshotDifficulty
     {
-        Easy,
+        Easy = 1,
 
-        Medium,
+        Medium = 2,
 
-        Hard
+        Hard = 4
     }
 }

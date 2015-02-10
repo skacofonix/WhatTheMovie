@@ -54,7 +54,7 @@ namespace WTM.WebsiteClient.Helpers
 
         public static string CleanString(this string s)
         {
-            return Regex.Replace(s, @"[\r\t\n]", string.Empty);
+            return Regex.Replace(s, @"[\t\r\n]*", string.Empty);
         }
     }
 }

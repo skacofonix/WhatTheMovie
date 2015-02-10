@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WTM.Domain
+namespace WTM.Domain.Interfaces
 {
     public interface IShot
     {
@@ -17,15 +17,15 @@ namespace WTM.Domain
 
         string FirstSolver { get;  }
 
-        int NbSolver { get;  }
+        int? NbSolver { get;  }
 
-        DateTime PublidationDate { get;  }
+        DateTime? PublidationDate { get;  }
 
-        DateTime SolutionDate { get;  }
+        DateTime? SolutionDate { get;  }
 
         SnapshotDifficulty? Difficulty { get;  }
 
-        ShotUserStatus UserStatus { get; }
+        ShotUserStatus? UserStatus { get; }
 
         bool IsGore { get;  }
 
@@ -38,5 +38,13 @@ namespace WTM.Domain
         IRate Rate { get;  }
 
         Movie Movie { get;  }
+
+       bool? IsFavourited { get; }
+
+       bool? IsBookmarked { get; }
+
+       bool? IsSolutionAvailable { get; }
+
+       int NumberOfFavourited { get; }
     }
 }

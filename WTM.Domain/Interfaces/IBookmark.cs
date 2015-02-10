@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WTM.Domain.Interfaces
+﻿namespace WTM.Domain.Interfaces
 {
     public interface IBookmark : IWebsiteEntity
     {

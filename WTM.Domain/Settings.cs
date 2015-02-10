@@ -1,12 +1,11 @@
 ﻿using System;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
     public class Settings : ISettings
     {
         public DateTime ParseDateTime { get; set; }
-        public TimeSpan ParseDuration { get; private set; }
+        public TimeSpan ParseDuration { get; set; }
 
         #region Filters
 

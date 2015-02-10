@@ -5,8 +5,8 @@ namespace WTM.WebsiteClient.Domain
 {
     public class SearchResultCollection : ISearchResultCollection
     {
-        public DateTime ParseDateTime { get; private set; }
-        public TimeSpan ParseDuration { get; private set; }
+        public DateTime ParseDateTime { get; set; }
+        public TimeSpan ParseDuration { get; set; }
 
         public IList Items { get; set; }
 

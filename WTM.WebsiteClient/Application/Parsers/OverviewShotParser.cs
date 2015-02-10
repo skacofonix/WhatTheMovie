@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using HtmlAgilityPack;
 using WTM.Domain;
-using WTM.WebsiteClient.Domain;
 using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Application.Parsers

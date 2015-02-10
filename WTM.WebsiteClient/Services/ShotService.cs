@@ -5,6 +5,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using WTM.Core.Services;
 using WTM.Domain;
+using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Application.Parsers;
 

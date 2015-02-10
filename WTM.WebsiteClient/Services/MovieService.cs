@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Domain.Interfaces;

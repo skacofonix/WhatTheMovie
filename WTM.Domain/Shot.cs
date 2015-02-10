@@ -30,19 +30,19 @@ namespace WTM.Domain
         public string FirstSolver { get; set; }
 
         [DataMember(IsRequired = true)]
-        public int NbSolver { get; set; }
+        public int? NbSolver { get; set; }
 
         [DataMember(IsRequired = true)]
-        public DateTime PublidationDate { get; set; }
+        public DateTime? PublidationDate { get; set; }
 
         [DataMember(IsRequired = true)]
-        public DateTime SolutionDate { get; set; }
+        public DateTime? SolutionDate { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public SnapshotDifficulty? Difficulty { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public ShotUserStatus UserStatus { get; set; }
+        public ShotUserStatus? UserStatus { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public bool IsGore { get; set; }
@@ -67,5 +67,20 @@ namespace WTM.Domain
 
         [IgnoreDataMember]
         public TimeSpan ParseDuration { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public bool? IsFavourited { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public bool? IsBookmarked { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public bool? IsSolutionAvailable { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public bool? IsVoteDeletation { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public int NumberOfFavourited { get; set; }
     }
 }

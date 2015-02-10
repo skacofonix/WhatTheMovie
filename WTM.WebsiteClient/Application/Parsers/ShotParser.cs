@@ -16,7 +16,6 @@ namespace WTM.WebsiteClient.Application.Parsers
     {
         public override string Identifier { get { return "shot"; } }
 
-        private readonly Regex regexCleanHtml = new Regex(@"[\r\t\n ]");
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
 
         public ShotParser(IWebClient webClient, IHtmlParser htmlParser)
@@ -35,38 +34,43 @@ namespace WTM.WebsiteClient.Application.Parsers
 
         protected override void ParseHtmlDocument(Shot instance, HtmlDocument htmlDocument)
         {
-            //base.ParseHtmlDocument(instance, htmlDocument);
-
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null) return;
-
-            instance.ShotId = GetShotId(htmlDocument).GetValueOrDefault();
-            instance.ImageUri = GetImageUrl(htmlDocument);
 
             // Navigation
             instance.Navigation = new Navigation();
             instance.Navigation.FirstId = GetFirstShotId(htmlDocument);
             instance.Navigation.PreviousId = GetPreviousShotId(htmlDocument);
             instance.Navigation.PreviousUnsolvedId = GetPreviousUnsolvedShotId(htmlDocument);
+            instance.ShotId = GetShotId(htmlDocument).GetValueOrDefault();
             instance.Navigation.NextUnsolvedId = GetNextUnsolvedShotId(htmlDocument);
             instance.Navigation.NextId = GetNextShotId(htmlDocument);
             instance.Navigation.LastId = GetLastShotId(htmlDocument);
 
+            // Shot infos
             instance.Poster = GetPostedBy(htmlDocument);
             instance.Updater = GetUpdater(navigator);
             instance.FirstSolver = GetFirstSolver(navigator);
+            instance.NbSolver = GetNumberOfSolver(navigator);
+            instance.PublidationDate = GetPostedDate(htmlDocument);
+            instance.SolutionDate = GetSolutionDate(navigator);
 
-            //
-
-
-
+            // Solution station
+            instance.ImageUri = GetImageUrl(htmlDocument);
+            instance.UserStatus = GetUserStatus(htmlDocument, instance.NbSolver);
+            instance.Rate = GetRate(navigator);
             instance.Languages = GetLanguages(navigator);
             instance.Tags = GetTags(navigator);
-            GetRate(instance, navigator);
+            instance.IsGore = GetIsGore(instance.Tags);
+            instance.IsNudity = GetIsNudity(instance.Tags);
+            instance.IsFavourited = GetIsFavourited(navigator);
+            instance.IsBookmarked = GetIsBookmarked(navigator);
+            instance.IsSolutionAvailable = GetIsSolutionAvailable(htmlDocument);
+            instance.IsVoteDeletation = GetIsVoteDeletation(navigator);
+            instance.NumberOfFavourited = GetNumberOfFavourited(htmlDocument);
 
-            var isSolvedByUserNode = navigator.SelectSingleNode("//input[@id='guess']/@class");
-            if (isSolvedByUserNode != null && isSolvedByUserNode.InnerXml.Contains("right_already"))
-                instance.UserStatus = ShotUserStatus.Solved;
+            // Async call
+            //instance.Difficulty = GetDifficulty(htmlDocument);
 
             var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId);
             string shoutString = null;
@@ -77,8 +81,7 @@ namespace WTM.WebsiteClient.Application.Parsers
                 shoutString = sr.ReadToEnd();
             }
 
-            var regexClean = new Regex("[\t\n]*");
-            var shoutStringClean = regexClean.Replace(shoutString, string.Empty);
+            var shoutStringClean = shoutString.CleanString();
 
             var regexShout = new Regex("Element.update\\(\"shoutbox\", \"(.*)\"\\);");
 
@@ -109,81 +112,9 @@ namespace WTM.WebsiteClient.Application.Parsers
             }
         }
 
-        private string GetUpdater(XPathNavigator navigator)
-        {
-            var nodeUpdater = navigator.SelectSingleNode("//div[@id='main_shot']/ul[@class='nav_shotinfo2']/li/a");
-            if (nodeUpdater == null) return null;
-            return nodeUpdater.InnerXml;
-        }
-
-        private int? GetShotId(IXPathNavigable htmlDocument)
-        {
-            var navigator = htmlDocument.CreateNavigator();
-            if (navigator == null)
-                return null;
-
-            var nodeShotId = navigator.SelectSingleNode("//li[@class='number']");
-
-            if (nodeShotId == null)
-                return null;
-
-            return nodeShotId.ValueAsInt;
-        }
-
-        private static void GetRate(Shot instance, XPathNavigator navigator)
-        {
-            var node = navigator.SelectSingleNode("//div[@id='main_shot']/script[4]");
-            if (node == null) return;
-
-            var rateRegex = new Regex(@"Overall rating: &lt;strong&gt;(\d.?\d{2})&lt;/strong&gt; \((\d*) votes\)");
-
-            var match = rateRegex.Match(node.InnerXml);
-            if (!match.Success) return;
-
-            var culture = new CultureInfo("en-US");
-
-            var rate = new Rate();
-            decimal rateScore;
-            if (decimal.TryParse(match.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateScore))
-                rate.Score = rateScore;
-
-            int nbRaters;
-            if (int.TryParse(match.Groups[2].Value, out nbRaters))
-            {
-                rate.NbRaters = nbRaters;
-            }
-            instance.Rate = rate;
-        }
-
-        private static List<string> GetTags(XPathNavigator navigator)
-        {
-            var nodes = navigator.Select("//ul[@id='shot_tag_list']/li/a");
-            var tagList = new List<string>(nodes.Count);
-            while (nodes.MoveNext())
-            {
-                tagList.Add(nodes.Current.InnerXml);
-            }
-            return tagList;
-        }
-
-        private static List<string> GetLanguages(XPathNavigator navigator)
-        {
-            var languageRegex = new Regex(@"images/flags/([a-z]*).png");
-            var nodes = navigator.Select("//div[@id='solve_station']/div[@class='col_center clearfix']/ul[@class='language_flags']/li/img/@src");
-            var languageList = new List<string>(nodes.Count);
-            while (nodes.MoveNext())
-            {
-                var match = languageRegex.Match(nodes.Current.InnerXml);
-                if (!match.Success) continue;
-
-                languageList.Add(match.Groups[1].Value);
-            }
-            return languageList;
-        }
-
-        #region Custom implementation
-
-        int? GetFirstShotId(HtmlDocument document)
+        #region Navigation
+        
+        private int? GetFirstShotId(HtmlDocument document)
         {
             var firstShotIdLink = document.GetElementbyId("first_shot_link")
                                           .GetAttributeValue("href", string.Empty);
@@ -206,11 +137,18 @@ namespace WTM.WebsiteClient.Application.Parsers
                         .ExtractAndParseInt(regexShotId);
         }
 
-        private int? GetNextShotId(HtmlDocument document)
+        private int? GetShotId(IXPathNavigable htmlDocument)
         {
-            var nextShotId = document.GetElementbyId("next_shot_link")
-                                     .GetAttributeValue("href", string.Empty);
-            return nextShotId.ExtractAndParseInt(regexShotId);
+            var navigator = htmlDocument.CreateNavigator();
+            if (navigator == null)
+                return null;
+
+            var nodeShotId = navigator.SelectSingleNode("//li[@class='number']");
+
+            if (nodeShotId == null)
+                return null;
+
+            return nodeShotId.ValueAsInt;
         }
 
         private int? GetNextUnsolvedShotId(HtmlDocument document)
@@ -220,6 +158,13 @@ namespace WTM.WebsiteClient.Application.Parsers
             return nextUnsolvedShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
+        private int? GetNextShotId(HtmlDocument document)
+        {
+            var nextShotId = document.GetElementbyId("next_shot_link")
+                                     .GetAttributeValue("href", string.Empty);
+            return nextShotId.ExtractAndParseInt(regexShotId);
+        }
+
         private int? GetLastShotId(HtmlDocument document)
         {
             var lastShotIdLink = document.GetElementbyId("last_shot_link")
@@ -227,22 +172,9 @@ namespace WTM.WebsiteClient.Application.Parsers
             return lastShotIdLink.ExtractAndParseInt(regexShotId);
         }
 
-        private string GetImageUrl(HtmlDocument document)
-        {
-            var imageUrlSection = document.DocumentNode.Descendants("script")
-                                                       .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
-                                                       .Select(s => s.InnerText)
-                                                       .FirstOrDefault(w => w.Contains("var imageSrc"));
-            return imageUrlSection.ExtractValue(new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
-        }
+        #endregion
 
-        private DateTime? GetPostedDate(HtmlDocument document)
-        {
-            DateTime date;
-            var sectionDate = document.GetElementbyId("hidden_date").InnerText;
-            DateTime.TryParse(sectionDate, out date);
-            return date;
-        }
+        #region Shot infos
 
         private string GetPostedBy(HtmlDocument document)
         {
@@ -252,12 +184,11 @@ namespace WTM.WebsiteClient.Application.Parsers
                                     .InnerText;
         }
 
-        private int? GetNumberOfSolver(HtmlNode sectionShotInfo)
+        private string GetUpdater(XPathNavigator navigator)
         {
-            var sectionNbSolved = sectionShotInfo.Descendants("li")
-                                                 .FirstOrDefault(li => li.Attributes.Any(attr => attr.Name == "class" && attr.Value == "solved"))
-                                                 .InnerText;
-            return sectionNbSolved.ExtractAndParseInt(new Regex(@"status: solved \((\d*)\)")).GetValueOrDefault(0);
+            var nodeUpdater = navigator.SelectSingleNode("//div[@id='main_shot']/ul[@class='nav_shotinfo2']/li/a");
+            if (nodeUpdater == null) return null;
+            return nodeUpdater.InnerXml;
         }
 
         private string GetFirstSolver(XPathNavigator navigator)
@@ -268,29 +199,160 @@ namespace WTM.WebsiteClient.Application.Parsers
             return nodeFirstSolver.InnerXml;
         }
 
-        private bool? GetIsFavourited(HtmlDocument document)
+        private int? GetNumberOfSolver(XPathNavigator navigator)
         {
-            bool isFavourite = false;
+            var solvedNode = navigator.SelectSingleNode(@"//li[@class='solved']");
+            if (solvedNode == null) return null;
 
-            var isFavouriteOnclickContent = document.GetElementbyId("favbutton")
-                                                    .GetAttributeValue("onclick", string.Empty);
-            var value = isFavouriteOnclickContent.ExtractValue(new Regex(@"new Ajax.Request\('/shot/\d*/(fav|unfav)'"));
-            isFavourite = (value == "unfav");
+            var solvedMatch = Regex.Match(solvedNode.InnerXml, @"status: solved \((\d*)\)");
+            if (!solvedMatch.Success)
+                return null;
+
+            int nbSolver;
+            if (int.TryParse(solvedMatch.Groups[1].Value, out nbSolver))
+                return nbSolver;
+
+            return null;
+        }
+
+        private DateTime? GetPostedDate(HtmlDocument document)
+        {
+            DateTime date;
+            var sectionDate = document.GetElementbyId("hidden_date").InnerText;
+            DateTime.TryParse(sectionDate, out date);
+            return date;
+        }
+
+        private DateTime? GetSolutionDate(XPathNavigator navigator)
+        {
+            return null;
+        }
+
+        #endregion
+
+        #region Solution station
+
+        private string GetImageUrl(HtmlDocument document)
+        {
+            var imageUrlSection = document.DocumentNode.Descendants("script")
+                                                       .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
+                                                       .Select(s => s.InnerText)
+                                                       .FirstOrDefault(w => w.Contains("var imageSrc"));
+            return imageUrlSection.ExtractValue(new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
+        }
+
+        private ShotUserStatus? GetUserStatus(HtmlDocument document, int? nbOfSolver)
+        {
+            if (nbOfSolver.GetValueOrDefault(0) > 0)
+                return ShotUserStatus.NeverSolved;
+
+            var nodeGuess = document.GetElementbyId("guess");
+            if (nodeGuess == null) return null;
+
+            var classGuess = nodeGuess.Attributes.FirstOrDefault(w => w.Name == "class");
+            if (classGuess == null)
+                return ShotUserStatus.Unsolved;
+
+            if (classGuess.Value.Contains("right"))
+                return ShotUserStatus.Solved;
+            if (classGuess.Value.Contains("wrong"))
+                return ShotUserStatus.Unsolved;
+
+            return ShotUserStatus.Unsolved;
+        }
+
+        private Rate GetRate(XPathNavigator navigator)
+        {
+            var node = navigator.SelectSingleNode("//div[@id='main_shot']/script[4]");
+            if (node == null) return null;
+            
+            var rateRegex = new Regex(@"Overall rating: &lt;strong&gt;(\d.?\d{2})&lt;/strong&gt; \((\d*) votes\)");
+
+            var match = rateRegex.Match(node.InnerXml);
+            if (!match.Success) return null;
+
+            var culture = new CultureInfo("en-US");
+
+            var rate = new Rate();
+            decimal rateScore;
+            if (decimal.TryParse(match.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateScore))
+                rate.Score = rateScore;
+
+            int nbRaters;
+            if (int.TryParse(match.Groups[2].Value, out nbRaters))
+                rate.NbRaters = nbRaters;
+
+            return rate;
+        }
+
+        private static List<string> GetLanguages(XPathNavigator navigator)
+        {
+            var languageRegex = new Regex(@"images/flags/([a-z]*).png");
+            var nodes = navigator.Select("//div[@id='solve_station']/div[@class='col_center clearfix']/ul[@class='language_flags']/li/img/@src");
+            var languageList = new List<string>(nodes.Count);
+            while (nodes.MoveNext())
+            {
+                var match = languageRegex.Match(nodes.Current.InnerXml);
+                if (!match.Success) continue;
+
+                languageList.Add(match.Groups[1].Value);
+            }
+            return languageList;
+        }
+
+        private static List<string> GetTags(XPathNavigator navigator)
+        {
+            var nodes = navigator.Select("//ul[@id='shot_tag_list']/li/a");
+            var tagList = new List<string>(nodes.Count);
+            while (nodes.MoveNext())
+            {
+                tagList.Add(nodes.Current.InnerXml);
+            }
+            return tagList;
+        }
+
+        private bool GetIsGore(IList<string> tags)
+        {
+            return tags.Contains("gore");
+        }
+
+        private bool GetIsNudity(IList<string> tags)
+        {
+            return tags.Contains("nudity");
+        }
+
+        private bool? GetIsFavourited(XPathNavigator navigator)
+        {
+            var favouritedNode = navigator.SelectSingleNode(@"//a[@id='favbutton']/onclick");
+            if (favouritedNode == null) return null;
+
+            var favouriteMatch = Regex.Match(favouritedNode.InnerXml, @"((un)?fav)");
+            if (!favouriteMatch.Success) return null;
+
+            var isFavourite = !favouriteMatch.Groups[2].Success;
 
             return isFavourite;
         }
 
-        private bool? GetIsBookmarked(HtmlDocument document)
+        private bool? GetIsBookmarked(XPathNavigator navigator)
         {
-            return false;
-        }
+            var favouritedNode = navigator.SelectSingleNode(@"//a[@id='bookbutton']/onclick");
+            if (favouritedNode == null) return null;
 
-        private bool? GetIsVoteDeletation(HtmlDocument document)
-        {
-            return false;
+            var favouriteMatch = Regex.Match(favouritedNode.InnerXml, @"((un)?watch)");
+            if (!favouriteMatch.Success) return null;
+
+            var isFavourite = !favouriteMatch.Groups[2].Success;
+
+            return isFavourite;
         }
 
         private bool? GetIsSolutionAvailable(HtmlDocument document)
+        {
+            return false;
+        }
+
+        private bool? GetIsVoteDeletation(XPathNavigator navigator)
         {
             return false;
         }
@@ -313,29 +375,41 @@ namespace WTM.WebsiteClient.Application.Parsers
             return numberOfFavourited;
         }
 
-        private string GetDifficulty(HtmlDocument document)
+        #endregion
+
+        private SnapshotDifficulty GetDifficulty(HtmlDocument document)
         {
+            // TODO : extract this in specific class
+
+            //var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId);
+            //string shoutString = null;
+
+            //using (var stream = WebClient.GetStream(uriShout))
+            //using (var sr = new StreamReader(stream))
+            //{
+            //    shoutString = sr.ReadToEnd();
+            //}
+
+
             var isEasy = document.GetElementbyId("difficulty_easy")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
             if (isEasy)
-                return "easy";
+                return SnapshotDifficulty.Easy;
 
-            var isMedium = document.GetElementbyId("difficulty_medium")
+            var isEasyOrMedium = document.GetElementbyId("difficulty_medium")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
-            if (isMedium)
-                return "medium";
+            if (isEasyOrMedium)
+                return SnapshotDifficulty.Easy | SnapshotDifficulty.Medium;
 
             var isHard = document.GetElementbyId("difficulty_hard")
                                  .GetAttributeValue("checked", string.Empty)
                                  .Equals("cheked");
             if (isHard)
-                return "hard";
+                return SnapshotDifficulty.Hard;
 
-            return "all";
+            return SnapshotDifficulty.Easy | SnapshotDifficulty.Medium | SnapshotDifficulty.Hard;
         }
-
-        #endregion
     }
 }

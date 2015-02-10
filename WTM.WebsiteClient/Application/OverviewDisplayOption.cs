@@ -2,8 +2,10 @@
 
 namespace WTM.WebsiteClient.Application
 {
-    class OverviewDisplayOption
+    public class OverviewDisplayOption
     {
+        private readonly IWebClient webClient;
+
         public bool ShowSolved
         {
             get { return showSolved; }
@@ -39,8 +41,9 @@ namespace WTM.WebsiteClient.Application
 
         public Cookie CookieOverviewDisplayOption { get; private set; }
 
-        public OverviewDisplayOption()
+        public OverviewDisplayOption(IWebClient webClient)
         {
+            this.webClient = webClient;
             GenerateCookie();
         }
 
