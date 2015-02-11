@@ -39,11 +39,13 @@
   <ItemGroup>
     <Compile Include="Bookmark.cs" />
     <Compile Include="BookmarkCollection.cs" />
+    <Compile Include="DifficultyOptions.cs" />
     <Compile Include="DisplayOptions.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="GuessTitleResponse.cs" />
     <Compile Include="Interfaces\IBookmark.cs" />
     <Compile Include="Interfaces\IBookmarkCollection.cs" />
+    <Compile Include="Interfaces\IDifficultyOptions.cs" />
     <Compile Include="Interfaces\IDisplayOptions.cs" />
     <Compile Include="Interfaces\INavigation.cs" />
     <Compile Include="Interfaces\IGuessTitleResponse.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Interfaces\IWebsiteEntity.cs" />
     <Compile Include="Interfaces\ISettings.cs" />
     <Compile Include="Interfaces\ISearchResultCollection.cs" />
+    <Compile Include="Interfaces\ISnapshotDifficultyChoice.cs" />
     <Compile Include="Memorabilia.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieSummary.cs" />
@@ -78,6 +81,11 @@
     <Compile Include="ShotSummary.cs" />
     <Compile Include="ShotUserStatus.cs" />
     <Compile Include="SnapshotDifficulty.cs" />
+    <Compile Include="SnapshotDifficultyChoice.cs" />
+    <Compile Include="SnapshotDifficultyChoiceEasy.cs" />
+    <Compile Include="SnapshotDifficultyChoiceEasyMedium.cs" />
+    <Compile Include="SnapshotDifficultyChoiceAll.cs" />
+    <Compile Include="SnapshotDifficultyChoiceHard.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

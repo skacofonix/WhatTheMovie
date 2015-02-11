@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\DifficultyOptions.cs" />
     <Compile Include="Application\HttpRequestBuilder.cs" />
     <Compile Include="Application\IServerDateTime.cs" />
     <Compile Include="Application\Parsers\BookmarksParser.cs" />
