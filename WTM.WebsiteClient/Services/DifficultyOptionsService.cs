@@ -78,10 +78,10 @@ namespace WTM.WebsiteClient.Services
 
         private static ISnapshotDifficultyChoice GetDifficulty(HtmlDocument htmlDocument)
         {
-            var easyNode = htmlDocument.GetElementbyId("difficulty_easy");
-            var mediumNode = htmlDocument.GetElementbyId("difficulty_medium");
-            var hardNode = htmlDocument.GetElementbyId("difficulty_hard");
-            var allNode = htmlDocument.GetElementbyId("difficulty_all");
+            var easyNode = htmlDocument.GetElementbyId("\\\"difficulty_easy\\\"");
+            var mediumNode = htmlDocument.GetElementbyId("\\\"difficulty_medium\\\"");
+            var hardNode = htmlDocument.GetElementbyId("\\\"difficulty_hard\\\"");
+            var allNode = htmlDocument.GetElementbyId("\\\"difficulty_all\\\"");
 
             if (easyNode != null && IsChecked(easyNode))
                 return new SnapshotDifficultyChoiceEasy();
@@ -92,41 +92,46 @@ namespace WTM.WebsiteClient.Services
             if (allNode != null && IsChecked(allNode))
                 return new SnapshotDifficultyChoiceAll();
 
-            // TODO : Log
-            return new SnapshotDifficultyChoiceEasy();
+            return null;
         }
 
         private void GetNumberOfShotForeachDifficultyLevel(HtmlDocument htmlDocument, DifficultyOptions difficultyOptions)
         {
-            difficultyOptions.NumberOfShotEasy = ExtractNumberOfShot(htmlDocument,"difficulty_easy");
+            difficultyOptions.NumberOfShotEasy = ExtractNumberOfShot(htmlDocument, "\\\"difficulty_easy\\\"");
 
-            var numberOfShotEasyMedium = ExtractNumberOfShot(htmlDocument, "difficulty_medium");
+            var numberOfShotEasyMedium = ExtractNumberOfShot(htmlDocument, "\\\"difficulty_medium\\\"");
             if (difficultyOptions.NumberOfShotEasy.HasValue && numberOfShotEasyMedium.HasValue)
                 difficultyOptions.NumberOfShotMedium = numberOfShotEasyMedium.Value - difficultyOptions.NumberOfShotEasy.Value;
 
-            difficultyOptions.NumberOfShotHard = ExtractNumberOfShot(htmlDocument, "difficulty_hard");
+            // Issue on WhatTheMovie : label for difficulty_hard is named difficulty_medium
+            //var inputLabelNode = htmlDocument.DocumentNode.SelectSingleNode("//label[@for='\\\"difficulty_medium\\\"'][2]");
+            //if (inputLabelNode != null)
+            //{
+            //    var inputLabelMatch = numberOfShotRegex.Match(inputLabelNode.InnerHtml);
+            //    if (inputLabelMatch.Success)
+            //    {
+            //        int nbSnaptshot;
+            //        if (int.TryParse(inputLabelMatch.Groups[1].Value, out nbSnaptshot))
+            //            difficultyOptions.NumberOfShotHard = nbSnaptshot;
+
+            //        difficultyOptions.NumberOfShotHard = ExtractNumberOfShot(htmlDocument, "\\\"difficulty_hard\\\"");
+            //    }
+            //}
         }
 
-        private readonly Regex numberOfShotRegex = new Regex(".* (\\d*)");
+        private readonly Regex numberOfShotRegex = new Regex(".* \\((\\d*)\\)");
 
         private int? ExtractNumberOfShot(HtmlDocument htmlDocument, string elementId)
         {
-            var inputNode = htmlDocument.GetElementbyId(elementId);
-            if (inputNode != null)
-            {
-                var inputLabelNode = inputNode.NextSibling;
-                if (inputLabelNode != null && inputLabelNode.GetAttributeValue("for", null) == elementId)
-                {
-                    var inputLabelMatch = numberOfShotRegex.Match(inputLabelNode.InnerHtml);
+            var inputLabelNode = htmlDocument.DocumentNode.SelectSingleNode(string.Format("//label[@for='{0}']", elementId));
+            if (inputLabelNode == null) return null;
 
-                    if (inputLabelMatch.Success)
-                    {
-                        int nbSnaptshot;
-                        if (int.TryParse(inputLabelMatch.Groups[1].Value, out nbSnaptshot))
-                            return nbSnaptshot;
-                    }
-                }
-            }
+            var inputLabelMatch = numberOfShotRegex.Match(inputLabelNode.InnerHtml);
+            if (!inputLabelMatch.Success) return null;
+
+            int nbSnaptshot;
+            if (int.TryParse(inputLabelMatch.Groups[1].Value, out nbSnaptshot))
+                return nbSnaptshot;
 
             return null;
         }
@@ -155,7 +160,7 @@ namespace WTM.WebsiteClient.Services
         private static bool IsChecked(HtmlNode htmlNode)
         {
             const string checkedTag = "checked";
-            return htmlNode.GetAttributeValue(checkedTag, null) == checkedTag;
+            return htmlNode.GetAttributeValue(checkedTag, null) != null;
         }
 
         public bool Write(IDifficultyOptions difficultyOptions)

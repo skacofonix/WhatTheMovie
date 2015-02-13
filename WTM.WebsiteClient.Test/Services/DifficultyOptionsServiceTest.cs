@@ -20,6 +20,10 @@ namespace WTM.WebsiteClient.Test.Services
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             difficultyOptionsService = new DifficultyOptionsService(webClient, htmlParser);
+
+            var authentifier = new Authentifier(webClient, htmlParser);
+            if (authentifier.Login("captainOblivious", "captainOblivious"))
+                webClient.SetCookie(authentifier.CookieSession);
         }
 
         [Test]
