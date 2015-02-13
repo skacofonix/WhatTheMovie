@@ -63,7 +63,7 @@ namespace WTM.WebsiteClient.Services
                 rawData = sr.ReadToEnd();
             }
 
-            var rawDataClean = rawData.CleanString();
+            var rawDataClean = rawData.CleanString().Replace("\\\"", "\"");
 
             var match = Regex.Match(rawDataClean, "Element.update\\(\"awesome_button_config\", \"(.*)\"\\);");
             if (!match.Success) return null;
@@ -78,10 +78,10 @@ namespace WTM.WebsiteClient.Services
 
         private static ISnapshotDifficultyChoice GetDifficulty(HtmlDocument htmlDocument)
         {
-            var easyNode = htmlDocument.GetElementbyId("\\\"difficulty_easy\\\"");
-            var mediumNode = htmlDocument.GetElementbyId("\\\"difficulty_medium\\\"");
-            var hardNode = htmlDocument.GetElementbyId("\\\"difficulty_hard\\\"");
-            var allNode = htmlDocument.GetElementbyId("\\\"difficulty_all\\\"");
+            var easyNode = htmlDocument.GetElementbyId("difficulty_easy");
+            var mediumNode = htmlDocument.GetElementbyId("difficulty_medium");
+            var hardNode = htmlDocument.GetElementbyId("difficulty_hard");
+            var allNode = htmlDocument.GetElementbyId("difficulty_all");
 
             if (easyNode != null && IsChecked(easyNode))
                 return new SnapshotDifficultyChoiceEasy();
@@ -97,9 +97,9 @@ namespace WTM.WebsiteClient.Services
 
         private void GetNumberOfShotForeachDifficultyLevel(HtmlDocument htmlDocument, DifficultyOptions difficultyOptions)
         {
-            difficultyOptions.NumberOfShotEasy = ExtractNumberOfShot(htmlDocument, "\\\"difficulty_easy\\\"");
+            difficultyOptions.NumberOfShotEasy = ExtractNumberOfShot(htmlDocument, "difficulty_easy");
 
-            var numberOfShotEasyMedium = ExtractNumberOfShot(htmlDocument, "\\\"difficulty_medium\\\"");
+            var numberOfShotEasyMedium = ExtractNumberOfShot(htmlDocument, "difficulty_medium");
             if (difficultyOptions.NumberOfShotEasy.HasValue && numberOfShotEasyMedium.HasValue)
                 difficultyOptions.NumberOfShotMedium = numberOfShotEasyMedium.Value - difficultyOptions.NumberOfShotEasy.Value;
 
