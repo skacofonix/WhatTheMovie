@@ -122,12 +122,16 @@ namespace WTM.WebsiteClient.Application
 
             httpWebRequest.KeepAlive = true;
             httpWebRequest.Host = uri.Host;
+            httpWebRequest.Headers.Add("Origin", UriBase.ToString());
             httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
         }
 
         private void SetupHttpPostRequest(HttpWebRequest httpWebRequest)
         {
             httpWebRequest.Method = "POST";
+
+            // X-Requested-With: XMLHttpRequest
+            httpWebRequest.Headers.Add("X-Requested-With", "XMLHttpRequest");
         }
     }
 }

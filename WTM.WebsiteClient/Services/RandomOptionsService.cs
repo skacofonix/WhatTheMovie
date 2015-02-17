@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Net;
 using HtmlAgilityPack;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,12 +12,12 @@ using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Services
 {
-    public class DifficultyOptionsService
+    public class RandomOptionsService
     {
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
 
-        public DifficultyOptionsService(IWebClient webClient, IHtmlParser htmlParser)
+        public RandomOptionsService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             this.htmlParser = htmlParser;
@@ -103,20 +103,9 @@ namespace WTM.WebsiteClient.Services
             if (difficultyOptions.NumberOfShotEasy.HasValue && numberOfShotEasyMedium.HasValue)
                 difficultyOptions.NumberOfShotMedium = numberOfShotEasyMedium.Value - difficultyOptions.NumberOfShotEasy.Value;
 
-            // Issue on WhatTheMovie : label for difficulty_hard is named difficulty_medium
-            //var inputLabelNode = htmlDocument.DocumentNode.SelectSingleNode("//label[@for='\\\"difficulty_medium\\\"'][2]");
-            //if (inputLabelNode != null)
-            //{
-            //    var inputLabelMatch = numberOfShotRegex.Match(inputLabelNode.InnerHtml);
-            //    if (inputLabelMatch.Success)
-            //    {
-            //        int nbSnaptshot;
-            //        if (int.TryParse(inputLabelMatch.Groups[1].Value, out nbSnaptshot))
-            //            difficultyOptions.NumberOfShotHard = nbSnaptshot;
-
-            //        difficultyOptions.NumberOfShotHard = ExtractNumberOfShot(htmlDocument, "\\\"difficulty_hard\\\"");
-            //    }
-            //}
+            var numberOfShotAll = ExtractNumberOfShot(htmlDocument, "difficulty_all");
+            if (numberOfShotEasyMedium.HasValue && numberOfShotAll.HasValue)
+                difficultyOptions.NumberOfShotHard = numberOfShotAll - numberOfShotEasyMedium;
         }
 
         private readonly Regex numberOfShotRegex = new Regex(".* \\((\\d*)\\)");
@@ -175,9 +164,8 @@ namespace WTM.WebsiteClient.Services
             httpRequestBuilder.AddParameter("include_solved", difficultyOptions.IncludeSolvedShots ? "1" : "0");
             var data = httpRequestBuilder.ToString();
 
-            webClient.Post(uriSource, uriDestination, data);
-
-            return false;
+            var webResponse = webClient.Post(uriSource, uriDestination, data) as HttpWebResponse;
+            return webResponse != null && webResponse.StatusCode == HttpStatusCode.OK;
         }
     }
 }

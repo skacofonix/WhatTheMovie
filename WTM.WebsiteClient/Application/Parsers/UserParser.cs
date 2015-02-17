@@ -225,19 +225,41 @@ namespace WTM.WebsiteClient.Application.Parsers
             if (navigator == null)
                 return;
 
-            var memorabiliaRoot = navigator.Select("//div[@id='main_white']/div[@class='col_left nopadding']/div[@class='memo_shelf']/div[@class='container']/div[@class='row'][1]/ul[@class='clearfix']/script");
+            //tt_award_383695731055272615 =	new Tip('award_383695731055272615', '<strong>Killerbunny<\/strong> <em>3000 FF solves<\/em><br/>There he is!<br/>What? Behind the rabbit?<br/>It *is* the rabbit!', {"hook": {"tip": "topMiddle", "mouse": true}, "stem": "topMiddle", "offset": {"x": 0, "y": 14}, "style": "tt_white_top"});
 
-            var tipRegex = new Regex("<strong>(.*)</strong> <em>(.*)</em>");
+            var memorabiliaRoot = navigator.Select("//div[@class='row'][1]/ul[@class='clearfix']/script");
 
-            var memorabiliaList = new List<KeyValuePair<string, string>>();
+            var tipRegex = new Regex("Tip\\('(.*)', '<strong>(.*)</strong> <em>(.*)</em>(.*)'");
+
+            var memorabiliaList = new List<IMemorabilia>();
 
             while (memorabiliaRoot.MoveNext())
             {
                 var match = tipRegex.Match(memorabiliaRoot.Current.TypedValue.ToString());
-                if(match.Success)
-                    memorabiliaList.Add(new KeyValuePair<string, string>(match.Groups[0].Value, match.Groups[1].Value));
+
+                if (!match.Success)
+                    continue;
+
+                var memorabilia = new Memorabilia();
+                memorabilia.Title = match.Groups[2].Value;
+                memorabilia.Tag = match.Groups[3].Value;
+                memorabilia.Description = match.Groups[4].Value.Replace("<br/>", string.Empty);
+
+                var imgNode = navigator.SelectSingleNode(string.Format("//img[@id='{0}']/@src", match.Groups[1].Value));
+                if (imgNode == null) continue;
+
+                try
+                {
+                    var uri = new Uri(imgNode.InnerXml);
+                    memorabilia.Image = uri;
+                }
+                catch
+                {
+                    memorabilia.Image = null;
+                }
             }
-            user.MemorabiliaList = memorabiliaList.Cast<IMemorabilia>().ToList();
+
+            user.MemorabiliaList = memorabiliaList.ToList();
         }
 
         private XPathNavigator ParsePageAndReturnNavigator(Uri baseUri, string pageName)

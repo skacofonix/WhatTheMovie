@@ -7,15 +7,15 @@ namespace WTM.Domain
     public class Memorabilia : IMemorabilia
     {
         [DataMember(IsRequired = true)]
-        public string Title { get; private set; }
+        public string Title { get; set; }
 
         [DataMember(IsRequired = true)]
-        public string Tag { get; private set; }
+        public string Tag { get; set; }
 
         [DataMember(IsRequired = true)]
-        public string Description { get; private set; }
+        public string Description { get; set; }
 
         [DataMember(IsRequired = true)]
-        public Uri Image { get; private set; }
+        public Uri Image { get; set; }
     }
 }

@@ -64,8 +64,9 @@ namespace WTM.WebsiteClient.Services
                 if (match.Success)
                     response = new GuessTitleResponse
                     {
+                        OriginalTitle = match.Groups[2].Value,
                         MovieId = match.Groups[3].Value,
-                        Year = Convert.ToInt32(match.Groups[4].Value)
+                        Year = Convert.ToInt32(match.Groups[4].Value),
                     };
             }
 

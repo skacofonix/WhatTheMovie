@@ -67,7 +67,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\DifficultyOptionsService.cs" />
+    <Compile Include="Services\RandomOptionsService.cs" />
     <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\RateService.cs" />
     <Compile Include="Services\ShotFeatureFilmsService.cs" />

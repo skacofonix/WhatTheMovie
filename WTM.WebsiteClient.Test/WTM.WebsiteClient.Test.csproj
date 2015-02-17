@@ -77,7 +77,7 @@
     <Compile Include="Services\ShotFeatureFilmsServiceTest.cs" />
     <Compile Include="Services\ShotNewSubmissionsServiceTest.cs" />
     <Compile Include="Services\ShotArchiveServiceTest.cs" />
-    <Compile Include="Services\DifficultyOptionsServiceTest.cs" />
+    <Compile Include="Services\RandomOptionsServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

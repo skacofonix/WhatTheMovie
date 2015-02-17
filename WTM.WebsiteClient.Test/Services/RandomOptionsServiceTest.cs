@@ -7,29 +7,24 @@ using WTM.WebsiteClient.Services;
 namespace WTM.WebsiteClient.Test.Services
 {
     [TestFixture]
-    public class DifficultyOptionsServiceTest
+    public class RandomOptionsServiceTest
     {
         private IWebClient webClient;
         private IHtmlParser htmlParser;
-        private DifficultyOptionsService difficultyOptionsService;
-
+        private RandomOptionsService randomOptionsService;
 
         [SetUp]
         public void BeforeTest()
         {
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
-            difficultyOptionsService = new DifficultyOptionsService(webClient, htmlParser);
-
-            var authentifier = new Authentifier(webClient, htmlParser);
-            if (authentifier.Login("captainOblivious", "captainOblivious"))
-                webClient.SetCookie(authentifier.CookieSession);
+            randomOptionsService = new RandomOptionsService(webClient, htmlParser);
         }
 
         [Test]
         public void WhenReadOptionsThenReturnEntity()
         {
-            var difficultyOptions = difficultyOptionsService.Read();
+            var difficultyOptions = randomOptionsService.Read();
 
             Check.That(difficultyOptions).IsNotNull();
             Check.That(difficultyOptions.NumberOfShotEasy).IsNotNull();
@@ -46,7 +41,7 @@ namespace WTM.WebsiteClient.Test.Services
             difficultyOptions.IncludeArchive = true;
             difficultyOptions.IncludeSolvedShots = true;
 
-            Check.That(difficultyOptionsService.Write(difficultyOptions)).IsTrue();
+            Check.That(randomOptionsService.Write(difficultyOptions)).IsTrue();
         }
     }
 }
