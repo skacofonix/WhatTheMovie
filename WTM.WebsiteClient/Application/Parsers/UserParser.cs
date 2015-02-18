@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using WTM.Domain;
+using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Application.Parsers
@@ -224,8 +225,6 @@ namespace WTM.WebsiteClient.Application.Parsers
             var navigator = ParsePageAndReturnNavigator(baseUri, "memorabilia");
             if (navigator == null)
                 return;
-
-            //tt_award_383695731055272615 =	new Tip('award_383695731055272615', '<strong>Killerbunny<\/strong> <em>3000 FF solves<\/em><br/>There he is!<br/>What? Behind the rabbit?<br/>It *is* the rabbit!', {"hook": {"tip": "topMiddle", "mouse": true}, "stem": "topMiddle", "offset": {"x": 0, "y": 14}, "style": "tt_white_top"});
 
             var memorabiliaRoot = navigator.Select("//div[@class='row'][1]/ul[@class='clearfix']/script");
 

@@ -63,12 +63,14 @@
     <Compile Include="Interfaces\ISettings.cs" />
     <Compile Include="Interfaces\ISearchResultCollection.cs" />
     <Compile Include="Interfaces\ISnapshotDifficultyChoice.cs" />
+    <Compile Include="Interfaces\IRange.cs" />
     <Compile Include="Memorabilia.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieSummary.cs" />
     <Compile Include="MovieSummaryCollection.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="NewSubmissionSummary.cs" />
+    <Compile Include="Range.cs" />
     <Compile Include="SearchResultBase.cs" />
     <Compile Include="SearchResultCollection.cs" />
     <Compile Include="SearchResultMovieTv.cs" />

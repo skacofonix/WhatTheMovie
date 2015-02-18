@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WTM.Domain
+namespace WTM.Domain.Interfaces
 {
     public interface IMemorabilia
     {

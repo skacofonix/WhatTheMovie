@@ -65,5 +65,13 @@ namespace WTM.WebsiteClient.Test.Services
             Check.That(shot).IsNotNull();
             Check.That(shot.ShotId).Equals(expectedShotId);
         }
+
+        [Test]
+        public void WhenSearchByTagThenReturnShots()
+        {
+            var shotSummary = shotService.Search("test");
+
+            Check.That(shotSummary).IsNotNull();
+        }
     }
 }

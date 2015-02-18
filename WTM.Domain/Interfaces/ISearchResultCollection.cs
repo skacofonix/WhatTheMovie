@@ -1,10 +1,13 @@
 ﻿using System.Collections;
-using WTM.Domain.Interfaces;
 
-namespace WTM.WebsiteClient.Domain
+namespace WTM.Domain.Interfaces
 {
     public interface ISearchResultCollection : IWebsiteEntity
     {
         IList Items { get; set; }
+
+        int? Total { get; set; }
+
+        IRange Range { get; set; }
     }
 }

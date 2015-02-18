@@ -16,6 +16,6 @@ namespace WTM.Core.Services
 
         IRate Rate(int score);
 
-        IEnumerable<IShot> Search(string tag);
+        IShotSummaryCollection Search(string tag);
     }
 }

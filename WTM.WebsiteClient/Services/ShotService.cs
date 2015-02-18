@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using WTM.Core.Services;
@@ -16,12 +17,14 @@ namespace WTM.WebsiteClient.Services
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
         private readonly ShotParser shotParser;
+        private readonly SearchTagParser shotSearcher;
 
         protected ShotService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             this.htmlParser = htmlParser;
             shotParser = new ShotParser(webClient, htmlParser);
+            shotSearcher = new SearchTagParser(webClient, htmlParser);
         }
 
         public IShot GetRandomShot()
@@ -124,9 +127,16 @@ namespace WTM.WebsiteClient.Services
             return movie;
         }
 
-        IEnumerable<IShot> IShotService.Search(string tag)
+        public IShotSummaryCollection Search(string tag)
         {
-            throw new NotImplementedException();
+            var result = shotSearcher.Search(tag);
+
+            IShotSummaryCollection shotSummaryCollection = new ShotSummaryCollection
+            {
+                Shots = result.Items.Cast<IShotSummary>().ToList()
+            };
+
+            return shotSummaryCollection;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
