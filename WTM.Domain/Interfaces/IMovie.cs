@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WTM.Domain.Interfaces;
 
-namespace WTM.Domain
+namespace WTM.Domain.Interfaces
 {
     public interface IMovie : IWebsiteEntity
     {

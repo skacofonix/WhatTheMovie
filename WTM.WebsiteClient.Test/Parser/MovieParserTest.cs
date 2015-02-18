@@ -1,9 +1,9 @@
 ﻿using NFluent;
 using NUnit.Framework;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Application.Parsers;
+using WTM.WebsiteClient.Parsers;
 
-namespace WTM.WebsiteClient.Test.Application.Parser
+namespace WTM.WebsiteClient.Test.Parser
 {
     [TestFixture]
     public class MovieParserTest

@@ -1,6 +1,6 @@
-﻿namespace WTM.WebsiteClient.Domain
+﻿namespace WTM.Domain
 {
-    public class SearchResultMovieTv : SearchResultBase
+    public class SearchResultMovieTv
     {
         public string Title { get; set; }
         public int? Year { get; set; }

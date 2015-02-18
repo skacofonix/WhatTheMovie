@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using WTM.Domain;
+﻿using WTM.Domain;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Core.Services
@@ -16,6 +15,6 @@ namespace WTM.Core.Services
 
         IRate Rate(int score);
 
-        IShotSummaryCollection Search(string tag);
+        IShotSummaryCollection Search(string tag, int? page = null);
     }
 }

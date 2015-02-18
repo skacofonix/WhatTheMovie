@@ -2,7 +2,7 @@
 using WTM.Core.Services;
 using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Application.Parsers;
+using WTM.WebsiteClient.Parsers;
 
 namespace WTM.WebsiteClient.Services
 {

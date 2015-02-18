@@ -1,6 +1,4 @@
-﻿using WTM.Domain.Interfaces;
-
-namespace WTM.Domain
+﻿namespace WTM.Domain.Interfaces
 {
     public interface ISettings : IWebsiteEntity
     {

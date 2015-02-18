@@ -1,14 +1,15 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
+using HtmlAgilityPack;
 using WTM.Domain;
-using WTM.WebsiteClient.Helpers;
+using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Extensions;
 
-namespace WTM.WebsiteClient.Application.Parsers
+namespace WTM.WebsiteClient.Parsers
 {
     internal class MovieParser : ParserBase<Movie>
     {

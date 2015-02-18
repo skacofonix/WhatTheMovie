@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
-using WTM.Domain;
 using WTM.Domain.Interfaces;
 
-namespace WTM.WebsiteClient.Domain
+namespace WTM.Domain
 {
     public class SearchResultCollection : ISearchResultCollection
     {

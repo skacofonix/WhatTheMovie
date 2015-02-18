@@ -1,9 +1,10 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Diagnostics;
+using HtmlAgilityPack;
 using WTM.Domain.Interfaces;
+using WTM.WebsiteClient.Application;
 
-namespace WTM.WebsiteClient.Application.Parsers
+namespace WTM.WebsiteClient.Parsers
 {
     public abstract class ParserBase<T> : IPageIdentifier
         where T : IWebsiteEntity, new()
@@ -25,14 +26,14 @@ namespace WTM.WebsiteClient.Application.Parsers
             return Parse(uri);
         }
 
-        protected virtual Uri MakeUri(string parameter = null)
+        protected virtual Uri MakeUri(string criteria = null)
         {
             var relativeUri = Identifier;
-            if (!string.IsNullOrEmpty(parameter))
+            if (!string.IsNullOrEmpty(criteria))
             {
-                if (!parameter.StartsWith("/"))
+                if (!criteria.StartsWith("/"))
                     relativeUri += "/";
-                relativeUri += parameter;
+                relativeUri += criteria;
             }
 
             return new Uri(WebClient.UriBase, relativeUri);

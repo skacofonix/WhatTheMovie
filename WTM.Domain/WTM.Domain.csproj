@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IShotMovieCollection.cs" />
     <Compile Include="Interfaces\IShotSummaryCollection.cs" />
     <Compile Include="Interfaces\IUser.cs" />
+    <Compile Include="Interfaces\IUserSummary.cs" />
     <Compile Include="Interfaces\IWebsiteEntity.cs" />
     <Compile Include="Interfaces\ISettings.cs" />
     <Compile Include="Interfaces\ISearchResultCollection.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="Navigation.cs" />
     <Compile Include="NewSubmissionSummary.cs" />
     <Compile Include="Range.cs" />
-    <Compile Include="SearchResultBase.cs" />
     <Compile Include="SearchResultCollection.cs" />
     <Compile Include="SearchResultMovieTv.cs" />
     <Compile Include="Settings.cs" />
@@ -89,6 +89,7 @@
     <Compile Include="SnapshotDifficultyChoiceAll.cs" />
     <Compile Include="SnapshotDifficultyChoiceHard.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserSummary.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

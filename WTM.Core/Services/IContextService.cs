@@ -1,4 +1,5 @@
 ﻿using WTM.Domain;
+using WTM.Domain.Interfaces;
 
 namespace WTM.Core.Services
 {

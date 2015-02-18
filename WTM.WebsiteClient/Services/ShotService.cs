@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,7 +7,7 @@ using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Application.Parsers;
+using WTM.WebsiteClient.Parsers;
 
 namespace WTM.WebsiteClient.Services
 {
@@ -127,9 +126,9 @@ namespace WTM.WebsiteClient.Services
             return movie;
         }
 
-        public IShotSummaryCollection Search(string tag)
+        public IShotSummaryCollection Search(string tag, int? page = null)
         {
-            var result = shotSearcher.Search(tag);
+            var result = shotSearcher.Search(tag, page);
 
             IShotSummaryCollection shotSummaryCollection = new ShotSummaryCollection
             {

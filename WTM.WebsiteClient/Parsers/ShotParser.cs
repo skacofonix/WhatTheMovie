@@ -8,9 +8,10 @@ using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using HtmlAgilityPack;
 using WTM.Domain;
-using WTM.WebsiteClient.Helpers;
+using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Extensions;
 
-namespace WTM.WebsiteClient.Application.Parsers
+namespace WTM.WebsiteClient.Parsers
 {
     public class ShotParser : ParserBase<Shot>
     {

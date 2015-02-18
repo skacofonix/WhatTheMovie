@@ -7,6 +7,6 @@ namespace WTM.Core.Services
     {
         IMovie GetByTitle(string title);
 
-        IMovieSummaryCollection Search(string title);
+        IMovieSummaryCollection Search(string title, int? page = null);
     }
 }

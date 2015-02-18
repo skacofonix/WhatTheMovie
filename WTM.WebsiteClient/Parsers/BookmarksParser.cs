@@ -4,8 +4,9 @@ using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using WTM.Domain;
+using WTM.WebsiteClient.Application;
 
-namespace WTM.WebsiteClient.Application.Parsers
+namespace WTM.WebsiteClient.Parsers
 {
     internal class BookmarksParser : ParserBase<BookmarkCollection>
     {

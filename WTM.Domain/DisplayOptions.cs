@@ -1,4 +1,6 @@
-﻿namespace WTM.Api.Core
+﻿using WTM.Api.Core;
+
+namespace WTM.Domain
 {
     public class DisplayOptions : IDisplayOptions
     {

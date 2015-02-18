@@ -35,7 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NFluent">
       <HintPath>..\packages\NFluent.1.3.1.0\lib\net40\NFluent.dll</HintPath>
     </Reference>
@@ -53,14 +52,14 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Application\Parser\BookmarksParserTest.cs" />
-    <Compile Include="Application\Parser\OverviewShotParserTest.cs" />
-    <Compile Include="Application\Parser\ShotParserTest.cs" />
-    <Compile Include="Application\Parser\SettingsParserTest.cs" />
+    <Compile Include="Parser\BookmarksParserTest.cs" />
+    <Compile Include="Parser\OverviewShotParserTest.cs" />
+    <Compile Include="Parser\ShotParserTest.cs" />
+    <Compile Include="Parser\SettingsParserTest.cs" />
     <Compile Include="Application\HttpRequestBuilderTest.cs" />
-    <Compile Include="Application\Parser\MovieParserTest.cs" />
-    <Compile Include="Application\Parser\SearchMovieTvParserTest.cs" />
-    <Compile Include="Application\Parser\UserParserTest.cs" />
+    <Compile Include="Parser\MovieParserTest.cs" />
+    <Compile Include="Parser\SearchMovieTvParserTest.cs" />
+    <Compile Include="Parser\UserParserTest.cs" />
     <Compile Include="Application\ServerDateTimeTest.cs" />
     <Compile Include="Application\WebClientFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +77,7 @@
     <Compile Include="Services\ShotNewSubmissionsServiceTest.cs" />
     <Compile Include="Services\ShotArchiveServiceTest.cs" />
     <Compile Include="Services\RandomOptionsServiceTest.cs" />
+    <Compile Include="Services\UserServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

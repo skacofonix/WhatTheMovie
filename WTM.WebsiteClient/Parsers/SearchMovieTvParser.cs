@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using WTM.WebsiteClient.Domain;
-using WTM.WebsiteClient.Helpers;
+using WTM.Domain;
+using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Extensions;
 
-namespace WTM.WebsiteClient.Application.Parsers
+namespace WTM.WebsiteClient.Parsers
 {
     internal class SearchMovieTvParser : SearchBaseParser<SearchResultCollection>
     {
@@ -14,7 +15,9 @@ namespace WTM.WebsiteClient.Application.Parsers
             : base(webClient, htmlParser)
         { }
 
-        protected override void ParseHtmlDocument(SearchResultCollection instance, HtmlDocument htmlDocument)
+        protected override string TagDisplayInfo { get { return "shot_focus_box"; } }
+
+        protected override void ParseResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null)

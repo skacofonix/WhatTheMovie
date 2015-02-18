@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WTM.Domain.Interfaces;
+﻿using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {

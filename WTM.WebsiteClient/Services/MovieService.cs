@@ -3,7 +3,7 @@ using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Application.Parsers;
+using WTM.WebsiteClient.Parsers;
 
 namespace WTM.WebsiteClient.Services
 {
@@ -23,9 +23,9 @@ namespace WTM.WebsiteClient.Services
             return movieParser.GetById(title);
         }
 
-        public IMovieSummaryCollection Search(string title)
+        public IMovieSummaryCollection Search(string title, int? page)
         {
-            var result = movieSearcher.Search(title);
+            var result = movieSearcher.Search(title, page);
 
             IMovieSummaryCollection movieSummaryCollection = new MovieSummaryCollection
             {

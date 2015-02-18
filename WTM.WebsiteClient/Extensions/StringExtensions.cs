@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace WTM.WebsiteClient.Helpers
+namespace WTM.WebsiteClient.Extensions
 {
     internal static class StringExtensions
     {

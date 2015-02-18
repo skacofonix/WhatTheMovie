@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
 using WTM.WebsiteClient.Application;
-using WTM.WebsiteClient.Helpers;
+using WTM.WebsiteClient.Extensions;
 
 namespace WTM.WebsiteClient.Services
 {
