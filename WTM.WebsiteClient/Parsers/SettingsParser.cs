@@ -1,7 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 
 namespace WTM.WebsiteClient.Parsers
 {

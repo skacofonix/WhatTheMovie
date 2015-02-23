@@ -1,7 +1,7 @@
 ﻿using System;
 using HtmlAgilityPack;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Helpers;
 using WTM.WebsiteClient.Parsers;
 
 namespace WTM.WebsiteClient.Services

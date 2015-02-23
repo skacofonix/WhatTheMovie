@@ -7,12 +7,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Extensions;
+using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Services
 {
-    public class RandomOptionsService
+    public class RandomOptionsService : IReadWriteService<IDifficultyOptions>
     {
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
@@ -47,6 +47,22 @@ namespace WTM.WebsiteClient.Services
             difficultyOptions.ParseDateTime = DateTime.Now;
 
             return difficultyOptions;
+        }
+
+        public bool Write(IDifficultyOptions difficultyOptions)
+        {
+            var uriSource = new Uri(webClient.UriBase, "/shot/1");
+            var uriDestination = new Uri(webClient.UriBase, "/shot/setrandomoptions");
+
+            var httpRequestBuilder = new HttpRequestBuilder();
+            httpRequestBuilder.AddParameter("difficulty", difficultyOptions.SnapshotDifficultyFilter.ToString());
+            httpRequestBuilder.AddParameter("keyword", difficultyOptions.TagFilter);
+            httpRequestBuilder.AddParameter("include_archive", difficultyOptions.IncludeArchive ? "1" : "0");
+            httpRequestBuilder.AddParameter("include_solved", difficultyOptions.IncludeSolvedShots ? "1" : "0");
+            var data = httpRequestBuilder.ToString();
+
+            var webResponse = webClient.Post(uriSource, uriDestination, data) as HttpWebResponse;
+            return webResponse != null && webResponse.StatusCode == HttpStatusCode.OK;
         }
 
         private HtmlDocument GetHtmlDocument()
@@ -150,22 +166,6 @@ namespace WTM.WebsiteClient.Services
         {
             const string checkedTag = "checked";
             return htmlNode.GetAttributeValue(checkedTag, null) != null;
-        }
-
-        public bool Write(IDifficultyOptions difficultyOptions)
-        {
-            var uriSource = new Uri(webClient.UriBase, "/shot/1");
-            var uriDestination = new Uri(webClient.UriBase, "/shot/setrandomoptions");
-
-            var httpRequestBuilder = new HttpRequestBuilder();
-            httpRequestBuilder.AddParameter("difficulty", difficultyOptions.SnapshotDifficultyFilter.ToString());
-            httpRequestBuilder.AddParameter("keyword", difficultyOptions.TagFilter);
-            httpRequestBuilder.AddParameter("include_archive", difficultyOptions.IncludeArchive ? "1" : "0");
-            httpRequestBuilder.AddParameter("include_solved", difficultyOptions.IncludeSolvedShots ? "1" : "0");
-            var data = httpRequestBuilder.ToString();
-
-            var webResponse = webClient.Post(uriSource, uriDestination, data) as HttpWebResponse;
-            return webResponse != null && webResponse.StatusCode == HttpStatusCode.OK;
         }
     }
 }

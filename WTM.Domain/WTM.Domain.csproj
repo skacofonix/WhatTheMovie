@@ -40,18 +40,17 @@
     <Compile Include="Bookmark.cs" />
     <Compile Include="BookmarkCollection.cs" />
     <Compile Include="DifficultyOptions.cs" />
-    <Compile Include="DisplayOptions.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="GuessTitleResponse.cs" />
     <Compile Include="Interfaces\IBookmark.cs" />
     <Compile Include="Interfaces\IBookmarkCollection.cs" />
     <Compile Include="Interfaces\IDifficultyOptions.cs" />
-    <Compile Include="Interfaces\IDisplayOptions.cs" />
     <Compile Include="Interfaces\INavigation.cs" />
     <Compile Include="Interfaces\IGuessTitleResponse.cs" />
     <Compile Include="Interfaces\IMemorabilia.cs" />
     <Compile Include="Interfaces\IMovie.cs" />
     <Compile Include="Interfaces\IMovieSummary.cs" />
+    <Compile Include="Interfaces\IOverviewDisplayOptions.cs" />
     <Compile Include="Interfaces\IRate.cs" />
     <Compile Include="Interfaces\IShot.cs" />
     <Compile Include="Interfaces\INewSubmissionSummary.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="MovieSummaryCollection.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="NewSubmissionSummary.cs" />
+    <Compile Include="OverviewDisplayOptions.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="SearchResultCollection.cs" />
     <Compile Include="SearchResultMovieTv.cs" />

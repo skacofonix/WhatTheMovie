@@ -1,6 +1,5 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Parsers;
 using WTM.WebsiteClient.Test.Application;
 using WTM.WebsiteClient.Test.Properties;
@@ -17,7 +16,8 @@ namespace WTM.WebsiteClient.Test.Parser
         [SetUp]
         public void Init()
         {
-            webClient = new WebClientFake(Resources.shot10);
+            //webClient = new WebClientFake(Resources.shot10);
+            webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             parser = new ShotParser(webClient, htmlParser);
         }
@@ -25,12 +25,12 @@ namespace WTM.WebsiteClient.Test.Parser
         [Test]
         public void WhenParseThenReturnValidEntity()
         {
-            var shot = parser.Parse(10);
+            var shot = parser.GetById(1000);
 
             Check.That(shot.Navigation.FirstId).HasAValue();
             Check.That(shot.Navigation.LastId).HasAValue();
             Check.That(shot.Navigation.PreviousId).HasAValue();
-            //Check.That(shot.Navigation.PreviousUnsolvedId).HasAValue();
+            Check.That(shot.Navigation.PreviousUnsolvedId).HasAValue();
             Check.That(shot.Navigation.NextId).HasAValue();
             Check.That(shot.Navigation.NextUnsolvedId).HasAValue();
             Check.That(shot.Poster).IsNotNull();

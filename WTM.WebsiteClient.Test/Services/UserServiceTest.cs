@@ -1,7 +1,6 @@
 ﻿using NFluent;
 using NUnit.Framework;
 using System.Linq;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Services;
 
 namespace WTM.WebsiteClient.Test.Services

@@ -1,7 +1,6 @@
 ﻿using NFluent;
 using NUnit.Framework;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Services;
 
 namespace WTM.WebsiteClient.Test.Services
@@ -20,9 +19,8 @@ namespace WTM.WebsiteClient.Test.Services
             htmlParser = new HtmlParser();
             settingsService = new SettingsService(webClient, htmlParser);
 
-            var authentifier = new Authentifier(webClient, htmlParser);
-            if(authentifier.Login("captainOblivious", "captainOblivious"))
-                webClient.SetCookie(authentifier.CookieSession);
+            var authenticateService = new AuthenticateService(webClient, htmlParser);
+            authenticateService.Login("captainOblivious", "captainOblivious");
         }
 
         [Test]

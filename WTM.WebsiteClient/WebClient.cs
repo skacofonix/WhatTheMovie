@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace WTM.WebsiteClient.Application
+namespace WTM.WebsiteClient
 {
     public abstract class WebClient : IWebClient
     {
@@ -22,6 +22,11 @@ namespace WTM.WebsiteClient.Application
             cookies.Add(cookie);
         }
 
+        public Cookie GetCookie(string name)
+        {
+            return cookies.FirstOrDefault(w => w.Name == name);
+        }
+
         public void RemoveCookie(Cookie cookie)
         {
             cookies.Remove(cookie);
@@ -32,6 +37,11 @@ namespace WTM.WebsiteClient.Application
             var webResponse = GetWebResponse(uri);
             var stream = webResponse.GetResponseStream();
             return stream;
+        }
+
+        public WebResponse Get(Uri uri)
+        {
+            return GetWebResponse(uri);
         }
 
         public WebResponse Post(Uri source, Uri destination, string data)

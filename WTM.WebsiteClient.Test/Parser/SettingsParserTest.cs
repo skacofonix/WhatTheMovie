@@ -1,7 +1,7 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Parsers;
+using WTM.WebsiteClient.Services;
 
 namespace WTM.WebsiteClient.Test.Parser
 {
@@ -23,9 +23,8 @@ namespace WTM.WebsiteClient.Test.Parser
         [Test]
         public void WhenParseThenReturnValidEntity()
         {
-            var authentifier = new Authentifier(webClient, htmlParser);
-            if (authentifier.Login("captainOblivious", "captainOblivious"))
-                webClient.SetCookie(authentifier.CookieSession);
+            var authenticateService = new AuthenticateService(webClient, htmlParser);
+            authenticateService.Login("captainOblivious", "captainOblivious");
 
             var settings = parser.Parse();
 

@@ -3,7 +3,6 @@ using System;
 using System.Net;
 using System.Text.RegularExpressions;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 
 namespace WTM.WebsiteClient.Parsers
 {
@@ -39,7 +38,8 @@ namespace WTM.WebsiteClient.Parsers
 
             if (displayingInfoNode == null) return;
 
-            // TODO : less than 50 case
+            // TODO : case when 1 result was found => redirect to shot/movie/user page
+            // TODO : case when there are less than 50 result (1 page)
 
             var rangeRawData = displayingInfoNode.SelectSingleNode("./b[1]");
             var rangeMatch = RangeDisplayInfoRegex.Match(rangeRawData.InnerHtml);

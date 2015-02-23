@@ -7,7 +7,6 @@ using System.Xml.XPath;
 using HtmlAgilityPack;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Extensions;
 
 namespace WTM.WebsiteClient.Parsers
@@ -20,24 +19,13 @@ namespace WTM.WebsiteClient.Parsers
             : base(webClient, htmlParser)
         { }
 
-        public new User Parse(string username)
+        public User GetByUsername(string username)
         {
-            var user = base.Parse(username);
-
-            var baseUri = base.MakeUri(username);
-
-            GetUploadInfos(baseUri, user);
-            GetFavouritesInfos(baseUri, user);
-            GetFellows(baseUri, user);
-            GetMemorabilia(baseUri, user);
-
-            return user;
+            return Parse(username);
         }
 
         protected override void ParseHtmlDocument(User instance, HtmlDocument htmlDocument)
         {
-            instance.ParseDateTime = DateTime.Now;
-
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null)
                 return;
@@ -155,6 +143,16 @@ namespace WTM.WebsiteClient.Parsers
                 decimal favouritedRating;
                 if (decimal.TryParse(statNodes[3].InnerHtml, NumberStyles.Number, culture.NumberFormat, out favouritedRating))
                     instance.FavouritedRating = favouritedRating;
+            }
+
+            if (instance.Name != null)
+            {
+                var baseUri = base.MakeUri(instance.Name);
+
+                GetUploadInfos(baseUri, instance);
+                GetFavouritesInfos(baseUri, instance);
+                GetFellows(baseUri, instance);
+                GetMemorabilia(baseUri, instance);
             }
         }
 

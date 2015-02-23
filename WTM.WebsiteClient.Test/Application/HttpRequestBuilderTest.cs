@@ -1,6 +1,6 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Test.Application
 {

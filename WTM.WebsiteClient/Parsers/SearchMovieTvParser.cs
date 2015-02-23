@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Extensions;
 
 namespace WTM.WebsiteClient.Parsers

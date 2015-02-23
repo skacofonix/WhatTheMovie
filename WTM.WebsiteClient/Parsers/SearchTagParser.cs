@@ -2,7 +2,6 @@
 using HtmlAgilityPack;
 using System.Collections.Generic;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 
 namespace WTM.WebsiteClient.Parsers
 {

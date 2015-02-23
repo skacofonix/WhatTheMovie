@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Text;
 
-namespace WTM.WebsiteClient.Application
+namespace WTM.WebsiteClient.Helpers
 {
-    class HttpRequestBuilder
+    internal class HttpRequestBuilder
     {
         private readonly Dictionary<string, string> parameters;
 

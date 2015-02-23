@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using NFluent;
 using NUnit.Framework;
+using WTM.Core.Services;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Services;
 
 namespace WTM.WebsiteClient.Test.Services
@@ -13,7 +13,7 @@ namespace WTM.WebsiteClient.Test.Services
         private IWebClient webClient;
         private IHtmlParser htmlParser;
         private ShotFeatureFilmsService shotFeatureFilmService;
-        private IServerDateTime serverDateTime;
+        private IServerDateTimeService serverDateTime;
 
         [SetUp]
         public void Init()
@@ -21,7 +21,7 @@ namespace WTM.WebsiteClient.Test.Services
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             shotFeatureFilmService = new ShotFeatureFilmsService(webClient, htmlParser);
-            serverDateTime = new ServerDateTime();
+            serverDateTime = new ServerDateTimeService(webClient);
         }
 
         [Test]
@@ -33,13 +33,13 @@ namespace WTM.WebsiteClient.Test.Services
             Check.That(overviewShotCollection.ShotType).Equals(ShotType.FeatureFilms);
             Check.That(overviewShotCollection.Shots).IsNotNull();
             Check.That(overviewShotCollection.Shots.Any()).IsTrue();
-            Check.That(overviewShotCollection.Date.Value.Date).Equals(today.Date);
+            Check.That(overviewShotCollection.Date.Value.Date).Equals(today.Value.Date);
         }
 
         [Test]
         public void WhenParseFeatureFilmsOfYesterdayThenReturnOverviewShotCollection()
         {
-            var yesterday = serverDateTime.GetDateTime().AddDays(-1);
+            var yesterday = serverDateTime.GetDateTime().Value.AddDays(-1);
             var overviewShotCollection = shotFeatureFilmService.GetShotSummaryByDate(yesterday);
             Check.That(overviewShotCollection).IsNotNull();
             Check.That(overviewShotCollection.ShotType).Equals(ShotType.FeatureFilms);

@@ -2,11 +2,10 @@
 using System.Diagnostics;
 using HtmlAgilityPack;
 using WTM.Domain.Interfaces;
-using WTM.WebsiteClient.Application;
 
 namespace WTM.WebsiteClient.Parsers
 {
-    public abstract class ParserBase<T> : IPageIdentifier
+    public abstract class ParserBase<T>
         where T : IWebsiteEntity, new()
     {
         protected readonly IWebClient WebClient;

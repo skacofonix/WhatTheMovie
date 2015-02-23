@@ -1,18 +1,19 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Linq;
 using System.Net;
-using HtmlAgilityPack;
+using WTM.WebsiteClient.Helpers;
 
-namespace WTM.WebsiteClient.Application
+namespace WTM.WebsiteClient.Services
 {
-    internal class Authentifier
+    public class AuthenticateService : IAuthenticateService
     {
-        public Cookie CookieSession { get; private set; }
+        private Cookie cookieSession;
 
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
 
-        public Authentifier(IWebClient webClient, IHtmlParser htmlParser)
+        public AuthenticateService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             this.htmlParser = htmlParser;
@@ -40,22 +41,18 @@ namespace WTM.WebsiteClient.Application
             var nodeContainer = document.GetElementbyId("container");
             var nodeFlashMessageInfo = nodeContainer.ChildNodes.FirstOrDefault(n => n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "flash_message flash_info"));
 
-            if (nodeFlashMessageInfo != null && nodeContainer.InnerHtml.Contains("Welcome"))
+            if (nodeFlashMessageInfo == null || !nodeContainer.InnerHtml.Contains("Welcome")) return false;
+            var httpWebResponse = webResponse as HttpWebResponse;
+
+            if (httpWebResponse == null) return false;
+            for (var index = 0; index < httpWebResponse.Cookies.Count; index++)
             {
+                var cookie = httpWebResponse.Cookies[index];
+                if (cookie.Name != "_wtm2_session") continue;
+
+                cookieSession = cookie;
                 loginSuccess = true;
-                var httpWebResponse = webResponse as HttpWebResponse;
-                if (httpWebResponse != null)
-                {
-                    for (var index = 0; index < httpWebResponse.Cookies.Count; index++)
-                    {
-                        var cookie = httpWebResponse.Cookies[index];
-                        if (cookie.Name == "_wtm2_session")
-                        {
-                            CookieSession = cookie;
-                            break;
-                        }
-                    }
-                }
+                break;
             }
 
             return loginSuccess;
@@ -63,7 +60,8 @@ namespace WTM.WebsiteClient.Application
 
         public void Logout()
         {
-            CookieSession = null;
+            webClient.RemoveCookie(cookieSession);
+            cookieSession = null;
         }
     }
 }

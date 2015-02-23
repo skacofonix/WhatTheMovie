@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
-using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Helpers;
 using WTM.WebsiteClient.Parsers;
 
 namespace WTM.WebsiteClient.Services
@@ -28,13 +28,13 @@ namespace WTM.WebsiteClient.Services
 
         public IShot GetRandomShot()
         {
-            IShot shot = shotParser.ParseRandom();
+            IShot shot = shotParser.GetRandom();
             return shot;
         }
 
         public IShot GetShotById(int id)
         {
-            IShot shot = shotParser.Parse(id);
+            IShot shot = shotParser.GetById(id);
             return shot;
         }
 

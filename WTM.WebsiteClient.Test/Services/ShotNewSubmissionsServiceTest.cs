@@ -2,7 +2,6 @@
 using NFluent;
 using NUnit.Framework;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Services;
 
 namespace WTM.WebsiteClient.Test.Services

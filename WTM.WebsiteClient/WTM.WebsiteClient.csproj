@@ -39,8 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\HttpRequestBuilder.cs" />
-    <Compile Include="Application\IServerDateTime.cs" />
+    <Compile Include="Helpers\HttpRequestBuilder.cs" />
     <Compile Include="Parsers\BookmarksParser.cs" />
     <Compile Include="Parsers\OverviewShotParser.cs" />
     <Compile Include="Parsers\SearchMovieTvParser.cs" />
@@ -48,25 +47,24 @@
     <Compile Include="Parsers\SearchTagParser.cs" />
     <Compile Include="Parsers\SearchUserParser.cs" />
     <Compile Include="Parsers\SettingsParser.cs" />
-    <Compile Include="Application\ServerDateTime.cs" />
-    <Compile Include="Application\WebClientWTM.cs" />
-    <Compile Include="Application\HtmlParser.cs" />
-    <Compile Include="Application\IHtmlParser.cs" />
-    <Compile Include="Application\IPageIdentifier.cs" />
-    <Compile Include="Application\IWebClient.cs" />
+    <Compile Include="Services\ServerDateTimeService.cs" />
+    <Compile Include="WebClientWTM.cs" />
+    <Compile Include="HtmlParser.cs" />
+    <Compile Include="IHtmlParser.cs" />
+    <Compile Include="IWebClient.cs" />
     <Compile Include="Parsers\ParserBase.cs" />
     <Compile Include="Parsers\MovieParser.cs" />
     <Compile Include="Parsers\ShotParser.cs" />
-    <Compile Include="Context.cs" />
     <Compile Include="Extensions\StringExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IContext.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\AuthenticateService.cs" />
+    <Compile Include="Services\OverviewDisplayOptionsService.cs" />
     <Compile Include="Services\RandomOptionsService.cs" />
     <Compile Include="Services\DownloadService.cs" />
     <Compile Include="Services\RateService.cs" />
@@ -77,9 +75,7 @@
     <Compile Include="Services\ShotOverviewService.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Parsers\UserParser.cs" />
-    <Compile Include="Application\WebClient.cs" />
-    <Compile Include="Application\Authentifier.cs" />
-    <Compile Include="Application\OverviewDisplayOption.cs" />
+    <Compile Include="WebClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ShotArchiveService.cs" />
     <Compile Include="Services\UserService.cs" />

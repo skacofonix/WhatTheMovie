@@ -3,7 +3,6 @@ using System.Linq;
 using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Parsers;
 
 namespace WTM.WebsiteClient.Services
@@ -21,7 +20,7 @@ namespace WTM.WebsiteClient.Services
 
         public IUser GetUser(string username)
         {
-            return userParser.Parse(username);
+            return userParser.GetByUsername(username);
         }
 
         public IEnumerable<IUserSummary> Search(string username, int? page = null)

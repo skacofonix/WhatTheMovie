@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using NFluent;
 using NUnit.Framework;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Parsers;
 using WTM.WebsiteClient.Test.Application;
 using WTM.WebsiteClient.Test.Properties;

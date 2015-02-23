@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using HtmlAgilityPack;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Extensions;
 
 namespace WTM.WebsiteClient.Parsers
@@ -23,12 +22,12 @@ namespace WTM.WebsiteClient.Parsers
             : base(webClient, htmlParser)
         { }
 
-        public Shot ParseRandom()
+        public Shot GetRandom()
         {
             return Parse("random");
         }
 
-        public Shot Parse(int id)
+        public Shot GetById(int id)
         {
             return Parse(id.ToString(CultureInfo.InvariantCulture));
         }

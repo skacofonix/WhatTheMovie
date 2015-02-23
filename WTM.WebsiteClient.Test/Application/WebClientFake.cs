@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using WTM.WebsiteClient.Application;
 
 namespace WTM.WebsiteClient.Test.Application
 {
@@ -21,6 +20,11 @@ namespace WTM.WebsiteClient.Test.Application
             return ms;
         }
 
+        public WebResponse Get(Uri uri)
+        {
+            throw new NotImplementedException();
+        }
+
         public WebResponse Post(Uri uri, string data)
         {
             throw new NotImplementedException();
@@ -37,6 +41,11 @@ namespace WTM.WebsiteClient.Test.Application
         }
 
         public void SetCookie(Cookie cookie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Cookie GetCookie(string name)
         {
             throw new NotImplementedException();
         }

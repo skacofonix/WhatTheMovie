@@ -1,5 +1,4 @@
 ﻿using WTM.Domain.Interfaces;
-using WTM.WebsiteClient.Application;
 
 namespace WTM.WebsiteClient.Services
 {

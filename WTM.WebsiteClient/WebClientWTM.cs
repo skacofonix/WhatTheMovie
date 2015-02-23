@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WTM.WebsiteClient.Application
+namespace WTM.WebsiteClient
 {
     public class WebClientWTM : WebClient
     {

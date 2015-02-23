@@ -4,7 +4,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
+using WTM.WebsiteClient.Helpers;
 
 namespace WTM.WebsiteClient.Parsers
 {

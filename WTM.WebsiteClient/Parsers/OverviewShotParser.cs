@@ -7,7 +7,6 @@ using System.Xml.XPath;
 using HtmlAgilityPack;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Extensions;
 
 namespace WTM.WebsiteClient.Parsers

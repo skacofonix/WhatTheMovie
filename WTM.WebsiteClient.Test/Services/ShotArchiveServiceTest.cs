@@ -2,7 +2,6 @@
 using NFluent;
 using NUnit.Framework;
 using WTM.Domain;
-using WTM.WebsiteClient.Application;
 using WTM.WebsiteClient.Services;
 
 namespace WTM.WebsiteClient.Test.Services
@@ -13,7 +12,6 @@ namespace WTM.WebsiteClient.Test.Services
         private IWebClient webClient;
         private IHtmlParser htmlParser;
         private ShotArchiveService shotArchiveService;
-        private IServerDateTime serverDateTime;
 
         [SetUp]
         public void Init()
@@ -21,7 +19,6 @@ namespace WTM.WebsiteClient.Test.Services
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             shotArchiveService = new ShotArchiveService(webClient, htmlParser);
-            serverDateTime = new ServerDateTime();
         }
 
         [Test]
