@@ -39,7 +39,7 @@ namespace WTM.WebsiteClient.Services
             requestBuilder.AddParameter("user%5Bnotification_friendrequest%5D", "email");
             requestBuilder.AddParameter("user%5Bprefers_newsletter%5D", "true");
 
-            HtmlDocument document = null;
+            HtmlDocument document;
             var webResponse = webClient.Post(source, destination, requestBuilder.ToString());
             using (var stream = webResponse.GetResponseStream())
             {

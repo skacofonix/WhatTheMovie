@@ -109,7 +109,7 @@ namespace WTM.WebsiteClient.Parsers
                 }
             }
 
-            var subTitleNode = navigator.SelectSingleNode("//div[@id='topbar']/h2[@class='topbar_title']");
+            var subTitleNode = navigator.SelectSingleNode("//h2[@class='topbar_title']");
             if (subTitleNode != null)
             {
                 var subTitleString = subTitleNode.InnerXml.CleanString();

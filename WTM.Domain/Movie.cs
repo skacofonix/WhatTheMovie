@@ -14,6 +14,14 @@ namespace WTM.Domain
             Tags = new List<string>();
         }
 
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
+
+        public IList<ParseInfo> ParseInfos { get; set; }
+
         [DataMember(IsRequired = true)]
         public string OriginalTitle { get;  set; }
 
@@ -51,12 +59,6 @@ namespace WTM.Domain
         public string IntroducedBy { get;  set; }
 
         [DataMember]
-        public int? NumberOfReviews { get;  set; }
-
-        [IgnoreDataMember]
-        public DateTime ParseDateTime { get;  set; }
-
-        [IgnoreDataMember]
-        public TimeSpan ParseDuration { get;  set; }
+        public int? NumberOfReviews { get; set; }
     }
 }

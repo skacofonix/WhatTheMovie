@@ -71,6 +71,9 @@
     <Compile Include="Navigation.cs" />
     <Compile Include="NewSubmissionSummary.cs" />
     <Compile Include="OverviewDisplayOptions.cs" />
+    <Compile Include="ParseErrorsChangedEventArgs.cs" />
+    <Compile Include="ParseInfo.cs" />
+    <Compile Include="ParseLevel.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="SearchResultCollection.cs" />
     <Compile Include="SearchResultMovieTv.cs" />

@@ -80,7 +80,7 @@ namespace WTM.WebsiteClient
         {
             var webClient = new System.Net.WebClient();
             webClient.DownloadFile(uri, destinationFile);
-        }
+        } 
 
         private WebResponse GetWebResponse(Uri uri)
         {

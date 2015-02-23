@@ -5,3 +5,17 @@
 /WTM.Core/bin/Debug
 *.suo
 /WTM.Core/obj/Debug
+/packages
+*.ncrunchproject
+*.user
+/WTM.Api/bin
+/WTM.Api/obj/Debug
+/WTM.Domain/bin/Debug
+/WTM.Domain/obj/Debug
+/WTM.WebsiteClient/bin
+/WTM.WebsiteClient/obj
+/WTM.WebsiteClient.Test/bin
+/WTM.WebsiteClient.Test/obj
+*.cache
+*.DotSettings
+*.ncrunchsolution

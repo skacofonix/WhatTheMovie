@@ -68,28 +68,8 @@ namespace WTM.WebsiteClient.Services
         private HtmlDocument GetHtmlDocument()
         {
             var uri = new Uri(webClient.UriBase, "/shot/randomoptions");
-
-            var webResponse = webClient.Post(uri);
-            var stream = webResponse.GetResponseStream();
-            if (stream == null) return null;
-
-            string rawData;
-            using (var sr = new StreamReader(stream))
-            {
-                rawData = sr.ReadToEnd();
-            }
-
-            var rawDataClean = rawData.CleanString().Replace("\\\"", "\"");
-
-            var match = Regex.Match(rawDataClean, "Element.update\\(\"awesome_button_config\", \"(.*)\"\\);");
-            if (!match.Success) return null;
-
-            var sb = new StringBuilder();
-            sb.Append("<html><body>");
-            sb.Append(match.Groups[1].Value);
-            sb.Append("</body></html>");
-
-            return htmlParser.GetHtmlDocument(sb.ToString());
+            var asyncWebRequest = new AsyncWebRequest(webClient, htmlParser);
+            return asyncWebRequest.DoAsyncPostRequest(uri);
         }
 
         private static ISnapshotDifficultyChoice GetDifficulty(HtmlDocument htmlDocument)

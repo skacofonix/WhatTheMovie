@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 
-namespace WTM.WebsiteClient.Test.Application
+namespace WTM.WebsiteClient.Test
 {
     internal class WebClientFake : IWebClient
     {

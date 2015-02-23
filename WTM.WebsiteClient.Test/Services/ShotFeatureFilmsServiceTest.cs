@@ -32,7 +32,6 @@ namespace WTM.WebsiteClient.Test.Services
             Check.That(overviewShotCollection).IsNotNull();
             Check.That(overviewShotCollection.ShotType).Equals(ShotType.FeatureFilms);
             Check.That(overviewShotCollection.Shots).IsNotNull();
-            Check.That(overviewShotCollection.Shots.Any()).IsTrue();
             Check.That(overviewShotCollection.Date.Value.Date).Equals(today.Value.Date);
         }
 

@@ -8,7 +8,7 @@ namespace WTM.WebsiteClient.Services
 {
     public class AuthenticateService : IAuthenticateService
     {
-        private Cookie cookieSession;
+        public Cookie CookieSession { get; private set; }
 
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
@@ -50,8 +50,11 @@ namespace WTM.WebsiteClient.Services
                 var cookie = httpWebResponse.Cookies[index];
                 if (cookie.Name != "_wtm2_session") continue;
 
-                cookieSession = cookie;
+                CookieSession = cookie;
                 loginSuccess = true;
+
+                webClient.SetCookie(cookie);
+
                 break;
             }
 
@@ -60,8 +63,8 @@ namespace WTM.WebsiteClient.Services
 
         public void Logout()
         {
-            webClient.RemoveCookie(cookieSession);
-            cookieSession = null;
+            webClient.RemoveCookie(CookieSession);
+            CookieSession = null;
         }
     }
 }

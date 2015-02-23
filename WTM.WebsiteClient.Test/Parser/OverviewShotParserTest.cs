@@ -2,7 +2,6 @@
 using NFluent;
 using NUnit.Framework;
 using WTM.WebsiteClient.Parsers;
-using WTM.WebsiteClient.Test.Application;
 using WTM.WebsiteClient.Test.Properties;
 
 namespace WTM.WebsiteClient.Test.Parser

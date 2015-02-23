@@ -1,7 +1,7 @@
 ﻿using NFluent;
 using NUnit.Framework;
 using WTM.WebsiteClient.Parsers;
-using WTM.WebsiteClient.Test.Application;
+using WTM.WebsiteClient.Services;
 using WTM.WebsiteClient.Test.Properties;
 
 namespace WTM.WebsiteClient.Test.Parser
@@ -20,6 +20,9 @@ namespace WTM.WebsiteClient.Test.Parser
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
             parser = new ShotParser(webClient, htmlParser);
+
+            var authenticateService = new AuthenticateService(webClient, htmlParser);
+            authenticateService.Login("captainOblivious", "captainOblivious");
         }
 
         [Test]

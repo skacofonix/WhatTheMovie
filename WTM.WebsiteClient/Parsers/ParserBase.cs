@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using HtmlAgilityPack;
+using WTM.Domain;
 using WTM.Domain.Interfaces;
 
 namespace WTM.WebsiteClient.Parsers
@@ -50,13 +52,15 @@ namespace WTM.WebsiteClient.Parsers
 
             var instance = new T();
 
+            instance.ParseInfos = new List<ParseInfo>();
+
             try
             {
                 ParseHtmlDocument(instance, document);
             }
             catch (Exception ex)
             {
-                // TODO : Log
+                instance.ParseInfos.Add(new ParseInfo(ParseLevel.Fatal, "Fatal error occur when parse entity", ex));
             }
 
             stopwatch.Stop();

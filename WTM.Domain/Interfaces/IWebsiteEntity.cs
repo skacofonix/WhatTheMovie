@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WTM.Domain.Interfaces
 {
@@ -7,5 +8,7 @@ namespace WTM.Domain.Interfaces
         DateTime ParseDateTime { get; set; }
 
         TimeSpan ParseDuration { get; set; }
+
+        IList<ParseInfo> ParseInfos { get; set; }
     }
 }

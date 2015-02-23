@@ -14,6 +14,15 @@ namespace WTM.Domain
             MemorabiliaList = new List<IMemorabilia>();
         }
 
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
+
+        [IgnoreDataMember]
+        public IList<ParseInfo> ParseInfos { get; set; }
+
         [DataMember]
         public string Name { get; set; }
 
@@ -94,11 +103,5 @@ namespace WTM.Domain
 
         [DataMember]
         public string ImageUrl { get; set; }
-
-        [IgnoreDataMember]
-        public DateTime ParseDateTime { get; set; }
-
-        [IgnoreDataMember]
-        public TimeSpan ParseDuration { get; set; }
     }
 }

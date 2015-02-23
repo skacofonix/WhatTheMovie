@@ -57,11 +57,11 @@
     <Compile Include="Parser\OverviewShotParserTest.cs" />
     <Compile Include="Parser\ShotParserTest.cs" />
     <Compile Include="Parser\SettingsParserTest.cs" />
-    <Compile Include="Application\HttpRequestBuilderTest.cs" />
+    <Compile Include="Helpers\HttpRequestBuilderTest.cs" />
     <Compile Include="Parser\MovieParserTest.cs" />
     <Compile Include="Parser\SearchMovieTvParserTest.cs" />
     <Compile Include="Parser\UserParserTest.cs" />
-    <Compile Include="Application\WebClientFake.cs" />
+    <Compile Include="WebClientFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

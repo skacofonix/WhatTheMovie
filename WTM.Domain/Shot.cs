@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using WTM.Domain.Interfaces;
 
@@ -8,6 +9,15 @@ namespace WTM.Domain
     [DataContract]
     public class Shot : IShot, IWebsiteEntity
     {
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
+
+        [IgnoreDataMember]
+        public IList<ParseInfo> ParseInfos { get; set; }
+
         [DataMember(IsRequired = true, Order = 1)]
         public int ShotId { get; set; }
 
@@ -61,12 +71,6 @@ namespace WTM.Domain
 
         [IgnoreDataMember]
         public Movie Movie { get; set; }
-
-        [IgnoreDataMember]
-        public DateTime ParseDateTime { get; set; }
-
-        [IgnoreDataMember]
-        public TimeSpan ParseDuration { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public bool? IsFavourited { get; set; }

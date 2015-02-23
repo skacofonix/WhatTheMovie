@@ -53,6 +53,7 @@ namespace WTM.WebsiteClient.Parsers
             }
 
             var totalNode = displayingInfoNode.SelectSingleNode("./b[2]");
+            if (totalNode == null) return;
             var totalString = totalNode.InnerText;
             int temp;
             if (!string.IsNullOrEmpty(totalString) && int.TryParse(totalString, out temp))

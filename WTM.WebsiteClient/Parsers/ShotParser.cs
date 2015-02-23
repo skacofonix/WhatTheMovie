@@ -35,7 +35,11 @@ namespace WTM.WebsiteClient.Parsers
         protected override void ParseHtmlDocument(Shot instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
-            if (navigator == null) return;
+            if (navigator == null)
+            {
+                instance.ParseInfos.Add(new ParseInfo(ParseLevel.Error, "Cannot create navigator"));
+                return;
+            }
 
             // Navigation
             instance.Navigation = new Navigation();
@@ -70,36 +74,9 @@ namespace WTM.WebsiteClient.Parsers
             instance.NumberOfFavourited = GetNumberOfFavourited(htmlDocument);
 
             // Async call
-            //instance.Difficulty = GetDifficulty(htmlDocument);
-
+            var asyncWebRequest = new Helpers.AsyncWebRequest(WebClient, HtmlParser);
             var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId);
-            string shoutString = null;
-
-            using (var stream = WebClient.GetStream(uriShout))
-            using (var sr = new StreamReader(stream))
-            {
-                shoutString = sr.ReadToEnd();
-            }
-
-            var shoutStringClean = shoutString.CleanString();
-
-            var regexShout = new Regex("Element.update\\(\"shoutbox\", \"(.*)\"\\);");
-
-            string shoutBodyHtml = null;
-            var match = regexShout.Match(shoutStringClean);
-            if (match.Success)
-            {
-                shoutBodyHtml = match.Groups[1].Value;
-            }
-
-            var sb = new StringBuilder();
-            sb.Append("<html><body>");
-            sb.Append(shoutBodyHtml);
-            sb.Append("</html></body>");
-
-            var shoutHtml = sb.ToString();
-
-            var shoutDocument = HtmlParser.GetHtmlDocument(shoutHtml);
+            var shoutDocument = asyncWebRequest.DoAsyncGetRequest(uriShout);
 
             var shoutNavigator = shoutDocument.CreateNavigator();
             if (shoutNavigator == null)
@@ -113,28 +90,20 @@ namespace WTM.WebsiteClient.Parsers
         }
 
         #region Navigation
-        
+
         private int? GetFirstShotId(HtmlDocument document)
         {
-            var firstShotIdLink = document.GetElementbyId("first_shot_link")
-                                          .GetAttributeValue("href", string.Empty);
-            return firstShotIdLink.ExtractAndParseInt(regexShotId);
+            return ParseNavigationId(document, "first_shot_link");
         }
 
         private int? GetPreviousShotId(HtmlDocument document)
         {
-            var previousShotIdLink = document.GetElementbyId("prev_shot_link")
-                                             .GetAttributeValue("href", string.Empty);
-            return previousShotIdLink.ExtractAndParseInt(regexShotId);
+            return ParseNavigationId(document, "prev_shot_link");
         }
 
         private int? GetPreviousUnsolvedShotId(HtmlDocument document)
         {
-            var previousUnsolvedShotIdNode = document.GetElementbyId("prev_unsolved_shot_link");
-            if (previousUnsolvedShotIdNode == null) return null;
-            return previousUnsolvedShotIdNode
-                        .GetAttributeValue("href", string.Empty)
-                        .ExtractAndParseInt(regexShotId);
+            return ParseNavigationId(document, "prev_unsolved_shot_link");
         }
 
         private int? GetShotId(IXPathNavigable htmlDocument)
@@ -153,23 +122,26 @@ namespace WTM.WebsiteClient.Parsers
 
         private int? GetNextUnsolvedShotId(HtmlDocument document)
         {
-            var nextUnsolvedShotIdLink = document.GetElementbyId("next_unsolved_shot_link")
-                                                 .GetAttributeValue("href", string.Empty);
-            return nextUnsolvedShotIdLink.ExtractAndParseInt(regexShotId);
+            return ParseNavigationId(document, "next_unsolved_shot_link");
         }
 
         private int? GetNextShotId(HtmlDocument document)
         {
-            var nextShotId = document.GetElementbyId("next_shot_link")
-                                     .GetAttributeValue("href", string.Empty);
-            return nextShotId.ExtractAndParseInt(regexShotId);
+            return ParseNavigationId(document, "next_shot_link");
         }
 
         private int? GetLastShotId(HtmlDocument document)
         {
-            var lastShotIdLink = document.GetElementbyId("last_shot_link")
-                                         .GetAttributeValue("href", string.Empty);
-            return lastShotIdLink.ExtractAndParseInt(regexShotId);
+            return ParseNavigationId(document, "last_shot_link");
+        }
+
+        private int? ParseNavigationId(HtmlDocument document, string elementId)
+        {
+            var elementNode = document.GetElementbyId(elementId);
+            if (elementNode == null) return null;
+            return elementNode
+                .GetAttributeValue("href", string.Empty)
+                .ExtractAndParseInt(regexShotId);
         }
 
         #endregion
@@ -265,7 +237,7 @@ namespace WTM.WebsiteClient.Parsers
         {
             var node = navigator.SelectSingleNode("//div[@id='main_shot']/script[4]");
             if (node == null) return null;
-            
+
             var rateRegex = new Regex(@"Overall rating: &lt;strong&gt;(\d.?\d{2})&lt;/strong&gt; \((\d*) votes\)");
 
             var match = rateRegex.Match(node.InnerXml);

@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using WTM.WebsiteClient.Helpers;
 
-namespace WTM.WebsiteClient.Test.Application
+namespace WTM.WebsiteClient.Test.Helpers
 {
     [TestFixture]
     public class HttpRequestBuilderTest
