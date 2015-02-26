@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F38DFE6-3F8A-4E28-8FD1-4A722225F2E9}</ProjectGuid>
+    <ProjectGuid>{87F8C3E0-4BF6-4AF0-94DB-965B91200EFE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WTM.Mobile.Core</RootNamespace>
-    <AssemblyName>WTM.Mobile.Core</AssemblyName>
+    <RootNamespace>WTM.WebsiteWrapper</RootNamespace>
+    <AssemblyName>WTM.WebsiteWrapper</AssemblyName>
     <DefaultLanguage>fr-FR</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,26 +34,56 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App.cs" />
+    <Compile Include="Extensions\HtmlDocumentExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\AsyncWebRequest.cs" />
+    <Compile Include="Helpers\HttpRequestBuilder.cs" />
+    <Compile Include="HtmlParser.cs" />
+    <Compile Include="IHtmlParser.cs" />
+    <Compile Include="IWebClient.cs" />
+    <Compile Include="Parsers\BookmarksParser.cs" />
+    <Compile Include="Parsers\MovieParser.cs" />
+    <Compile Include="Parsers\OverviewShotParser.cs" />
+    <Compile Include="Parsers\ParserBase.cs" />
+    <Compile Include="Parsers\SearchBaseParser.cs" />
+    <Compile Include="Parsers\SearchMovieTvParser.cs" />
+    <Compile Include="Parsers\SearchTagParser.cs" />
+    <Compile Include="Parsers\SearchUserParser.cs" />
+    <Compile Include="Parsers\SettingsParser.cs" />
+    <Compile Include="Parsers\ShotParser.cs" />
+    <Compile Include="Parsers\UserParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthenticateService.cs" />
+    <Compile Include="Services\DownloadService.cs" />
+    <Compile Include="Services\GuessTitleResponse.cs" />
+    <Compile Include="Services\IShotService.cs" />
+    <Compile Include="Services\MovieService.cs" />
+    <Compile Include="Services\OverviewDisplayOptionsService.cs" />
+    <Compile Include="Services\RandomOptionsService.cs" />
+    <Compile Include="Services\RateService.cs" />
+    <Compile Include="Services\ServerDateTimeService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\ShotArchiveService.cs" />
+    <Compile Include="Services\ShotFeatureFilmsService.cs" />
+    <Compile Include="Services\ShotNewSubmissionsService.cs" />
+    <Compile Include="Services\ShotOverviewService.cs" />
     <Compile Include="Services\ShotService.cs" />
-    <Compile Include="ViewModels\ShotViewModel.cs" />
-    <Compile Include="ViewModels\FirstViewModel.cs" />
+    <Compile Include="Services\ShowSolutionResponse.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="WebClient.cs" />
+    <Compile Include="WebClientWTM.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.CrossCore.dll</HintPath>
+    <Reference Include="HtmlAgilityPack-PCL">
+      <HintPath>..\packages\HtmlAgilityPack-PCL.1.4.6\lib\HtmlAgilityPack-PCL.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.5.0\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.dll</HintPath>
+    <Reference Include="System.Xml.XPath">
+      <HintPath>..\packages\System.Xml.XPath.SL4.2.0.5.0\lib\System.Xml.XPath.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\portable-win+net45+wp8+win8+wpa81\Cirrious.MvvmCross.Localization.dll</HintPath>
-    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
@@ -64,10 +94,6 @@
       <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
       <Name>WTM.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Local\" />
-    <Folder Include="Services\Remote\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
