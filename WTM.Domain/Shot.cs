@@ -67,7 +67,7 @@ namespace WTM.Domain
         public IList<string> Languages { get; set; }
 
         [DataMember(IsRequired = true)]
-        public IRate Rate { get; set; }
+        public Rate Rate { get; set; }
 
         [IgnoreDataMember]
         public Movie Movie { get; set; }

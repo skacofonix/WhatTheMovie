@@ -1,37 +1,37 @@
 ﻿using System;
 using WTM.Core.Services;
-using WTM.Domain.Interfaces;
+using WTM.Domain;
 
 namespace WTM.Mobile.Core.Services
 {
     public class ShotService : IShotService
     {
-        public IShot GetRandomShot()
+        public Shot GetRandomShot()
         {
             throw new NotImplementedException();
         }
 
-        public IShot GetShotById(int id)
+        public Shot GetShotById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IGuessTitleResponse GuessTitle(int shotId, string title)
+        public GuessTitleResponse GuessTitle(int shotId, string title)
         {
             throw new NotImplementedException();
         }
 
-        public IMovie ShowSolution(int shotId)
+        public Movie ShowSolution(int shotId)
         {
             throw new NotImplementedException();
         }
 
-        public IRate Rate(int score)
+        public Rate Rate(int score)
         {
             throw new NotImplementedException();
         }
 
-        public IShotSummaryCollection Search(string tag, int? page = null)
+        public ShotSummaryCollection Search(string tag, int? page = null)
         {
             throw new NotImplementedException();
         }

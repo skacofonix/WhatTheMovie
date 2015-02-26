@@ -1,20 +1,19 @@
 ﻿using WTM.Domain;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Core.Services
 {
     public interface IShotService
     {
-        IShot GetRandomShot();
+        Shot GetRandomShot();
 
-        IShot GetShotById(int id);
+        Shot GetShotById(int id);
 
-        IGuessTitleResponse GuessTitle(int shotId, string title);
+        GuessTitleResponse GuessTitle(int shotId, string title);
 
-        IMovie ShowSolution(int shotId);
+        Movie ShowSolution(int shotId);
 
-        IRate Rate(int score);
+        Rate Rate(int score);
 
-        IShotSummaryCollection Search(string tag, int? page = null);
+        ShotSummaryCollection Search(string tag, int? page = null);
     }
 }

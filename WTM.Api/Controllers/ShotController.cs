@@ -2,12 +2,19 @@
 using System.Web.Http;
 using WTM.Core.Services;
 using WTM.Domain;
+using WTM.WebsiteClient;
+using WTM.WebsiteClient.Services;
 
 namespace WTM.Api.Controllers
 {
     public class ShotController : ApiController
     {
         private readonly IShotService shotService;
+
+        public ShotController()
+        {
+            shotService = new ShotService(new WebClientWTM(), new HtmlParser());
+        }
 
         public ShotController(IShotService shotService)
         {

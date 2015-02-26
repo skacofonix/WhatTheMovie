@@ -18,7 +18,7 @@ namespace WTM.WebsiteClient.Services
         private readonly ShotParser shotParser;
         private readonly SearchTagParser shotSearcher;
 
-        protected ShotService(IWebClient webClient, IHtmlParser htmlParser)
+        public ShotService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             this.htmlParser = htmlParser;
@@ -26,21 +26,19 @@ namespace WTM.WebsiteClient.Services
             shotSearcher = new SearchTagParser(webClient, htmlParser);
         }
 
-        public IShot GetRandomShot()
+        public Shot GetRandomShot()
         {
-            IShot shot = shotParser.GetRandom();
-            return shot;
+            return shotParser.GetRandom();
         }
 
-        public IShot GetShotById(int id)
+        public Shot GetShotById(int id)
         {
-            IShot shot = shotParser.GetById(id);
-            return shot;
+            return shotParser.GetById(id);
         }
 
-        public IGuessTitleResponse GuessTitle(int shotId, string title)
+        public GuessTitleResponse GuessTitle(int shotId, string title)
         {
-            IGuessTitleResponse response = null;
+            GuessTitleResponse response = null;
 
             var titleFormatted = WebUtility.UrlEncode(title.Trim());
 
@@ -75,9 +73,9 @@ namespace WTM.WebsiteClient.Services
             return response;
         }
 
-        public IGuessTitleResponse ShowSolution(int shotId)
+        public GuessTitleResponse ShowSolution(int shotId)
         {
-            IGuessTitleResponse response = null;
+            GuessTitleResponse response = null;
 
             var relativeUri = string.Join("/", "shot", shotId, "showsolution");
             var uri = new Uri(webClient.UriBase, relativeUri);
@@ -107,14 +105,14 @@ namespace WTM.WebsiteClient.Services
             return response;
         }
 
-        public IRate Rate(int score)
+        public Rate Rate(int score)
         {
             throw new NotImplementedException();
         }
 
-        IMovie IShotService.ShowSolution(int shotId)
+        Movie IShotService.ShowSolution(int shotId)
         {
-            IMovie movie = null;
+            Movie movie = null;
 
             var guessTitleResponse = ShowSolution(shotId);
             if (guessTitleResponse.RightGuess.HasValue && guessTitleResponse.RightGuess.Value)
@@ -126,16 +124,17 @@ namespace WTM.WebsiteClient.Services
             return movie;
         }
 
-        public IShotSummaryCollection Search(string tag, int? page = null)
+        public ShotSummaryCollection Search(string tag, int? page = null)
         {
-            var result = shotSearcher.Search(tag, page);
+            throw new NotImplementedException();
+            //var result = shotSearcher.Search(tag, page);
 
-            IShotSummaryCollection shotSummaryCollection = new ShotSummaryCollection
-            {
-                Shots = result.Items.Cast<IShotSummary>().ToList()
-            };
+            //var shotSummaryCollection = new ShotSummaryCollection
+            //{
+            //    Shots = result.Items.Cast<ShotSummary>().ToList()
+            //};
 
-            return shotSummaryCollection;
+            //return shotSummaryCollection;
         }
     }
 }

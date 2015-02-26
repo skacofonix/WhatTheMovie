@@ -35,7 +35,7 @@ namespace WTM.Domain.Interfaces
 
         IList<string> Languages { get;  }
 
-        IRate Rate { get;  }
+        Rate Rate { get;  }
 
         Movie Movie { get;  }
 
