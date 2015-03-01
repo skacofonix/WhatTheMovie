@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteClient", "WTM.WebsiteClient\WTM.WebsiteClient.csproj", "{0A433949-DD18-4B4F-A31E-61415FC2A38A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Crawler", "WTM.Crawler\WTM.Crawler.csproj", "{0A433949-DD18-4B4F-A31E-61415FC2A38A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteClient.Test", "WTM.WebsiteClient.Test\WTM.WebsiteClient.Test.csproj", "{1022C2E5-EF1A-474A-BE00-46BF578DCEAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Crawler.Test", "WTM.Crawler.Test\WTM.Crawler.Test.csproj", "{1022C2E5-EF1A-474A-BE00-46BF578DCEAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2FD81C3D-787D-46B8-8062-3701330371F6}"
 EndProject
@@ -31,8 +31,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Mobile.Droid", "WTM.Mobile.Droid\WTM.Mobile.Droid.csproj", "{4AF4487D-0C3E-4384-BA68-62CB1680C648}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{C22C5396-B477-4405-9CFC-8D9EFF6D2426}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.WebsiteWrapper", "WTM.WebsiteWrapper\WTM.WebsiteWrapper.csproj", "{87F8C3E0-4BF6-4AF0-94DB-965B91200EFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Api.Client", "WTM.Api.Client\WTM.Api.Client.csproj", "{6661369F-3C0F-41B6-946B-9EA27DD13FE3}"
 EndProject
@@ -79,10 +77,6 @@ Global
 		{4AF4487D-0C3E-4384-BA68-62CB1680C648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AF4487D-0C3E-4384-BA68-62CB1680C648}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4AF4487D-0C3E-4384-BA68-62CB1680C648}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{87F8C3E0-4BF6-4AF0-94DB-965B91200EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87F8C3E0-4BF6-4AF0-94DB-965B91200EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87F8C3E0-4BF6-4AF0-94DB-965B91200EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87F8C3E0-4BF6-4AF0-94DB-965B91200EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6661369F-3C0F-41B6-946B-9EA27DD13FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6661369F-3C0F-41B6-946B-9EA27DD13FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6661369F-3C0F-41B6-946B-9EA27DD13FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,4 +1,4 @@
-﻿namespace WTM.WebsiteClient.Services
+﻿namespace WTM.Crawler.Services
 {
     public interface IAuthenticateService
     {

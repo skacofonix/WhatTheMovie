@@ -3,8 +3,8 @@ using System.Net;
 using System.Web.Http;
 using WTM.Core.Services;
 using WTM.Domain;
-using WTM.WebsiteClient;
-using WTM.WebsiteClient.Services;
+using WTM.Crawler;
+using WTM.Crawler.Services;
 
 namespace WTM.Api.Controllers
 {

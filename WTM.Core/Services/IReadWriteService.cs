@@ -1,6 +1,6 @@
 ﻿using WTM.Domain.Interfaces;
 
-namespace WTM.WebsiteClient.Services
+namespace WTM.Crawler.Services
 {
     public interface IReadWriteService<T> where T : IWebsiteEntity
     {
