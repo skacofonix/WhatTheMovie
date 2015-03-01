@@ -6,7 +6,7 @@ namespace WTM.Api.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "WTM";
 
             return View();
         }

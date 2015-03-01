@@ -45,9 +45,16 @@ namespace WTM.WebsiteClient.Parsers
             var stopwatch = Stopwatch.StartNew();
 
             HtmlDocument document;
-            using (var stream = WebClient.GetStream(uri))
+            try
             {
-                document = HtmlParser.GetHtmlDocument(stream);
+                using (var stream = WebClient.GetStream(uri))
+                {
+                    document = HtmlParser.GetHtmlDocument(stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             var instance = new T();

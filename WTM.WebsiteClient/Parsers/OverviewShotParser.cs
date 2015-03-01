@@ -125,6 +125,9 @@ namespace WTM.WebsiteClient.Parsers
                     case "New Submissions":
                         instance.ShotType = ShotType.NewSubmissions;
                         break;
+                    case "Rejected Snapshots":
+                        instance.ShotType = ShotType.Rejected;
+                        break;
                 }
             }
 

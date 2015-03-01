@@ -118,7 +118,7 @@ namespace WTM.WebsiteClient
 
         private void SetupWebRequest(WebRequest webRequest)
         {
-            webRequest.Proxy = new WebProxy("localhost:8888");
+            //webRequest.Proxy = new WebProxy("localhost:8888");
         }
 
         private void SetupHttpRequest(HttpWebRequest httpWebRequest, Uri uri)

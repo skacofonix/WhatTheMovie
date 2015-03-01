@@ -56,6 +56,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WTM.Api.Client\WTM.Api.Client.csproj">
+      <Project>{6661369f-3c0f-41b6-946b-9ea27dd13fe3}</Project>
+      <Name>WTM.Api.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
       <Project>{0d34cc8d-817b-419d-8ec6-f524e65f0fcc}</Project>
       <Name>WTM.Core</Name>

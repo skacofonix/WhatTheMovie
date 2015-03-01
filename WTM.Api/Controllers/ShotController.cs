@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Web.Http;
 using WTM.Core.Services;
 using WTM.Domain;
@@ -13,7 +14,9 @@ namespace WTM.Api.Controllers
 
         public ShotController()
         {
-            shotService = new ShotService(new WebClientWTM(), new HtmlParser());
+            var webClient = new WebClientWTM();
+            var htmlParser = new HtmlParser();
+            shotService = new ShotService(webClient, htmlParser);
         }
 
         public ShotController(IShotService shotService)
@@ -23,47 +26,60 @@ namespace WTM.Api.Controllers
 
         public Shot Get()
         {
-            return (Shot)shotService.GetRandomShot();
+            return Random();
         }
 
         public Shot Get(int id)
         {
-            return (Shot)shotService.GetShotById(id);
+            return shotService.GetShotById(id);
         }
 
+        [ActionName("Random")]
         public Shot Random()
         {
-            return (Shot)shotService.GetRandomShot();
+            return shotService.GetRandomShot();
         }
 
-        public GuessTitleResponse GuessTitle(int id, [FromBody]string guessTitle)
+        [HttpGet]
+        [ActionName("Guess")]
+        public GuessTitleResponse Guess(int id, string title)
         {
             // Don't forget fucking guillmet lorsque l'on forge la trame sous fidler
             // Content-Type: application/json
 
-            return (GuessTitleResponse)shotService.GuessTitle(id, guessTitle);
+            return shotService.GuessTitle(id, WebUtility.UrlDecode(title));
         }
 
-        public Rate Rate(int id, [FromBody] int score)
+        [HttpGet]
+        [ActionName("Rate")]
+        public Rate Rate(int id, int score)
         {
             throw new NotImplementedException();
         }
 
+        [HttpGet]
+        [ActionName("AddBookmark")]
         public bool AddBookmark(int id)
         {
             throw new NotImplementedException();
         }
 
+        [HttpGet]
+        [ActionName("RemoveBookmark")]
         public bool RemoveBookmark(int id)
         {
             throw new NotImplementedException();
         }
 
+        [HttpGet]
+        [ActionName("AddFavourite")]
         public bool AddFavourite(int id)
         {
             throw new NotImplementedException();
         }
 
+        [HttpGet]
+        [ActionName("RemoveFavourite")]
         public bool RemoveFavourite(int id)
         {
             throw new NotImplementedException();

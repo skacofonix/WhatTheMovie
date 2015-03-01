@@ -7,7 +7,7 @@ namespace WTM.Domain.Interfaces
     {
         int ShotId { get; }
 
-        string ImageUri { get;  }
+        Uri ImageUri { get;  }
 
         string MovieId { get;  }
 

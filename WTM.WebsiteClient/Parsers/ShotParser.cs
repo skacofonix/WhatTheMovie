@@ -204,13 +204,18 @@ namespace WTM.WebsiteClient.Parsers
 
         #region Solution station
 
-        private string GetImageUrl(HtmlDocument document)
+        private Uri GetImageUrl(HtmlDocument document)
         {
             var imageUrlSection = document.DocumentNode.Descendants("script")
                                                        .Where(s => s.Attributes.Any(attr => attr.Name == "type" && attr.Value == "text/javascript"))
                                                        .Select(s => s.InnerText)
                                                        .FirstOrDefault(w => w.Contains("var imageSrc"));
-            return imageUrlSection.ExtractValue(new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
+
+            var urn = imageUrlSection.ExtractValue(new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
+
+            var uri = new Uri(WebClient.UriBase, urn);
+
+            return uri;
         }
 
         private ShotUserStatus? GetUserStatus(HtmlDocument document, int? nbOfSolver)

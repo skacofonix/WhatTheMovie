@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using WTM.Domain.Interfaces;
 
@@ -22,7 +21,7 @@ namespace WTM.Domain
         public int ShotId { get; set; }
 
         [DataMember(IsRequired = true, Order = 2)]
-        public string ImageUri { get; set; }
+        public Uri ImageUri { get; set; }
 
         [DataMember(IsRequired = true)]
         public Navigation Navigation { get; set; }

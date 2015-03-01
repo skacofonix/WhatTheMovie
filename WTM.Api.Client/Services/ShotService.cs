@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using WTM.Core.Services;
 using WTM.Domain;
 
@@ -15,7 +15,10 @@ namespace WTM.Api.Client.Services
 
         public ShotService()
         {
-            var uriBuilder = new UriBuilder("http", "localhost", 56369, "api/");
+            UriBuilder uriBuilder;
+            uriBuilder = new UriBuilder("http", "localhost", 56369, "api/shot/");
+            //uriBuilder = new UriBuilder("https", "wtmapi.azurewebsites.net", 443, "api/shot/");
+
             baseUri = uriBuilder.Uri;
 
             httpClient = new HttpClient();
@@ -25,44 +28,64 @@ namespace WTM.Api.Client.Services
         {
             Shot shot = null;
 
-            var uri = new Uri(baseUri, "shot");
+            var uri = baseUri;
 
-            try
+            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
             {
-                var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-                {
-                    var json = JObject.Parse(result.Result);
-                    var jsonReader = json.CreateReader();
-                    var jsonSerialializer = JsonSerializer.Create();
-                    var shotDesrialized = jsonSerialializer.Deserialize<Shot>(jsonReader);
-                    shot = shotDesrialized;
-                }, TaskContinuationOptions.NotOnCanceled);
+                var json = JObject.Parse(result.Result);
+                var jsonReader = json.CreateReader();
+                var jsonSerialializer = JsonSerializer.Create();
+                var shotDesrialized = jsonSerialializer.Deserialize<Shot>(jsonReader);
+                shot = shotDesrialized;
+            });
 
-                task.Wait();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            task.Wait();
 
-            
             return shot;
-        }
-
-        private async Task<string>GetRandomShotString(Uri uri)
-        {
-            var s =  await httpClient.GetStringAsync(uri);
-            return s;
         }
 
         public Shot GetShotById(int id)
         {
-            throw new NotImplementedException();
+            Shot shot = null;
+
+            var uri = new Uri(baseUri, id.ToString());
+
+            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
+            {
+                var json = JObject.Parse(result.Result);
+                var jsonReader = json.CreateReader();
+                var jsonSerialializer = JsonSerializer.Create();
+                var shotDesrialized = jsonSerialializer.Deserialize<Shot>(jsonReader);
+                shot = shotDesrialized;
+            });
+
+            task.Wait();
+
+            return shot;
         }
 
         public GuessTitleResponse GuessTitle(int shotId, string title)
         {
-            throw new NotImplementedException();
+            GuessTitleResponse guessTitleResponse = null;
+            
+            var uri = new Uri(baseUri, string.Format("{0}&guessTitle={1}",
+                shotId,
+                WebUtility.UrlEncode(title)));
+
+            var content = string.Format("guessTitle='{0}'", WebUtility.UrlEncode(title));
+
+            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
+            {
+                var json = JObject.Parse(result.Result);
+                var jsonReader = json.CreateReader();
+                var jsonSerialializer = JsonSerializer.Create();
+                var shotDesrialized = jsonSerialializer.Deserialize<GuessTitleResponse>(jsonReader);
+                guessTitleResponse = shotDesrialized;
+            });
+
+            task.Wait();
+
+            return guessTitleResponse;
         }
 
         public Movie ShowSolution(int shotId)

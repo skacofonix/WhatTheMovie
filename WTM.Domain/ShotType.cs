@@ -6,6 +6,8 @@
 
         FeatureFilms,
 
-        NewSubmissions
+        NewSubmissions,
+
+        Rejected
     }
 }
