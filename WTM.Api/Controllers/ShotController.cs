@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Net;
 using System.Web.Http;
 using WTM.Core.Services;
@@ -24,63 +25,26 @@ namespace WTM.Api.Controllers
             this.shotService = shotService;
         }
 
+        // GET api/Shot
         public Shot Get()
         {
-            return Random();
+            return shotService.GetRandomShot();
         }
 
+        // GET api/Shot/{id}
         public Shot Get(int id)
         {
             return shotService.GetShotById(id);
         }
 
-        [ActionName("Random")]
-        public Shot Random()
+        // POST api/Shot/{id}
+        public GuessTitleResponse Guess(int id, [FromBody]string title)
         {
-            return shotService.GetRandomShot();
-        }
-
-        [HttpGet]
-        [ActionName("Guess")]
-        public GuessTitleResponse Guess(int id, string title)
-        {
-            // Don't forget fucking guillmet lorsque l'on forge la trame sous fidler
-            // Content-Type: application/json
-
             return shotService.GuessTitle(id, WebUtility.UrlDecode(title));
         }
 
-        [HttpGet]
-        [ActionName("Rate")]
-        public Rate Rate(int id, int score)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet]
-        [ActionName("AddBookmark")]
-        public bool AddBookmark(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet]
-        [ActionName("RemoveBookmark")]
-        public bool RemoveBookmark(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet]
-        [ActionName("AddFavourite")]
-        public bool AddFavourite(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet]
-        [ActionName("RemoveFavourite")]
-        public bool RemoveFavourite(int id)
+        // POST api/Shot/{id}
+        public Rate Rate(int id, [FromBody]int rate)
         {
             throw new NotImplementedException();
         }

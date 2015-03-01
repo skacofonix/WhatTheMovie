@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Http;
+using WTM.Api.Client.Helpers;
 using WTM.Core.Services;
 using WTM.Domain;
 
@@ -13,14 +12,9 @@ namespace WTM.Api.Client.Services
         private readonly Uri baseUri;
         private readonly HttpClient httpClient;
 
-        public ShotService()
+        public ShotService(ISettings settings)
         {
-            UriBuilder uriBuilder;
-            uriBuilder = new UriBuilder("http", "localhost", 56369, "api/shot/");
-            //uriBuilder = new UriBuilder("https", "wtmapi.azurewebsites.net", 443, "api/shot/");
-
-            baseUri = uriBuilder.Uri;
-
+            baseUri = new Uri(settings.Host, "shot/");
             httpClient = new HttpClient();
         }
 
@@ -28,15 +22,9 @@ namespace WTM.Api.Client.Services
         {
             Shot shot = null;
 
-            var uri = baseUri;
-
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
+            var task = httpClient.GetStringAsync(baseUri).ContinueWith(result =>
             {
-                var json = JObject.Parse(result.Result);
-                var jsonReader = json.CreateReader();
-                var jsonSerialializer = JsonSerializer.Create();
-                var shotDesrialized = jsonSerialializer.Deserialize<Shot>(jsonReader);
-                shot = shotDesrialized;
+                shot = result.Result.Deserialize<Shot>();
             });
 
             task.Wait();
@@ -52,11 +40,7 @@ namespace WTM.Api.Client.Services
 
             var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
             {
-                var json = JObject.Parse(result.Result);
-                var jsonReader = json.CreateReader();
-                var jsonSerialializer = JsonSerializer.Create();
-                var shotDesrialized = jsonSerialializer.Deserialize<Shot>(jsonReader);
-                shot = shotDesrialized;
+                shot = result.Result.Deserialize<Shot>();
             });
 
             task.Wait();
@@ -67,23 +51,24 @@ namespace WTM.Api.Client.Services
         public GuessTitleResponse GuessTitle(int shotId, string title)
         {
             GuessTitleResponse guessTitleResponse = null;
-            
-            var uri = new Uri(baseUri, string.Format("{0}&guessTitle={1}",
-                shotId,
-                WebUtility.UrlEncode(title)));
 
-            var content = string.Format("guessTitle='{0}'", WebUtility.UrlEncode(title));
+            var uri = new Uri(baseUri, shotId.ToString());
 
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-            {
-                var json = JObject.Parse(result.Result);
-                var jsonReader = json.CreateReader();
-                var jsonSerialializer = JsonSerializer.Create();
-                var shotDesrialized = jsonSerialializer.Deserialize<GuessTitleResponse>(jsonReader);
-                guessTitleResponse = shotDesrialized;
-            });
+            var content = string.Format("title='{0}'", WebUtility.UrlEncode(title));
 
-            task.Wait();
+            var taskPostAsync = httpClient.PostAsync(uri, new StringContent(content))
+                .ContinueWith(resultPostAsync =>
+                {
+                    var taskReadAsync = resultPostAsync.Result.Content.ReadAsStringAsync()
+                        .ContinueWith(resultReadAsync =>
+                        {
+                            guessTitleResponse = resultReadAsync.Result.Deserialize<GuessTitleResponse>();
+                        });
+
+                    taskReadAsync.Wait();
+                });
+
+            taskPostAsync.Wait();
 
             return guessTitleResponse;
         }
