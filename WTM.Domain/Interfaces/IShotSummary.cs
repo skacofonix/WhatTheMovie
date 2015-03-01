@@ -1,6 +1,6 @@
 ﻿namespace WTM.Domain.Interfaces
 {
-    public interface IShotSummary
+    public interface IShotSummary : IWebsiteEntity
     {
         int ShotId { get; set; }
 

@@ -5,7 +5,7 @@ using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
 {
-    public class OverviewDisplayOptionsService : IReadWriteService<IOverviewDisplayOptions>
+    public class OverviewDisplayOptionsService : IReadWriteService<OverviewDisplayOptions>
     {
         private readonly IWebClient webClient;
 
@@ -20,7 +20,7 @@ namespace WTM.Crawler.Services
             this.webClient = webClient;
         }
 
-        public IOverviewDisplayOptions Read()
+        public OverviewDisplayOptions Read()
         {
             var cookie = webClient.GetCookie(OverviewDisplayOptionsCookieName);
             if (cookie == null) return null;
@@ -28,7 +28,7 @@ namespace WTM.Crawler.Services
             var match = overviewOptionsCookieBodyRegex.Match(cookie.Value);
             if (!match.Success) return null;
 
-            IOverviewDisplayOptions overviewDisplayOptions = new OverviewDisplayOptions();
+            var overviewDisplayOptions = new OverviewDisplayOptions();
             overviewDisplayOptions.ShowSolved = match.Groups[1].Value == Show;
             overviewDisplayOptions.ShowUnsolved = match.Groups[2].Value == Show;
             overviewDisplayOptions.ShowPosted = match.Groups[3].Value == Show;
@@ -36,7 +36,7 @@ namespace WTM.Crawler.Services
             return overviewDisplayOptions;
         }
 
-        public bool Write(IOverviewDisplayOptions instance)
+        public bool Write(OverviewDisplayOptions instance)
         {
             var cookieBody = string.Format(OverviewOptionsCookieBodyFormat,
                 instance.ShowSolved ? Show : Hide,

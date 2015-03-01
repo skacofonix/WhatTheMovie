@@ -1,12 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
     [DataContract]
-    public class MovieSummary : IMovieSummary
+    public class MovieSummary : IWebsiteEntity
     {
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
+
+        [IgnoreDataMember]
+        public IList<ParseInfo> ParseInfos { get; set; }
+
         [DataMember]
         public string MovieId { get; private set; }
 

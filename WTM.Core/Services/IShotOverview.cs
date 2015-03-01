@@ -1,10 +1,11 @@
 ﻿using System;
+using WTM.Domain;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Core.Services
 {
     public interface IShotOverview
     {
-        IShotSummaryCollection GetShotSummaryByDate(DateTime date);
+        ShotSummaryCollection GetShotSummaryByDate(DateTime date);
     }
 }

@@ -1,11 +1,22 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
     [DataContract]
-    public class NewSubmissionSummary : IShotSummary, INewSubmissionSummary
+    public class NewSubmissionSummary : IShotSummary
     {
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+        
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
+        
+        [IgnoreDataMember]
+        public IList<ParseInfo> ParseInfos { get; set; }
+
         [DataMember]
         public int ShotId { get; set; }
         
@@ -16,9 +27,11 @@ namespace WTM.Domain
         public ShotUserStatus UserStatus { get; set; }
         
         [DataMember]
-        public IRate Rate { get; private set; }
+        public Rate Rate { get; private set; }
         
         [DataMember]
         public int TimeRemaining { get; private set; }
+
+        
     }
 }

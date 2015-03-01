@@ -1,4 +1,5 @@
-﻿using WTM.Domain.Interfaces;
+﻿using WTM.Domain;
+using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
 {
@@ -8,7 +9,7 @@ namespace WTM.Crawler.Services
             : base(webClient, htmlParser)
         { }
 
-        public IShotSummaryCollection GetShotSummaryToday()
+        public ShotSummaryCollection GetShotSummaryToday()
         {
             return OverviewShotParser.ParseFeatureFilmsToday();
         }

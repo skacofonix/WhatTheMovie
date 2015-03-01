@@ -229,7 +229,7 @@ namespace WTM.Crawler.Parsers
 
             var tipRegex = new Regex("Tip\\('(.*)', '<strong>(.*)</strong> <em>(.*)</em>(.*)'");
 
-            var memorabiliaList = new List<IMemorabilia>();
+            var memorabiliaList = new List<Memorabilia>();
 
             while (memorabiliaRoot.MoveNext())
             {

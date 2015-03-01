@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
     [DataContract]
-    public class Memorabilia : IMemorabilia
+    public class Memorabilia
     {
         [DataMember(IsRequired = true)]
         public string Title { get; set; }

@@ -6,8 +6,8 @@ namespace WTM.Core.Services
 {
     public interface IUserService
     {
-        IUser GetUser(string username);
+        User GetUser(string username);
 
-        IEnumerable<IUserSummary> Search(string username, int? page = null);
+        IEnumerable<UserSummary> Search(string username, int? page = null);
     }
 }

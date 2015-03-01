@@ -4,7 +4,7 @@ using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
-    public class OverviewDisplayOptions : IOverviewDisplayOptions
+    public class OverviewDisplayOptions : IWebsiteEntity
     {
         public DateTime ParseDateTime { get; set; }
         

@@ -4,7 +4,7 @@ using WTM.Domain.Interfaces;
 namespace WTM.Domain
 {
     [DataContract]
-    public class GuessTitleResponse : IGuessTitleResponse
+    public class GuessTitleResponse
     {
         [DataMember(EmitDefaultValue = false)]
         public bool? RightGuess { get; set; }
@@ -19,6 +19,6 @@ namespace WTM.Domain
         public int? Year { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public IMovie Movie { get; private set; }
+        public Movie Movie { get; private set; }
     }
 }

@@ -5,7 +5,7 @@ using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
-    public class SearchResultCollection : ISearchResultCollection
+    public class SearchResultCollection : IWebsiteEntity
     {
         public DateTime ParseDateTime { get; set; }
 
@@ -15,7 +15,7 @@ namespace WTM.Domain
 
         public IList Items { get; set; }
         public int? Total { get; set; }
-        public IRange Range { get; set; }
+        public Range Range { get; set; }
 
         public SearchResultCollection()
         {

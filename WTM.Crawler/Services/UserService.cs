@@ -2,6 +2,7 @@
 using System.Linq;
 using WTM.Core.Services;
 using WTM.Crawler.Parsers;
+using WTM.Domain;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
@@ -17,15 +18,15 @@ namespace WTM.Crawler.Services
             userSearcher = new SearchUserParser(webClient, htmlParser);
         }
 
-        public IUser GetUser(string username)
+        public User GetUser(string username)
         {
             return userParser.GetByUsername(username);
         }
 
-        public IEnumerable<IUserSummary> Search(string username, int? page = null)
+        public IEnumerable<UserSummary> Search(string username, int? page = null)
         {
             var result = userSearcher.Search(username, page);
-            return result.Items.Cast<IUserSummary>().ToList();
+            return result.Items.Cast<UserSummary>().ToList();
         }
     }
 }

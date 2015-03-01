@@ -1,10 +1,9 @@
 ﻿using System.Runtime.Serialization;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
     [DataContract]
-    public class Navigation : INavigation
+    public class Navigation
     {
         [DataMember(EmitDefaultValue = false)]
         public int? FirstId { get; set; }

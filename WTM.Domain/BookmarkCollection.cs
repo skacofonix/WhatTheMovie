@@ -4,7 +4,7 @@ using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
-    public class BookmarkCollection : IBookmarkCollection
+    public class BookmarkCollection : IWebsiteEntity
     {
         public DateTime ParseDateTime { get; set; }
         

@@ -1,6 +1,7 @@
 ﻿using System;
 using WTM.Core.Services;
 using WTM.Crawler.Parsers;
+using WTM.Domain;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
@@ -17,7 +18,7 @@ namespace WTM.Crawler.Services
         private readonly ShotParser shotParser;
         protected readonly OverviewShotParser OverviewShotParser;
 
-        public IShotSummaryCollection GetShotSummaryByDate(DateTime date)
+        public ShotSummaryCollection GetShotSummaryByDate(DateTime date)
         {
             return OverviewShotParser.ParseByDate(date);
         }

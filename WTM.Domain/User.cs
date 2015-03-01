@@ -6,12 +6,12 @@ using WTM.Domain.Interfaces;
 namespace WTM.Domain
 {
     [DataContract]
-    public class User : IUser
+    public class User : IWebsiteEntity
     {
         public User()
         {
             Friends = new List<string>();
-            MemorabiliaList = new List<IMemorabilia>();
+            MemorabiliaList = new List<Memorabilia>();
         }
 
         [IgnoreDataMember]
@@ -99,7 +99,7 @@ namespace WTM.Domain
         public IList<string> Friends { get; set; }
 
         [DataMember]
-        public IList<IMemorabilia> MemorabiliaList { get; set; }
+        public IList<Memorabilia> MemorabiliaList { get; set; }
 
         [DataMember]
         public string ImageUrl { get; set; }

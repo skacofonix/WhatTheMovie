@@ -6,7 +6,7 @@ using WTM.Domain.Interfaces;
 namespace WTM.Domain
 {
     [DataContract]
-    public class Shot : IShot, IWebsiteEntity
+    public class Shot : IWebsiteEntity
     {
         [IgnoreDataMember]
         public DateTime ParseDateTime { get; set; }

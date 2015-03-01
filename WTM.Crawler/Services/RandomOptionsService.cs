@@ -12,7 +12,7 @@ using WTM.Crawler.Extensions;
 
 namespace WTM.Crawler.Services
 {
-    public class RandomOptionsService : IReadWriteService<IDifficultyOptions>
+    public class RandomOptionsService : IReadWriteService<DifficultyOptions>
     {
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
@@ -23,7 +23,7 @@ namespace WTM.Crawler.Services
             this.htmlParser = htmlParser;
         }
 
-        public IDifficultyOptions Read()
+        public DifficultyOptions Read()
         {
             var stopwatch = Stopwatch.StartNew();
 
@@ -49,7 +49,7 @@ namespace WTM.Crawler.Services
             return difficultyOptions;
         }
 
-        public bool Write(IDifficultyOptions difficultyOptions)
+        public bool Write(DifficultyOptions difficultyOptions)
         {
             var uriSource = new Uri(webClient.UriBase, "/shot/1");
             var uriDestination = new Uri(webClient.UriBase, "/shot/setrandomoptions");
@@ -72,7 +72,7 @@ namespace WTM.Crawler.Services
             return asyncWebRequest.DoAsyncPostRequest(uri);
         }
 
-        private static ISnapshotDifficultyChoice GetDifficulty(HtmlDocument htmlDocument)
+        private static SnapshotDifficultyChoice GetDifficulty(HtmlDocument htmlDocument)
         {
             var easyNode = htmlDocument.GetElementbyId("difficulty_easy");
             var mediumNode = htmlDocument.GetElementbyId("difficulty_medium");

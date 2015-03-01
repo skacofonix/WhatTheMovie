@@ -17,18 +17,18 @@ namespace WTM.Crawler.Services
             movieSearcher = new SearchMovieTvParser(webClient, htmlParser);
         }
 
-        public IMovie GetByTitle(string title)
+        public Movie GetByTitle(string title)
         {
             return movieParser.GetById(title);
         }
 
-        public IMovieSummaryCollection Search(string title, int? page)
+        public MovieSummaryCollection Search(string title, int? page)
         {
             var result = movieSearcher.Search(title, page);
 
-            IMovieSummaryCollection movieSummaryCollection = new MovieSummaryCollection
+            var movieSummaryCollection = new MovieSummaryCollection
             {
-                Movies = result.Items.Cast<IMovieSummary>().ToList()
+                Movies = result.Items.Cast<MovieSummary>().ToList()
             };
 
             return movieSummaryCollection;

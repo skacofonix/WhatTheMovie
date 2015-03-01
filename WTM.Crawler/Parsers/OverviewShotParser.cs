@@ -170,7 +170,7 @@ namespace WTM.Crawler.Parsers
                 overviewShotList.Add(shotSummary);
             }
 
-            instance.Shots = overviewShotList.Cast<IShotSummary>().ToList();
+            instance.Shots = overviewShotList.ToList();
         }
     }
 }

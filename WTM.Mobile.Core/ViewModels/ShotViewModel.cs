@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using WTM.Core.Services;
+using WTM.Domain;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Mobile.Core.ViewModels
@@ -19,7 +20,7 @@ namespace WTM.Mobile.Core.ViewModels
             RandomShotCommand.Execute(null);
         }
 
-        public IShot Shot
+        public Shot Shot
         {
             get { return shot; }
             set
@@ -28,7 +29,7 @@ namespace WTM.Mobile.Core.ViewModels
                 RaisePropertyChanged(() => Shot);
             }
         }
-        private IShot shot;
+        private Shot shot;
 
         #region RandomShotCommand
 

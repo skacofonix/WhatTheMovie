@@ -4,7 +4,7 @@ using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
-    public class DifficultyOptions : IDifficultyOptions
+    public class DifficultyOptions : IWebsiteEntity
     {
         public DateTime ParseDateTime { get; set; }
 
@@ -12,7 +12,7 @@ namespace WTM.Domain
 
         public IList<ParseInfo> ParseInfos { get; set; }
 
-        public ISnapshotDifficultyChoice SnapshotDifficultyFilter { get; set; }
+        public SnapshotDifficultyChoice SnapshotDifficultyFilter { get; set; }
 
         public int? NumberOfShotEasy { get; set; }
         

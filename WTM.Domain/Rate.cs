@@ -1,10 +1,9 @@
 ﻿using System.Runtime.Serialization;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
     [DataContract]
-    public class Rate : IRate
+    public class Rate
     {
         [DataMember(IsRequired = true)]
         public decimal Score { get; set; }

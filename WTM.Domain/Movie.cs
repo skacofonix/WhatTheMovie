@@ -6,7 +6,7 @@ using WTM.Domain.Interfaces;
 namespace WTM.Domain
 {
     [DataContract]
-    public class Movie : IMovie
+    public class Movie : IWebsiteEntity
     {
         public Movie()
         {
@@ -38,7 +38,7 @@ namespace WTM.Domain
         public int? Year { get;  set; }
 
         [DataMember]
-        public IRate Rate { get;  set; }
+        public Rate Rate { get; set; }
 
         [DataMember]
         public IList<string> AlternativeTitles { get;  set; }

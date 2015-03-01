@@ -5,7 +5,7 @@ using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
-    public class UserSummary : IUserSummary
+    public class UserSummary : IWebsiteEntity
     {
         [IgnoreDataMember]
         public DateTime ParseDateTime { get; set; }
