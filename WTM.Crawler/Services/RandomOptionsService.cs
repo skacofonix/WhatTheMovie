@@ -2,13 +2,9 @@
 using HtmlAgilityPack;
 using System;
 using System.Diagnostics;
-using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using WTM.Crawler.Helpers;
 using WTM.Domain;
-using WTM.Domain.Interfaces;
-using WTM.Crawler.Extensions;
 
 namespace WTM.Crawler.Services
 {

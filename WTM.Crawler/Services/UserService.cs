@@ -3,7 +3,6 @@ using System.Linq;
 using WTM.Core.Services;
 using WTM.Crawler.Parsers;
 using WTM.Domain;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
 {

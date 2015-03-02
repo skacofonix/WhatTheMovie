@@ -7,21 +7,18 @@ using WTM.Core.Services;
 using WTM.Crawler.Helpers;
 using WTM.Crawler.Parsers;
 using WTM.Domain;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
 {
     public class ShotService : IShotService
     {
         private readonly IWebClient webClient;
-        private readonly IHtmlParser htmlParser;
         private readonly ShotParser shotParser;
         private readonly SearchTagParser shotSearcher;
 
         public ShotService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
-            this.htmlParser = htmlParser;
             shotParser = new ShotParser(webClient, htmlParser);
             shotSearcher = new SearchTagParser(webClient, htmlParser);
         }
@@ -36,7 +33,7 @@ namespace WTM.Crawler.Services
             return shotParser.GetById(id);
         }
 
-        public GuessTitleResponse GuessTitle(int shotId, string title)
+        public GuessTitleResponse GuessTitle(int id, string title)
         {
             GuessTitleResponse response = null;
 
@@ -47,7 +44,7 @@ namespace WTM.Crawler.Services
             requestBuilder.AddParameter("commit", "Guess");
             var data = requestBuilder.ToString();
 
-            var post = string.Join("/", "shot", shotId, "guess");
+            var post = string.Join("/", "shot", id, "guess");
             var uri = new Uri(webClient.UriBase, post);
             var webResponse = webClient.Post(uri, data);
 
@@ -74,11 +71,11 @@ namespace WTM.Crawler.Services
             return response;
         }
 
-        public GuessTitleResponse ShowSolution(int shotId)
+        public GuessTitleResponse ShowSolution(int id)
         {
             GuessTitleResponse response = null;
 
-            var relativeUri = string.Join("/", "shot", shotId, "showsolution");
+            var relativeUri = string.Join("/", "shot", id, "showsolution");
             var uri = new Uri(webClient.UriBase, relativeUri);
             var webResponse = webClient.Post(uri);
 
@@ -106,36 +103,21 @@ namespace WTM.Crawler.Services
             return response;
         }
 
-        public Rate Rate(int score)
+        public Rate Rate(int id, int score)
         {
             throw new NotImplementedException();
-        }
-
-        Movie IShotService.ShowSolution(int shotId)
-        {
-            Movie movie = null;
-
-            var guessTitleResponse = ShowSolution(shotId);
-            if (guessTitleResponse.RightGuess.HasValue && guessTitleResponse.RightGuess.Value)
-            {
-                var movieParser = new MovieParser(webClient, htmlParser);
-                movie = movieParser.GetById(guessTitleResponse.MovieId);
-            }
-
-            return movie;
         }
 
         public ShotSummaryCollection Search(string tag, int? page = null)
         {
-            throw new NotImplementedException();
-            //var result = shotSearcher.Search(tag, page);
+            var result = shotSearcher.Search(tag, page);
 
-            //var shotSummaryCollection = new ShotSummaryCollection
-            //{
-            //    Shots = result.Items.Cast<ShotSummary>().ToList()
-            //};
+            var shotSummaryCollection = new ShotSummaryCollection
+            {
+                Shots = result.Items.Cast<ShotSummary>().ToList()
+            };
 
-            //return shotSummaryCollection;
+            return shotSummaryCollection;
         }
     }
 }

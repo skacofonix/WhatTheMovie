@@ -6,7 +6,7 @@ using WTM.Domain;
 
 namespace WTM.Crawler.Services
 {
-    internal class SettingsService
+    internal class SettingsService : IReadWriteService<Settings>
     {
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;

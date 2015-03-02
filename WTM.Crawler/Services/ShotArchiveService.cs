@@ -1,5 +1,4 @@
 ﻿using WTM.Domain;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
 {

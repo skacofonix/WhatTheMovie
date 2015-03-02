@@ -16,17 +16,17 @@ namespace WTM.Mobile.Core.Services
             throw new NotImplementedException();
         }
 
-        public GuessTitleResponse GuessTitle(int shotId, string title)
+        public GuessTitleResponse GuessTitle(int id, string title)
         {
             throw new NotImplementedException();
         }
 
-        public Movie ShowSolution(int shotId)
+        public GuessTitleResponse ShowSolution(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Rate Rate(int score)
+        public Rate Rate(int id, int score)
         {
             throw new NotImplementedException();
         }

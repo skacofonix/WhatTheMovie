@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using HtmlAgilityPack;
-using WTM.Domain;
-using WTM.Domain.Interfaces;
 using WTM.Crawler.Extensions;
+using WTM.Domain;
 
 namespace WTM.Crawler.Parsers
 {

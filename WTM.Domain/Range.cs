@@ -1,6 +1,4 @@
-﻿using WTM.Domain.Interfaces;
-
-namespace WTM.Domain
+﻿namespace WTM.Domain
 {
     public class Range
     {

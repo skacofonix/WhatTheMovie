@@ -2,7 +2,6 @@ using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using WTM.Core.Services;
 using WTM.Domain;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Mobile.Core.ViewModels
 {

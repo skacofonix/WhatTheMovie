@@ -2,7 +2,6 @@
 using WTM.Core.Services;
 using WTM.Crawler.Parsers;
 using WTM.Domain;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
 {
@@ -11,11 +10,9 @@ namespace WTM.Crawler.Services
         protected ShotOverviewService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
         {
-            shotParser = new ShotParser(webClient, htmlParser);
             OverviewShotParser = new OverviewShotParser(webClient, htmlParser);
         }
 
-        private readonly ShotParser shotParser;
         protected readonly OverviewShotParser OverviewShotParser;
 
         public ShotSummaryCollection GetShotSummaryByDate(DateTime date)

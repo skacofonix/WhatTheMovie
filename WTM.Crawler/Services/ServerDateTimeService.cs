@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using HtmlAgilityPack;
 using WTM.Core.Services;
 
 namespace WTM.Crawler.Services

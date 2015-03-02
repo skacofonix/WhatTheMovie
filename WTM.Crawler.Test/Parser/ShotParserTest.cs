@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using WTM.Crawler.Parsers;
 using WTM.Crawler.Services;
-using WTM.Crawler.Test.Properties;
 
 namespace WTM.Crawler.Test.Parser
 {

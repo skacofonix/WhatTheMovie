@@ -2,11 +2,10 @@
 using WTM.Core.Services;
 using WTM.Crawler.Parsers;
 using WTM.Domain;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
 {
-    internal class MovieService : IMovieService
+    public class MovieService : IMovieService
     {
         private readonly MovieParser movieParser;
         private readonly SearchMovieTvParser movieSearcher;
@@ -22,7 +21,7 @@ namespace WTM.Crawler.Services
             return movieParser.GetById(title);
         }
 
-        public MovieSummaryCollection Search(string title, int? page)
+        public MovieSummaryCollection Search(string title, int? page = null)
         {
             var result = movieSearcher.Search(title, page);
 

@@ -48,11 +48,11 @@ namespace WTM.Api.Client.Services
             return shot;
         }
 
-        public GuessTitleResponse GuessTitle(int shotId, string title)
+        public GuessTitleResponse GuessTitle(int id, string title)
         {
             GuessTitleResponse guessTitleResponse = null;
 
-            var uri = new Uri(baseUri, shotId.ToString());
+            var uri = new Uri(baseUri, id.ToString());
 
             var content = string.Format("title='{0}'", WebUtility.UrlEncode(title));
 
@@ -73,12 +73,12 @@ namespace WTM.Api.Client.Services
             return guessTitleResponse;
         }
 
-        public Movie ShowSolution(int shotId)
+        public GuessTitleResponse ShowSolution(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Rate Rate(int score)
+        public Rate Rate(int id, int score)
         {
             throw new NotImplementedException();
         }

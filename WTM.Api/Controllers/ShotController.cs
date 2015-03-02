@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Net;
+﻿using System.Net;
 using System.Web.Http;
 using WTM.Core.Services;
 using WTM.Domain;
@@ -43,10 +41,17 @@ namespace WTM.Api.Controllers
             return shotService.GuessTitle(id, WebUtility.UrlDecode(title));
         }
 
+        [HttpGet]
+        public GuessTitleResponse SHowSolution(int id)
+        {
+            return shotService.ShowSolution(id);
+        }
+
         // POST api/Shot/{id}
         public Rate Rate(int id, [FromBody]int rate)
         {
-            throw new NotImplementedException();
+            return shotService.Rate(id, rate);
         }
+
     }
 }

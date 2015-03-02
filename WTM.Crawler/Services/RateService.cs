@@ -21,7 +21,6 @@ namespace WTM.Crawler.Services
         public void RateShot(string id, int rated, bool rerated = false)
         {
             Rate("shot", id, rated, rerated);
-            
         }
 
         private void Rate(string category, string id, int rate, bool rerated)

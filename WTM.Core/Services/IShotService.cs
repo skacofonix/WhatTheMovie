@@ -8,11 +8,11 @@ namespace WTM.Core.Services
 
         Shot GetShotById(int id);
 
-        GuessTitleResponse GuessTitle(int shotId, string title);
+        GuessTitleResponse GuessTitle(int id, string title);
 
-        Movie ShowSolution(int shotId);
+        GuessTitleResponse ShowSolution(int id);
 
-        Rate Rate(int score);
+        Rate Rate(int id, int score);
 
         ShotSummaryCollection Search(string tag, int? page = null);
     }

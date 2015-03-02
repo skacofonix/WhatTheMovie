@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Text.RegularExpressions;
 using WTM.Domain;
-using WTM.Domain.Interfaces;
 
 namespace WTM.Crawler.Services
 {

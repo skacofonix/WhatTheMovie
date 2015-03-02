@@ -1,22 +1,19 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using WTM.Crawler.Services;
+using WTM.Api.Client.Services;
+using WTM.Core.Services;
 
-namespace WTM.Crawler.Test.Services
+namespace WTM.Api.Client.Test.Services
 {
     [TestFixture]
     public class MovieServiceTest
     {
-        private IWebClient webClient;
-        private IHtmlParser htmlParser;
-        private MovieService movieService;
+        private IMovieService movieService;
 
         [SetUp]
         public void BeforeTest()
         {
-            webClient = new WebClientWTM();
-            htmlParser = new HtmlParser();
-            movieService = new MovieService(webClient, htmlParser);
+            movieService = new MovieService(new SettingsProxy());
         }
 
         [Test]

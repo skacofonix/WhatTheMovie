@@ -5,8 +5,10 @@ namespace WTM.Api.Client
 {
     public interface ISettings
     {
-        Uri Host { get; set; }
-        Uri Proxy { get; set; }
-        ICredentials ProxyCredentials { get; set; }
+        Uri Host { get; }
+        
+        Uri Proxy { get; }
+        
+        ICredentials ProxyCredentials { get; }
     }
 }
