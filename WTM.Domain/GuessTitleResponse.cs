@@ -9,7 +9,7 @@ namespace WTM.Domain
         public bool? RightGuess { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public string MovieId { get; set; }
+        public string Id { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public string OriginalTitle { get; set; }

@@ -211,6 +211,7 @@
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ShotController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Error.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

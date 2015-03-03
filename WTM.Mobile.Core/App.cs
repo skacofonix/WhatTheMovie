@@ -1,3 +1,4 @@
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 
 namespace WTM.Mobile.Core

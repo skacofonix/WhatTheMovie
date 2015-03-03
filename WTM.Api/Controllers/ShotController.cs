@@ -35,23 +35,25 @@ namespace WTM.Api.Controllers
             return shotService.GetShotById(id);
         }
 
-        // POST api/Shot/{id}
-        public GuessTitleResponse Guess(int id, [FromBody]string title)
+        // GET api/Shot/{id}?guessTitle={guessTitle}
+        [HttpGet]
+        public GuessTitleResponse Guess(int id, [FromUri]string guessTitle)
         {
-            return shotService.GuessTitle(id, WebUtility.UrlDecode(title));
+            return shotService.GuessTitle(id, WebUtility.UrlDecode(guessTitle));
         }
 
-        [HttpGet]
-        public GuessTitleResponse SHowSolution(int id)
+        // GET api/Shot/{id}/solution
+        [Route("Api/Shot/{id}/solution")]
+        public GuessTitleResponse GetSolution(int id)
         {
             return shotService.ShowSolution(id);
         }
 
-        // POST api/Shot/{id}
-        public Rate Rate(int id, [FromBody]int rate)
+        // GET api/Shot/{id}?rate={rate}
+        [HttpGet]
+        public Rate Rate(int id, [FromUri]int rate)
         {
             return shotService.Rate(id, rate);
         }
-
     }
 }

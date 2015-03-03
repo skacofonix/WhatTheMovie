@@ -62,7 +62,7 @@ namespace WTM.Crawler.Services
                     response = new GuessTitleResponse
                     {
                         OriginalTitle = match.Groups[2].Value,
-                        MovieId = match.Groups[3].Value,
+                        Id = match.Groups[3].Value,
                         Year = Convert.ToInt32(match.Groups[4].Value),
                         RightGuess = true
                     };
@@ -95,7 +95,7 @@ namespace WTM.Crawler.Services
                     {
                         OriginalTitle = match.Groups[1].Value,
                         Year = Convert.ToInt32(match.Groups[2].Value),
-                        MovieId = match.Groups[3].Value
+                        Id = match.Groups[3].Value
                     };
                 }
             }

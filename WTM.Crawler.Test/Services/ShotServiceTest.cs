@@ -24,7 +24,7 @@ namespace WTM.Crawler.Test.Services
         {
             var response = shotService.GuessTitle(10, "Eternal sunshine of the splotless mind");
             Check.That(response).IsNotNull();
-            Check.That(response.MovieId).IsNotNull();
+            Check.That(response.Id).IsNotNull();
             Check.That(response.OriginalTitle).IsNotNull();
             Check.That(response.Year).IsNotNull();
         }
@@ -43,7 +43,7 @@ namespace WTM.Crawler.Test.Services
             Check.That(response).IsNotNull();
             Check.That(response.OriginalTitle).IsNotNull();
             Check.That(response.Year).IsNotNull();
-            Check.That(response.MovieId).IsNotNull();
+            Check.That(response.Id).IsNotNull();
         }
 
         [Test]
