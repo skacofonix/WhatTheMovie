@@ -32,7 +32,7 @@ namespace WTM.Api.Client.Services
             return shot;
         }
 
-        public Shot GetShotById(int id)
+        public Shot GetById(int id)
         {
             Shot shot = null;
 
@@ -52,30 +52,30 @@ namespace WTM.Api.Client.Services
         {
             GuessTitleResponse guessTitleResponse = null;
 
-            var uri = new Uri(baseUri, id.ToString());
+            var uri = new Uri(baseUri, string.Format("{0}?guessTitle={1}", id,WebUtility.UrlEncode(title)));
 
-            var content = string.Format("title='{0}'", WebUtility.UrlEncode(title));
-
-            var taskPostAsync = httpClient.PostAsync(uri, new StringContent(content))
-                .ContinueWith(resultPostAsync =>
-                {
-                    var taskReadAsync = resultPostAsync.Result.Content.ReadAsStringAsync()
-                        .ContinueWith(resultReadAsync =>
-                        {
-                            guessTitleResponse = resultReadAsync.Result.Deserialize<GuessTitleResponse>();
-                        });
-
-                    taskReadAsync.Wait();
-                });
-
-            taskPostAsync.Wait();
+            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
+            {
+                guessTitleResponse = result.Result.Deserialize<GuessTitleResponse>();
+            });
+            task.Wait();
 
             return guessTitleResponse;
         }
 
-        public GuessTitleResponse ShowSolution(int id)
+        public GuessTitleResponse GetSolution(int id)
         {
-            throw new NotImplementedException();
+            GuessTitleResponse guessTitleResponse = null;
+
+            var uri = new Uri(baseUri, string.Format("{0}/solution", id));
+
+            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
+            {
+                guessTitleResponse = result.Result.Deserialize<GuessTitleResponse>();
+            });
+            task.Wait();
+
+            return guessTitleResponse;
         }
 
         public Rate Rate(int id, int score)
@@ -85,7 +85,18 @@ namespace WTM.Api.Client.Services
 
         public ShotSummaryCollection Search(string tag, int? page = null)
         {
-            throw new NotImplementedException();
+            ShotSummaryCollection shotSummaryCollection = null;
+
+            var uri = new Uri(baseUri, string.Format("?search={0}&page={1}", WebUtility.UrlEncode(tag), page));
+
+            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
+            {
+                shotSummaryCollection = result.Result.Deserialize<ShotSummaryCollection>();
+            });
+
+            task.Wait();
+
+            return shotSummaryCollection;
         }
     }
 }

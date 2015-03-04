@@ -23,7 +23,7 @@ namespace WTM.Crawler.Test.Services
         [Test]
         public void WhenGetUserThenReturnEntity()
         {
-            var user = userService.GetUser("alex68");
+            var user = userService.GetByUsername("alex68");
 
             Check.That(user).IsNotNull();
         }

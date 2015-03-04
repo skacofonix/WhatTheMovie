@@ -28,7 +28,7 @@ namespace WTM.Crawler.Services
             return shotParser.GetRandom();
         }
 
-        public Shot GetShotById(int id)
+        public Shot GetById(int id)
         {
             return shotParser.GetById(id);
         }
@@ -71,7 +71,7 @@ namespace WTM.Crawler.Services
             return response;
         }
 
-        public GuessTitleResponse ShowSolution(int id)
+        public GuessTitleResponse GetSolution(int id)
         {
             GuessTitleResponse response = null;
 

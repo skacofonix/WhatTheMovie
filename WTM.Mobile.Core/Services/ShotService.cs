@@ -1,13 +1,11 @@
-﻿using System;
-using WTM.Core.Services;
+﻿using WTM.Core.Services;
 using WTM.Domain;
-using Settings = WTM.Api.Client.Settings;
 
 namespace WTM.Mobile.Core.Services
 {
     public class ShotService : IShotService
     {
-        private IShotService shotService;
+        private readonly IShotService shotService;
 
         public ShotService()
         {
@@ -18,32 +16,32 @@ namespace WTM.Mobile.Core.Services
 
         public Shot GetRandomShot()
         {
-            throw new NotImplementedException();
+            return shotService.GetRandomShot();
         }
 
-        public Shot GetShotById(int id)
+        public Shot GetById(int id)
         {
-            throw new NotImplementedException();
+            return shotService.GetById(id);
         }
 
         public GuessTitleResponse GuessTitle(int id, string title)
         {
-            throw new NotImplementedException();
+            return shotService.GuessTitle(id, title);
         }
 
-        public GuessTitleResponse ShowSolution(int id)
+        public GuessTitleResponse GetSolution(int id)
         {
-            throw new NotImplementedException();
+            return shotService.GetSolution(id);
         }
 
         public Rate Rate(int id, int score)
         {
-            throw new NotImplementedException();
+            return shotService.Rate(id, score);
         }
 
         public ShotSummaryCollection Search(string tag, int? page = null)
         {
-            throw new NotImplementedException();
+            return shotService.Search(tag, page);
         }
     }
 }

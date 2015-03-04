@@ -39,7 +39,7 @@ namespace WTM.Crawler.Test.Services
         [Test]
         public void WhenShowSolutionThenReceiveSolution()
         {
-            var response = shotService.ShowSolution(10);
+            var response = shotService.GetSolution(10);
             Check.That(response).IsNotNull();
             Check.That(response.OriginalTitle).IsNotNull();
             Check.That(response.Year).IsNotNull();
@@ -59,7 +59,7 @@ namespace WTM.Crawler.Test.Services
         {
             const int expectedShotId = 10;
 
-            var shot = shotService.GetShotById(expectedShotId);
+            var shot = shotService.GetById(expectedShotId);
 
             Check.That(shot).IsNotNull();
             Check.That(shot.ShotId).Equals(expectedShotId);

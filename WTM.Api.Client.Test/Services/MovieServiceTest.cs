@@ -19,7 +19,7 @@ namespace WTM.Api.Client.Test.Services
         [Test]
         public void WhenGetMovieByTitleThenReturnEntity()
         {
-            var movie = movieService.GetByTitle("eternal_sunshine_of_the_spotless_mind");
+            var movie = movieService.GetById("eternal_sunshine_of_the_spotless_mind");
 
             Check.That(movie).IsNotNull();
             Check.That(movie.ParseDateTime).IsNotEqualTo(null);

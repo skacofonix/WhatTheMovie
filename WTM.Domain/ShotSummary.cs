@@ -25,7 +25,5 @@ namespace WTM.Domain
 
         [DataMember(IsRequired = true, Order = 3)]
         public ShotUserStatus UserStatus { get; set; }
-
-        
     }
 }

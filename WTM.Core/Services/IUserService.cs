@@ -5,7 +5,7 @@ namespace WTM.Core.Services
 {
     public interface IUserService
     {
-        User GetUser(string username);
+        User GetByUsername(string username);
 
         IEnumerable<UserSummary> Search(string username, int? page = null);
     }

@@ -17,7 +17,7 @@ namespace WTM.Crawler.Services
             userSearcher = new SearchUserParser(webClient, htmlParser);
         }
 
-        public User GetUser(string username)
+        public User GetByUsername(string username)
         {
             return userParser.GetByUsername(username);
         }

@@ -19,7 +19,7 @@ namespace WTM.Api.Client.Test.Services
         [Test]
         public void WhenGetSpecificUserThenReturnOneValidEntity()
         {
-            var user = userService.GetUser("alex68");
+            var user = userService.GetByUsername("alex68");
             Check.That(user).IsNotNull();
         }
 

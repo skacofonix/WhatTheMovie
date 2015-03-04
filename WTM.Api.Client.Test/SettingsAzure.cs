@@ -12,7 +12,11 @@ namespace WTM.Api.Client.Test
 
         public Uri Proxy
         {
-            get { return new Uri("localhost:8888"); }
+            get
+            {
+                return null;
+                //return new Uri("localhost:8888");
+            }
         }
 
         public ICredentials ProxyCredentials

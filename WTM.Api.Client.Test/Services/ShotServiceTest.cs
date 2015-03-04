@@ -26,7 +26,7 @@ namespace WTM.Api.Client.Test.Services
         [Test]
         public void WhenGetShotThenReturnThisShot()
         {
-            var shot = shotService.GetShotById(10);
+            var shot = shotService.GetById(10);
             Check.That(shot).IsNotNull();
         }
 
@@ -43,6 +43,13 @@ namespace WTM.Api.Client.Test.Services
         {
             var rate = shotService.Rate(10, 5);
             Check.That(rate).IsNotNull();
+        }
+
+        [Test]
+        public void WhenAskSOlutionThenReturnIt()
+        {
+            var guessTitleResponse = shotService.GetSolution(10);
+            Check.That(guessTitleResponse).IsNotNull();
         }
     }
 }

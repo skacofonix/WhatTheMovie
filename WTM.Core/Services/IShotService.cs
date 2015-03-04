@@ -6,11 +6,11 @@ namespace WTM.Core.Services
     {
         Shot GetRandomShot();
 
-        Shot GetShotById(int id);
+        Shot GetById(int id);
 
         GuessTitleResponse GuessTitle(int id, string title);
 
-        GuessTitleResponse ShowSolution(int id);
+        GuessTitleResponse GetSolution(int id);
 
         Rate Rate(int id, int score);
 

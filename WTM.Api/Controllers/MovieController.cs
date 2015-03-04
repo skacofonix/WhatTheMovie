@@ -23,19 +23,17 @@ namespace WTM.Api.Controllers
             this.movieService = movieService;
         }
 
-        // GET api/movie/{title}
-        [Route("api/movie/{title}")]
-        public Movie Get(string title)
+        // GET api/Movie/{id}
+        public Movie Get(string id)
         {
-            var titleDecoded = WebUtility.UrlDecode(title);
-            return movieService.GetByTitle(titleDecoded);
+            return movieService.GetById(id);
         }
 
-        // GET api/movie/?????
-        public MovieSummaryCollection Search(string title, int? page = null)
+        // GET api/Movie?search={search}&page={page}
+        [HttpGet]
+        public MovieSummaryCollection Search(string search, [FromUri]int? page = null)
         {
-            var titleDecoded = WebUtility.UrlDecode(title);
-            return movieService.Search(titleDecoded, page);
+            return movieService.Search(search, page);
         }
     }
 }

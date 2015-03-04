@@ -19,7 +19,7 @@ namespace WTM.Api.Client.Services
             httpClient = new HttpClient();
         }
 
-        public User GetUser(string username)
+        public User GetByUsername(string username)
         {
             User user = null;
 

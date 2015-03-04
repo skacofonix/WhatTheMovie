@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using WTM.Domain.Interfaces;
 
 namespace WTM.Domain
 {
+    [DataContract]
     public class Settings : IWebsiteEntity
     {
+        [IgnoreDataMember]
         public DateTime ParseDateTime { get; set; }
-        
+
+        [IgnoreDataMember]
         public TimeSpan ParseDuration { get; set; }
-        
+
+        [IgnoreDataMember]
         public IList<ParseInfo> ParseInfos { get; set; }
 
-        #region Filters
-
+        [DataMember]
         public bool? ShowGore { get; set; }
 
+        [DataMember]
         public bool? ShowNudity { get; set; }
-
-        #endregion
-
-        public Settings()
-        {
-            ParseDateTime = DateTime.Now;            
-        }
 
         public override bool Equals(object obj)
         {

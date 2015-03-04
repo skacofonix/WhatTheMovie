@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Web.Http;
+using System.Web.UI;
 using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Crawler;
@@ -32,21 +33,21 @@ namespace WTM.Api.Controllers
         // GET api/Shot/{id}
         public Shot Get(int id)
         {
-            return shotService.GetShotById(id);
+            return shotService.GetById(id);
         }
 
         // GET api/Shot/{id}?guessTitle={guessTitle}
         [HttpGet]
         public GuessTitleResponse Guess(int id, [FromUri]string guessTitle)
         {
-            return shotService.GuessTitle(id, WebUtility.UrlDecode(guessTitle));
+            return shotService.GuessTitle(id, guessTitle);
         }
 
         // GET api/Shot/{id}/solution
         [Route("Api/Shot/{id}/solution")]
         public GuessTitleResponse GetSolution(int id)
         {
-            return shotService.ShowSolution(id);
+            return shotService.GetSolution(id);
         }
 
         // GET api/Shot/{id}?rate={rate}
@@ -54,6 +55,13 @@ namespace WTM.Api.Controllers
         public Rate Rate(int id, [FromUri]int rate)
         {
             return shotService.Rate(id, rate);
+        }
+
+        // GET api/Shot?search={search}&page={page}
+        [HttpGet]
+        public ShotSummaryCollection Search(string search, [FromUri] int? page)
+        {
+            return shotService.Search(search, page);
         }
     }
 }

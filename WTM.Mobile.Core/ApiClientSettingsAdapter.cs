@@ -3,7 +3,7 @@ using System.Net;
 
 namespace WTM.Mobile.Core
 {
-    public class ApiClientSettingsAdapter : WTM.Api.Client.ISettings
+    public class ApiClientSettingsAdapter : Api.Client.ISettings
     {
         public Uri Host { get; private set; }
         

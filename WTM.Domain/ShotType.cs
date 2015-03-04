@@ -1,5 +1,8 @@
-﻿namespace WTM.Domain
+﻿using System.Runtime.Serialization;
+
+namespace WTM.Domain
 {
+    [DataContract]
     public enum ShotType
     {
         Archive,
