@@ -25,12 +25,7 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, WebUtility.UrlEncode(username));
 
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-            {
-                user = result.Result.Deserialize<User>();
-            });
-
-            task.Wait();
+            user = httpClient.GetObjectSync<User>(uri);
 
             return user;
         }

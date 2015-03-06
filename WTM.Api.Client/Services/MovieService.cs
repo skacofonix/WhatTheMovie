@@ -24,12 +24,7 @@ namespace WTM.Api.Client.Services
             
             var uri = new Uri(baseUri, WebUtility.UrlEncode(id));
 
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-            {
-                movie = result.Result.Deserialize<Movie>();
-            });
-
-            task.Wait();
+            movie = httpClient.GetObjectSync<Movie>(uri);
 
             return movie;
         }
@@ -40,12 +35,7 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, string.Format("?search={0}&page={1}", WebUtility.UrlEncode(title), page));
 
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-            {
-                movieSummaryCollection = result.Result.Deserialize<MovieSummaryCollection>();
-            });
-
-            task.Wait();
+            movieSummaryCollection = httpClient.GetObjectSync<MovieSummaryCollection>(uri);
 
             return movieSummaryCollection;
         }

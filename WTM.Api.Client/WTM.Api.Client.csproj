@@ -45,6 +45,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\HttpClientExtension.cs" />
     <Compile Include="HttpClientFactory.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Helpers\JsonDeserializer.cs" />

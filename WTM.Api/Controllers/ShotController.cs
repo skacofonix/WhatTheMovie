@@ -1,10 +1,8 @@
-﻿using System.Net;
-using System.Web.Http;
-using System.Web.UI;
+﻿using System.Web.Http;
 using WTM.Core.Services;
-using WTM.Domain;
 using WTM.Crawler;
 using WTM.Crawler.Services;
+using WTM.Domain;
 
 namespace WTM.Api.Controllers
 {

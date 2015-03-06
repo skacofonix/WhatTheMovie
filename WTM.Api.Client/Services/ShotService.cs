@@ -22,12 +22,7 @@ namespace WTM.Api.Client.Services
         {
             Shot shot = null;
 
-            var task = httpClient.GetStringAsync(baseUri).ContinueWith(result =>
-            {
-                shot = result.Result.Deserialize<Shot>();
-            });
-
-            task.Wait();
+            shot = httpClient.GetObjectSync<Shot>(baseUri);
 
             return shot;
         }
@@ -38,12 +33,7 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, id.ToString());
 
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-            {
-                shot = result.Result.Deserialize<Shot>();
-            });
-
-            task.Wait();
+            shot = httpClient.GetObjectSync<Shot>(uri);
 
             return shot;
         }
@@ -54,11 +44,7 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, string.Format("{0}?guessTitle={1}", id,WebUtility.UrlEncode(title)));
 
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-            {
-                guessTitleResponse = result.Result.Deserialize<GuessTitleResponse>();
-            });
-            task.Wait();
+            guessTitleResponse = httpClient.GetObjectSync<GuessTitleResponse>(uri);
 
             return guessTitleResponse;
         }
@@ -69,18 +55,20 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, string.Format("{0}/solution", id));
 
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-            {
-                guessTitleResponse = result.Result.Deserialize<GuessTitleResponse>();
-            });
-            task.Wait();
+            guessTitleResponse = httpClient.GetObjectSync<GuessTitleResponse>(uri);
 
             return guessTitleResponse;
         }
 
         public Rate Rate(int id, int score)
         {
-            throw new NotImplementedException();
+            Rate rate = null;
+
+            var uri = new Uri(baseUri, string.Format("{0}?rate={1}", id, score));
+
+            rate = httpClient.GetObjectSync<Rate>(uri);
+
+            return rate;
         }
 
         public ShotSummaryCollection Search(string tag, int? page = null)
@@ -89,12 +77,7 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, string.Format("?search={0}&page={1}", WebUtility.UrlEncode(tag), page));
 
-            var task = httpClient.GetStringAsync(uri).ContinueWith(result =>
-            {
-                shotSummaryCollection = result.Result.Deserialize<ShotSummaryCollection>();
-            });
-
-            task.Wait();
+            shotSummaryCollection = httpClient.GetObjectSync<ShotSummaryCollection>(uri);
 
             return shotSummaryCollection;
         }
