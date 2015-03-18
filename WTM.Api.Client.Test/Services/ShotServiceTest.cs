@@ -39,6 +39,14 @@ namespace WTM.Api.Client.Test.Services
         }
 
         [Test]
+        public void WhenGuessWrongTitleThenReturnGuessTitleResponse()
+        {
+            var guessTitleResponse = shotService.GuessTitle(10, "Nimportenawak");
+            Check.That(guessTitleResponse).IsNotNull();
+            Check.That(guessTitleResponse.RightGuess).IsNotNull().And.IsEqualTo(false);
+        }
+
+        [Test]
         public void WhenDoRateThenReturnNewRateResult()
         {
             var rate = shotService.Rate(10, 5);

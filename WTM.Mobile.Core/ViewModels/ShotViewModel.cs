@@ -20,6 +20,16 @@ namespace WTM.Mobile.Core.ViewModels
             RandomShotCommand.Execute(null);
         }
 
+        public bool Busy
+        {
+            get { return busy; }
+            set
+            {
+                busy = value; 
+                RaisePropertyChanged(() => Busy);
+            }
+        }
+
         public Shot Shot
         {
             get { return shot; }
@@ -74,9 +84,20 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     randomShotCommand = new MvxCommand(() =>
                     {
-                        Shot = shotService.GetRandomShot();
-                        ImageUrl = Shot.ImageUri.ToString();
-                        Response = null;
+                        Busy = true;
+
+                        try
+                        {
+                            Shot = null;
+                            Response = null;
+
+                            Shot = shotService.GetRandomShot();
+                            ImageUrl = Shot.ImageUri.ToString();
+                        }
+                        finally
+                        {
+                            Busy = false;
+                        }
                     });
                 }
                 return randomShotCommand;
@@ -96,8 +117,17 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     guessTitleCommand = new MvxCommand(() =>
                     {
-                        Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
-                    });
+                        Busy = true;
+                        
+                        try
+                        {
+                            Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
+                        }
+                        finally
+                        {
+                            Busy = false;
+                        }
+                    }, () => Shot != null);
                 }
                 return guessTitleCommand;
             }
@@ -116,13 +146,24 @@ namespace WTM.Mobile.Core.ViewModels
                 {
 					getSolutionCommand = new MvxCommand(() =>
                     {
-                        Response = shotService.GetSolution(Shot.ShotId);
-                    }, () => true);
+                        Busy = true;
+
+                        try
+                        {
+                            Response = shotService.GetSolution(Shot.ShotId);
+                        }
+                        finally
+                        {
+                            Busy = false;
+                        }
+                        
+                    }, () => Shot != null);
                 }
 				return getSolutionCommand;
             }
         }
 		private MvxCommand getSolutionCommand;
+        private bool busy;
 
         #endregion
     }

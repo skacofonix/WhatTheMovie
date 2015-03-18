@@ -8,11 +8,21 @@ namespace WTM.Api.Client.Helpers
         public static T GetObjectSync<T>(this HttpClient httpClient, Uri uri)
         {
             T result = default(T);
-            var task = httpClient.GetStringAsync(uri).ContinueWith(r =>
+
+            try
             {
-                result = r.Result.Deserialize<T>();
-            });
-            task.Wait();
+                var task = httpClient.GetStringAsync(uri).ContinueWith(r =>
+                {
+                    result = r.Result.Deserialize<T>();
+                });
+                task.Wait();
+            }
+            catch (Exception)
+            {
+                // TODO : Log
+                result = default(T);
+            }
+            
             return result;
         }
     }

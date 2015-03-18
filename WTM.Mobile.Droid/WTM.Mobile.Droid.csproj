@@ -36,6 +36,15 @@
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Acr.MvvmCross.Plugins.UserDialogs">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.2.4.0\lib\MonoAndroid10\Acr.MvvmCross.Plugins.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.MvvmCross.Plugins.UserDialogs.Droid">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.2.4.0\lib\MonoAndroid10\Acr.MvvmCross.Plugins.UserDialogs.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="AndHUD">
+      <HintPath>..\packages\Acr.MvvmCross.Plugins.UserDialogs.2.4.0\lib\MonoAndroid10\AndHUD.dll</HintPath>
+    </Reference>
     <Reference Include="Cirrious.CrossCore">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.5.0\lib\MonoAndroid\Cirrious.CrossCore.dll</HintPath>
     </Reference>
@@ -85,6 +94,7 @@
   <ItemGroup>
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
+    <Compile Include="Bootstrap\UserDialogsPluginBootstrap.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

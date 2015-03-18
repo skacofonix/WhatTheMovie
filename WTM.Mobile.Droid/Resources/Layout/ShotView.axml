@@ -6,8 +6,8 @@
     android:layout_height="fill_parent">
     <Mvx.MvxImageView
         android:layout_width="fill_parent"
-        android:layout_height="75dp"
-        local:MvxBind="ImageUrl ImageUrl" />
+        local:MvxBind="ImageUrl ImageUrl"
+        android:layout_height="200dp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
