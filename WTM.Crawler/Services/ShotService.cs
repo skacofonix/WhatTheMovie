@@ -59,13 +59,19 @@ namespace WTM.Crawler.Services
                 var regex = new Regex("guess_right\\(\"(.*)\", (\\d*), \"(.*) \\((\\d{4})\\)\"");
                 var match = regex.Match(webResponseString);
                 if (match.Success)
+                {
                     response = new GuessTitleResponse
                     {
-                        OriginalTitle = match.Groups[2].Value,
-                        Id = match.Groups[3].Value,
+                        MovieId = match.Groups[1].Value,
+                        OriginalTitle = match.Groups[3].Value,
                         Year = Convert.ToInt32(match.Groups[4].Value),
                         RightGuess = true
                     };
+
+                    int shotId;
+                    if (int.TryParse(match.Groups[2].Value, out shotId))
+                        response.ShotId = shotId;
+                }
             }
 
             return response;
@@ -95,7 +101,7 @@ namespace WTM.Crawler.Services
                     {
                         OriginalTitle = match.Groups[1].Value,
                         Year = Convert.ToInt32(match.Groups[2].Value),
-                        Id = match.Groups[3].Value
+                        MovieId = match.Groups[3].Value
                     };
                 }
             }

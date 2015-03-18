@@ -25,10 +25,11 @@ namespace WTM.Mobile.Core.ViewModels
             get { return busy; }
             set
             {
-                busy = value; 
+                busy = value;
                 RaisePropertyChanged(() => Busy);
             }
         }
+        private bool busy;
 
         public Shot Shot
         {
@@ -74,6 +75,14 @@ namespace WTM.Mobile.Core.ViewModels
         }
         private string guessTitle1;
 
+        private void Reset()
+        {
+            Shot = null;
+            ImageUrl = null;
+            Response = null;
+            GuessTitle = null;
+        }
+
         #region RandomShotCommand
 
         public ICommand RandomShotCommand
@@ -88,8 +97,7 @@ namespace WTM.Mobile.Core.ViewModels
 
                         try
                         {
-                            Shot = null;
-                            Response = null;
+                            Reset();
 
                             Shot = shotService.GetRandomShot();
                             ImageUrl = Shot.ImageUri.ToString();
@@ -118,10 +126,16 @@ namespace WTM.Mobile.Core.ViewModels
                     guessTitleCommand = new MvxCommand(() =>
                     {
                         Busy = true;
-                        
+
                         try
                         {
-                            Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
+                            if (!string.IsNullOrWhiteSpace(GuessTitle))
+                                Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
+                            else
+                                Response = null;
+
+                            if (Response != null)
+                                GuessTitle = Response.OriginalTitle;
                         }
                         finally
                         {
@@ -142,29 +156,29 @@ namespace WTM.Mobile.Core.ViewModels
         {
             get
             {
-				if (getSolutionCommand == null)
+                if (getSolutionCommand == null)
                 {
-					getSolutionCommand = new MvxCommand(() =>
+                    getSolutionCommand = new MvxCommand(() =>
                     {
                         Busy = true;
 
                         try
                         {
                             Response = shotService.GetSolution(Shot.ShotId);
+                            GuessTitle = Response != null ? Response.OriginalTitle : null;
                         }
                         finally
                         {
                             Busy = false;
                         }
-                        
+
                     }, () => Shot != null);
                 }
-				return getSolutionCommand;
+                return getSolutionCommand;
             }
         }
-		private MvxCommand getSolutionCommand;
-        private bool busy;
-
+        private MvxCommand getSolutionCommand;
+        
         #endregion
     }
 }

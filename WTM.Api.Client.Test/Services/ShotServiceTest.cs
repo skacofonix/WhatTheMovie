@@ -42,8 +42,7 @@ namespace WTM.Api.Client.Test.Services
         public void WhenGuessWrongTitleThenReturnGuessTitleResponse()
         {
             var guessTitleResponse = shotService.GuessTitle(10, "Nimportenawak");
-            Check.That(guessTitleResponse).IsNotNull();
-            Check.That(guessTitleResponse.RightGuess).IsNotNull().And.IsEqualTo(false);
+            Check.That(guessTitleResponse).IsNull();
         }
 
         [Test]
