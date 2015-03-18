@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using WTM.Core.Services;
@@ -30,6 +31,17 @@ namespace WTM.Mobile.Core.ViewModels
         }
         private Shot shot;
 
+        public string ImageUrl
+        {
+            get { return imageUrl; }
+            set
+            {
+                imageUrl = value;
+                RaisePropertyChanged(() => ImageUrl);
+            }
+        }
+        private string imageUrl;
+
         public GuessTitleResponse Response
         {
             get { return response; }
@@ -40,6 +52,17 @@ namespace WTM.Mobile.Core.ViewModels
             }
         }
         private GuessTitleResponse response;
+
+        public string GuessTitle
+        {
+            get { return guessTitle1; }
+            set
+            {
+                guessTitle1 = value;
+                RaisePropertyChanged(() => GuessTitle);
+            }
+        }
+        private string guessTitle1;
 
         #region RandomShotCommand
 
@@ -52,6 +75,7 @@ namespace WTM.Mobile.Core.ViewModels
                     randomShotCommand = new MvxCommand(() =>
                     {
                         Shot = shotService.GetRandomShot();
+                        ImageUrl = Shot.ImageUri.ToString();
                         Response = null;
                     });
                 }
@@ -68,43 +92,37 @@ namespace WTM.Mobile.Core.ViewModels
         {
             get
             {
-                if (guessTitle == null)
+                if (guessTitleCommand == null)
                 {
-                    guessTitle = new MvxCommand<string>(title =>
+                    guessTitleCommand = new MvxCommand(() =>
                     {
-                        Response = shotService.GuessTitle(shot.ShotId, title);
-                    }, title =>
-                    {
-                        return Shot != null;
+                        Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
                     });
                 }
-                return guessTitle;
+                return guessTitleCommand;
             }
         }
-        private MvxCommand<string> guessTitle;
+        private MvxCommand guessTitleCommand;
 
         #endregion
 
         #region GetSolution
 
-        public ICommand GetSolution
+        public ICommand GetSolutionCommand
         {
             get
             {
-                if (getSolution == null)
+				if (getSolutionCommand == null)
                 {
-                    getSolution = new MvxCommand(() =>
+					getSolutionCommand = new MvxCommand(() =>
                     {
                         Response = shotService.GetSolution(Shot.ShotId);
-                    }, () =>
-                    {
-                        return Shot != null;
-                    });
+                    }, () => true);
                 }
-                return getSolution;
+				return getSolutionCommand;
             }
         }
-        private MvxCommand getSolution;
+		private MvxCommand getSolutionCommand;
 
         #endregion
     }
