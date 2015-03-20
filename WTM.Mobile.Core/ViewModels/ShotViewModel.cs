@@ -1,6 +1,5 @@
-using System.ComponentModel;
-using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
+using System.Windows.Input;
 using WTM.Core.Services;
 using WTM.Domain;
 
@@ -15,21 +14,16 @@ namespace WTM.Mobile.Core.ViewModels
             this.shotService = shotService;
         }
 
-        public void Init()
+        public void Init(Shot shot = null)
         {
-            RandomShotCommand.Execute(null);
+            NavigateToRandomShotCommand.Execute(shot);
         }
 
-        public bool Busy
+        private void Reset()
         {
-            get { return busy; }
-            set
-            {
-                busy = value;
-                RaisePropertyChanged(() => Busy);
-            }
+            Response = null;
+            GuessTitle = null;
         }
-        private bool busy;
 
         public Shot Shot
         {
@@ -42,16 +36,16 @@ namespace WTM.Mobile.Core.ViewModels
         }
         private Shot shot;
 
-        public string ImageUrl
+        public string GuessTitle
         {
-            get { return imageUrl; }
+            get { return guessTitle; }
             set
             {
-                imageUrl = value;
-                RaisePropertyChanged(() => ImageUrl);
+                guessTitle = value;
+                RaisePropertyChanged(() => GuessTitle);
             }
         }
-        private string imageUrl;
+        private string guessTitle;
 
         public GuessTitleResponse Response
         {
@@ -64,43 +58,99 @@ namespace WTM.Mobile.Core.ViewModels
         }
         private GuessTitleResponse response;
 
-        public string GuessTitle
+        public bool Busy
         {
-            get { return guessTitle1; }
+            get { return busy; }
             set
             {
-                guessTitle1 = value;
-                RaisePropertyChanged(() => GuessTitle);
+                busy = value;
+                RaisePropertyChanged(() => Busy);
             }
         }
-        private string guessTitle1;
+        private bool busy;
 
-        private void Reset()
-        {
-            Shot = null;
-            ImageUrl = null;
-            Response = null;
-            GuessTitle = null;
-        }
+        #region NavigateToFirstShotCommand
 
-        #region RandomShotCommand
-
-        public ICommand RandomShotCommand
+        public ICommand NavigateToFirstShotCommand
         {
             get
             {
-                if (randomShotCommand == null)
+                if (navigateToFirstShotCommand == null)
                 {
-                    randomShotCommand = new MvxCommand(() =>
+                    navigateToFirstShotCommand = new MvxCommand(() =>
                     {
                         Busy = true;
 
                         try
                         {
                             Reset();
+                            Shot = shotService.GetById(Shot.Navigation.FirstId.Value);
+                        }
+                        finally
+                        {
+                            Busy = false;
+                        }
+                    }, () => 
+                    {
+                        if (Shot != null && Shot.Navigation != null && Shot.Navigation.FirstId.HasValue && Shot.Navigation.FirstId.Value != Shot.ShotId)
+                            return true;
+                        return false;
+                    });
+                }
+                return navigateToFirstShotCommand;
+            }
+        }
+        private MvxCommand navigateToFirstShotCommand;
 
+        #endregion
+
+        #region NavigateToPreviousShotCommand
+
+        public ICommand NavigateToPreviousShotCommand
+        {
+            get
+            {
+                if (navigateToPreviousShotCommand == null)
+                {
+                    navigateToPreviousShotCommand = new MvxCommand(() =>
+                    {
+                        Busy = true;
+
+                        try
+                        {
+                            Reset();
+                            // ToDo : Choose between previous and unsolved previous
+                            Shot = shotService.GetById(Shot.Navigation.PreviousId.Value);
+                        }
+                        finally
+                        {
+                            Busy = false;
+                        }
+                    }, () => Shot != null && Shot.Navigation != null && Shot.Navigation.PreviousId.HasValue && Shot.Navigation.PreviousId.Value != Shot.ShotId);
+                }
+                return navigateToPreviousShotCommand;
+            }
+        }
+        private MvxCommand navigateToPreviousShotCommand;
+
+        #endregion
+
+        #region NavigateToRandomShotCommand
+
+        public ICommand NavigateToRandomShotCommand
+        {
+            get
+            {
+                if (navigateToRandomShotCommand == null)
+                {
+                    navigateToRandomShotCommand = new MvxCommand(() =>
+                    {
+                        Busy = true;
+
+                        try
+                        {
+                            Reset();
                             Shot = shotService.GetRandomShot();
-                            ImageUrl = Shot.ImageUri.ToString();
                         }
                         finally
                         {
@@ -108,14 +158,74 @@ namespace WTM.Mobile.Core.ViewModels
                         }
                     });
                 }
-                return randomShotCommand;
+                return navigateToRandomShotCommand;
             }
         }
-        private MvxCommand randomShotCommand;
+        private MvxCommand navigateToRandomShotCommand;
 
         #endregion
 
-        #region GuessTitle
+        #region NavigateToNextShotCommand
+
+        public ICommand NavigateToNextShotCommand
+        {
+            get
+            {
+                if (navigateToNextShotCommand == null)
+                {
+                    navigateToNextShotCommand = new MvxCommand(() =>
+                    {
+                        Busy = true;
+
+                        try
+                        {
+                            Reset();
+                            // ToDo : Choose between next and unsolved next previous
+                            Shot = shotService.GetById(Shot.Navigation.NextId.Value);
+                        }
+                        finally
+                        {
+                            Busy = false;
+                        }
+                    }, () => Shot != null && Shot.Navigation != null && Shot.Navigation.NextId.HasValue && Shot.Navigation.NextId.Value != Shot.ShotId);
+                }
+                return navigateToNextShotCommand;
+            }
+        }
+        private MvxCommand navigateToNextShotCommand;
+
+        #endregion
+
+        #region NavigateToNextShotCommand
+
+        public ICommand NavigateToLastShotCommand
+        {
+            get
+            {
+                if (navigateToLastShotCommand == null)
+                {
+                    navigateToLastShotCommand = new MvxCommand(() =>
+                    {
+                        Busy = true;
+                        try
+                        {
+                            Reset();
+                            Shot = shotService.GetById(Shot.Navigation.LastId.Value);
+                        }
+                        finally
+                        {
+                            Busy = false;
+                        }
+                    }, () => Shot != null && Shot.Navigation != null && Shot.Navigation.LastId.HasValue && Shot.Navigation.LastId.Value != Shot.ShotId);
+                }
+                return navigateToLastShotCommand;
+            }
+        }
+        private MvxCommand navigateToLastShotCommand;
+
+        #endregion
+
+        #region GuessTitleCommand
 
         public ICommand GuessTitleCommand
         {
@@ -130,12 +240,13 @@ namespace WTM.Mobile.Core.ViewModels
                         try
                         {
                             if (!string.IsNullOrWhiteSpace(GuessTitle))
+                            {
                                 Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
+                            }
                             else
+                            {
                                 Response = null;
-
-                            if (Response != null)
-                                GuessTitle = Response.OriginalTitle;
+                            }
                         }
                         finally
                         {
@@ -150,7 +261,7 @@ namespace WTM.Mobile.Core.ViewModels
 
         #endregion
 
-        #region GetSolution
+        #region GetSolutionCommand
 
         public ICommand GetSolutionCommand
         {
@@ -165,7 +276,6 @@ namespace WTM.Mobile.Core.ViewModels
                         try
                         {
                             Response = shotService.GetSolution(Shot.ShotId);
-                            GuessTitle = Response != null ? Response.OriginalTitle : null;
                         }
                         finally
                         {
@@ -178,7 +288,7 @@ namespace WTM.Mobile.Core.ViewModels
             }
         }
         private MvxCommand getSolutionCommand;
-        
+
         #endregion
     }
 }

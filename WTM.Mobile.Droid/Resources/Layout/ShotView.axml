@@ -4,31 +4,135 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <Mvx.MvxImageView
-        android:layout_width="fill_parent"
-        local:MvxBind="ImageUrl ImageUrl"
-        android:layout_height="200dp" />
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText1"
-        local:MvxBind="Text GuessTitle" />
-    <Button
-        android:text="Guess title"
+        android:id="@+id/linearLayoutNavigation">
+        <Button
+            android:text="First"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonNavigationFirst"
+            android:layout_weight="1"
+            local:MvxBind="Click NavigateToFirstShotCommand" />
+        <Button
+            android:text="Previous"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonNavigationPrevious"
+            android:layout_weight="1"
+            local:MvxBind="Click NavigateToPreviousShotCommand" />
+        <Button
+            android:text="Random"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonNavigationRandom"
+            android:layout_weight="1"
+            local:MvxBind="Click NavigateToRandomShotCommand" />
+        <Button
+            android:text="Next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonNavigationNext"
+            android:layout_weight="1"
+            local:MvxBind="Click NavigateToNextShotCommand" />
+        <Button
+            android:text="Last"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonNavigationLast"
+            android:layout_weight="1"
+            local:MvxBind="Click NavigateToLastShotCommand" />
+    </LinearLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1"
-        local:MvxBind="Click GuessTitleCommand" />
-    <Button
-        android:text="Ask solution"
+        android:id="@+id/relativeLayoutShotImage">
+        <Mvx.MvxImageView
+            android:id="@+id/imageViewShot"
+            local:MvxBind="ImageUrl Shot.ImageUri"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <ProgressBar
+            android:id="@+id/progressBarLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            local:MvxBind="Visibility Busy, Converter=Visibility"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1"
-        local:MvxBind="Click GetSolutionCommand" />
-    <Button
-        android:text="Next random shot"
+        android:id="@+id/linearLayoutGuessTitle"
+        local:MvxBind="Visibility Response, Converter=InvertedVisibility">
+        <EditText
+            android:id="@+id/editTextGuessTitle"
+            local:MvxBind="Text GuessTitle"
+            android:singleLine="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="10" />
+        <Button
+            android:text="Guess"
+            android:id="@+id/buttonGuessTitle"
+            local:MvxBind="Click GuessTitleCommand"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1"
-        local:MvxBind="Click RandomShotCommand" />
+        android:id="@+id/linearLayoutSolution"
+        local:MvxBind="Visibility Response, Converter=Visibility">
+        <TextView
+            android:text="Titre super long qui rentre pas très bien"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textViewSolutionMovieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:ellipsize="end"
+            android:textAlignment="textStart"
+            local:MvxBind="Text Response.OriginalTitle" />
+        <TextView
+            android:text="(2015)"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewSolutionMovieYear"
+            android:padding="5dp" />
+        <Button
+            android:text="Movie"
+            android:id="@+id/buttonSolutionMovieNavigation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutAskSolution"
+        local:MvxBind="Visibility Response, Converter=InvertedVisibility">
+        <Button
+            android:text="Ask solution"
+            android:id="@+id/buttonAskSolution"
+            local:MvxBind="Click GetSolutionCommand"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </LinearLayout>
