@@ -290,5 +290,22 @@ namespace WTM.Mobile.Core.ViewModels
         private MvxCommand getSolutionCommand;
 
         #endregion
+
+        #region ShowMovieDetailCommand
+
+        public ICommand ShowMovieDetailCommand
+        {
+            get
+            {
+                if (showMovieDetailCommand == null)
+                {
+                    showMovieDetailCommand = new MvxCommand(() => ShowViewModel<MovieViewModel>(Response.MovieId), () => Response != null);
+                }
+                return showMovieDetailCommand;
+            }
+        }
+        private MvxCommand showMovieDetailCommand;
+
+        #endregion
     }
 }

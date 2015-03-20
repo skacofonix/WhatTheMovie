@@ -110,7 +110,6 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\ShotView.cs" />
-    <Compile Include="Views\FirstView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

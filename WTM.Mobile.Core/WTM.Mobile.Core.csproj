@@ -45,6 +45,7 @@
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsAzure.cs" />
+    <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\ShotViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
