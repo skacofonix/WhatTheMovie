@@ -2,6 +2,7 @@ using Cirrious.MvvmCross.ViewModels;
 using System.Windows.Input;
 using WTM.Core.Services;
 using WTM.Domain;
+using WTM.Mobile.Core.ViewModels.Parameters;
 
 namespace WTM.Mobile.Core.ViewModels
 {
@@ -281,8 +282,7 @@ namespace WTM.Mobile.Core.ViewModels
                         {
                             Busy = false;
                         }
-
-                    }, () => Shot != null);
+                    }, () => Shot != null && Shot.IsSolutionAvailable.GetValueOrDefault(false));
                 }
                 return getSolutionCommand;
             }
@@ -299,7 +299,7 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (showMovieDetailCommand == null)
                 {
-                    showMovieDetailCommand = new MvxCommand(() => ShowViewModel<MovieViewModel>(Response.MovieId), () => Response != null);
+                    showMovieDetailCommand = new MvxCommand(() => ShowViewModel<MovieViewModel>(new MovieParameters{MovieId = Response.MovieId}));
                 }
                 return showMovieDetailCommand;
             }

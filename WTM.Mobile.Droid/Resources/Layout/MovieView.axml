@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:padding="5dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Eternal Sunshine of the Sptotless Mind"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textViewOriginalTitle"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_weight="10"
+            local:MvxBind="Text Movie.OriginalTitle" />
+        <TextView
+            android:text="(2015)"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textViewYear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:padding="5dp"
+            local:MvxBind="Text Movie.Year" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:id="@+id/space1" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutGenre"
+        android:padding="5dp">
+        <TextView
+            android:text="Genre :"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewGenre"
+            android:layout_marginRight="5dp" />
+        <TextView
+            android:text="Fantasy, Comedy, Thriller"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewGenreValue"
+            android:textColor="@android:color/darker_gray"
+            local:MvxBind="Text Movie.GenreList" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linearLayoutDirector"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Director :"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewDirector"
+            android:layout_marginRight="5dp" />
+        <TextView
+            android:text="Michel Gondry"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewDirectorValue"
+            android:textColor="@android:color/darker_gray"
+            local:MvxBind="Text Movie.Director" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:id="@+id/space2" />
+    <TextView
+        android:text="What would happen if we could erase the worst experiences and relationships from our memory. Charlie Kaufman and Michel Gondry combined forces to answer this very question."
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewAbstract"
+        local:MvxBind="Text Movie.Abstract" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:id="@+id/space3" />
+    <Mvx.MvxImageView
+        android:id="@+id/imageViewMovie"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

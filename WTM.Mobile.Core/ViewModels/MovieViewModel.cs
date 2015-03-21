@@ -1,6 +1,7 @@
 ﻿using Cirrious.MvvmCross.ViewModels;
 using WTM.Core.Services;
 using WTM.Domain;
+using WTM.Mobile.Core.ViewModels.Parameters;
 
 namespace WTM.Mobile.Core.ViewModels
 {
@@ -13,9 +14,9 @@ namespace WTM.Mobile.Core.ViewModels
             this.movieService = movieService;
         }
 
-        public void Init(string movieId)
+        public void Init(MovieParameters movieParameters)
         {
-            Movie = movieService.GetById(movieId);
+            Movie = movieService.GetById(movieParameters.MovieId);
         }
 
         public Movie Movie

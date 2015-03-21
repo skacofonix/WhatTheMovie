@@ -40,3 +40,4 @@
 /WTM.Mobile.Droid/bin/Debug
 /WTM.Mobile.Droid/obj
 *.userprefs
+/WTM.Api.Mobile/obj/Release

@@ -17,7 +17,7 @@ namespace WTM.Api.Client.Helpers
                 });
                 task.Wait();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // TODO : Log
                 result = default(T);
