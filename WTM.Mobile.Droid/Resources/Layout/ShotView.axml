@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:id="@+id/buttonNavigationLast"
             android:layout_weight="1"
-            local:MvxBind="Click NavigateToLastShotCommand, IsEnabled CanNavigateToLastShot" />
+            local:MvxBind="Click NavigateToLastShotCommand" />
     </LinearLayout>
     <RelativeLayout
         android:minWidth="25px"
