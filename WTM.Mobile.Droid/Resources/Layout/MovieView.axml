@@ -18,6 +18,7 @@
             android:text="Eternal Sunshine of the Sptotless Mind"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/textViewOriginalTitle"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="5dp"
             android:textColor="@android:color/holo_red_light"
@@ -57,7 +58,7 @@
             android:layout_height="match_parent"
             android:id="@+id/textViewGenreValue"
             android:textColor="@android:color/darker_gray"
-            local:MvxBind="Text Movie.GenreList" />
+            local:MvxBind="Text Movie.GenreList, Converter=StringList" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

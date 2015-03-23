@@ -14,14 +14,10 @@ namespace WTM.Mobile.Core.ViewModels
             this.movieService = movieService;
         }
 
-        public void Init()
-        {
-            // Just for test
-        }
-
         public void Init(MovieParameters movieParameters)
         {
-            Movie = movieService.GetById(movieParameters.MovieId);
+            //Movie = movieService.GetById(movieParameters.MovieId);
+            Movie = movieService.GetById("eternal_sunshine_of_the_spotless_mind");
         }
 
         public Movie Movie
@@ -29,7 +25,7 @@ namespace WTM.Mobile.Core.ViewModels
             get { return movie; }
             set
             {
-                movie = value; 
+                movie = value;
                 RaisePropertyChanged(() => Movie);
             }
         }

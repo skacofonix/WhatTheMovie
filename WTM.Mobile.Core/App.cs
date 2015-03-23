@@ -12,7 +12,8 @@ namespace WTM.Mobile.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 				
-            RegisterAppStart<ViewModels.ShotViewModel>();
+            //RegisterAppStart<ViewModels.ShotViewModel>();
+            RegisterAppStart<ViewModels.MovieViewModel>();
         }
     }
 }
