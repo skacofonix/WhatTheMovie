@@ -45,19 +45,21 @@
             android:layout_height="match_parent"
             android:id="@+id/buttonNavigationLast"
             android:layout_weight="1"
-            local:MvxBind="Click NavigateToLastShotCommand" />
+            local:MvxBind="Click NavigateToLastShotCommand, IsEnabled CanNavigateToLastShot" />
     </LinearLayout>
     <RelativeLayout
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400px"
         android:id="@+id/relativeLayoutShotImage">
         <Mvx.MvxImageView
             android:id="@+id/imageViewShot"
             local:MvxBind="ImageUrl Shot.ImageUri"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
         <ProgressBar
             android:id="@+id/progressBarLoading"
             android:layout_width="wrap_content"
@@ -83,7 +85,6 @@
             android:text="Guess"
             android:id="@+id/buttonGuessTitle"
             local:MvxBind="Click GuessTitleCommand"
-            android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -96,7 +97,7 @@
         android:id="@+id/linearLayoutSolution"
         local:MvxBind="Visibility Response, Converter=Visibility">
         <TextView
-            android:text="Titre super long qui rentre pas très bien"
+            android:text="Eternal Sunshine of the Sptotless Mind"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/textViewSolutionMovieTitle"
             android:layout_width="wrap_content"
@@ -106,14 +107,16 @@
             android:padding="5dp"
             android:ellipsize="end"
             android:textAlignment="textStart"
-            local:MvxBind="Text Response.OriginalTitle" />
+            local:MvxBind="Text Response.OriginalTitle"
+            android:gravity="center_vertical" />
         <TextView
             android:text="(2015)"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/textViewSolutionMovieYear"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:gravity="center_vertical" />
         <Button
             android:text="Movie"
             android:id="@+id/buttonSolutionMovieNavigation"
@@ -135,5 +138,43 @@
             local:MvxBind="Click GetSolutionCommand"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutRate">
+        <RatingBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBarShot"
+            android:numStars="10"
+            android:stepSize="1"
+            local:MvxBind="Rating Shot.Rate.Score" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout1"
+            android:gravity="right">
+            <TextView
+                android:text="7.7"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/textViewOverallRating"
+                android:paddingRight="5dp"
+                local:MvxBind="Text Shot.Rate.Score" />
+            <TextView
+                android:text="(123 votes)"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/textViewRateNbRaters"
+                android:textColor="@android:color/darker_gray"
+                local:MvxBind="Text Shot.Rate.NbRaters" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

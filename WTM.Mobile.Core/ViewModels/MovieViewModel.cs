@@ -14,6 +14,11 @@ namespace WTM.Mobile.Core.ViewModels
             this.movieService = movieService;
         }
 
+        public void Init()
+        {
+            // Just for test
+        }
+
         public void Init(MovieParameters movieParameters)
         {
             Movie = movieService.GetById(movieParameters.MovieId);

@@ -262,6 +262,9 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f050013
 			public const int linearLayoutNavigation = 2131034131;
 			
+			// aapt resource value: 0x7f050025
+			public const int linearLayoutRate = 2131034149;
+			
 			// aapt resource value: 0x7f05001f
 			public const int linearLayoutSolution = 2131034143;
 			
@@ -276,6 +279,9 @@ namespace WTM.Mobile.Droid
 			
 			// aapt resource value: 0x7f05001b
 			public const int progressBarLoading = 2131034139;
+			
+			// aapt resource value: 0x7f050026
+			public const int ratingBarShot = 2131034150;
 			
 			// aapt resource value: 0x7f050019
 			public const int relativeLayoutShotImage = 2131034137;
@@ -306,6 +312,12 @@ namespace WTM.Mobile.Droid
 			
 			// aapt resource value: 0x7f050006
 			public const int textViewOriginalTitle = 2131034118;
+			
+			// aapt resource value: 0x7f050027
+			public const int textViewOverallRating = 2131034151;
+			
+			// aapt resource value: 0x7f050028
+			public const int textViewRateNbRaters = 2131034152;
 			
 			// aapt resource value: 0x7f050020
 			public const int textViewSolutionMovieTitle = 2131034144;

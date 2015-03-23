@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cirrious.MvvmCross.ViewModels;
 using System.Windows.Input;
 using WTM.Core.Services;
@@ -22,8 +23,20 @@ namespace WTM.Mobile.Core.ViewModels
 
         private void Reset()
         {
-            Response = null;
-            GuessTitle = null;
+            InvokeOnMainThread(() =>
+            {
+                Response = null;
+                GuessTitle = null;
+            });
+        }
+
+        private void UpdateCanExecute()
+        {
+            navigateToFirstShotCommand.RaiseCanExecuteChanged();
+            navigateToPreviousShotCommand.RaiseCanExecuteChanged();
+            navigateToNextShotCommand.RaiseCanExecuteChanged();
+            guessTitleCommand.RaiseCanExecuteChanged();
+            getSolutionCommand.RaiseCanExecuteChanged();
         }
 
         public Shot Shot
@@ -33,6 +46,7 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 shot = value;
                 RaisePropertyChanged(() => Shot);
+                UpdateCanExecute();
             }
         }
         private Shot shot;
@@ -80,22 +94,27 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     navigateToFirstShotCommand = new MvxCommand(() =>
                     {
-                        Busy = true;
+                        InvokeOnMainThread(() => Busy = true);
 
-                        try
+                        Task.Run(() =>
                         {
-                            Reset();
-                            Shot = shotService.GetById(Shot.Navigation.FirstId.Value);
-                        }
-                        finally
-                        {
-                            Busy = false;
-                        }
-                    }, () => 
+                            try
+                            {
+                                Reset();
+                                Shot = shotService.GetById(Shot.Navigation.FirstId.Value);
+                            }
+                            finally
+                            {
+                                InvokeOnMainThread(() => Busy = false);
+                            }
+                        });
+
+                    }, () =>
                     {
-                        if (Shot != null && Shot.Navigation != null && Shot.Navigation.FirstId.HasValue && Shot.Navigation.FirstId.Value != Shot.ShotId)
-                            return true;
-                        return false;
+                        return Shot != null
+                               && Shot.Navigation != null
+                               && Shot.Navigation.FirstId.HasValue
+                               && Shot.Navigation.FirstId.Value != Shot.ShotId;
                     });
                 }
                 return navigateToFirstShotCommand;
@@ -115,19 +134,28 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     navigateToPreviousShotCommand = new MvxCommand(() =>
                     {
-                        Busy = true;
+                        InvokeOnMainThread(() => Busy = true);
 
-                        try
+                        Task.Run(() =>
                         {
-                            Reset();
-                            // ToDo : Choose between previous and unsolved previous
-                            Shot = shotService.GetById(Shot.Navigation.PreviousId.Value);
-                        }
-                        finally
-                        {
-                            Busy = false;
-                        }
-                    }, () => Shot != null && Shot.Navigation != null && Shot.Navigation.PreviousId.HasValue && Shot.Navigation.PreviousId.Value != Shot.ShotId);
+                            try
+                            {
+                                Reset();
+                                // ToDo : Choose between previous and unsolved previous
+                                Shot = shotService.GetById(Shot.Navigation.PreviousId.Value);
+                            }
+                            finally
+                            {
+                                InvokeOnMainThread(() => Busy = false);
+                            }
+                        });
+                    }, () =>
+                    {
+                        return Shot != null
+                               && Shot.Navigation != null
+                               && Shot.Navigation.PreviousId.HasValue
+                               && Shot.Navigation.PreviousId.Value != Shot.ShotId;
+                    });
                 }
                 return navigateToPreviousShotCommand;
             }
@@ -144,19 +172,22 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (navigateToRandomShotCommand == null)
                 {
-                    navigateToRandomShotCommand = new MvxCommand(() =>
+                    navigateToRandomShotCommand = new MvxCommand(() => 
                     {
-                        Busy = true;
+                        InvokeOnMainThread(() => Busy = true);
 
-                        try
+                        Task.Run(() =>
                         {
-                            Reset();
-                            Shot = shotService.GetRandomShot();
-                        }
-                        finally
-                        {
-                            Busy = false;
-                        }
+                            try
+                            {
+                                Reset();
+                                Shot = shotService.GetRandomShot();
+                            }
+                            finally
+                            {
+                                InvokeOnMainThread(() => Busy = false);
+                            }
+                        });
                     });
                 }
                 return navigateToRandomShotCommand;
@@ -176,19 +207,29 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     navigateToNextShotCommand = new MvxCommand(() =>
                     {
-                        Busy = true;
+                        InvokeOnMainThread(() => Busy = true);
 
-                        try
+                        Task.Run(() =>
                         {
-                            Reset();
-                            // ToDo : Choose between next and unsolved next previous
-                            Shot = shotService.GetById(Shot.Navigation.NextId.Value);
-                        }
-                        finally
-                        {
-                            Busy = false;
-                        }
-                    }, () => Shot != null && Shot.Navigation != null && Shot.Navigation.NextId.HasValue && Shot.Navigation.NextId.Value != Shot.ShotId);
+                            try
+                            {
+                                Reset();
+                                // ToDo : Choose between next and unsolved next previous
+                                Shot = shotService.GetById(Shot.Navigation.NextId.Value);
+                            }
+                            finally
+                            {
+                                InvokeOnMainThread(() => Busy = false);
+                            }
+                        });
+                       
+                    }, () =>
+                    {
+                        return Shot != null
+                               && Shot.Navigation != null
+                               && Shot.Navigation.NextId.HasValue
+                               && Shot.Navigation.NextId.Value != Shot.ShotId;
+                    });
                 }
                 return navigateToNextShotCommand;
             }
@@ -197,7 +238,7 @@ namespace WTM.Mobile.Core.ViewModels
 
         #endregion
 
-        #region NavigateToNextShotCommand
+        #region NavigateToLastShotCommand
 
         public ICommand NavigateToLastShotCommand
         {
@@ -205,24 +246,43 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (navigateToLastShotCommand == null)
                 {
-                    navigateToLastShotCommand = new MvxCommand(() =>
-                    {
-                        Busy = true;
-                        try
-                        {
-                            Reset();
-                            Shot = shotService.GetById(Shot.Navigation.LastId.Value);
-                        }
-                        finally
-                        {
-                            Busy = false;
-                        }
-                    }, () => Shot != null && Shot.Navigation != null && Shot.Navigation.LastId.HasValue && Shot.Navigation.LastId.Value != Shot.ShotId);
+                    navigateToLastShotCommand = new MvxCommand(NavigateToLastShotExecute, NavigateToLastShotCanExecute);
                 }
                 return navigateToLastShotCommand;
             }
         }
         private MvxCommand navigateToLastShotCommand;
+
+        private void NavigateToLastShotExecute()
+        {
+            InvokeOnMainThread(() => Busy = true);
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    Reset();
+                    Shot = shotService.GetById(Shot.Navigation.LastId.Value);
+                }
+                finally
+                {
+                    InvokeOnMainThread(() => Busy = false);
+                }
+            });
+        }
+
+        private bool NavigateToLastShotCanExecute()
+        {
+            return Shot != null
+                    && Shot.Navigation != null
+                    && Shot.Navigation.LastId.HasValue
+                    && Shot.Navigation.LastId.Value != Shot.ShotId;
+        }
+
+        public bool CanNavigateToLastShot
+        {
+            get { return NavigateToLastShotCanExecute(); }
+        }
 
         #endregion
 
@@ -236,24 +296,31 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     guessTitleCommand = new MvxCommand(() =>
                     {
-                        Busy = true;
+                        InvokeOnMainThread(() => Busy = true);
 
-                        try
+                        Task.Run(() =>
                         {
-                            if (!string.IsNullOrWhiteSpace(GuessTitle))
+                            try
                             {
-                                Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
+                                if (!string.IsNullOrWhiteSpace(GuessTitle))
+                                {
+                                    Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
+                                }
+                                else
+                                {
+                                    Response = null;
+                                }
                             }
-                            else
+                            finally
                             {
-                                Response = null;
+                                InvokeOnMainThread(() => Busy = false);
                             }
-                        }
-                        finally
-                        {
-                            Busy = false;
-                        }
-                    }, () => Shot != null);
+                        });
+                        
+                    }, () =>
+                    {
+                        return Shot != null;
+                    });
                 }
                 return guessTitleCommand;
             }
@@ -272,17 +339,24 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     getSolutionCommand = new MvxCommand(() =>
                     {
-                        Busy = true;
+                        InvokeOnMainThread(() => Busy = true);
 
-                        try
+                        Task.Run(() =>
                         {
-                            Response = shotService.GetSolution(Shot.ShotId);
-                        }
-                        finally
-                        {
-                            Busy = false;
-                        }
-                    }, () => Shot != null && Shot.IsSolutionAvailable.GetValueOrDefault(false));
+                            try
+                            {
+                                Response = shotService.GetSolution(Shot.ShotId);
+                            }
+                            finally
+                            {
+                                InvokeOnMainThread(() => Busy = false);
+                            }
+                        });
+                    }, () =>
+                    {
+                        return Shot != null
+                               && Shot.IsSolutionAvailable.GetValueOrDefault(false);
+                    });
                 }
                 return getSolutionCommand;
             }
@@ -299,7 +373,11 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (showMovieDetailCommand == null)
                 {
-                    showMovieDetailCommand = new MvxCommand(() => ShowViewModel<MovieViewModel>(new MovieParameters{MovieId = Response.MovieId}));
+                    showMovieDetailCommand = new MvxCommand(() =>
+                    {
+                        ShowViewModel<MovieViewModel>();
+                        //ShowViewModel<MovieViewModel>(new MovieParameters {MovieId = Response.MovieId});
+                    });
                 }
                 return showMovieDetailCommand;
             }
