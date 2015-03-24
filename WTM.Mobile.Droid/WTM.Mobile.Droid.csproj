@@ -109,6 +109,7 @@
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\MenuView.cs" />
     <Compile Include="Views\ShotView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +119,12 @@
     <AndroidResource Include="Resources\Layout\ShotView.axml" />
     <Compile Include="Views\MovieView.cs" />
     <AndroidResource Include="Resources\Layout\MovieView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\MenuView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\SettingsView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

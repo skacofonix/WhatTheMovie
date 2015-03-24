@@ -14,10 +14,12 @@ namespace WTM.Mobile.Core.ViewModels
             this.movieService = movieService;
         }
 
-        public void Init(MovieParameters movieParameters)
+        public void Init(MovieParameters movieParameters = null)
         {
-            //Movie = movieService.GetById(movieParameters.MovieId);
-            Movie = movieService.GetById("eternal_sunshine_of_the_spotless_mind");
+            if (movieParameters != null)
+            {
+                Movie = movieService.GetById(movieParameters.MovieId);
+            }
         }
 
         public Movie Movie

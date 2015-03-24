@@ -47,8 +47,12 @@
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsAzure.cs" />
+    <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="IContext.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\Parameters\MovieParameters.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShotViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

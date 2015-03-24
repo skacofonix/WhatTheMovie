@@ -1,4 +1,3 @@
-using Cirrious.CrossCore;
 using Cirrious.CrossCore.IoC;
 
 namespace WTM.Mobile.Core
@@ -11,9 +10,8 @@ namespace WTM.Mobile.Core
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
-				
-            //RegisterAppStart<ViewModels.ShotViewModel>();
-            RegisterAppStart<ViewModels.MovieViewModel>();
+
+            RegisterAppStart<ViewModels.MenuViewModel>();
         }
     }
 }
