@@ -20,7 +20,6 @@ namespace WTM.Api.Controllers
             this.authenticateService = authenticateService;
         }
 
-        [Route("Api/Account")]
         [HttpGet]
         public string Login([FromUri]string username, [FromUri]string password)
         {
