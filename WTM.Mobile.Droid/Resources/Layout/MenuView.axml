@@ -12,7 +12,7 @@
         android:id="@+id/textView1"
         android:textColor="@android:color/holo_red_light"
         android:padding="5dp"
-        local:MvxBind="Text Context.UserName, Converter=Visibility" />
+        local:MvxBind="Text Context.CurrentUser.Name, Converter=Visibility" />
     <Button
         android:text="Feature films"
         android:layout_width="match_parent"
