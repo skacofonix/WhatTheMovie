@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace WTM.Mobile.Core.ViewModels
 {
-    public class AuthenticationViewModel : MvxViewModel
+    public class AuthenticationViewModel : ViewModelBase
     {
         private readonly IContext context;
 

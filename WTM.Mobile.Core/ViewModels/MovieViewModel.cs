@@ -5,7 +5,7 @@ using WTM.Mobile.Core.ViewModels.Parameters;
 
 namespace WTM.Mobile.Core.ViewModels
 {
-    public class MovieViewModel : MvxViewModel
+    public class MovieViewModel : ViewModelBase
     {
         private readonly IMovieService movieService;
 

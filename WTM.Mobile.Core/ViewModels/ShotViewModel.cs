@@ -8,7 +8,7 @@ using WTM.Mobile.Core.ViewModels.Parameters;
 
 namespace WTM.Mobile.Core.ViewModels
 {
-    public class ShotViewModel : MvxViewModel
+    public class ShotViewModel : ViewModelBase
     {
         private readonly IShotService shotService;
 
@@ -64,30 +64,15 @@ namespace WTM.Mobile.Core.ViewModels
         }
         private GuessTitleResponse response;
 
-        public bool Busy
+        protected override void ExecuteSyncAction(Action action)
         {
-            get { return busy; }
-            set
-            {
-                busy = value;
-                RaisePropertyChanged(() => Busy);
-            }
-        }
-        private bool busy;
-
-        private void ExecuteSyncAction(Action action)
-        {
-            InvokeOnMainThread(() => Busy = true);
-
-            Task.Run(() =>
+            var actionWithReset = new Action(() =>
             {
                 Reset();
                 action();
-
-            }).ContinueWith(task =>
-            {
-                InvokeOnMainThread(() => Busy = false);
             });
+
+            base.ExecuteSyncAction(actionWithReset);
         }
 
         #region NavigateToFirstShotCommand

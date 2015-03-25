@@ -12,7 +12,7 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutSettings"
+        android:id="@+id/linearLayoutCommonSettings"
         android:padding="5dp">
         <RadioGroup
             android:minWidth="25px"
@@ -49,7 +49,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/switchShowSolvedShot"
             android:text="Show solved shot"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25px"

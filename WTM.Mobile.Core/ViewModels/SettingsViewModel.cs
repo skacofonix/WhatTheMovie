@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace WTM.Mobile.Core.ViewModels
 {
-    public class SettingsViewModel : MvxViewModel
+    public class SettingsViewModel : ViewModelBase
     {
         public SettingsViewModel()
         { }

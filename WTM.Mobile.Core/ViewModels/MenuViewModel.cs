@@ -3,11 +3,8 @@ using System.Windows.Input;
 
 namespace WTM.Mobile.Core.ViewModels
 {
-    public class MenuViewModel : MvxViewModel
+    public class MenuViewModel : ViewModelBase
     {
-        public MenuViewModel()
-        { }
-
         #region NavigateToFeatureFilmsCommand
 
         public ICommand NavigateToFeatureFilmsCommand
