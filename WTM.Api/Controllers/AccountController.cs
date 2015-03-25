@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using WTM.Core.Services;
+﻿using System.Web.Http;
 using WTM.Crawler;
 using WTM.Crawler.Services;
 
@@ -26,6 +20,7 @@ namespace WTM.Api.Controllers
             this.authenticateService = authenticateService;
         }
 
+        [Route("Api/Account")]
         [HttpGet]
         public string Login([FromUri]string username, [FromUri]string password)
         {

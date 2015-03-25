@@ -25,5 +25,26 @@ namespace WTM.Api.Client.Helpers
             
             return result;
         }
+
+        public static string GetStringSync(this HttpClient httpClient, Uri uri)
+        {
+            string resultString = null;
+
+            try
+            {
+                var task = httpClient.GetStringAsync(uri).ContinueWith(r =>
+                {
+                    resultString = r.Result;
+                });
+                task.Wait();
+            }
+            catch (Exception ex)
+            {
+                // TODO : Log
+                resultString = null;
+            }
+
+            return resultString;
+        }
     }
 }
