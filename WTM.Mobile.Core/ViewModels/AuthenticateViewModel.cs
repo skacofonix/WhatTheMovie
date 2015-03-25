@@ -48,9 +48,9 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     authenticateCommand = new MvxCommand(() => this.ExecuteSyncAction(() =>
                     {
-                        Context.CurrentUser = userService.Login(Username, Password);
+                        var user = userService.Login(Username, Password);
 
-                        if (Context.CurrentUser == null)
+                        if (user == null)
                         {
                             Password = null;
                         }

@@ -31,7 +31,5 @@ namespace WTM.Domain
         
         [DataMember]
         public int TimeRemaining { get; private set; }
-
-        
     }
 }
