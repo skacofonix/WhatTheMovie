@@ -1,18 +1,17 @@
-﻿using Cirrious.MvvmCross.Plugins.Messenger;
-using Cirrious.MvvmCross.ViewModels;
+﻿using Cirrious.MvvmCross.ViewModels;
 using System.Windows.Input;
-using WTM.Crawler.Services;
+using WTM.Core.Services;
 
 namespace WTM.Mobile.Core.ViewModels
 {
     public class AuthenticateViewModel : ViewModelBase
     {
-        private readonly IAuthenticateService authenticateService;
+        private readonly IUserService userService;
 
-        public AuthenticateViewModel(IContext context, IAuthenticateService authenticateService)
+        public AuthenticateViewModel(IContext context, IUserService userService)
             : base(context)
         {
-            this.authenticateService = authenticateService;
+            this.userService = userService;
         }
 
         public string Username
@@ -49,26 +48,17 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     authenticateCommand = new MvxCommand(() => this.ExecuteSyncAction(() =>
                     {
-                        var token = authenticateService.Login(Username, Password);
-                        if (token == null)
+                        Context.CurrentUser = userService.Login(Username, Password);
+
+                        if (Context.CurrentUser == null)
                         {
-                            // Wrong password
                             Password = null;
-                            Context.UserToken = null;
-                            Context.UserName = null;
                         }
                         else
                         {
-                            // Right password
-                            // Navigate to other view
-                            Context.UserToken = token;
-                            Context.UserName = Username;
                             Close(this);
                         }
-                    }), () =>
-                    {
-                        return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
-                    });
+                    }), () => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));
                 }
                 return authenticateCommand;
             }
