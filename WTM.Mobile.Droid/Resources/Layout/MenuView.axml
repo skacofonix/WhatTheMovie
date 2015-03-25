@@ -20,7 +20,8 @@
         android:text="User"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonUser" />
+        android:id="@+id/buttonUser"
+        local:MvxBind="Click NavigateToUserCommand" />
     <Button
         android:text="Settings"
         android:layout_width="match_parent"

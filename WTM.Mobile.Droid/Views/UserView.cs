@@ -4,7 +4,7 @@ using Cirrious.MvvmCross.Droid.Views;
 
 namespace WTM.Mobile.Droid.Views
 {
-    [Activity(Label = "Shot")]
+    [Activity(Label = "User")]
     public class UserView : MvxActivity
     {
         protected override void OnCreate(Bundle bundle)
