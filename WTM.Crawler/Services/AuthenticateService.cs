@@ -7,7 +7,7 @@ using WTM.Crawler.Helpers;
 
 namespace WTM.Crawler.Services
 {
-    public class AuthenticateService : IAuthenticateService
+    public class AuthenticateService
     {
         public Cookie CookieSession { get; private set; }
 

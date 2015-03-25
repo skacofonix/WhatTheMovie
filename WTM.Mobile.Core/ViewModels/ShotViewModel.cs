@@ -292,10 +292,7 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (showMovieDetailCommand == null)
                 {
-                    showMovieDetailCommand = new MvxCommand(() =>
-                    {
-                        ShowViewModel<MovieViewModel>(new MovieParameters { MovieId = Response.MovieId });
-                    });
+                    showMovieDetailCommand = new MvxCommand(() => ShowViewModel<MovieViewModel>(new { movieId = Response.MovieId }));
                 }
                 return showMovieDetailCommand;
             }

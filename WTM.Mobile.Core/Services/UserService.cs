@@ -24,5 +24,15 @@ namespace WTM.Mobile.Core.Services
         {
             return userService.Search(username, page);
         }
+
+        public User Login(string username, string password)
+        {
+            return userService.Login(username, password);
+        }
+
+        public void Logout()
+        {
+            userService.Logout();
+        }
     }
 }

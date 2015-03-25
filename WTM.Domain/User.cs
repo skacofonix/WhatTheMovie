@@ -103,5 +103,8 @@ namespace WTM.Domain
 
         [DataMember]
         public string ImageUrl { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public string Token { get; set; }
     }
 }

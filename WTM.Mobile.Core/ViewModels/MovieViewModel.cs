@@ -1,6 +1,5 @@
 ﻿using WTM.Core.Services;
 using WTM.Domain;
-using WTM.Mobile.Core.ViewModels.Parameters;
 
 namespace WTM.Mobile.Core.ViewModels
 {
@@ -14,11 +13,14 @@ namespace WTM.Mobile.Core.ViewModels
             this.movieService = movieService;
         }
 
-        public void Init(MovieParameters movieParameters = null)
+        public void Init(string movieId)
         {
-            if (movieParameters != null)
+            if (movieId != null)
             {
-                Movie = movieService.GetById(movieParameters.MovieId);
+                ExecuteSyncAction(() =>
+                {
+                    Movie = movieService.GetById(movieId);
+                });
             }
         }
 

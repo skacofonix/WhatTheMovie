@@ -34,5 +34,21 @@ namespace WTM.Api.Client.Services
         {
             throw new NotImplementedException();
         }
+
+        public User Login(string username, string password)
+        {
+            User user = null;
+
+            var uri = new Uri(baseUri, string.Format("Login?username={0}&password={1}",
+                WebUtility.UrlEncode(username),
+                WebUtility.UrlEncode(password)));
+
+            user = httpClient.GetObjectSync<User>(uri);
+
+            return user;
+        }
+
+        public void Logout()
+        { }
     }
 }
