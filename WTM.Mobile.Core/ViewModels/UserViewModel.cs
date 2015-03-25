@@ -7,7 +7,7 @@ namespace WTM.Mobile.Core.ViewModels
     {
         private readonly IUserService userService;
 
-        public User User { get; set; }
+        public User User { get; private set; }
 
         public UserViewModel(IUserService userService)
         {

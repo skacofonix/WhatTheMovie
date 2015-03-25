@@ -39,6 +39,23 @@ namespace WTM.Mobile.Core.ViewModels
 
         #endregion
 
+        #region NavigateToMovieCommand
+
+        public ICommand NavigateToUserCommand
+        {
+            get
+            {
+                if (navigateToUserCommand == null)
+                {
+                    navigateToUserCommand = new MvxCommand(() => ShowViewModel<UserViewModel>());
+                }
+                return navigateToUserCommand;
+            }
+        }
+        private ICommand navigateToUserCommand;
+
+        #endregion
+
         #region NavigateToSettingsCommand
 
         public ICommand NavigateToSettingsCommand

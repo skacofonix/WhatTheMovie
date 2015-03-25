@@ -17,6 +17,11 @@
         android:id="@+id/buttonMovie"
         local:MvxBind="Click NavigateToMovieCommand" />
     <Button
+        android:text="User"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonUser" />
+    <Button
         android:text="Settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

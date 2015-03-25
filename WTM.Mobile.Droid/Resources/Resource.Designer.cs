@@ -416,6 +416,9 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f030007
 			public const int SplashScreen = 2130903047;
 			
+			// aapt resource value: 0x7f030008
+			public const int UserView = 2130903048;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

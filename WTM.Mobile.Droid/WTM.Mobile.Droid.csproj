@@ -111,6 +111,7 @@
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\MenuView.cs" />
     <Compile Include="Views\ShotView.cs" />
+    <Compile Include="Views\UserView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -125,6 +126,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\SettingsView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\UserView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
