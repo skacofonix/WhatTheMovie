@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using System;
 using System.Linq;
 using System.Net;
@@ -19,9 +20,9 @@ namespace WTM.Crawler.Services
             this.htmlParser = htmlParser;
         }
 
-        public bool Login(string login, string password)
+        public string Login(string login, string password)
         {
-            var loginSuccess = false;
+            string token = null;
 
             var uri = new Uri(webClient.UriBase, "user/login");
 
@@ -40,25 +41,31 @@ namespace WTM.Crawler.Services
 
             var nodeContainer = document.GetElementbyId("container");
             var nodeFlashMessageInfo = nodeContainer.ChildNodes.FirstOrDefault(n => n.Attributes.Any(attr => attr.Name == "class" && attr.Value == "flash_message flash_info"));
+            if (nodeFlashMessageInfo == null || !nodeContainer.InnerHtml.Contains("Welcome")) return null;
 
-            if (nodeFlashMessageInfo == null || !nodeContainer.InnerHtml.Contains("Welcome")) return false;
+            // Check username
+            var usernameNode = document.DocumentNode.SelectSingleNode("//li[@class='secondary_nav'][2]/a");
+            if (usernameNode == null) return null;
+            var usernameMatch = Regex.Match(usernameNode.GetAttributeValue("href", null), "/user/(.*)$");
+            if (!usernameMatch.Success) return null;
+            if (usernameMatch.Groups[1].Value != login) return null;
+
             var httpWebResponse = webResponse as HttpWebResponse;
-
-            if (httpWebResponse == null) return false;
+            if (httpWebResponse == null) return null;
             for (var index = 0; index < httpWebResponse.Cookies.Count; index++)
             {
                 var cookie = httpWebResponse.Cookies[index];
                 if (cookie.Name != "_wtm2_session") continue;
 
                 CookieSession = cookie;
-                loginSuccess = true;
-
                 webClient.SetCookie(cookie);
+
+                token = cookie.Value;
 
                 break;
             }
 
-            return loginSuccess;
+            return token;
         }
 
         public void Logout()

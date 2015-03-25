@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using NFluent;
 using NUnit.Framework;
 using WTM.Crawler.Parsers;

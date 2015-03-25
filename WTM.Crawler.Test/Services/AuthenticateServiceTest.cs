@@ -22,13 +22,13 @@ namespace WTM.Crawler.Test.Services
         [Test]
         public void WhenWrongAuthenticateWithLoginAndPasswordThenFail()
         {
-            Check.That(authenticateService.Login("captainOblivious", "wrongPassword")).IsFalse();
+            Check.That(authenticateService.Login("captainOblivious", "wrongPassword")).IsNull();
         }
 
         [Test]
         public void WhenAuthenticateWithLoginAndPasswordThenSuccess()
         {
-            Check.That(authenticateService.Login("captainOblivious", "captainOblivious")).IsTrue();
+            Check.That(authenticateService.Login("captainOblivious", "captainOblivious")).IsNotNull();
         }
     }
 }
