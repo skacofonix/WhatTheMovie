@@ -32,7 +32,8 @@ namespace WTM.Mobile.Core.ViewModels
             }
         }
 
-        public UserViewModel(IUserService userService)
+        public UserViewModel(IContext context, IUserService userService)
+            : base(context)
         {
             this.userService = userService;
         }

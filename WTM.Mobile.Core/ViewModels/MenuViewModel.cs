@@ -5,6 +5,10 @@ namespace WTM.Mobile.Core.ViewModels
 {
     public class MenuViewModel : ViewModelBase
     {
+        public MenuViewModel(IContext context)
+            : base(context)
+        { }
+
         #region NavigateToFeatureFilmsCommand
 
         public ICommand NavigateToFeatureFilmsCommand
@@ -64,12 +68,29 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (navigateToSettingsCommand == null)
                 {
-                    navigateToSettingsCommand = new MvxCommand(() => ShowViewModel<MovieViewModel>());
+                    navigateToSettingsCommand = new MvxCommand(() => ShowViewModel<SettingsViewModel>());
                 }
                 return navigateToSettingsCommand;
             }
         }
         private ICommand navigateToSettingsCommand;
+
+        #endregion
+
+        #region NavigateToAuthenticateCommand
+
+        public ICommand NavigateToAuthenticateCommand
+        {
+            get
+            {
+                if (navigateToAuthenticateCommand == null)
+                {
+                    navigateToAuthenticateCommand = new MvxCommand(() => ShowViewModel<AuthenticateViewModel>());
+                }
+                return navigateToAuthenticateCommand;
+            }
+        }
+        private ICommand navigateToAuthenticateCommand;
 
         #endregion
     }

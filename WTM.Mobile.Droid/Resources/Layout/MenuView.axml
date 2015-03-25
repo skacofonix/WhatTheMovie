@@ -4,6 +4,15 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <TextView
+        android:text="Username"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:textColor="@android:color/holo_red_light"
+        android:padding="5dp"
+        local:MvxBind="Text Context.UserName, Converter=Visibility" />
     <Button
         android:text="Feature films"
         android:layout_width="match_parent"
@@ -28,4 +37,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonSettings"
         local:MvxBind="Click NavigateToSettingsCommand" />
+    <Button
+        android:text="Authenticate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAuthenticate"
+        local:MvxBind="Click NavigateToAuthenticateCommand" />
 </LinearLayout>

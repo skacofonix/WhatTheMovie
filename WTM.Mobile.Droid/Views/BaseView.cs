@@ -1,16 +1,7 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <summary>
-//    Defines the BaseView type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+using Cirrious.MvvmCross.Droid.Views;
+
 namespace WTM.Mobile.Droid.Views
 {
-    using Cirrious.MvvmCross.Droid.Views;
-
-    /// <summary>
-    ///    Defines the BaseView type.
-    /// </summary>
     public abstract class BaseView : MvxActivity
-    {
-    }
+    { }
 }

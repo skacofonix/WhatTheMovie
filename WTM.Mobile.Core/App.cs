@@ -11,6 +11,11 @@ namespace WTM.Mobile.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
+            CreatableTypes()
+                .Containing("Context")
+                .AsInterfaces()
+                .RegisterAsSingleton();
+
             RegisterAppStart<ViewModels.MenuViewModel>();
         }
     }

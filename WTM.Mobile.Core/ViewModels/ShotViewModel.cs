@@ -12,7 +12,8 @@ namespace WTM.Mobile.Core.ViewModels
     {
         private readonly IShotService shotService;
 
-        public ShotViewModel(IShotService shotService)
+        public ShotViewModel(IContext context, IShotService shotService)
+            : base(context)
         {
             this.shotService = shotService;
         }

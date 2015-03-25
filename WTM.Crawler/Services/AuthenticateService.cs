@@ -20,14 +20,14 @@ namespace WTM.Crawler.Services
             this.htmlParser = htmlParser;
         }
 
-        public string Login(string login, string password)
+        public string Login(string username, string password)
         {
             string token = null;
 
             var uri = new Uri(webClient.UriBase, "user/login");
 
             var getRequestBuilder = new HttpRequestBuilder();
-            getRequestBuilder.AddParameter("name", login);
+            getRequestBuilder.AddParameter("name", username);
             getRequestBuilder.AddParameter("upassword", password);
             var data = getRequestBuilder.ToString();
 
@@ -48,7 +48,7 @@ namespace WTM.Crawler.Services
             if (usernameNode == null) return null;
             var usernameMatch = Regex.Match(usernameNode.GetAttributeValue("href", null), "/user/(.*)$");
             if (!usernameMatch.Success) return null;
-            if (usernameMatch.Groups[1].Value != login) return null;
+            if (usernameMatch.Groups[1].Value != username) return null;
 
             var httpWebResponse = webResponse as HttpWebResponse;
             if (httpWebResponse == null) return null;

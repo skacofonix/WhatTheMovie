@@ -1,5 +1,4 @@
-﻿using Cirrious.MvvmCross.ViewModels;
-using WTM.Core.Services;
+﻿using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Mobile.Core.ViewModels.Parameters;
 
@@ -9,7 +8,8 @@ namespace WTM.Mobile.Core.ViewModels
     {
         private readonly IMovieService movieService;
 
-        public MovieViewModel(IMovieService movieService)
+        public MovieViewModel(IContext context, IMovieService movieService)
+            : base(context)
         {
             this.movieService = movieService;
         }

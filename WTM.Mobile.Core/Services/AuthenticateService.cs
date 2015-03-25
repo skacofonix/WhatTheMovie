@@ -13,9 +13,9 @@ namespace WTM.Mobile.Core.Services
             authenticateService = new Api.Client.Services.AuthenticationService(settingsAdapter);
         }
 
-        public string Login(string login, string password)
+        public string Login(string username, string password)
         {
-            return authenticateService.Login(login, password);
+            return authenticateService.Login(username, password);
         }
 
         public void Logout()

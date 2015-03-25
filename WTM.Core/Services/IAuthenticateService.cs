@@ -2,7 +2,7 @@
 {
     public interface IAuthenticateService
     {
-        string Login(string login, string password);
+        string Login(string username, string password);
         void Logout();
     }
 }

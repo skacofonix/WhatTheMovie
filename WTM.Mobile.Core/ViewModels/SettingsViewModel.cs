@@ -6,7 +6,8 @@ namespace WTM.Mobile.Core.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        public SettingsViewModel()
+        public SettingsViewModel(IContext context)
+            : base(context)
         { }
 
         public void Init()

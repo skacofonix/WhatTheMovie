@@ -13,14 +13,14 @@ namespace WTM.Api.Client.Services
 
         public AuthenticationService(ISettings settings)
         {
-            baseUri = new Uri(settings.Host, "account/");
+            baseUri = new Uri(settings.Host, "Account");
             httpClient = new HttpClient();
         }
 
-        public string Login(string login, string password)
+        public string Login(string username, string password)
         {
-            var uri = new Uri(baseUri, string.Format("login={0}&password={1}",
-                WebUtility.UrlEncode(login),
+            var uri = new Uri(baseUri, string.Format("Account?username={0}&password={1}",
+                WebUtility.UrlEncode(username),
                 WebUtility.UrlEncode(password)));
 
             return  httpClient.GetStringSync(uri);

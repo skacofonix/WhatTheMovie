@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="ApiClientSettingsAdapter.cs" />
     <Compile Include="App.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Converters\StringListValueConverter.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -49,7 +50,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsAzure.cs" />
-    <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModels\AuthenticateViewModel.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
