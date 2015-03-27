@@ -110,5 +110,22 @@ namespace WTM.Mobile.Core.ViewModels
         private ICommand navigateToAuthenticateCommand;
 
         #endregion
+
+        #region NavigateToAboutCommand
+
+        public ICommand NavigateToAboutCommand
+        {
+            get
+            {
+                if (navigateToAboutCommand == null)
+                {
+                    navigateToAboutCommand = new MvxCommand(() => ShowViewModel<AboutViewModel>());
+                }
+                return navigateToAboutCommand;
+            }
+        }
+        private ICommand navigateToAboutCommand;
+
+        #endregion
     }
 }
