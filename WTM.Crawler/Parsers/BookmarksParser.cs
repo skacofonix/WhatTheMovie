@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using WTM.Crawler.Helpers;
+using WTM.Common.Helpers;
 using WTM.Domain;
 
 namespace WTM.Crawler.Parsers

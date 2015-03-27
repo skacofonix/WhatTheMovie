@@ -19,6 +19,10 @@ namespace WTM.Crawler
 
         public void SetCookie(Cookie cookie)
         {
+            foreach (var c in cookies.Where(x => x.Name == cookie.Name))
+            {
+                cookies.Remove(c);
+            }
             cookies.Add(cookie);
         }
 

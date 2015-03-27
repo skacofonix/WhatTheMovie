@@ -7,9 +7,9 @@ namespace WTM.Core.Services
     {
         User GetByUsername(string username);
 
-        IEnumerable<UserSummary> Search(string username, int? page = null);
+        IEnumerable<UserSummary> Search(string search, int? page = null);
 
-        User Login(string username, string password);
+        string Login(string username, string password);
 
         void Logout();
     }

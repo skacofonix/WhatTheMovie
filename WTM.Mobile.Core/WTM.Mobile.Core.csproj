@@ -45,16 +45,18 @@
     <Compile Include="ISettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MovieService.cs" />
+    <Compile Include="Services\ShotOverviewService.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsAzure.cs" />
     <Compile Include="ViewModels\AuthenticateViewModel.cs" />
     <Compile Include="IContext.cs" />
+    <Compile Include="ViewModels\FeatureFilmsViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
-    <Compile Include="ViewModels\Parameters\MovieParameters.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\ShotSummaryViewModel.cs" />
     <Compile Include="ViewModels\ShotViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -77,6 +79,10 @@
     <ProjectReference Include="..\WTM.Api.Client\WTM.Api.Client.csproj">
       <Project>{6661369F-3C0F-41B6-946B-9EA27DD13FE3}</Project>
       <Name>WTM.Api.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WTM.Common\WTM.Common.csproj">
+      <Project>{575fcab7-d35e-443e-b9a3-2ab4931415f7}</Project>
+      <Name>WTM.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
       <Project>{0D34CC8D-817B-419D-8EC6-F524E65F0FCC}</Project>

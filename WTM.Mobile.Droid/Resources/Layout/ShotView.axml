@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res/WTM.Mobile.Droid"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -124,6 +123,57 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             local:MvxBind="Click ShowMovieDetailCommand" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutPoster"
+        local:MvxBind="Visibility Shot.Poster, Converter=Visibility">
+        <TextView
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1"
+            local:MvxBind="Text Shot.Poster"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:layout_weight="10"
+            android:ellipsize="end"
+            android:padding="5dp" />
+        <Button
+            android:text="Show poster"
+            android:id="@+id/buttonPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            local:MvxBind="Click ShowPosterCommand"
+            android:layout_weight="3" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutFirstSolver"
+        local:MvxBind="Visibility Shot.FirstSolver, Converter=Visibility">
+        <TextView
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView2"
+            local:MvxBind="Text Shot.FirstSolver"
+            android:gravity="center_vertical"
+            android:layout_weight="10"
+            android:ellipsize="end"
+            android:padding="5dp" />
+        <Button
+            android:text="Show fisrt solver"
+            android:id="@+id/buttonFisrtSolver"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            local:MvxBind="Click ShowFirstSolverCommand"
+            android:layout_weight="3" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"

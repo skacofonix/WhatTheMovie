@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using WTM.Core.Services;
-using WTM.Crawler.Helpers;
+using WTM.Common.Helpers;
 using WTM.Crawler.Parsers;
 using WTM.Domain;
 
@@ -23,17 +23,17 @@ namespace WTM.Crawler.Services
             shotSearcher = new SearchTagParser(webClient, htmlParser);
         }
 
-        public Shot GetRandomShot()
+        public Shot GetRandomShot(string token = null)
         {
-            return shotParser.GetRandom();
+            return shotParser.GetRandom(token);
         }
 
-        public Shot GetById(int id)
+        public Shot GetById(int id, string token = null)
         {
-            return shotParser.GetById(id);
+            return shotParser.GetById(id, token);
         }
 
-        public GuessTitleResponse GuessTitle(int id, string title)
+        public GuessTitleResponse GuessTitle(int id, string title, string token = null)
         {
             GuessTitleResponse response = null;
 
@@ -77,7 +77,7 @@ namespace WTM.Crawler.Services
             return response;
         }
 
-        public GuessTitleResponse GetSolution(int id)
+        public GuessTitleResponse GetSolution(int id, string token = null)
         {
             GuessTitleResponse response = null;
 
@@ -109,12 +109,12 @@ namespace WTM.Crawler.Services
             return response;
         }
 
-        public Rate Rate(int id, int score)
+        public Rate Rate(int id, int score, string token = null)
         {
             throw new NotImplementedException();
         }
 
-        public ShotSummaryCollection Search(string tag, int? page = null)
+        public ShotSummaryCollection Search(string tag, int? page = null, string token = null)
         {
             var result = shotSearcher.Search(tag, page);
 

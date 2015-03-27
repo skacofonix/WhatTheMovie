@@ -20,13 +20,15 @@ namespace WTM.Crawler.Parsers
             : base(webClient, htmlParser)
         { }
 
-        public Shot GetRandom()
+        public Shot GetRandom(string userToken = null)
         {
+            SetUserToken(userToken);
             return Parse("random");
         }
 
-        public Shot GetById(int id)
+        public Shot GetById(int id, string userToken = null)
         {
+            SetUserToken(userToken);
             return Parse(id.ToString(CultureInfo.InvariantCulture));
         }
 

@@ -48,14 +48,18 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     authenticateCommand = new MvxCommand(() => this.ExecuteSyncAction(() =>
                     {
-                        var user = userService.Login(Username, Password);
+                        var token = userService.Login(Username, Password);
 
-                        if (user == null)
+                        if (token == null)
                         {
                             Password = null;
                         }
                         else
                         {
+                            var user = userService.GetByUsername(Username);
+
+                            Context.SetUserContext(user, token);
+
                             Close(this);
                         }
                     }), () => !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password));

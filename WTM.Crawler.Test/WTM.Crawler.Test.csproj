@@ -99,6 +99,10 @@
     <None Include="Resources\FeatureFilms20141201.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WTM.Common\WTM.Common.csproj">
+      <Project>{575fcab7-d35e-443e-b9a3-2ab4931415f7}</Project>
+      <Name>WTM.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
       <Project>{0d34cc8d-817b-419d-8ec6-f524e65f0fcc}</Project>
       <Name>WTM.Core</Name>

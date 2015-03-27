@@ -14,34 +14,34 @@ namespace WTM.Mobile.Core.Services
             shotService = new Api.Client.Services.ShotService(settingsAdapter);
         }
 
-        public Shot GetRandomShot()
+        public Shot GetRandomShot(string token = null)
         {
-            return shotService.GetRandomShot();
+            return shotService.GetRandomShot(token);
         }
 
-        public Shot GetById(int id)
+        public Shot GetById(int id, string token = null)
         {
-            return shotService.GetById(id);
+            return shotService.GetById(id, token);
         }
 
-        public GuessTitleResponse GuessTitle(int id, string title)
+        public GuessTitleResponse GuessTitle(int id, string title, string token = null)
         {
-            return shotService.GuessTitle(id, title);
+            return shotService.GuessTitle(id, title, token);
         }
 
-        public GuessTitleResponse GetSolution(int id)
+        public GuessTitleResponse GetSolution(int id, string token = null)
         {
-            return shotService.GetSolution(id);
+            return shotService.GetSolution(id, token);
         }
 
-        public Rate Rate(int id, int score)
+        public Rate Rate(int id, int score, string token = null)
         {
-            return shotService.Rate(id, score);
+            return shotService.Rate(id, score, token);
         }
 
-        public ShotSummaryCollection Search(string tag, int? page = null)
+        public ShotSummaryCollection Search(string tag, int? page = null, string token = null)
         {
-            return shotService.Search(tag, page);
+            return shotService.Search(tag, page, token);
         }
     }
 }

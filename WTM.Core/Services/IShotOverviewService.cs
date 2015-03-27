@@ -3,7 +3,7 @@ using WTM.Domain;
 
 namespace WTM.Core.Services
 {
-    public interface IShotOverview
+    public interface IShotOverviewService
     {
         ShotSummaryCollection GetShotSummaryByDate(DateTime date);
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WTM.Core.Services;
 using WTM.Domain;
 
@@ -22,22 +23,32 @@ namespace WTM.Mobile.Core.Services
             return userService.GetByUsername(username);
         }
 
-        public IEnumerable<UserSummary> Search(string username, int? page = null)
+        public IEnumerable<UserSummary> Search(string search, int? page = null)
         {
-            return userService.Search(username, page);
+            return userService.Search(search, page);
         }
 
-        public User Login(string username, string password)
+        public string Login(string username, string password)
         {
-            var user = userService.Login(username, password);
-            context.CurrentUser = user;
-            return user;
+            string token = null;
+
+            try
+            {
+                token = userService.Login(username, password);
+
+            }
+            catch (Exception ex)
+            {
+                // ToDo log
+            }
+
+            return token;
         }
 
         public void Logout()
         {
             userService.Logout();
-            context.CurrentUser = null;
+            context.ResetUserContext();
         }
     }
 }

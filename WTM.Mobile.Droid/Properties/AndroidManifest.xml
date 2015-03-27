@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="wtm.droid" android:installLocation="auto" android:versionName="Alpha">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="WTM.Mobile.Droid" android:installLocation="auto" android:versionName="Alpha">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="19" />
 	<application android:label="WTM" android:icon="@drawable/Icon"></application>
 	<uses-permission android:name="android.permission.INTERNET" />

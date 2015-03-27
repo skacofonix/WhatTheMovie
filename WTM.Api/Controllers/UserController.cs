@@ -27,9 +27,22 @@ namespace WTM.Api.Controllers
         // GET api/User/Login?username={username}&password={password}
         [Route("api/User/Login")]
         [HttpGet]
-        public User Login([FromUri]string username, [FromUri]string password)
+        public LoginResponse Login([FromUri] string username, [FromUri] string password)
         {
-            return userService.Login(username, password);
+            var token = userService.Login(username, password);
+
+            var loginResponse = new LoginResponse();
+            if (token != null)
+            {
+                loginResponse.Token = token;
+            }
+            else
+            {
+                loginResponse.Code = 13;                        // Nawak
+                loginResponse.Message = "Wrong authentication"; // Nawak
+            }
+
+            return loginResponse;
         }
 
         [Route("api/User/{username}")]

@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using WTM.Domain.Interfaces;
+﻿using System.Runtime.Serialization;
 
 namespace WTM.Domain
 {
     [DataContract]
-    public class ShotSummary : IShotSummary
+    public class ShotSummary
     {
-        [IgnoreDataMember]
-        public DateTime ParseDateTime { get; set; }
-        
-        [IgnoreDataMember]
-        public TimeSpan ParseDuration { get; set; }
-        
-        [IgnoreDataMember]
-        public IList<ParseInfo> ParseInfos { get; set; }
-
         [DataMember(IsRequired = true, Order = 1)]
         public int ShotId { get; set; }
 

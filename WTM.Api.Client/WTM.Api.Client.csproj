@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\WTM.Common\WTM.Common.csproj">
+      <Project>{575fcab7-d35e-443e-b9a3-2ab4931415f7}</Project>
+      <Name>WTM.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
       <Project>{0D34CC8D-817B-419D-8EC6-F524E65F0FCC}</Project>
       <Name>WTM.Core</Name>
@@ -51,6 +55,7 @@
     <Compile Include="Helpers\JsonDeserializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MovieService.cs" />
+    <Compile Include="Services\ShotOverviewService.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Settings.cs" />

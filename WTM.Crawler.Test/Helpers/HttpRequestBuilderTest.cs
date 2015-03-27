@@ -1,6 +1,6 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using WTM.Crawler.Helpers;
+using WTM.Common.Helpers;
 
 namespace WTM.Crawler.Test.Helpers
 {

@@ -5,9 +5,9 @@ using WTM.Domain;
 
 namespace WTM.Crawler.Services
 {
-    public abstract class ShotOverviewService : ShotService, IShotOverview
+    public class ShotOverviewService : ShotService, IShotOverviewService
     {
-        protected ShotOverviewService(IWebClient webClient, IHtmlParser htmlParser)
+        public ShotOverviewService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)
         {
             OverviewShotParser = new OverviewShotParser(webClient, htmlParser);

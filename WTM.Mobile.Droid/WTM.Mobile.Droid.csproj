@@ -110,6 +110,7 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\AuthenticateView.cs" />
     <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\FeatureFilmsView.cs" />
     <Compile Include="Views\MenuView.cs" />
     <Compile Include="Views\ShotView.cs" />
     <Compile Include="Views\UserView.cs" />
@@ -133,6 +134,12 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\AuthenticateView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\FeatureFilmsView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\Item_Shot.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

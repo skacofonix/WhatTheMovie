@@ -17,12 +17,29 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (navigateToFeatureFilmsCommand == null)
                 {
-                    navigateToFeatureFilmsCommand = new MvxCommand(() => ShowViewModel<ShotViewModel>());
+                    navigateToFeatureFilmsCommand = new MvxCommand(() => ShowViewModel<FeatureFilmsViewModel>());
                 }
                 return navigateToFeatureFilmsCommand;
             }
         }
         private ICommand navigateToFeatureFilmsCommand;
+
+        #endregion
+
+        #region NavigateToShotCommand
+
+        public ICommand NavigateToShotCommand
+        {
+            get
+            {
+                if (navigateToShotCommand == null)
+                {
+                    navigateToShotCommand = new MvxCommand(() => ShowViewModel<ShotViewModel>());
+                }
+                return navigateToShotCommand;
+            }
+        }
+        private ICommand navigateToShotCommand;
 
         #endregion
 

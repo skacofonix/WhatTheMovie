@@ -4,7 +4,6 @@ using Cirrious.MvvmCross.ViewModels;
 using System.Windows.Input;
 using WTM.Core.Services;
 using WTM.Domain;
-using WTM.Mobile.Core.ViewModels.Parameters;
 
 namespace WTM.Mobile.Core.ViewModels
 {
@@ -18,9 +17,12 @@ namespace WTM.Mobile.Core.ViewModels
             this.shotService = shotService;
         }
 
-        public void Init(Shot shot = null)
+        public void Init(int? shotId = null)
         {
-            NavigateToRandomShotCommand.Execute(shot);
+            if(shotId.HasValue)
+                NavigateToShotByIdCommand.Execute(shotId.Value);
+            else
+                NavigateToRandomShotCommand.Execute(null);
         }
 
         private void Reset()
@@ -86,7 +88,7 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     navigateToFirstShotCommand = new MvxCommand(() =>
                     {
-                        ExecuteSyncAction(() => Shot = shotService.GetById(Shot.Navigation.FirstId.Value));
+                        ExecuteSyncAction(() => Shot = shotService.GetById(Shot.Navigation.FirstId.Value, Context.Token));
                     }, () =>
                     {
                         return Shot != null
@@ -115,7 +117,7 @@ namespace WTM.Mobile.Core.ViewModels
                         ExecuteSyncAction(() =>
                         {
                             // ToDo : Choose between previous and unsolved previous
-                            Shot = shotService.GetById(Shot.Navigation.PreviousId.Value);
+                            Shot = shotService.GetById(Shot.Navigation.PreviousId.Value, Context.Token);
                         });
                     }, () =>
                     {
@@ -140,7 +142,7 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (navigateToRandomShotCommand == null)
                 {
-                    navigateToRandomShotCommand = new MvxCommand(() => ExecuteSyncAction(() => Shot = shotService.GetRandomShot()));
+                    navigateToRandomShotCommand = new MvxCommand(() => ExecuteSyncAction(() => Shot = shotService.GetRandomShot(Context.Token)));
                 }
                 return navigateToRandomShotCommand;
             }
@@ -162,7 +164,7 @@ namespace WTM.Mobile.Core.ViewModels
                         ExecuteSyncAction(() =>
                         {
                             // ToDo : Choose between next and unsolved next previous
-                            Shot = shotService.GetById(Shot.Navigation.NextId.Value);
+                            Shot = shotService.GetById(Shot.Navigation.NextId.Value, Context.Token);
                         });
                     }, () =>
                     {
@@ -189,7 +191,7 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     navigateToLastShotCommand = new MvxCommand(() =>
                     {
-                        ExecuteSyncAction(() => Shot = shotService.GetById(Shot.Navigation.LastId.Value));
+                        ExecuteSyncAction(() => Shot = shotService.GetById(Shot.Navigation.LastId.Value, Context.Token));
                     }, () =>
                     {
                         return Shot != null
@@ -202,6 +204,26 @@ namespace WTM.Mobile.Core.ViewModels
             }
         }
         private MvxCommand navigateToLastShotCommand;
+
+        #endregion
+
+        #region NavigateToShotByIdCommand
+
+        public ICommand NavigateToShotByIdCommand
+        {
+            get
+            {
+                if (navigateToShotByIdCommand == null)
+                {
+                    navigateToShotByIdCommand = new MvxCommand<int>(shotId => ExecuteSyncAction(() =>
+                    {
+                        Shot = shotService.GetById(shotId);
+                    }));
+                }
+                return navigateToShotByIdCommand;
+            }
+        }
+        private MvxCommand<int> navigateToShotByIdCommand;
 
         #endregion
 
@@ -223,7 +245,7 @@ namespace WTM.Mobile.Core.ViewModels
                             {
                                 if (!string.IsNullOrWhiteSpace(GuessTitle))
                                 {
-                                    Response = shotService.GuessTitle(shot.ShotId, GuessTitle);
+                                    Response = shotService.GuessTitle(shot.ShotId, GuessTitle, Context.Token);
                                 }
                                 else
                                 {
@@ -264,7 +286,7 @@ namespace WTM.Mobile.Core.ViewModels
                         {
                             try
                             {
-                                Response = shotService.GetSolution(Shot.ShotId);
+                                Response = shotService.GetSolution(Shot.ShotId, Context.Token);
                             }
                             finally
                             {
@@ -298,6 +320,40 @@ namespace WTM.Mobile.Core.ViewModels
             }
         }
         private MvxCommand showMovieDetailCommand;
+
+        #endregion
+
+        #region ShowPosterCommand
+
+        public ICommand ShowPosterCommand
+        {
+            get
+            {
+                if (showPosterCommand == null)
+                {
+                    showPosterCommand = new MvxCommand(() => ShowViewModel<UserViewModel>(new { userId = Shot.Poster }));
+                }
+                return showPosterCommand;
+            }
+        }
+        private MvxCommand showPosterCommand;
+
+        #endregion
+
+        #region ShowFirstSolverCommand
+
+        public ICommand ShowFirstSolverCommand
+        {
+            get
+            {
+                if (showFirstSolverCommand == null)
+                {
+                    showFirstSolverCommand = new MvxCommand(() => ShowViewModel<UserViewModel>(new { userId = Shot.FirstSolver }));
+                }
+                return showFirstSolverCommand;
+            }
+        }
+        private MvxCommand showFirstSolverCommand;
 
         #endregion
     }

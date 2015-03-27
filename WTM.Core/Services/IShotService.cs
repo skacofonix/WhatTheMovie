@@ -4,16 +4,16 @@ namespace WTM.Core.Services
 {
     public interface IShotService
     {
-        Shot GetRandomShot();
+        Shot GetRandomShot(string token = null);
 
-        Shot GetById(int id);
+        Shot GetById(int id, string token = null);
 
-        GuessTitleResponse GuessTitle(int id, string title);
+        GuessTitleResponse GuessTitle(int id, string title, string token = null);
 
-        GuessTitleResponse GetSolution(int id);
+        GuessTitleResponse GetSolution(int id, string token = null);
 
-        Rate Rate(int id, int score);
+        Rate Rate(int id, int score, string token = null);
 
-        ShotSummaryCollection Search(string tag, int? page = null);
+        ShotSummaryCollection Search(string tag, int? page = null, string token = null);
     }
 }

@@ -22,44 +22,44 @@ namespace WTM.Api.Controllers
             this.shotService = shotService;
         }
 
-        // GET api/Shot
-        public Shot Get()
+        // GET api/Shot?token={token}
+        public Shot Get(string token = null)
         {
-            return shotService.GetRandomShot();
+            return shotService.GetRandomShot(token);
         }
 
-        // GET api/Shot/{id}
-        public Shot Get(int id)
+        // GET api/Shot/{id}?token={token}
+        public Shot Get(int id, string token = null)
         {
-            return shotService.GetById(id);
+            return shotService.GetById(id, token);
         }
 
-        // GET api/Shot/{id}?guessTitle={guessTitle}
+        // GET api/Shot/{id}?guessTitle={guessTitle}&token={token}
         [HttpGet]
-        public GuessTitleResponse Guess(int id, [FromUri]string guessTitle)
+        public GuessTitleResponse Guess(int id, [FromUri]string guessTitle, [FromUri]string token = null)
         {
-            return shotService.GuessTitle(id, guessTitle);
+            return shotService.GuessTitle(id, guessTitle, token);
         }
 
-        // GET api/Shot/{id}/solution
+        // GET Api/Shot/{id}/solution?token={token}
         [Route("Api/Shot/{id}/solution")]
-        public GuessTitleResponse GetSolution(int id)
+        public GuessTitleResponse GetSolution(int id, [FromUri]string token = null)
         {
-            return shotService.GetSolution(id);
+            return shotService.GetSolution(id, token);
         }
 
-        // GET api/Shot/{id}?rate={rate}
+        // GET api/Shot/{id}?rate={rate}&token={token}
         [HttpGet]
-        public Rate Rate(int id, [FromUri]int rate)
+        public Rate Rate(int id, [FromUri]int rate, [FromUri]string token = null)
         {
-            return shotService.Rate(id, rate);
+            return shotService.Rate(id, rate, token);
         }
 
-        // GET api/Shot?search={search}&page={page}
+        // GET api/Shot?search={search}&page={page}&token={token}
         [HttpGet]
-        public ShotSummaryCollection Search(string search, [FromUri] int? page)
+        public ShotSummaryCollection Search(string search, [FromUri] int? page, [FromUri]string token = null)
         {
-            return shotService.Search(search, page);
+            return shotService.Search(search, page, token);
         }
     }
 }

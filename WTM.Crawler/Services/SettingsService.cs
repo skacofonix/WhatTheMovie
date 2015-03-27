@@ -1,6 +1,6 @@
 ﻿using System;
 using HtmlAgilityPack;
-using WTM.Crawler.Helpers;
+using WTM.Common.Helpers;
 using WTM.Crawler.Parsers;
 using WTM.Domain;
 

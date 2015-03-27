@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using WTM.Api.Client.Helpers;
+using WTM.Common.Helpers;
 using WTM.Core.Services;
 using WTM.Domain;
 
@@ -18,7 +19,7 @@ namespace WTM.Api.Client.Services
             httpClient = new HttpClient();
         }
 
-        public Shot GetRandomShot()
+        public Shot GetRandomShot(string token = null)
         {
             Shot shot = null;
 
@@ -27,7 +28,7 @@ namespace WTM.Api.Client.Services
             return shot;
         }
 
-        public Shot GetById(int id)
+        public Shot GetById(int id, string token = null)
         {
             Shot shot = null;
 
@@ -38,18 +39,23 @@ namespace WTM.Api.Client.Services
             return shot;
         }
 
-        public GuessTitleResponse GuessTitle(int id, string title)
+        public GuessTitleResponse GuessTitle(int id, string title, string token = null)
         {
             GuessTitleResponse guessTitleResponse = null;
 
-            var uri = new Uri(baseUri, string.Format("{0}?guessTitle={1}", id,WebUtility.UrlEncode(title)));
+            var requestBuilder = new HttpRequestBuilder(id.ToString());
+            requestBuilder.AddParameter("guessTitle", WebUtility.UrlEncode(title));
+            if(token != null)
+                requestBuilder.AddParameter("token", token);
+
+            var uri = new Uri(baseUri, requestBuilder.ToString());
 
             guessTitleResponse = httpClient.GetObjectSync<GuessTitleResponse>(uri);
 
             return guessTitleResponse;
         }
 
-        public GuessTitleResponse GetSolution(int id)
+        public GuessTitleResponse GetSolution(int id, string token = null)
         {
             GuessTitleResponse guessTitleResponse = null;
 
@@ -60,22 +66,34 @@ namespace WTM.Api.Client.Services
             return guessTitleResponse;
         }
 
-        public Rate Rate(int id, int score)
+        public Rate Rate(int id, int score, string token = null)
         {
             Rate rate = null;
 
-            var uri = new Uri(baseUri, string.Format("{0}?rate={1}", id, score));
+            var requestBuilder = new HttpRequestBuilder(id.ToString());
+            requestBuilder.AddParameter("rate", score.ToString());
+            if (token != null)
+                requestBuilder.AddParameter("token", token);
+
+            var uri = new Uri(baseUri, requestBuilder.ToString());
 
             rate = httpClient.GetObjectSync<Rate>(uri);
 
             return rate;
         }
 
-        public ShotSummaryCollection Search(string tag, int? page = null)
+        public ShotSummaryCollection Search(string tag, int? page = null, string token = null)
         {
             ShotSummaryCollection shotSummaryCollection = null;
 
-            var uri = new Uri(baseUri, string.Format("?search={0}&page={1}", WebUtility.UrlEncode(tag), page));
+            var requestBuilder = new HttpRequestBuilder();
+            requestBuilder.AddParameter("search", WebUtility.UrlEncode(tag));
+            if (page.HasValue)
+                requestBuilder.AddParameter("page", page.GetValueOrDefault(1).ToString());
+            if (token != null)
+                requestBuilder.AddParameter("token", token);
+
+            var uri = new Uri(baseUri, requestBuilder.ToString());
 
             shotSummaryCollection = httpClient.GetObjectSync<ShotSummaryCollection>(uri);
 

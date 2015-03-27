@@ -1,9 +1,9 @@
-﻿using System.Text.RegularExpressions;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Linq;
 using System.Net;
-using WTM.Crawler.Helpers;
+using System.Text.RegularExpressions;
+using WTM.Common.Helpers;
 
 namespace WTM.Crawler.Services
 {

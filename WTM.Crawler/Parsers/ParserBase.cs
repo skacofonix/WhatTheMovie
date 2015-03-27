@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using HtmlAgilityPack;
 using WTM.Domain;
 using WTM.Domain.Interfaces;
@@ -14,6 +15,12 @@ namespace WTM.Crawler.Parsers
         protected readonly IHtmlParser HtmlParser;
 
         public abstract string Identifier { get; }
+
+        protected virtual void SetUserToken(string userToken)
+        {
+            if(userToken != null)
+                WebClient.SetCookie(new Cookie("_wtm2_session", userToken));
+        }
 
         protected ParserBase(IWebClient webClient, IHtmlParser htmlParser)
         {

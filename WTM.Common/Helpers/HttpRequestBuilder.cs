@@ -1,15 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace WTM.Crawler.Helpers
+namespace WTM.Common.Helpers
 {
-    internal class HttpRequestBuilder
+    public class HttpRequestBuilder
     {
+        private readonly string prefix;
         private readonly Dictionary<string, string> parameters;
 
         public HttpRequestBuilder()
         {
+            parameters = new Dictionary<string, string>();
+        }
+
+        public HttpRequestBuilder(string prefix)
+        {
+            this.prefix = prefix;
             parameters = new Dictionary<string, string>();
         }
 
@@ -20,7 +28,7 @@ namespace WTM.Crawler.Helpers
 
         public override string ToString()
         {
-            var sb = new StringBuilder();
+            var sb = new StringBuilder(prefix);
 
             if (parameters.Count > 0)
                 AppendParameter(sb, parameters.First());

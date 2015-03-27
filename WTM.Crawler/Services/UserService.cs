@@ -24,22 +24,15 @@ namespace WTM.Crawler.Services
             return userParser.GetByUsername(username);
         }
 
-        public IEnumerable<UserSummary> Search(string username, int? page = null)
+        public IEnumerable<UserSummary> Search(string search, int? page = null)
         {
-            var result = userSearcher.Search(username, page);
+            var result = userSearcher.Search(search, page);
             return result.Items.Cast<UserSummary>().ToList();
         }
 
-        public User Login(string username, string password)
+        public string Login(string username, string password)
         {
-            var token = authenticateService.Login(username, password);
-            if (token == null)
-                return null;
-
-            var user = GetByUsername(username);
-            user.Token = token;
-
-            return user;
+            return authenticateService.Login(username, password);
         }
 
         public void Logout()
