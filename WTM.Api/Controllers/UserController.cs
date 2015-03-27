@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
+using WTM.Api.Domain;
 using WTM.Core.Services;
 using WTM.Crawler;
 using WTM.Crawler.Services;
-using WTM.Domain;
 
 namespace WTM.Api.Controllers
 {
-    public class UserController : ApiController
+    public class UserController : BaseController
     {
         private readonly IUserService userService;
 
@@ -27,36 +26,70 @@ namespace WTM.Api.Controllers
         // GET api/User/Login?username={username}&password={password}
         [Route("api/User/Login")]
         [HttpGet]
-        public LoginResponse Login([FromUri] string username, [FromUri] string password)
+        public UserLoginResponse Login([FromUri] string username, [FromUri] string password)
         {
-            var token = userService.Login(username, password);
-
-            var loginResponse = new LoginResponse();
-            if (token != null)
+            return DoWork<UserLoginResponse>(() =>
             {
-                loginResponse.Token = token;
-            }
-            else
-            {
-                loginResponse.Code = 13;                        // Nawak
-                loginResponse.Message = "Wrong authentication"; // Nawak
-            }
+                var response = new UserLoginResponse();
 
-            return loginResponse;
+                var token = userService.Login(username, password);
+
+                if (token != null)
+                {
+                    response.Token = token;
+                }
+                else
+                {
+                    response.AddError(new Error
+                    {
+                        Message = "Wrong authentication"
+                    });
+                }
+
+                return response;
+            });
         }
 
         [Route("api/User/{username}")]
         [HttpGet]
-        public User Get(string username)
+        public UserResponse Get(string username)
         {
-            return userService.GetByUsername(username);
+            return DoWork<UserResponse>(() =>
+            {
+                var response = new UserResponse();
+
+                var user = userService.GetByUsername(username);
+
+                if (user != null)
+                {
+                    response.User = user;
+                }
+                else
+                {
+                    response.AddError(new Error
+                    {
+                        Message = "Unexisting user"
+                    });
+                }
+
+                return response;
+            });
         }
 
         //[Route("api/User/Search")]
         [HttpGet]
-        public List<UserSummary> Search(string search, [FromUri]int? page = null)
+        public UserSearchResponse Search(string search, [FromUri]int? page = null)
         {
-            return userService.Search(search, page).ToList();
+            return DoWork<UserSearchResponse>(() =>
+            {
+                var response = new UserSearchResponse();
+
+                var userSummaries = userService.Search(search, page).ToList();
+
+                response.UserSummaries = userSummaries;
+
+                return response;
+            });
         }
     }
 }
