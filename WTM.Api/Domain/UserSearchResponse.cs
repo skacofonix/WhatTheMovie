@@ -7,7 +7,7 @@ namespace WTM.Api.Domain
     [DataContract]
     public class UserSearchResponse : ResponseBase
     {
-        [DataMember(EmitDefaultValue = false)]
+        [DataMember(EmitDefaultValue = false)]  
         public List<UserSummary> UserSummaries { get; set; }
     }
 }
