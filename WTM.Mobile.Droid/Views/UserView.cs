@@ -1,11 +1,10 @@
 using Android.App;
 using Android.OS;
-using Cirrious.MvvmCross.Droid.Views;
 
 namespace WTM.Mobile.Droid.Views
 {
     [Activity(Label = "User")]
-    public class UserView : MvxActivity
+    public class UserView : BaseView
     {
         protected override void OnCreate(Bundle bundle)
         {

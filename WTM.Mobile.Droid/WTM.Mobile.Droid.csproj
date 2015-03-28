@@ -113,6 +113,7 @@
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\FeatureFilmsView.cs" />
     <Compile Include="Views\MenuView.cs" />
+    <Compile Include="Views\SettingsView.cs" />
     <Compile Include="Views\ShotView.cs" />
     <Compile Include="Views\UserView.cs" />
   </ItemGroup>

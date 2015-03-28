@@ -184,16 +184,13 @@ namespace WTM.Mobile.Droid
 			public const int Icon = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int monoandroidsplash = 2130837507;
+			public const int roundedbg = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int roundedbg = 2130837508;
+			public const int roundedbgdark = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int roundedbgdark = 2130837509;
-			
-			// aapt resource value: 0x7f020006
-			public const int splash = 2130837510;
+			public const int splash = 2130837509;
 			
 			static Drawable()
 			{
@@ -537,9 +534,6 @@ namespace WTM.Mobile.Droid
 		
 		public partial class Style
 		{
-			
-			// aapt resource value: 0x7f060001
-			public const int Mono_Android_Theme_Splash = 2131099649;
 			
 			// aapt resource value: 0x7f060000
 			public const int Theme_Splash = 2131099648;
