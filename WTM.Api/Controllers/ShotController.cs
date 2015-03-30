@@ -26,7 +26,7 @@ namespace WTM.Api.Controllers
         // GET api/Shot?token={token}
         public ShotResponse Get(string token = null)
         {
-            return DoWork<ShotResponse>(() =>
+            return DoWork(() =>
             {
                 var shotResponse = new ShotResponse();
 
@@ -51,7 +51,7 @@ namespace WTM.Api.Controllers
         // GET api/Shot/{id}?token={token}
         public ShotResponse Get(int id, string token = null)
         {
-            return DoWork<ShotResponse>(() =>
+            return DoWork(() =>
             {
                 var shotResponse = new ShotResponse();
 
@@ -77,7 +77,7 @@ namespace WTM.Api.Controllers
         [HttpGet]
         public ShotGuessTitleResponse Guess(int id, [FromUri]string guessTitle, [FromUri]string token = null)
         {
-            return DoWork<ShotGuessTitleResponse>(() =>
+            return DoWork(() =>
             {
                 var response = new ShotGuessTitleResponse();
 
@@ -104,7 +104,7 @@ namespace WTM.Api.Controllers
         [Route("Api/Shot/{id}/solution")]
         public ShotGuessTitleResponse GetSolution(int id, [FromUri]string token = null)
         {
-            return DoWork<ShotGuessTitleResponse>(() =>
+            return DoWork(() =>
             {
                 var response = new ShotGuessTitleResponse();
 

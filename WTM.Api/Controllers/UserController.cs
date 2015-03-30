@@ -28,7 +28,7 @@ namespace WTM.Api.Controllers
         [HttpGet]
         public UserLoginResponse Login([FromUri] string username, [FromUri] string password)
         {
-            return DoWork<UserLoginResponse>(() =>
+            return DoWork(() =>
             {
                 var response = new UserLoginResponse();
 
@@ -54,7 +54,7 @@ namespace WTM.Api.Controllers
         [HttpGet]
         public UserResponse Get(string username)
         {
-            return DoWork<UserResponse>(() =>
+            return DoWork(() =>
             {
                 var response = new UserResponse();
 
@@ -80,13 +80,23 @@ namespace WTM.Api.Controllers
         [HttpGet]
         public UserSearchResponse Search(string search, [FromUri]int? page = null)
         {
-            return DoWork<UserSearchResponse>(() =>
+            return DoWork(() =>
             {
                 var response = new UserSearchResponse();
 
                 var userSummaries = userService.Search(search, page).ToList();
 
-                response.UserSummaries = userSummaries;
+                if (userSummaries.Any())
+                {
+                    response.UserSummaries = userSummaries;
+                }
+                else
+                {
+                    response.AddError(new Error
+                    {
+                        Message = "No match found"
+                    });
+                }
 
                 return response;
             });
