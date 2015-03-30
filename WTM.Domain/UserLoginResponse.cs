@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
-using WTM.Api.Domain;
 
-namespace WTM.Api.Controllers
+namespace WTM.Domain
 {
     [DataContract]
     public class UserLoginResponse : ResponseBase

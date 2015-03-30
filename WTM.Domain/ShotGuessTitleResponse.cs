@@ -1,10 +1,9 @@
 ﻿using System.Runtime.Serialization;
-using WTM.Domain;
 
-namespace WTM.Api.Domain
+namespace WTM.Domain
 {
     [DataContract]
-    public class ShotGetSolutionResponse : ResponseBase
+    public class ShotGuessTitleResponse : ResponseBase
     {
         [DataMember(EmitDefaultValue = false)]
         public GuessTitleResponse GuessTitleResponse { get; set; }

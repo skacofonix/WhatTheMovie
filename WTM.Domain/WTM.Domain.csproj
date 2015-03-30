@@ -40,12 +40,12 @@
     <Compile Include="Bookmark.cs" />
     <Compile Include="BookmarkCollection.cs" />
     <Compile Include="DifficultyOptions.cs" />
+    <Compile Include="Error.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="GuessTitleResponse.cs" />
     <Compile Include="Interfaces\IShotSummary.cs" />
     <Compile Include="Interfaces\IWebsiteEntity.cs" />
     <Compile Include="IResponse.cs" />
-    <Compile Include="LoginResponse.cs" />
     <Compile Include="Memorabilia.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieSummary.cs" />
@@ -57,9 +57,15 @@
     <Compile Include="ParseInfo.cs" />
     <Compile Include="ParseLevel.cs" />
     <Compile Include="Range.cs" />
+    <Compile Include="ResponseBase.cs" />
+    <Compile Include="ResponseGeneric.cs" />
     <Compile Include="SearchResultCollection.cs" />
     <Compile Include="SearchResultMovieTv.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ShotGetSolutionResponse.cs" />
+    <Compile Include="ShotGuessTitleResponse.cs" />
+    <Compile Include="ShotResponse.cs" />
+    <Compile Include="ShotSearchResult.cs" />
     <Compile Include="ShotSummaryCollection.cs" />
     <Compile Include="ShotType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +80,9 @@
     <Compile Include="SnapshotDifficultyChoiceAll.cs" />
     <Compile Include="SnapshotDifficultyChoiceHard.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserLoginResponse.cs" />
+    <Compile Include="UserResponse.cs" />
+    <Compile Include="UserSearchResponse.cs" />
     <Compile Include="UserSummary.cs" />
     <Compile Include="UserSummaryCollection.cs" />
   </ItemGroup>

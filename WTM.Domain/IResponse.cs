@@ -1,9 +1,13 @@
-﻿namespace WTM.Domain
+﻿using System.Collections.Generic;
+
+namespace WTM.Domain
 {
     public interface IResponse
     {
-        int Code { get; set; }
+        IList<Error> Errors { get; }
 
-        string Message { get; set; }
+        bool HasError { get; }
+
+        void AddError(Error error);
     }
 }

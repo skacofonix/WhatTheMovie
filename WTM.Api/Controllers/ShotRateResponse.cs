@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using WTM.Api.Domain;
 using WTM.Domain;
 
 namespace WTM.Api.Controllers

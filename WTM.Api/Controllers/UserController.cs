@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Http;
-using WTM.Api.Domain;
 using WTM.Core.Services;
 using WTM.Crawler;
 using WTM.Crawler.Services;
+using WTM.Domain;
 
 namespace WTM.Api.Controllers
 {
@@ -50,6 +50,7 @@ namespace WTM.Api.Controllers
             });
         }
 
+        // GET api/User/{username}
         [Route("api/User/{username}")]
         [HttpGet]
         public UserResponse Get(string username)
@@ -76,7 +77,7 @@ namespace WTM.Api.Controllers
             });
         }
 
-        //[Route("api/User/Search")]
+        // GET api/User?search={search}&page={page}
         [HttpGet]
         public UserSearchResponse Search(string search, [FromUri]int? page = null)
         {

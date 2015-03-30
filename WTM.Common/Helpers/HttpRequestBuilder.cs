@@ -30,6 +30,9 @@ namespace WTM.Common.Helpers
         {
             var sb = new StringBuilder(prefix);
 
+            if (!string.IsNullOrEmpty(prefix) && !prefix.EndsWith("/"))
+                sb.Append("?");
+
             if (parameters.Count > 0)
                 AppendParameter(sb, parameters.First());
 

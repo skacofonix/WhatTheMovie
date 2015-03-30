@@ -23,7 +23,10 @@ namespace WTM.Api.Client.Services
         {
             Shot shot = null;
 
-            shot = httpClient.GetObjectSync<Shot>(baseUri);
+            var response = httpClient.GetObjectSync<ShotResponse>(baseUri);
+
+            if (!response.HasError)
+                shot = response.Shot;
 
             return shot;
         }
@@ -34,7 +37,10 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, id.ToString());
 
-            shot = httpClient.GetObjectSync<Shot>(uri);
+            var response = httpClient.GetObjectSync<ShotResponse>(uri);
+
+            if (!response.HasError)
+                shot = response.Shot;
 
             return shot;
         }
@@ -50,7 +56,10 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, requestBuilder.ToString());
 
-            guessTitleResponse = httpClient.GetObjectSync<GuessTitleResponse>(uri);
+            var response = httpClient.GetObjectSync<ShotGuessTitleResponse>(uri);
+
+            if (response != null && !response.HasError)
+                guessTitleResponse = response.GuessTitleResponse;
 
             return guessTitleResponse;
         }
@@ -61,7 +70,10 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, string.Format("{0}/solution", id));
 
-            guessTitleResponse = httpClient.GetObjectSync<GuessTitleResponse>(uri);
+            var response = httpClient.GetObjectSync<ShotGuessTitleResponse>(uri);
+
+            if (response != null && !response.HasError)
+                guessTitleResponse = response.GuessTitleResponse;
 
             return guessTitleResponse;
         }

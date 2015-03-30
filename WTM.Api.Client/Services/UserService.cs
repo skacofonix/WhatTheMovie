@@ -26,7 +26,10 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, WebUtility.UrlEncode(username));
 
-            user = httpClient.GetObjectSync<User>(uri);
+            var userResponse = httpClient.GetObjectSync<UserResponse>(uri);
+
+            if (!userResponse.HasError)
+                user = userResponse.User;
 
             return user;
         }
@@ -35,10 +38,17 @@ namespace WTM.Api.Client.Services
         {
             List<UserSummary> userCollection = null;
 
-            var uri = new Uri(baseUri, string.Format("?search={0}&page={1}", WebUtility.UrlEncode(search), page));
+            var requestBuilder = new HttpRequestBuilder();
+            requestBuilder.AddParameter("search", WebUtility.UrlEncode(search));
+            if(page.HasValue)
+                requestBuilder.AddParameter("page", page.GetValueOrDefault(1).ToString());
 
-            // Ouch! how to parse Lis<User>, maybe i should use a specific UserCollection to encapsulate this list
-            userCollection = httpClient.GetObjectSync<List<UserSummary>>(uri);
+            var uri = new Uri(baseUri, requestBuilder.ToString());
+
+            var searchResponse = httpClient.GetObjectSync<UserSearchResponse>(uri);
+
+            if (!searchResponse.HasError)
+                userCollection = searchResponse.UserSummaries;
 
             return userCollection;
         }
@@ -53,9 +63,9 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, requestBuilder.ToString());
 
-            var loginResponse = httpClient.GetObjectSync<LoginResponse>(uri);
+            var loginResponse = httpClient.GetObjectSync<UserLoginResponse>(uri);
 
-            if (loginResponse.Token != null)
+            if (!loginResponse.HasError && !string.IsNullOrEmpty(loginResponse.Token))
                 token = loginResponse.Token;
 
             return token;
