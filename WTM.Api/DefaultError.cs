@@ -8,6 +8,6 @@ namespace WTM.Api
                 {
                     Code = -1,
                     Message = "Error occured on the server-side API",
-                };;
+                };
     }
 }

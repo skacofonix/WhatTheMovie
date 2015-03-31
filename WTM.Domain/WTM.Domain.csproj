@@ -64,6 +64,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="ShotGetSolutionResponse.cs" />
     <Compile Include="ShotGuessTitleResponse.cs" />
+    <Compile Include="ShotOverviewResponse.cs" />
     <Compile Include="ShotRateResponse.cs" />
     <Compile Include="ShotResponse.cs" />
     <Compile Include="ShotSearchResult.cs" />

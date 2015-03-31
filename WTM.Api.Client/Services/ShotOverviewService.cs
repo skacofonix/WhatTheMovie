@@ -23,7 +23,10 @@ namespace WTM.Api.Client.Services
 
             var uri = new Uri(baseUri, string.Join("/", date.Year, date.Month, date.Day));
 
-            shotSummaryCollection = httpClient.GetObjectSync<ShotSummaryCollection>(uri);
+            var response = httpClient.GetObjectSync<ShotOverviewResponse>(uri);
+
+            if (response != null && !response.HasError)
+                shotSummaryCollection = response.ShotsSummaries;
 
             return shotSummaryCollection;
         }

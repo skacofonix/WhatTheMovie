@@ -7,7 +7,7 @@ using WTM.Domain;
 
 namespace WTM.Api.Controllers
 {
-    public class ShotOverviewController : ApiController
+    public class ShotOverviewController : BaseController
     {
         private readonly IShotOverviewService shotOverviewService;
 
@@ -20,25 +20,42 @@ namespace WTM.Api.Controllers
 
         [HttpGet]
         [Route("api/ShotOverview/{year}/{month}/{day}")]
-        public ShotSummaryCollection Get([FromUri] int year, [FromUri] int month, [FromUri] int day)
+        public ShotOverviewResponse Get([FromUri] int year, [FromUri] int month, [FromUri] int day)
         {
-            ShotSummaryCollection shotSummaryCollection = null;
-            DateTime? date;
-
-            try
+            return DoWork(() =>
             {
-                  date = new DateTime(year, month, day);
-            }
-            catch (Exception)
-            {
-                // ToDo : Log + Use encapsulate WS type
-                date = null;
-            }
+                var response = new ShotOverviewResponse();
 
-            if (date.HasValue)
-                shotSummaryCollection = shotOverviewService.GetShotSummaryByDate(date.Value);
+                DateTime? date;
+                try
+                {
+                    date = new DateTime(year, month, day);
+                }
+                catch (Exception ex)
+                {
+                    date = null;
+                    response.AddError(new Error
+                    {
+                        Message = "Invalid date",
+                    });
+                }
 
-            return shotSummaryCollection;
+                if (date.HasValue)
+                {
+                    var shotSummaries = shotOverviewService.GetShotSummaryByDate(date.Value);
+
+                    if (shotSummaries != null)
+                    {
+                        response.ShotsSummaries = shotSummaries;
+                    }
+                    else
+                    {
+                        response.AddError(DefaultError.DefaultApiError);
+                    }
+                }
+
+                return response;
+            });
         }
     }
 }
