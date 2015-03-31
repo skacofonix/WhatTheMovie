@@ -1,5 +1,8 @@
-﻿using HtmlAgilityPack;
+﻿using System;
+using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using System.Collections.Generic;
+using WTM.Crawler.Extensions;
 using WTM.Domain;
 
 namespace WTM.Crawler.Parsers
@@ -23,11 +26,25 @@ namespace WTM.Crawler.Parsers
                 var shotSummary = new ShotSummary();
                 instance.Items.Add(shotSummary);
 
-                var href = tagNode.SelectSingleNode("./@href");
-                shotSummary.ImageUrl = href.GetAttributeValue("href", null);
+                // Shot ID
+                var hrefNode = tagNode.SelectSingleNode("./@href");
+                var hrefValue = hrefNode.GetAttributeValue("href", null);
+                if (!string.IsNullOrEmpty(hrefValue))
+                {
+                    int? shotId = hrefValue.ExtractAndParseInt(new Regex("shot/(\\d)*"));
+                    if (shotId.HasValue)
+                        shotSummary.ShotId = shotId.Value;
+                }
 
+                // Image
                 var img = tagNode.SelectSingleNode("./img/@src");
-                shotSummary.ImageUrl = img.GetAttributeValue("src", null);
+                var rawUri = img.GetAttributeValue("src", null);
+                if (!string.IsNullOrEmpty(rawUri))
+                {
+                    Uri uri = null;
+                    if (Uri.TryCreate(rawUri, UriKind.Absolute, out uri))
+                        shotSummary.ImageUrl = uri;
+                }
             }
         }
     }

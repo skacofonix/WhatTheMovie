@@ -155,7 +155,14 @@ namespace WTM.Crawler.Parsers
                     }
                 }
 
-                shotSummary.ImageUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a/img/@src");
+                var imgSrc = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a/img/@src");
+                if (!string.IsNullOrEmpty(imgSrc))
+                {
+                    Uri uri = null;
+                    if (Uri.TryCreate(imgSrc, UriKind.Absolute, out uri))
+                        shotSummary.ImageUrl = uri;
+                }
+
 
                 var nodeShotUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a[1]/@href");
                 var regexLastDecimal = new Regex(@"(\d*)$");

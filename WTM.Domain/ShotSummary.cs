@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace WTM.Domain
 {
@@ -9,7 +10,7 @@ namespace WTM.Domain
         public int ShotId { get; set; }
 
         [DataMember(IsRequired = true, Order = 2)]
-        public string ImageUrl { get; set; }
+        public Uri ImageUrl { get; set; }
 
         [DataMember(IsRequired = true, Order = 3)]
         public ShotUserStatus UserStatus { get; set; }
