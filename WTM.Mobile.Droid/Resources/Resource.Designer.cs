@@ -325,11 +325,11 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f05003a
 			public const int linearLayoutSolution = 2131034170;
 			
-			// aapt resource value: 0x7f05004e
-			public const int linearLayoutStatistics = 2131034190;
+			// aapt resource value: 0x7f050050
+			public const int linearLayoutStatistics = 2131034192;
 			
-			// aapt resource value: 0x7f050049
-			public const int linearLayoutSummary = 2131034185;
+			// aapt resource value: 0x7f05004b
+			public const int linearLayoutSummary = 2131034187;
 			
 			// aapt resource value: 0x7f05000e
 			public const int loadingImage = 2131034126;
@@ -339,6 +339,9 @@ namespace WTM.Mobile.Droid
 			
 			// aapt resource value: 0x7f05000f
 			public const int loadingProgressWheel = 2131034127;
+			
+			// aapt resource value: 0x7f050049
+			public const int progressBar = 2131034185;
 			
 			// aapt resource value: 0x7f050036
 			public const int progressBarLoading = 2131034166;
@@ -357,6 +360,9 @@ namespace WTM.Mobile.Droid
 			
 			// aapt resource value: 0x7f050046
 			public const int ratingBarShot = 2131034182;
+			
+			// aapt resource value: 0x7f05004a
+			public const int relativeLayout1 = 2131034186;
 			
 			// aapt resource value: 0x7f05002b
 			public const int relativeLayoutCommands = 2131034155;
@@ -382,11 +388,11 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f050041
 			public const int textView2 = 2131034177;
 			
-			// aapt resource value: 0x7f05004f
-			public const int textView6 = 2131034191;
+			// aapt resource value: 0x7f050051
+			public const int textView6 = 2131034193;
 			
-			// aapt resource value: 0x7f05004d
-			public const int textViewAbout = 2131034189;
+			// aapt resource value: 0x7f05004f
+			public const int textViewAbout = 2131034191;
 			
 			// aapt resource value: 0x7f05001e
 			public const int textViewAbstract = 2131034142;
@@ -418,17 +424,17 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f050005
 			public const int textViewPasswordLabel = 2131034117;
 			
-			// aapt resource value: 0x7f05004c
-			public const int textViewPersonalInformations = 2131034188;
+			// aapt resource value: 0x7f05004e
+			public const int textViewPersonalInformations = 2131034190;
 			
-			// aapt resource value: 0x7f05004b
-			public const int textViewRank = 2131034187;
+			// aapt resource value: 0x7f05004d
+			public const int textViewRank = 2131034189;
 			
 			// aapt resource value: 0x7f050048
 			public const int textViewRateNbRaters = 2131034184;
 			
-			// aapt resource value: 0x7f050050
-			public const int textViewSnapshotSolved = 2131034192;
+			// aapt resource value: 0x7f050052
+			public const int textViewSnapshotSolved = 2131034194;
 			
 			// aapt resource value: 0x7f05003b
 			public const int textViewSolutionMovieTitle = 2131034171;
@@ -439,8 +445,8 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f05000d
 			public const int textViewStatus = 2131034125;
 			
-			// aapt resource value: 0x7f05004a
-			public const int textViewUsername = 2131034186;
+			// aapt resource value: 0x7f05004c
+			public const int textViewUsername = 2131034188;
 			
 			// aapt resource value: 0x7f050002
 			public const int textViewUsernameLabel = 2131034114;

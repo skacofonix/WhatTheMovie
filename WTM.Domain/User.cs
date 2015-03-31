@@ -102,7 +102,7 @@ namespace WTM.Domain
         public IList<Memorabilia> MemorabiliaList { get; set; }
 
         [DataMember]
-        public string ImageUrl { get; set; }
+        public Uri ImageUrl { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public string Token { get; set; }

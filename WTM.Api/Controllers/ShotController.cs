@@ -39,7 +39,7 @@ namespace WTM.Api.Controllers
                 {
                     shotResponse.AddError(new Error
                     {
-                        Message = "This shot doesn't exist"
+                        Message = "Error occured on the server-side API"
                     });
                 }
 
@@ -90,7 +90,7 @@ namespace WTM.Api.Controllers
                 {
                     response.AddError(new Error
                     {
-                        Message = "Error occur"
+                        Message = "Error occured on the server-side API"
                     });
                 }
 
@@ -117,7 +117,7 @@ namespace WTM.Api.Controllers
                 {
                     response.AddError(new Error
                     {
-                        Message = "Error occur"
+                        Message = "Error occured on the server-side API"
                     });
                 }
 
@@ -127,16 +127,54 @@ namespace WTM.Api.Controllers
 
         // GET api/Shot/{id}?rate={rate}&token={token}
         [HttpGet]
-        public Rate Rate(int id, [FromUri]int rate, [FromUri]string token = null)
+        public ShotRateResponse Rate(int id, [FromUri]int rate, [FromUri]string token = null)
         {
-            return shotService.Rate(id, rate, token);
+            return DoWork(() =>
+            {
+                var response = new ShotRateResponse();
+
+                var rateResponse = shotService.Rate(id, rate, token);
+
+                if (rateResponse != null)
+                {
+                    response.Rate = rateResponse;
+                }
+                else
+                {
+                    response.AddError(new Error
+                    {
+                        Message = "Error occured on the server-side API"
+                    });
+                }
+
+                return response;
+            });
         }
 
         // GET api/Shot?search={search}&page={page}&token={token}
         [HttpGet]
-        public ShotSummaryCollection Search(string search, [FromUri] int? page, [FromUri]string token = null)
+        public ShotSearchResult Search(string search, [FromUri] int? page, [FromUri]string token = null)
         {
-            return shotService.Search(search, page, token);
+            return DoWork(() =>
+            {
+                var response = new ShotSearchResult();
+
+                var shotSummaryCollection = shotService.Search(search, page, token);
+
+                if (shotSummaryCollection != null)
+                {
+                    response.ShotSummaries = shotSummaryCollection;
+                }
+                else
+                {
+                    response.AddError(new Error
+                    {
+                        Message = "Error occured on the server-side API"
+                    });
+                }
+
+                return response;
+            });
         }
     }
 }

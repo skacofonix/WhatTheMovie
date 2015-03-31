@@ -195,7 +195,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ShotOverviewController.cs" />
-    <Compile Include="Controllers\ShotRateResponse.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\BookmarkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

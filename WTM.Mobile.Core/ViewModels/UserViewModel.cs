@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using WTM.Core.Services;
 using WTM.Domain;
 
@@ -9,7 +8,17 @@ namespace WTM.Mobile.Core.ViewModels
     {
         private readonly IUserService userService;
 
-        public User User { get; private set; }
+        public User User
+        {
+            get { return user; }
+            private set
+            {
+                user = value; 
+                RaisePropertyChanged(() => User);
+                RaisePropertyChanged(() => PersonalInformations);
+            }
+        }
+        private User user;
 
         public string PersonalInformations
         {

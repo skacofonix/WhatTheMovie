@@ -6,62 +6,75 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-    <LinearLayout
-        android:orientation="horizontal"
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        local:MvxBind="Visibility Busy, Converter=Visibility" />
+    <RelativeLayout
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutSummary">
-        <Mvx.MvxImageView
-            android:id="@+id/imageViewShot"
-            android:layout_width="256px"
-            android:layout_height="256px"
-            android:layout_margin="5dp"
-            local:MvxBind="ImageUrl User.ImageUrl" />
+        android:id="@+id/relativeLayout1">
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout1"
-            android:layout_margin="5dp">
-            <TextView
-                android:text="Username"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/linearLayoutSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Mvx.MvxImageView
+                android:id="@+id/imageViewShot"
+                android:layout_width="256px"
+                android:layout_height="256px"
+                android:layout_margin="5dp"
+                local:MvxBind="ImageUrl User.ImageUrl" />
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewUsername"
-                android:textColor="@android:color/holo_red_light"
-                local:MvxBind="Text User.Name" />
-            <TextView
-                android:text="Set Decorator"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textViewRank"
-                local:MvxBind="Text User.Level" />
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:id="@+id/space1" />
-            <TextView
-                android:text="35, male, France"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textViewPersonalInformations"
-                local:MvxBind="Text PersonalInformations" />
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:id="@+id/space2" />
-            <TextView
-                android:text="Nazz has joined WTM about 4 years ago"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textViewAbout"
-                local:MvxBind="Text UserAbout" />
+                android:id="@+id/linearLayout1"
+                android:layout_margin="5dp">
+                <TextView
+                    android:text="Username"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewUsername"
+                    android:textColor="@android:color/holo_red_light"
+                    local:MvxBind="Text User.Name" />
+                <TextView
+                    android:text="Set Decorator"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewRank"
+                    local:MvxBind="Text User.Level" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:id="@+id/space1" />
+                <TextView
+                    android:text="35, male, France"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewPersonalInformations"
+                    local:MvxBind="Text PersonalInformations" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:id="@+id/space2" />
+                <TextView
+                    android:text="Nazz has joined WTM about 4 years ago"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewAbout"
+                    local:MvxBind="Text UserAbout" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"

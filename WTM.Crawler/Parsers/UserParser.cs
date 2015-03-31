@@ -59,7 +59,19 @@ namespace WTM.Crawler.Parsers
 
             var imageNode = rootNode.SelectSingleNode("/div[@class='col_left nopadding']/div[@class='character_box_big clearfix']/div[@class='autograph ']/span[@class='wrapper']/img/@src");
             if (imageNode != null)
-                instance.ImageUrl = imageNode.InnerText;
+            {
+                Uri uri = null;
+                try
+                {
+                    uri = new Uri(imageNode.InnerText);
+                }
+                catch (Exception)
+                {
+                    // ToDo log
+                    uri = null;
+                }
+                instance.ImageUrl = uri;
+            }
 
             var personalInfosNode = rootNode.SelectSingleNode(".//p[@class='personal_information']");
             if (personalInfosNode != null)
