@@ -4,9 +4,47 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayoutNavigation">
+        <Button
+            android:text="Previous"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonPrevious"
+            android:layout_weight="1"
+            local:MvxBind="Click NavigateToPreviousDateCommand" />
+        <TextView
+            android:text="01/04/2015"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1"
+            android:layout_weight="2"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            local:MvxBind="Text Date" />
+        <Button
+            android:text="Next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonNext"
+            android:layout_weight="1"
+            local:MvxBind="Click NavigateToNextDateCommand" />
+    </LinearLayout>
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        local:MvxBind="Visibility Busy, Converter=Visibility" />
     <Mvx.MvxListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        local:MvxBind="ItemsSource ShotSummaryCollection.Shots"
+        local:MvxBind="ItemsSource ShotSummaryCollection.Shots;ItemClick NavigateToShotCommand"
         local:MvxItemTemplate="@layout/item_shot" />
 </LinearLayout>

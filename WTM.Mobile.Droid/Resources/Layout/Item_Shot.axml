@@ -29,8 +29,7 @@
                 android:text="Show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/buttonShowShot"
-                local:MvxBind="Click NavigateToShotCommand" />
+                android:id="@+id/buttonShowShot" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
