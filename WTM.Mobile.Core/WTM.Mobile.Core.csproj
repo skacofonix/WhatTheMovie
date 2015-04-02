@@ -41,6 +41,7 @@
     <Compile Include="ApiClientSettingsAdapter.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="Converters\StringFormatValueConverter.cs" />
     <Compile Include="Converters\StringListValueConverter.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShotSummaryViewModel.cs" />
     <Compile Include="ViewModels\ShotViewModel.cs" />
+    <Compile Include="ViewModels\TestViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>

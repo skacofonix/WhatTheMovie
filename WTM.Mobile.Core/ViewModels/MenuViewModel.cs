@@ -127,5 +127,22 @@ namespace WTM.Mobile.Core.ViewModels
         private ICommand navigateToAboutCommand;
 
         #endregion
+
+        #region NavigateToTestCommand
+
+        public ICommand NavigateToTestCommand
+        {
+            get
+            {
+                if (navigateToTestCommand == null)
+                {
+                    navigateToTestCommand = new MvxCommand(() => ShowViewModel<TestViewModel>());
+                }
+                return navigateToTestCommand;
+            }
+        }
+        private ICommand navigateToTestCommand;
+
+        #endregion
     }
 }

@@ -49,10 +49,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonAuthenticate"
         local:MvxBind="Click NavigateToAuthenticateCommand" />
-  <Button
-       android:text="About"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/buttonAuthenticate"
-       local:MvxBind="Click NavigateToAboutCommand" />
+    <Button
+        android:text="About"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAuthenticate"
+        local:MvxBind="Click NavigateToAboutCommand" />
+    <Button
+        android:text="Test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAuthenticate"
+        local:MvxBind="Click NavigateToTestCommand" />
 </LinearLayout>

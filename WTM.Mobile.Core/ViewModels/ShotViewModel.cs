@@ -17,12 +17,14 @@ namespace WTM.Mobile.Core.ViewModels
             this.shotService = shotService;
         }
 
-        public void Init(int? shotId = null)
+        public void Init()
         {
-            if(shotId.HasValue)
-                NavigateToShotByIdCommand.Execute(shotId.Value);
-            else
-                NavigateToRandomShotCommand.Execute(null);
+            //NavigateToRandomShotCommand.Execute(null);
+        }
+
+        public void Init(int shotId)
+        {
+            NavigateToShotByIdCommand.Execute(shotId);
         }
 
         private void Reset()
