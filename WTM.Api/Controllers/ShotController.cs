@@ -54,7 +54,7 @@ namespace WTM.Api.Controllers
             {
                 var shotResponse = new ShotResponse();
 
-                var shot = shotService.GetRandomShot(token);
+                var shot = shotService.GetById(id, token);
 
                 if (shot != null)
                 {

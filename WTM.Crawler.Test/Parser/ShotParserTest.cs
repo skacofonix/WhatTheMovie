@@ -29,6 +29,7 @@ namespace WTM.Crawler.Test.Parser
         {
             var shot = parser.GetById(1000);
 
+            Check.That(shot.ShotId).Equals(1000);
             Check.That(shot.Navigation.FirstId).HasAValue();
             Check.That(shot.Navigation.LastId).HasAValue();
             Check.That(shot.Navigation.PreviousId).HasAValue();

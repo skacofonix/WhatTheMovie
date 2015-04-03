@@ -28,6 +28,7 @@ namespace WTM.Api.Client.Test.Services
         {
             var shot = shotService.GetById(10);
             Check.That(shot).IsNotNull();
+            Check.That(shot.ShotId).IsEqualTo(10);
         }
 
         [Test]
