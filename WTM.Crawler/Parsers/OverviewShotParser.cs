@@ -158,11 +158,16 @@ namespace WTM.Crawler.Parsers
                 var imgSrc = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a/img/@src");
                 if (!string.IsNullOrEmpty(imgSrc))
                 {
-                    Uri uri = null;
-                    if (Uri.TryCreate(imgSrc, UriKind.Absolute, out uri))
+                    string uriRaw;
+                    if (!imgSrc.StartsWith("http:"))
+                        uriRaw = "http:" + imgSrc;
+                    else
+                        uriRaw = imgSrc;
+
+                    Uri uri;
+                    if (Uri.TryCreate(uriRaw, UriKind.Absolute, out uri))
                         shotSummary.ImageUrl = uri;
                 }
-
 
                 var nodeShotUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a[1]/@href");
                 var regexLastDecimal = new Regex(@"(\d*)$");
