@@ -7,8 +7,9 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <Mvx.MvxImageView
-        android:layout_width="wrap_content"
+        android:layout_width="512px"
         android:layout_margin="5dp"
-        android:layout_height="100dp"
-        local:MvxBind="ImageUrl ImageUrl" />
+        android:layout_height="288px"
+        local:MvxBind="ImageUrl ImageUrl"
+        android:background="@android:color/black" />
 </LinearLayout>

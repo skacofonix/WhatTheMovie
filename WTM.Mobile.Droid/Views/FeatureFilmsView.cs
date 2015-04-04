@@ -3,7 +3,7 @@ using Android.OS;
 
 namespace WTM.Mobile.Droid.Views
 {
-    [Activity(Label = "FeatureFilm")]
+    [Activity(Label = "Feature Films")]
     public class FeatureFilmsView : BaseView
     {
         protected override void OnCreate(Bundle bundle)
