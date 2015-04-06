@@ -111,7 +111,8 @@
     <Compile Include="Views\AboutView.cs" />
     <Compile Include="Views\AuthenticateView.cs" />
     <Compile Include="Views\BaseView.cs" />
-    <Compile Include="Views\FeatureFilmsView.cs" />
+    <Compile Include="Views\ShotArchiveView.cs" />
+    <Compile Include="Views\ShotFeatureFilmsView.cs" />
     <Compile Include="Views\MenuView.cs" />
     <Compile Include="Views\SettingsView.cs" />
     <Compile Include="Views\ShotView.cs" />
@@ -139,7 +140,7 @@
     <AndroidResource Include="Resources\Layout\AuthenticateView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\FeatureFilmsView.axml">
+    <AndroidResource Include="Resources\Layout\ShotOverviewView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\Item_Shot.axml">

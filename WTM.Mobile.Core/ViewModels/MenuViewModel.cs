@@ -17,7 +17,7 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (navigateToFeatureFilmsCommand == null)
                 {
-                    navigateToFeatureFilmsCommand = new MvxCommand(() => ShowViewModel<FeatureFilmsViewModel>());
+                    navigateToFeatureFilmsCommand = new MvxCommand(() => ShowViewModel<ShotFeatureFilmsViewModel>());
                 }
                 return navigateToFeatureFilmsCommand;
             }
@@ -26,41 +26,24 @@ namespace WTM.Mobile.Core.ViewModels
 
         #endregion
 
-        #region NavigateToShotCommand
+        #region NavigateToArchiveCommand
 
-        public ICommand NavigateToShotCommand
+        public ICommand NavigateToArchiveCommand
         {
             get
             {
-                if (navigateToShotCommand == null)
+                if (navigateToArchiveCommand == null)
                 {
-                    navigateToShotCommand = new MvxCommand(() => ShowViewModel<ShotViewModel>());
+                    navigateToArchiveCommand = new MvxCommand(() => ShowViewModel<ShotArchiveViewModel>());
                 }
-                return navigateToShotCommand;
+                return navigateToArchiveCommand;
             }
         }
-        private ICommand navigateToShotCommand;
+        private ICommand navigateToArchiveCommand;
 
         #endregion
 
-        #region NavigateToMovieCommand
-
-        public ICommand NavigateToMovieCommand
-        {
-            get
-            {
-                if (navigateToMovieCommand == null)
-                {
-                    navigateToMovieCommand = new MvxCommand(() => ShowViewModel<MovieViewModel>());
-                }
-                return navigateToMovieCommand;
-            }
-        }
-        private ICommand navigateToMovieCommand;
-
-        #endregion
-
-        #region NavigateToMovieCommand
+        #region NavigateToUserCommand
 
         public ICommand NavigateToUserCommand
         {

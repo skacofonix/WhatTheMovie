@@ -54,7 +54,9 @@
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\AuthenticateViewModel.cs" />
     <Compile Include="IContext.cs" />
-    <Compile Include="ViewModels\FeatureFilmsViewModel.cs" />
+    <Compile Include="ViewModels\ShotArchiveViewModel.cs" />
+    <Compile Include="ViewModels\ShotOverviewViewModel.cs" />
+    <Compile Include="ViewModels\ShotFeatureFilmsViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />

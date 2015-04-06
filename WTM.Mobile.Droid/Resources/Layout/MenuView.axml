@@ -20,17 +20,11 @@
         android:id="@+id/buttonFeatureFilms"
         local:MvxBind="Click NavigateToFeatureFilmsCommand" />
     <Button
-        android:text="Shot"
+        android:text="Archives"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonFeatureFilms"
-        local:MvxBind="Click NavigateToShotCommand" />
-    <Button
-        android:text="Movie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonMovie"
-        local:MvxBind="Click NavigateToMovieCommand" />
+        local:MvxBind="Click NavigateToArchiveCommand" />
     <Button
         android:text="User"
         android:layout_width="match_parent"
