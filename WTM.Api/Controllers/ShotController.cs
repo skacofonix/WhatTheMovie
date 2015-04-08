@@ -1,4 +1,12 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Mime;
+using System.Web;
+using System.Web.Http;
 using WTM.Core.Services;
 using WTM.Crawler;
 using WTM.Crawler.Services;
@@ -175,6 +183,27 @@ namespace WTM.Api.Controllers
 
                 return response;
             });
+        }
+
+        // GET api/Shot?image={image}&referer={referer}
+        [HttpGet]
+        public HttpResponseMessage GetImage(string image, [FromUri] string referer)
+        {
+            var uriImage = new Uri(WebUtility.UrlDecode(image));
+
+            var webClient = new System.Net.WebClient();
+            webClient.Headers = new WebHeaderCollection();
+            webClient.Headers["Referer"] = WebUtility.UrlDecode(referer);
+
+            var stream = webClient.OpenRead(uriImage);
+            var ms = new MemoryStream();
+            stream.CopyTo(ms);
+
+            var result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new ByteArrayContent(ms.ToArray());
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+
+            return result;
         }
     }
 }
