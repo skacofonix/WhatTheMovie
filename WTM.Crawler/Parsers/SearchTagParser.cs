@@ -43,7 +43,7 @@ namespace WTM.Crawler.Parsers
                 {
                     Uri uri = null;
                     if (Uri.TryCreate(rawUri, UriKind.Absolute, out uri))
-                        shotSummary.ImageUrl = uri;
+                        shotSummary.ImageUri = uri;
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace WTM.Domain
         public int ShotId { get; set; }
 
         [DataMember(IsRequired = true, Order = 2)]
-        public Uri ImageUrl { get; set; }
+        public Uri ImageUri { get; set; }
 
         [DataMember(IsRequired = true, Order = 3)]
         public ShotUserStatus UserStatus { get; set; }

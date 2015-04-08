@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Helpers\HttpClientExtension.cs" />
     <Compile Include="HttpClientFactory.cs" />
+    <Compile Include="ImageDownloadUriMaker.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="Helpers\JsonDeserializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

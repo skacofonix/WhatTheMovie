@@ -10,6 +10,6 @@
         android:layout_width="512px"
         android:layout_margin="5dp"
         android:layout_height="288px"
-        local:MvxBind="ImageUrl ImageUrl"
+        local:MvxBind="ImageUrl ImageUri"
         android:background="@android:color/black" />
 </LinearLayout>

@@ -12,11 +12,13 @@ namespace WTM.Api.Client.Services
     {
         private readonly Uri baseUri;
         private readonly HttpClient httpClient;
+        private readonly ImageDownloadUriMaker imageDownloadUriMaker;
 
         public ShotService(ISettings settings)
         {
             baseUri = new Uri(settings.Host, "shot/");
             httpClient = new HttpClient();
+            imageDownloadUriMaker = new ImageDownloadUriMaker(settings.Host);
         }
 
         public Shot GetRandomShot(string token = null)
@@ -26,7 +28,10 @@ namespace WTM.Api.Client.Services
             var response = httpClient.GetObjectSync<ShotResponse>(baseUri);
 
             if (!response.HasError)
+            {
                 shot = response.Shot;
+                shot.ImageUri = imageDownloadUriMaker.MakeUri(shot.ImageUri,"http://whatthemovie.com/shot/" + shot.ShotId);
+            }
 
             return shot;
         }
@@ -40,7 +45,10 @@ namespace WTM.Api.Client.Services
             var response = httpClient.GetObjectSync<ShotResponse>(uri);
 
             if (!response.HasError)
+            {
                 shot = response.Shot;
+                shot.ImageUri = imageDownloadUriMaker.MakeUri(shot.ImageUri, "http://whatthemovie.com/shot/" + shot.ShotId);
+            }
 
             return shot;
         }
@@ -108,6 +116,8 @@ namespace WTM.Api.Client.Services
             var uri = new Uri(baseUri, requestBuilder.ToString());
 
             shotSummaryCollection = httpClient.GetObjectSync<ShotSummaryCollection>(uri);
+
+            // ToDo : use imageDownloadUriMaker
 
             return shotSummaryCollection;
         }

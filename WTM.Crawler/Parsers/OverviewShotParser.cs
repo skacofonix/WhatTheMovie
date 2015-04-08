@@ -166,7 +166,7 @@ namespace WTM.Crawler.Parsers
 
                     Uri uri;
                     if (Uri.TryCreate(uriRaw, UriKind.Absolute, out uri))
-                        shotSummary.ImageUrl = uri;
+                        shotSummary.ImageUri = uri;
                 }
 
                 var nodeShotUrl = GetFirstValue(nodeIterator.Current, ".//div[@class='box']/div/a[1]/@href");

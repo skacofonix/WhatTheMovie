@@ -10,11 +10,13 @@ namespace WTM.Api.Client.Services
     {
         private readonly Uri baseUri;
         private readonly HttpClient httpClient;
+        private readonly ImageDownloadUriMaker imageDownloadUriMaker;
 
         public ShotOverviewService(ISettings settings)
         {
             baseUri = new Uri(settings.Host, "ShotOverview/");
             httpClient = new HttpClient();
+            imageDownloadUriMaker = new ImageDownloadUriMaker(settings.Host);
         }
 
         public ShotSummaryCollection GetShotSummaryByDate(DateTime date)
@@ -26,7 +28,14 @@ namespace WTM.Api.Client.Services
             var response = httpClient.GetObjectSync<ShotOverviewResponse>(uri);
 
             if (response != null && !response.HasError)
+            {
                 shotSummaryCollection = response.ShotsSummaries;
+
+                foreach (var shot in shotSummaryCollection.Shots)
+                {
+                    shot.ImageUri = imageDownloadUriMaker.MakeUri(shot.ImageUri, string.Join("/", "http://whatthemovie.com/overview", date.Year, date.Month, date.Day));
+                }
+            }
 
             return shotSummaryCollection;
         }
