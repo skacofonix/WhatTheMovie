@@ -211,7 +211,7 @@ namespace WTM.Crawler.Parsers
                                                        .Select(s => s.InnerText)
                                                        .FirstOrDefault(w => w.Contains("var imageSrc"));
 
-            var urn = imageUrlSection.ExtractValue(new Regex("var imageSrc = '([a-z0-9/.]*)';", RegexOptions.IgnoreCase));
+            var urn = imageUrlSection.ExtractValue(new Regex("var imageSrc = '([a-z0-9/.:]*\\.jpg)'"));
 
             var uri = new Uri(WebClient.UriBase, urn);
 
