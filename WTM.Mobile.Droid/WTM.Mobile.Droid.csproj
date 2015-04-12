@@ -115,6 +115,7 @@
     <Compile Include="Views\ShotFeatureFilmsView.cs" />
     <Compile Include="Views\MenuView.cs" />
     <Compile Include="Views\SettingsView.cs" />
+    <Compile Include="Views\ShotFullscreenView.cs" />
     <Compile Include="Views\ShotView.cs" />
     <Compile Include="Views\TestView.cs" />
     <Compile Include="Views\UserView.cs" />
@@ -143,7 +144,7 @@
     <AndroidResource Include="Resources\Layout\ShotOverviewView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\Item_Shot.axml">
+    <AndroidResource Include="Resources\Layout\Item_overview_shot.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\About.axml">
@@ -153,6 +154,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\TestView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ShotFullscreenView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

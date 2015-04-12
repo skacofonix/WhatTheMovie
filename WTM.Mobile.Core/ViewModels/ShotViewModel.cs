@@ -358,5 +358,22 @@ namespace WTM.Mobile.Core.ViewModels
         private MvxCommand showFirstSolverCommand;
 
         #endregion
+
+        #region ShowFullscreenShotCommand
+
+        public ICommand ShowFullscreenShotCommand
+        {
+            get
+            {
+                if (showFullscreenShotCommand == null)
+                {
+                    showFullscreenShotCommand = new MvxCommand(() => ShowViewModel<ShotFullscreenViewModel>(new { uri = Shot.ImageUri.ToString() }));
+                }
+                return showFullscreenShotCommand;
+            }
+        }
+        private MvxCommand showFullscreenShotCommand;
+
+        #endregion
     }
 }

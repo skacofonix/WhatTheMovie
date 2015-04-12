@@ -55,7 +55,7 @@
         android:id="@+id/relativeLayoutShotImage">
         <Mvx.MvxImageView
             android:id="@+id/imageViewShot"
-            local:MvxBind="ImageUrl Shot.ImageUri"
+            local:MvxBind="ImageUrl Shot.ImageUri; Click ShowFullscreenShotCommand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

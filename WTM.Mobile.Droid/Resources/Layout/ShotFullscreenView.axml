@@ -3,13 +3,14 @@
     xmlns:local="http://schemas.android.com/apk/res/WTM.Mobile.Droid"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
+    android:layout_height="fill_parent">
     <Mvx.MvxImageView
-        android:layout_width="512px"
-        android:layout_margin="5dp"
-        android:layout_height="288px"
-        local:MvxBind="ImageUrl ImageUri"
+        android:id="@+id/imageViewShot"
+        local:MvxBind="ImageUrl Uri"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
         android:background="@android:color/black" />
 </LinearLayout>
