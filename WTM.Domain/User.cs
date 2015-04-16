@@ -102,9 +102,6 @@ namespace WTM.Domain
         public IList<Memorabilia> MemorabiliaList { get; set; }
 
         [DataMember]
-        public Uri ImageUrl { get; set; }
-
-        [DataMember(EmitDefaultValue = false)]
-        public string Token { get; set; }
+        public Uri ImageUri { get; set; }
     }
 }

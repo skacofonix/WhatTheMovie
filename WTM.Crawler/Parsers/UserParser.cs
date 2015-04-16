@@ -36,9 +36,9 @@ namespace WTM.Crawler.Parsers
             var headerNode = rootNode.SelectSingleNode("div[@class='header_white']/h1");
             if (headerNode != null)
             {
-                var nameMatch = Regex.Match(headerNode.InnerHtml, "(.*)<span");
+                var nameMatch = Regex.Match(headerNode.InnerHtml.CleanString(), "(.*)<span");
                 if (nameMatch.Success)
-                    instance.Name = nameMatch.Groups[1].Value.CleanString();
+                    instance.Name = nameMatch.Groups[1].Value.Trim();
 
                 var levelNode = headerNode.SelectSingleNode("./span/strong");
                 if (levelNode != null)
@@ -57,20 +57,16 @@ namespace WTM.Crawler.Parsers
                 }
             }
 
-            var imageNode = rootNode.SelectSingleNode("/div[@class='col_left nopadding']/div[@class='character_box_big clearfix']/div[@class='autograph ']/span[@class='wrapper']/img/@src");
+            var imageNode = rootNode.SelectSingleNode("//div[@class='autograph ']/span[@class='wrapper']/img");
             if (imageNode != null)
             {
-                Uri uri = null;
-                try
+                var value = imageNode.GetAttributeValue("src", null);
+                if (value != null)
                 {
-                    uri = new Uri(imageNode.InnerText);
+                    Uri uri;
+                    if (Uri.TryCreate(value, UriKind.Absolute, out uri))
+                        instance.ImageUri = uri;
                 }
-                catch (Exception)
-                {
-                    // ToDo log
-                    uri = null;
-                }
-                instance.ImageUrl = uri;
             }
 
             var personalInfosNode = rootNode.SelectSingleNode(".//p[@class='personal_information']");

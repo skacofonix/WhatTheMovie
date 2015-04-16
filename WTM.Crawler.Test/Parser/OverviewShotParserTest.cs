@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using NFluent;
+﻿using NFluent;
 using NUnit.Framework;
+using System.Linq;
 using WTM.Crawler.Parsers;
-using WTM.Crawler.Test.Properties;
 
 namespace WTM.Crawler.Test.Parser
 {
@@ -16,7 +15,7 @@ namespace WTM.Crawler.Test.Parser
         [SetUp]
         public void Init()
         {
-            webClient = new WebClientFake(Resources.FeatureFilms20141201);
+            webClient = new WebClientFake("Resources/FeatureFilms/FeatureFilms20141201.html");
             htmlParser = new HtmlParser();
             parser = new OverviewShotParser(webClient, htmlParser);
         }

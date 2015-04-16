@@ -6,17 +6,28 @@ namespace WTM.Crawler.Test
 {
     internal class WebClientFake : IWebClient
     {
-        private readonly string htmlContent;
+        private readonly FileInfo htmlFile;
 
-        public Uri UriBase {get { return new Uri("http://whatthemovie.com"); }}
+        public WebClientFake(string htmlFilePath)
+        {
+            htmlFile = new FileInfo(htmlFilePath);
+        }
+
+        public Uri UriBase
+        {
+            get { return new Uri("http://whatthemovie.com"); }
+        }
 
         public Stream GetStream(Uri uri)
         {
             var ms = new MemoryStream();
-            var sw = new StreamWriter(ms);
-            sw.Write(htmlContent);
-            ms.Position = 0;
 
+            using (FileStream fs = htmlFile.OpenRead())
+            {
+                fs.CopyTo(ms);
+            }
+
+            ms.Position = 0;
             return ms;
         }
 
@@ -53,11 +64,6 @@ namespace WTM.Crawler.Test
         public void RemoveCookie(Cookie cookie)
         {
             throw new NotImplementedException();
-        }
-
-        public WebClientFake(string htmlContent)
-        {
-            this.htmlContent = htmlContent;
         }
     }
 }

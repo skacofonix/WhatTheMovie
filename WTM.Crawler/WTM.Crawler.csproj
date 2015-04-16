@@ -39,6 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrawlerException.cs" />
     <Compile Include="Helpers\AsyncWebRequest.cs" />
     <Compile Include="Parsers\BookmarksParser.cs" />
     <Compile Include="Parsers\OverviewShotParser.cs" />
