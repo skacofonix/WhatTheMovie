@@ -40,9 +40,13 @@ namespace WTM.Crawler.Parsers
                 if (nameMatch.Success)
                     instance.Name = nameMatch.Groups[1].Value.Trim();
 
-                var levelNode = headerNode.SelectSingleNode("./span/strong");
+                var levelNode = headerNode.SelectSingleNode("./span");
                 if (levelNode != null)
-                    instance.Level = levelNode.InnerHtml;
+                {
+                    var match = Regex.Match(levelNode.InnerHtml, "<strong>(.*)</strong>");
+                    if (match.Success)
+                        instance.Level = match.Groups[1].Value;
+                }
 
                 var scoreNode = headerNode.SelectSingleNode("./span/em");
                 if (scoreNode != null)
@@ -57,7 +61,7 @@ namespace WTM.Crawler.Parsers
                 }
             }
 
-            var imageNode = rootNode.SelectSingleNode("//div[@class='autograph ']/span[@class='wrapper']/img");
+            var imageNode = rootNode.SelectSingleNode("//div[starts-with(@class, 'autograph')]/span[@class='wrapper']/img");
             if (imageNode != null)
             {
                 var value = imageNode.GetAttributeValue("src", null);

@@ -13,7 +13,7 @@ namespace WTM.Crawler.Test.Parser
         {
             ParseUserAndDoBasisCheck("alex68");
             ParseUserAndDoBasisCheck("Asmodai");
-            ParseUserAndDoBasisCheck("CaptainOblivious");
+            ParseUserAndDoBasisCheck("captainOblivious");
             ParseUserAndDoBasisCheck("MisterZob");
             ParseUserAndDoBasisCheck("RDPL55");
             ParseUserAndDoBasisCheck("Scruffy");
