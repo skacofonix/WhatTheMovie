@@ -10,7 +10,7 @@ namespace WTM.Crawler.Parsers
 {
     internal class BookmarksParser : ParserBase<BookmarkCollection>
     {
-        public override string Identifier { get { return "mybookmarks"; } }
+        protected override string Identifier { get { return "mybookmarks"; } }
 
         public BookmarksParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

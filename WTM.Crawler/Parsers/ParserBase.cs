@@ -14,7 +14,7 @@ namespace WTM.Crawler.Parsers
         protected readonly IWebClient WebClient;
         protected readonly IHtmlParser HtmlParser;
 
-        public abstract string Identifier { get; }
+        protected abstract string Identifier { get; }
 
         protected virtual void SetUserToken(string userToken)
         {
@@ -61,12 +61,10 @@ namespace WTM.Crawler.Parsers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new CrawlerException("Error occured when parsing HTML page " + uri, ex);
             }
 
-            var instance = new T();
-
-            instance.ParseInfos = new List<ParseInfo>();
+            var instance = new T {ParseInfos = new List<ParseInfo>()};
 
             try
             {
@@ -74,7 +72,7 @@ namespace WTM.Crawler.Parsers
             }
             catch (Exception ex)
             {
-                instance.ParseInfos.Add(new ParseInfo(ParseLevel.Fatal, "Fatal error occur when parse entity", ex));
+                throw new CrawlerException("Error occured when parsing entity " + instance.GetType(), ex);
             }
 
             stopwatch.Stop();

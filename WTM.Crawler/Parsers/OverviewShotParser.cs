@@ -12,7 +12,7 @@ namespace WTM.Crawler.Parsers
 {
     public class OverviewShotParser : ParserBase<ShotSummaryCollection>
     {
-        public override string Identifier { get { return "overview"; } }
+        protected override string Identifier { get { return "overview"; } }
 
         public OverviewShotParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

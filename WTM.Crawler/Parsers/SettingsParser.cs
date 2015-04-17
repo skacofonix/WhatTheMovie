@@ -6,7 +6,7 @@ namespace WTM.Crawler.Parsers
 {
     internal class SettingsParser : ParserBase<Settings>
     {
-        public override string Identifier { get { return "user/settings"; } }
+        protected override string Identifier { get { return "user/settings"; } }
 
         public SettingsParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

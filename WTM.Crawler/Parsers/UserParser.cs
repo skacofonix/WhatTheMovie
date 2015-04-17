@@ -12,7 +12,7 @@ namespace WTM.Crawler.Parsers
 {
     internal class UserParser : ParserBase<User>
     {
-        public override string Identifier { get { return "user"; } }
+        protected override string Identifier { get { return "user"; } }
 
         public UserParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

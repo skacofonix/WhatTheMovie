@@ -12,7 +12,7 @@ namespace WTM.Crawler.Parsers
 {
     public class ShotParser : ParserBase<Shot>
     {
-        public override string Identifier { get { return "shot"; } }
+        protected override string Identifier { get { return "shot"; } }
 
         private readonly Regex regexShotId = new Regex(@"/shot/(\d*)");
 

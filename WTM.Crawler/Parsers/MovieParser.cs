@@ -12,7 +12,7 @@ namespace WTM.Crawler.Parsers
 {
     internal class MovieParser : ParserBase<Movie>
     {
-        public override string Identifier { get { return "movie"; } }
+        protected override string Identifier { get { return "movie"; } }
 
         public MovieParser(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

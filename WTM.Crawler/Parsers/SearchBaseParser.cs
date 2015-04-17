@@ -8,7 +8,7 @@ namespace WTM.Crawler.Parsers
 {
     internal abstract class SearchBaseParser<T> : ParserBase<SearchResultCollection>
     {
-        public override string Identifier { get { return "search"; } }
+        protected override string Identifier { get { return "search"; } }
 
         protected abstract string SearchIdentifier { get; }
 
