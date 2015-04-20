@@ -53,6 +53,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Extensions\StringExtensionsTest.cs" />
     <Compile Include="Parser\BookmarksParserTest.cs" />
     <Compile Include="Parser\OverviewShotParserTest.cs" />
     <Compile Include="Parser\ShotParserTest.cs" />

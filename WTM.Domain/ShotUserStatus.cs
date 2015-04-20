@@ -11,6 +11,8 @@ namespace WTM.Domain
 
         NeverSolved,
 
-        Uploaded
+        Uploaded,
+
+        Requested
     }
 }

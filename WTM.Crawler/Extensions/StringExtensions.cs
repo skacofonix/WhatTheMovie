@@ -8,7 +8,6 @@ namespace WTM.Crawler.Extensions
         {
             var match = regex.Match(value);
             var valueExtracted = match.Groups[1].Value;
-
             return valueExtracted;
         }
 

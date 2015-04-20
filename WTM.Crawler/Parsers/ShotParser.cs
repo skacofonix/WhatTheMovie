@@ -235,6 +235,9 @@ namespace WTM.Crawler.Parsers
             if (classGuess.Value.Contains("wrong"))
                 return ShotUserStatus.Unsolved;
 
+            if (classGuess.Value.Contains("requested"))
+                return ShotUserStatus.Requested;
+
             return ShotUserStatus.Unsolved;
         }
 
