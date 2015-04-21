@@ -7,8 +7,34 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
-        android:text="Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla Lorem Ipsum Dolor Bla Bla Bla "
+        android:text="WhatTheMovie unoffical app by Skacofonix"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5" />
+    <TextView
+        android:text="Disclamer"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textColor="@android:color/holo_red_light" />
+    <TextView
+        android:text="This application is unofficial client to play at What The Movie."
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView1" />
+    <TextView
+        android:text="License"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textColor="@android:color/holo_red_light" />
+    <TextView
+        android:text="The MIT License (MIT)"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4" />
 </LinearLayout>

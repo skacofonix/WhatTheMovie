@@ -5,8 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <Mvx.MvxImageView
-        android:id="@+id/imageViewShot"
-        local:MvxBind="ImageUrl Uri"
+        android:id="@+id/imageViewShotFullscreen"
+        local:MvxBind="ImageUrl Uri; Click CloseCommand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"

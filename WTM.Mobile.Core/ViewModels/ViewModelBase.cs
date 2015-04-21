@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 
 namespace WTM.Mobile.Core.ViewModels
@@ -28,7 +29,7 @@ namespace WTM.Mobile.Core.ViewModels
         }
         private bool busy;
 
-        public ViewModelBase(IContext context)
+        protected ViewModelBase(IContext context)
         {
             Context = context;
         }
@@ -38,5 +39,22 @@ namespace WTM.Mobile.Core.ViewModels
             InvokeOnMainThread(() => Busy = true);
             Task.Run(action).ContinueWith(task => InvokeOnMainThread(() => Busy = false));
         }
+
+        #region CloseCommand
+
+        public ICommand CloseCommand
+        {
+            get
+            {
+                if (closeCommand == null)
+                {
+                    closeCommand = new MvxCommand(() => ExecuteSyncAction(() => Close(this)));
+                }
+                return closeCommand;
+            }
+        }
+        private MvxCommand closeCommand;
+
+        #endregion
     }
 }

@@ -17,11 +17,6 @@ namespace WTM.Mobile.Core.ViewModels
             this.shotService = shotService;
         }
 
-        public void Init()
-        {
-            //NavigateToRandomShotCommand.Execute(null);
-        }
-
         public void Init(int shotId)
         {
             NavigateToShotByIdCommand.Execute(shotId);
@@ -219,7 +214,7 @@ namespace WTM.Mobile.Core.ViewModels
                 {
                     navigateToShotByIdCommand = new MvxCommand<int>(shotId => ExecuteSyncAction(() =>
                     {
-                        Shot = shotService.GetById(shotId);
+                        Shot = shotService.GetById(shotId, Context.Token);
                     }));
                 }
                 return navigateToShotByIdCommand;

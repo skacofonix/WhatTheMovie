@@ -4,8 +4,6 @@ namespace WTM.Mobile.Core.ViewModels
 {
     public class ShotFullscreenViewModel : ViewModelBase
     {
-        private Uri uri;
-
         public ShotFullscreenViewModel(IContext context)
             : base(context)
         { }
@@ -19,6 +17,7 @@ namespace WTM.Mobile.Core.ViewModels
                 RaisePropertyChanged(() => Uri);
             }
         }
+        private Uri uri;
 
         public void Init(string uri)
         {
