@@ -47,9 +47,9 @@ namespace WTM.Mobile.Core.ViewModels
             this.userService = userService;
         }
 
-        public void Init(string userId = null)
+        public void Init(string username = null)
         {
-            if (userId == null)
+            if (username == null)
             {
                 // Juste fo dev
                 User = new User
@@ -64,14 +64,27 @@ namespace WTM.Mobile.Core.ViewModels
                     Score = 35679,
                     Level = "Set Decorator"
                 };
-
-                return;
             }
+            else if (Context.CurrentUser != null && Context.CurrentUser.Name == username)
+            {
+                User = Context.CurrentUser;
+            }
+            else
+            {
+                User = GetUserByName(username);
+            }
+        }
+
+        private User GetUserByName(string name)
+        {
+            User tempUser = null;
 
             ExecuteSyncAction(() =>
             {
-                User = userService.GetByUsername(userId);
+                tempUser = userService.GetByUsername(name);
             });
+
+            return tempUser;
         }
     }
 }

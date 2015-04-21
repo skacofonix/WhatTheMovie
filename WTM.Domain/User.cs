@@ -27,6 +27,9 @@ namespace WTM.Domain
         public string Name { get; set; }
 
         [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
         public string Level { get; set; }
 
         [DataMember]
