@@ -30,7 +30,7 @@
                 android:layout_width="256px"
                 android:layout_height="256px"
                 android:layout_margin="5dp"
-                local:MvxBind="ImageUrl User.ImageUrl" />
+                local:MvxBind="ImageUrl User.ImageUri" />
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
