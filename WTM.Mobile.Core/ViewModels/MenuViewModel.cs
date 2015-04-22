@@ -51,7 +51,7 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (navigateToUserCommand == null)
                 {
-                    navigateToUserCommand = new MvxCommand(() => ShowViewModel<UserViewModel>());
+                    navigateToUserCommand = new MvxCommand(() => ShowViewModel<UserViewModel>(new { username = (Context != null && Context.CurrentUser != null) ? Context.CurrentUser.Name : null }));
                 }
                 return navigateToUserCommand;
             }
