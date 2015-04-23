@@ -7,7 +7,48 @@ namespace WTM.Mobile.Core.ViewModels
     {
         public MenuViewModel(IContext context)
             : base(context)
-        { }
+        {
+            context.OnUserChange += context_OnUserChange;
+        }
+
+        private void context_OnUserChange(object sender, System.EventArgs e)
+        {
+            this.RaisePropertyChanged(() => Context);
+        }
+
+        #region LoginCommand
+
+        public ICommand LoginCommand
+        {
+            get
+            {
+                if (loginCommand == null)
+                {
+                    loginCommand = new MvxCommand(() => ShowViewModel<AuthenticateViewModel>());
+                }
+                return loginCommand;
+            }
+        }
+        private ICommand loginCommand;
+
+        #endregion
+
+        #region LogoutCommand
+
+        public ICommand LogoutCommand
+        {
+            get
+            {
+                if (logoutCommand == null)
+                {
+                    logoutCommand = new MvxCommand(() => Context.ResetUserContext());
+                }
+                return logoutCommand;
+            }
+        }
+        private ICommand logoutCommand;
+
+        #endregion
 
         #region NavigateToFeatureFilmsCommand
 
@@ -74,23 +115,6 @@ namespace WTM.Mobile.Core.ViewModels
             }
         }
         private ICommand navigateToSettingsCommand;
-
-        #endregion
-
-        #region NavigateToAuthenticateCommand
-
-        public ICommand NavigateToAuthenticateCommand
-        {
-            get
-            {
-                if (navigateToAuthenticateCommand == null)
-                {
-                    navigateToAuthenticateCommand = new MvxCommand(() => ShowViewModel<AuthenticateViewModel>());
-                }
-                return navigateToAuthenticateCommand;
-            }
-        }
-        private ICommand navigateToAuthenticateCommand;
 
         #endregion
 

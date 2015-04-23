@@ -1,4 +1,5 @@
-﻿using WTM.Domain;
+﻿using System;
+using WTM.Domain;
 
 namespace WTM.Mobile.Core
 {
@@ -12,12 +13,24 @@ namespace WTM.Mobile.Core
         {
             CurrentUser = user;
             Token = token;
+            FireUserChange(user);
         }
 
         public void ResetUserContext()
         {
             CurrentUser = null;
             Token = null;
+            FireUserChange(null);
         }
+
+        private void FireUserChange(User user)
+        {
+            if (OnUserChange != null)
+            {
+                OnUserChange(this, new UserEvent(user));
+            }
+        }
+
+        public event EventHandler<UserEvent> OnUserChange;
     }
 }

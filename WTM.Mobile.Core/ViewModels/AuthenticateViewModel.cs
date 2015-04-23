@@ -14,6 +14,14 @@ namespace WTM.Mobile.Core.ViewModels
             this.userService = userService;
         }
 
+        public void Init()
+        {
+//#if DEBUG
+//            Username = "captainOblivious";
+//            Password = "captainOblivious";
+//#endif
+        }
+
         public string Username
         {
             get { return username; }

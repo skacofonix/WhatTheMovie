@@ -35,7 +35,6 @@ namespace WTM.Mobile.Core.Services
             try
             {
                 token = userService.Login(username, password);
-
             }
             catch (Exception ex)
             {

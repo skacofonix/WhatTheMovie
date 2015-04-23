@@ -1,4 +1,5 @@
-﻿using WTM.Domain;
+﻿using System;
+using WTM.Domain;
 
 namespace WTM.Mobile.Core
 {
@@ -11,5 +12,7 @@ namespace WTM.Mobile.Core
         void SetUserContext(User user, string token);
 
         void ResetUserContext();
+
+        event EventHandler<UserEvent> OnUserChange;
     }
 }
