@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res/WTM.Mobile.Droid"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:minWidth="25px"
@@ -12,4 +12,11 @@
         android:layout_height="288px"
         local:MvxBind="ImageUrl ImageUri"
         android:background="@android:color/black" />
+    <TextView
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/textView1"
+        local:MvxBind="Text UserStatus" />
 </LinearLayout>
