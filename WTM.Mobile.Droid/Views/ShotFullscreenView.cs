@@ -14,7 +14,6 @@ namespace WTM.Mobile.Droid.Views
             RequestWindowFeature(WindowFeatures.NoTitle);
 
             SetContentView(Resource.Layout.ShotFullscreenView);
-
         }
     }
 }

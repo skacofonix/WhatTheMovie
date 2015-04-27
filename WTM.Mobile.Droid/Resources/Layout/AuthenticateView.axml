@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editTextUsername"
-        local:MvxBind="Text Username" />
+        local:MvxBind="Text Username; Enabled Busy, Converter=InverseBoolean" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editTextPassword"
-        local:MvxBind="Text Password" />
+        local:MvxBind="Text Password; Enabled Busy, Converter=InverseBoolean" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,5 +44,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonLogin"
-        local:MvxBind="Click AuthenticateCommand" />
+        local:MvxBind="Click AuthenticateCommand; Visibility Busy, Converter=InvertedVisibility" />
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar1"
+        local:MvxBind="Click AuthenticateCommand; Visibility Busy, Converter=Visibility" />
 </LinearLayout>
