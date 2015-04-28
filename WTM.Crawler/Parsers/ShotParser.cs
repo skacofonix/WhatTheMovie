@@ -329,7 +329,8 @@ namespace WTM.Crawler.Parsers
 
         private bool? GetIsSolutionAvailable(HtmlDocument document)
         {
-            return false;
+            var node = document.DocumentNode.SelectSingleNode("//a[@id='solucebutton']");
+            return node != null;
         }
 
         private bool? GetIsVoteDeletation(XPathNavigator navigator)
