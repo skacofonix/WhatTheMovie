@@ -9,15 +9,15 @@ namespace WTM.Crawler.Services
 {
     public class AuthenticateService
     {
-        public Cookie CookieSession { get; private set; }
-
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;
+        private readonly CookieFactory cookieFactory;
 
         public AuthenticateService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             this.htmlParser = htmlParser;
+            cookieFactory = new CookieFactory(webClient);
         }
 
         public string Login(string username, string password)
@@ -57,21 +57,15 @@ namespace WTM.Crawler.Services
                 var cookie = httpWebResponse.Cookies[index];
                 if (cookie.Name != "_wtm2_session") continue;
 
-                CookieSession = cookie;
-                webClient.SetCookie(cookie);
-
                 token = cookie.Value;
+
+                cookie = cookieFactory.Create(token);
+                webClient.SetCookie(cookie); 
 
                 break;
             }
 
             return token;
-        }
-
-        public void Logout()
-        {
-            webClient.RemoveCookie(CookieSession);
-            CookieSession = null;
         }
     }
 }

@@ -13,25 +13,30 @@ namespace WTM.Crawler.Parsers
     {
         protected readonly IWebClient WebClient;
         protected readonly IHtmlParser HtmlParser;
+        private readonly CookieFactory cookieFactory;
 
         protected abstract string Identifier { get; }
-
-        protected virtual void SetUserToken(string userToken)
-        {
-            if(userToken != null)
-                WebClient.SetCookie(new Cookie("_wtm2_session", userToken));
-        }
 
         protected ParserBase(IWebClient webClient, IHtmlParser htmlParser)
         {
             WebClient = webClient;
             HtmlParser = htmlParser;
+            cookieFactory = new CookieFactory(webClient);
         }
 
         protected virtual T Parse(string parameter = null)
         {
             var uri = MakeUri(parameter);
             return Parse(uri);
+        }
+
+        protected virtual void SetUserToken(string userToken)
+        {
+            if (userToken != null)
+            {
+                var cookie = cookieFactory.Create(userToken);
+                WebClient.SetCookie(cookie);
+            }
         }
 
         protected virtual Uri MakeUri(string criteria = null)
@@ -46,7 +51,7 @@ namespace WTM.Crawler.Parsers
 
             return new Uri(WebClient.UriBase, relativeUri);
         }
-
+        
         protected T Parse(Uri uri)
         {
             var stopwatch = Stopwatch.StartNew();
@@ -83,5 +88,7 @@ namespace WTM.Crawler.Parsers
         }
 
         protected abstract void ParseHtmlDocument(T instance, HtmlDocument htmlDocument);
+
+
     }
 }

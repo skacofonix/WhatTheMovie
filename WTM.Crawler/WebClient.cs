@@ -132,9 +132,6 @@ namespace WTM.Crawler
             {
                 foreach (var cookie in cookies)
                 {
-#warning HACK!
-                    cookie.Domain = UriBase.Host;
-#warning HACK!
                     httpWebRequest.CookieContainer.Add(cookie);
                 }
             }
