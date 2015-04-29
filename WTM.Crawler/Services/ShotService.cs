@@ -15,12 +15,14 @@ namespace WTM.Crawler.Services
         private readonly IWebClient webClient;
         private readonly ShotParser shotParser;
         private readonly SearchTagParser shotSearcher;
+        private readonly CookieFactory cookieFactory;
 
         public ShotService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
             shotParser = new ShotParser(webClient, htmlParser);
             shotSearcher = new SearchTagParser(webClient, htmlParser);
+            cookieFactory = new CookieFactory(webClient);
         }
 
         public Shot GetRandomShot(string token = null)
@@ -46,6 +48,10 @@ namespace WTM.Crawler.Services
 
             var post = string.Join("/", "shot", id, "guess");
             var uri = new Uri(webClient.UriBase, post);
+
+            var cookie = cookieFactory.Create(token);
+            webClient.SetCookie(cookie);
+
             var webResponse = webClient.Post(uri, data);
 
             string webResponseString = null;
