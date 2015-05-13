@@ -96,6 +96,12 @@
     <Reference Include="System.Windows">
       <HintPath>Lib\System.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\..\..\NavigationDrawer\packages\Xamarin.Android.Support.v4.20.0.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\..\..\NavigationDrawer\packages\Xamarin.Android.Support.v7.RecyclerView.21.0.0-rc1v2\lib\MonoAndroid10\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
@@ -104,6 +110,7 @@
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
+    <Compile Include="MenuAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
@@ -111,6 +118,7 @@
     <Compile Include="Views\AboutView.cs" />
     <Compile Include="Views\AuthenticateView.cs" />
     <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\NavigationDrawerView.cs" />
     <Compile Include="Views\ShotArchiveView.cs" />
     <Compile Include="Views\ShotFeatureFilmsView.cs" />
     <Compile Include="Views\MenuView.cs" />
@@ -159,6 +167,15 @@
     <AndroidResource Include="Resources\Layout\ShotFullscreenView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Layout\MenuDrawerLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\activity_navigation_drawer.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Menu\navigation_drawer.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />
@@ -173,6 +190,13 @@
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Values\SplashStyle.xml" />
     <AndroidResource Include="Resources\Drawable\splash.png" />
+    <AndroidResource Include="Resources\Drawable\action_search.png" />
+    <AndroidResource Include="Resources\Drawable\drawer_shadow.9.png" />
+    <AndroidResource Include="Resources\Drawable\ic_drawer.png" />
+    <AndroidResource Include="Resources\Drawable\ic_launcher.png" />
+    <AndroidResource Include="Resources\Drawable\tile.9.png" />
+    <AndroidResource Include="Resources\Layout\drawer_list_item.xml" />
+    <AndroidResource Include="Resources\Layout\fragment_planet.xml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -104,6 +104,22 @@ namespace WTM.Mobile.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::WTM.Mobile.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int planets_array = 2131165184;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -175,22 +191,37 @@ namespace WTM.Mobile.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int ic_errorstatus = 2130837504;
+			public const int action_search = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int ic_successstatus = 2130837505;
+			public const int drawer_shadow = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int Icon = 2130837506;
+			public const int ic_drawer = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int roundedbg = 2130837507;
+			public const int ic_errorstatus = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int roundedbgdark = 2130837508;
+			public const int ic_launcher = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int splash = 2130837509;
+			public const int ic_successstatus = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int Icon = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int roundedbg = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int roundedbgdark = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int splash = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int tile = 2130837514;
 			
 			static Drawable()
 			{
@@ -208,212 +239,227 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f050000
 			public const int MvxBindingTagUnique = 2131034112;
 			
-			// aapt resource value: 0x7f050052
-			public const int buttonAskSolution = 2131034194;
+			// aapt resource value: 0x7f050064
+			public const int action_websearch = 2131034212;
 			
-			// aapt resource value: 0x7f050021
-			public const int buttonAuthenticate = 2131034145;
+			// aapt resource value: 0x7f050056
+			public const int buttonAskSolution = 2131034198;
 			
-			// aapt resource value: 0x7f05001e
-			public const int buttonFeatureFilms = 2131034142;
+			// aapt resource value: 0x7f050025
+			public const int buttonAuthenticate = 2131034149;
 			
-			// aapt resource value: 0x7f050050
-			public const int buttonFisrtSolver = 2131034192;
-			
-			// aapt resource value: 0x7f050048
-			public const int buttonGuessTitle = 2131034184;
-			
-			// aapt resource value: 0x7f05000c
-			public const int buttonLogin = 2131034124;
-			
-			// aapt resource value: 0x7f05003f
-			public const int buttonNavigationFirst = 2131034175;
-			
-			// aapt resource value: 0x7f050043
-			public const int buttonNavigationLast = 2131034179;
-			
-			// aapt resource value: 0x7f050042
-			public const int buttonNavigationNext = 2131034178;
-			
-			// aapt resource value: 0x7f050040
-			public const int buttonNavigationPrevious = 2131034176;
-			
-			// aapt resource value: 0x7f050041
-			public const int buttonNavigationRandom = 2131034177;
-			
-			// aapt resource value: 0x7f05003d
-			public const int buttonNext = 2131034173;
-			
-			// aapt resource value: 0x7f05004e
-			public const int buttonPoster = 2131034190;
-			
-			// aapt resource value: 0x7f05003c
-			public const int buttonPrevious = 2131034172;
-			
-			// aapt resource value: 0x7f050039
-			public const int buttonReset = 2131034169;
-			
-			// aapt resource value: 0x7f050038
-			public const int buttonSave = 2131034168;
-			
-			// aapt resource value: 0x7f050020
-			public const int buttonSettings = 2131034144;
-			
-			// aapt resource value: 0x7f05004c
-			public const int buttonSolutionMovieNavigation = 2131034188;
-			
-			// aapt resource value: 0x7f05001f
-			public const int buttonUser = 2131034143;
-			
-			// aapt resource value: 0x7f050036
-			public const int editTextFilterTagValue = 2131034166;
-			
-			// aapt resource value: 0x7f050047
-			public const int editTextGuessTitle = 2131034183;
-			
-			// aapt resource value: 0x7f05000a
-			public const int editTextPassword = 2131034122;
-			
-			// aapt resource value: 0x7f050007
-			public const int editTextUsername = 2131034119;
-			
-			// aapt resource value: 0x7f05002c
-			public const int imageViewMovie = 2131034156;
-			
-			// aapt resource value: 0x7f05001c
-			public const int imageViewShot = 2131034140;
-			
-			// aapt resource value: 0x7f05003a
-			public const int imageViewShotFullscreen = 2131034170;
-			
-			// aapt resource value: 0x7f05001b
-			public const int linearLayout1 = 2131034139;
-			
-			// aapt resource value: 0x7f05001d
-			public const int linearLayout2 = 2131034141;
-			
-			// aapt resource value: 0x7f050051
-			public const int linearLayoutAskSolution = 2131034193;
-			
-			// aapt resource value: 0x7f05002d
-			public const int linearLayoutCommonSettings = 2131034157;
-			
-			// aapt resource value: 0x7f050027
-			public const int linearLayoutDirector = 2131034151;
-			
-			// aapt resource value: 0x7f050034
-			public const int linearLayoutFilterTag = 2131034164;
-			
-			// aapt resource value: 0x7f05004f
-			public const int linearLayoutFirstSolver = 2131034191;
-			
-			// aapt resource value: 0x7f050024
-			public const int linearLayoutGenre = 2131034148;
-			
-			// aapt resource value: 0x7f050046
-			public const int linearLayoutGuessTitle = 2131034182;
-			
-			// aapt resource value: 0x7f05003b
-			public const int linearLayoutNavigation = 2131034171;
-			
-			// aapt resource value: 0x7f05004d
-			public const int linearLayoutPoster = 2131034189;
-			
-			// aapt resource value: 0x7f050053
-			public const int linearLayoutRate = 2131034195;
-			
-			// aapt resource value: 0x7f050049
-			public const int linearLayoutSolution = 2131034185;
-			
-			// aapt resource value: 0x7f05005d
-			public const int linearLayoutStatistics = 2131034205;
-			
-			// aapt resource value: 0x7f050058
-			public const int linearLayoutSummary = 2131034200;
-			
-			// aapt resource value: 0x7f050019
-			public const int loadingImage = 2131034137;
-			
-			// aapt resource value: 0x7f050017
-			public const int loadingProgressBar = 2131034135;
-			
-			// aapt resource value: 0x7f05001a
-			public const int loadingProgressWheel = 2131034138;
-			
-			// aapt resource value: 0x7f05003e
-			public const int progressBar = 2131034174;
-			
-			// aapt resource value: 0x7f05000d
-			public const int progressBar1 = 2131034125;
-			
-			// aapt resource value: 0x7f050045
-			public const int progressBarLoading = 2131034181;
-			
-			// aapt resource value: 0x7f050030
-			public const int radioButtonDifficultyEasy = 2131034160;
-			
-			// aapt resource value: 0x7f050031
-			public const int radioButtonDifficultyEasyMedium = 2131034161;
-			
-			// aapt resource value: 0x7f050032
-			public const int radioButtonDifficultyHard = 2131034162;
-			
-			// aapt resource value: 0x7f05002e
-			public const int radioGroupDifficulty = 2131034158;
+			// aapt resource value: 0x7f050022
+			public const int buttonFeatureFilms = 2131034146;
 			
 			// aapt resource value: 0x7f050054
-			public const int ratingBarShot = 2131034196;
+			public const int buttonFisrtSolver = 2131034196;
 			
-			// aapt resource value: 0x7f050057
-			public const int relativeLayout1 = 2131034199;
-			
-			// aapt resource value: 0x7f050037
-			public const int relativeLayoutCommands = 2131034167;
-			
-			// aapt resource value: 0x7f050044
-			public const int relativeLayoutShotImage = 2131034180;
-			
-			// aapt resource value: 0x7f05000b
-			public const int space1 = 2131034123;
-			
-			// aapt resource value: 0x7f050008
-			public const int space2 = 2131034120;
-			
-			// aapt resource value: 0x7f05002b
-			public const int space3 = 2131034155;
-			
-			// aapt resource value: 0x7f050033
-			public const int switchShowSolvedShot = 2131034163;
-			
-			// aapt resource value: 0x7f05000e
-			public const int tableLayout1 = 2131034126;
+			// aapt resource value: 0x7f05004c
+			public const int buttonGuessTitle = 2131034188;
 			
 			// aapt resource value: 0x7f05000f
-			public const int tableRow1 = 2131034127;
+			public const int buttonLogin = 2131034127;
+			
+			// aapt resource value: 0x7f050043
+			public const int buttonNavigationFirst = 2131034179;
+			
+			// aapt resource value: 0x7f050047
+			public const int buttonNavigationLast = 2131034183;
+			
+			// aapt resource value: 0x7f050046
+			public const int buttonNavigationNext = 2131034182;
+			
+			// aapt resource value: 0x7f050044
+			public const int buttonNavigationPrevious = 2131034180;
+			
+			// aapt resource value: 0x7f050045
+			public const int buttonNavigationRandom = 2131034181;
+			
+			// aapt resource value: 0x7f050041
+			public const int buttonNext = 2131034177;
+			
+			// aapt resource value: 0x7f050052
+			public const int buttonPoster = 2131034194;
+			
+			// aapt resource value: 0x7f050040
+			public const int buttonPrevious = 2131034176;
+			
+			// aapt resource value: 0x7f05003d
+			public const int buttonReset = 2131034173;
+			
+			// aapt resource value: 0x7f05003c
+			public const int buttonSave = 2131034172;
+			
+			// aapt resource value: 0x7f050024
+			public const int buttonSettings = 2131034148;
+			
+			// aapt resource value: 0x7f050050
+			public const int buttonSolutionMovieNavigation = 2131034192;
+			
+			// aapt resource value: 0x7f050023
+			public const int buttonUser = 2131034147;
+			
+			// aapt resource value: 0x7f050007
+			public const int content_frame = 2131034119;
+			
+			// aapt resource value: 0x7f050006
+			public const int drawer_layout = 2131034118;
+			
+			// aapt resource value: 0x7f05003a
+			public const int editTextFilterTagValue = 2131034170;
+			
+			// aapt resource value: 0x7f05004b
+			public const int editTextGuessTitle = 2131034187;
+			
+			// aapt resource value: 0x7f05000d
+			public const int editTextPassword = 2131034125;
+			
+			// aapt resource value: 0x7f05000a
+			public const int editTextUsername = 2131034122;
+			
+			// aapt resource value: 0x7f050011
+			public const int image = 2131034129;
+			
+			// aapt resource value: 0x7f050030
+			public const int imageViewMovie = 2131034160;
+			
+			// aapt resource value: 0x7f050020
+			public const int imageViewShot = 2131034144;
+			
+			// aapt resource value: 0x7f05003e
+			public const int imageViewShotFullscreen = 2131034174;
+			
+			// aapt resource value: 0x7f050008
+			public const int left_drawer = 2131034120;
+			
+			// aapt resource value: 0x7f05001f
+			public const int linearLayout1 = 2131034143;
+			
+			// aapt resource value: 0x7f050021
+			public const int linearLayout2 = 2131034145;
+			
+			// aapt resource value: 0x7f050055
+			public const int linearLayoutAskSolution = 2131034197;
+			
+			// aapt resource value: 0x7f050031
+			public const int linearLayoutCommonSettings = 2131034161;
+			
+			// aapt resource value: 0x7f05002b
+			public const int linearLayoutDirector = 2131034155;
+			
+			// aapt resource value: 0x7f050038
+			public const int linearLayoutFilterTag = 2131034168;
+			
+			// aapt resource value: 0x7f050053
+			public const int linearLayoutFirstSolver = 2131034195;
+			
+			// aapt resource value: 0x7f050028
+			public const int linearLayoutGenre = 2131034152;
+			
+			// aapt resource value: 0x7f05004a
+			public const int linearLayoutGuessTitle = 2131034186;
+			
+			// aapt resource value: 0x7f05003f
+			public const int linearLayoutNavigation = 2131034175;
+			
+			// aapt resource value: 0x7f050051
+			public const int linearLayoutPoster = 2131034193;
+			
+			// aapt resource value: 0x7f050057
+			public const int linearLayoutRate = 2131034199;
+			
+			// aapt resource value: 0x7f05004d
+			public const int linearLayoutSolution = 2131034189;
+			
+			// aapt resource value: 0x7f050061
+			public const int linearLayoutStatistics = 2131034209;
+			
+			// aapt resource value: 0x7f05005c
+			public const int linearLayoutSummary = 2131034204;
+			
+			// aapt resource value: 0x7f05001d
+			public const int loadingImage = 2131034141;
+			
+			// aapt resource value: 0x7f05001b
+			public const int loadingProgressBar = 2131034139;
+			
+			// aapt resource value: 0x7f05001e
+			public const int loadingProgressWheel = 2131034142;
+			
+			// aapt resource value: 0x7f050042
+			public const int progressBar = 2131034178;
+			
+			// aapt resource value: 0x7f050010
+			public const int progressBar1 = 2131034128;
+			
+			// aapt resource value: 0x7f050049
+			public const int progressBarLoading = 2131034185;
+			
+			// aapt resource value: 0x7f050034
+			public const int radioButtonDifficultyEasy = 2131034164;
+			
+			// aapt resource value: 0x7f050035
+			public const int radioButtonDifficultyEasyMedium = 2131034165;
+			
+			// aapt resource value: 0x7f050036
+			public const int radioButtonDifficultyHard = 2131034166;
+			
+			// aapt resource value: 0x7f050032
+			public const int radioGroupDifficulty = 2131034162;
+			
+			// aapt resource value: 0x7f050058
+			public const int ratingBarShot = 2131034200;
+			
+			// aapt resource value: 0x7f05005b
+			public const int relativeLayout1 = 2131034203;
+			
+			// aapt resource value: 0x7f05003b
+			public const int relativeLayoutCommands = 2131034171;
+			
+			// aapt resource value: 0x7f050048
+			public const int relativeLayoutShotImage = 2131034184;
+			
+			// aapt resource value: 0x7f05000e
+			public const int space1 = 2131034126;
+			
+			// aapt resource value: 0x7f05000b
+			public const int space2 = 2131034123;
+			
+			// aapt resource value: 0x7f05002f
+			public const int space3 = 2131034159;
+			
+			// aapt resource value: 0x7f050037
+			public const int switchShowSolvedShot = 2131034167;
 			
 			// aapt resource value: 0x7f050012
-			public const int tableRow2 = 2131034130;
+			public const int tableLayout1 = 2131034130;
 			
-			// aapt resource value: 0x7f050015
-			public const int tableRow3 = 2131034133;
+			// aapt resource value: 0x7f050013
+			public const int tableRow1 = 2131034131;
+			
+			// aapt resource value: 0x7f050016
+			public const int tableRow2 = 2131034134;
+			
+			// aapt resource value: 0x7f050019
+			public const int tableRow3 = 2131034137;
 			
 			// aapt resource value: 0x7f050003
 			public const int textView1 = 2131034115;
 			
-			// aapt resource value: 0x7f050010
-			public const int textView10 = 2131034128;
-			
-			// aapt resource value: 0x7f050013
-			public const int textView11 = 2131034131;
-			
-			// aapt resource value: 0x7f050016
-			public const int textView13 = 2131034134;
-			
 			// aapt resource value: 0x7f050014
-			public const int textView14 = 2131034132;
+			public const int textView10 = 2131034132;
 			
-			// aapt resource value: 0x7f050011
-			public const int textView16 = 2131034129;
+			// aapt resource value: 0x7f050017
+			public const int textView11 = 2131034135;
+			
+			// aapt resource value: 0x7f05001a
+			public const int textView13 = 2131034138;
+			
+			// aapt resource value: 0x7f050018
+			public const int textView14 = 2131034136;
+			
+			// aapt resource value: 0x7f050015
+			public const int textView16 = 2131034133;
 			
 			// aapt resource value: 0x7f050002
 			public const int textView2 = 2131034114;
@@ -427,71 +473,71 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f050001
 			public const int textView5 = 2131034113;
 			
-			// aapt resource value: 0x7f05005e
-			public const int textView6 = 2131034206;
+			// aapt resource value: 0x7f050062
+			public const int textView6 = 2131034210;
 			
-			// aapt resource value: 0x7f05005c
-			public const int textViewAbout = 2131034204;
+			// aapt resource value: 0x7f050060
+			public const int textViewAbout = 2131034208;
 			
-			// aapt resource value: 0x7f05002a
-			public const int textViewAbstract = 2131034154;
+			// aapt resource value: 0x7f05002e
+			public const int textViewAbstract = 2131034158;
 			
-			// aapt resource value: 0x7f05002f
-			public const int textViewDifficulty = 2131034159;
+			// aapt resource value: 0x7f050033
+			public const int textViewDifficulty = 2131034163;
 			
-			// aapt resource value: 0x7f050028
-			public const int textViewDirector = 2131034152;
+			// aapt resource value: 0x7f05002c
+			public const int textViewDirector = 2131034156;
+			
+			// aapt resource value: 0x7f05002d
+			public const int textViewDirectorValue = 2131034157;
+			
+			// aapt resource value: 0x7f050039
+			public const int textViewFilterTag = 2131034169;
 			
 			// aapt resource value: 0x7f050029
-			public const int textViewDirectorValue = 2131034153;
+			public const int textViewGenre = 2131034153;
 			
-			// aapt resource value: 0x7f050035
-			public const int textViewFilterTag = 2131034165;
-			
-			// aapt resource value: 0x7f050025
-			public const int textViewGenre = 2131034149;
+			// aapt resource value: 0x7f05002a
+			public const int textViewGenreValue = 2131034154;
 			
 			// aapt resource value: 0x7f050026
-			public const int textViewGenreValue = 2131034150;
-			
-			// aapt resource value: 0x7f050022
-			public const int textViewOriginalTitle = 2131034146;
-			
-			// aapt resource value: 0x7f050055
-			public const int textViewOverallRating = 2131034197;
-			
-			// aapt resource value: 0x7f050009
-			public const int textViewPasswordLabel = 2131034121;
-			
-			// aapt resource value: 0x7f05005b
-			public const int textViewPersonalInformations = 2131034203;
-			
-			// aapt resource value: 0x7f05005a
-			public const int textViewRank = 2131034202;
-			
-			// aapt resource value: 0x7f050056
-			public const int textViewRateNbRaters = 2131034198;
-			
-			// aapt resource value: 0x7f05005f
-			public const int textViewSnapshotSolved = 2131034207;
-			
-			// aapt resource value: 0x7f05004a
-			public const int textViewSolutionMovieTitle = 2131034186;
-			
-			// aapt resource value: 0x7f05004b
-			public const int textViewSolutionMovieYear = 2131034187;
-			
-			// aapt resource value: 0x7f050018
-			public const int textViewStatus = 2131034136;
+			public const int textViewOriginalTitle = 2131034150;
 			
 			// aapt resource value: 0x7f050059
-			public const int textViewUsername = 2131034201;
+			public const int textViewOverallRating = 2131034201;
 			
-			// aapt resource value: 0x7f050006
-			public const int textViewUsernameLabel = 2131034118;
+			// aapt resource value: 0x7f05000c
+			public const int textViewPasswordLabel = 2131034124;
 			
-			// aapt resource value: 0x7f050023
-			public const int textViewYear = 2131034147;
+			// aapt resource value: 0x7f05005f
+			public const int textViewPersonalInformations = 2131034207;
+			
+			// aapt resource value: 0x7f05005e
+			public const int textViewRank = 2131034206;
+			
+			// aapt resource value: 0x7f05005a
+			public const int textViewRateNbRaters = 2131034202;
+			
+			// aapt resource value: 0x7f050063
+			public const int textViewSnapshotSolved = 2131034211;
+			
+			// aapt resource value: 0x7f05004e
+			public const int textViewSolutionMovieTitle = 2131034190;
+			
+			// aapt resource value: 0x7f05004f
+			public const int textViewSolutionMovieYear = 2131034191;
+			
+			// aapt resource value: 0x7f05001c
+			public const int textViewStatus = 2131034140;
+			
+			// aapt resource value: 0x7f05005d
+			public const int textViewUsername = 2131034205;
+			
+			// aapt resource value: 0x7f050009
+			public const int textViewUsernameLabel = 2131034121;
+			
+			// aapt resource value: 0x7f050027
+			public const int textViewYear = 2131034151;
 			
 			static Id()
 			{
@@ -510,49 +556,61 @@ namespace WTM.Mobile.Droid
 			public const int About = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int AuthenticateView = 2130903041;
+			public const int activity_navigation_drawer = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Item_overview_shot = 2130903042;
+			public const int AuthenticateView = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int item_test = 2130903043;
+			public const int drawer_list_item = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int loading = 2130903044;
+			public const int fragment_planet = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int loadingimage = 2130903045;
+			public const int Item_overview_shot = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int loadingprogress = 2130903046;
+			public const int item_test = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int MenuView = 2130903047;
+			public const int loading = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int MovieView = 2130903048;
+			public const int loadingimage = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int SettingsView = 2130903049;
+			public const int loadingprogress = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int ShotFullscreenView = 2130903050;
+			public const int MenuDrawerLayout = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
-			public const int ShotOverviewView = 2130903051;
+			public const int MenuView = 2130903051;
 			
 			// aapt resource value: 0x7f03000c
-			public const int ShotView = 2130903052;
+			public const int MovieView = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int SplashScreen = 2130903053;
+			public const int SettingsView = 2130903053;
 			
 			// aapt resource value: 0x7f03000e
-			public const int TestView = 2130903054;
+			public const int ShotFullscreenView = 2130903054;
 			
 			// aapt resource value: 0x7f03000f
-			public const int UserView = 2130903055;
+			public const int ShotOverviewView = 2130903055;
+			
+			// aapt resource value: 0x7f030010
+			public const int ShotView = 2130903056;
+			
+			// aapt resource value: 0x7f030011
+			public const int SplashScreen = 2130903057;
+			
+			// aapt resource value: 0x7f030012
+			public const int TestView = 2130903058;
+			
+			// aapt resource value: 0x7f030013
+			public const int UserView = 2130903059;
 			
 			static Layout()
 			{
@@ -560,6 +618,22 @@ namespace WTM.Mobile.Droid
 			}
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f080000
+			public const int navigation_drawer = 2131230720;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
 			{
 			}
 		}
@@ -572,6 +646,18 @@ namespace WTM.Mobile.Droid
 			
 			// aapt resource value: 0x7f040001
 			public const int Hello = 2130968577;
+			
+			// aapt resource value: 0x7f040005
+			public const int action_websearch = 2130968581;
+			
+			// aapt resource value: 0x7f040006
+			public const int app_not_available = 2130968582;
+			
+			// aapt resource value: 0x7f040004
+			public const int drawer_close = 2130968580;
+			
+			// aapt resource value: 0x7f040003
+			public const int drawer_open = 2130968579;
 			
 			// aapt resource value: 0x7f040000
 			public const int library_name = 2130968576;

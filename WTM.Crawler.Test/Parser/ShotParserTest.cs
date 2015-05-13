@@ -1,7 +1,6 @@
 ﻿using NFluent;
 using NUnit.Framework;
 using WTM.Crawler.Parsers;
-using WTM.Crawler.Services;
 using WTM.Domain;
 
 namespace WTM.Crawler.Test.Parser
@@ -9,46 +8,40 @@ namespace WTM.Crawler.Test.Parser
     [TestFixture]
     public class ShotParserTest
     {
-        private IWebClient webClient;
-        private IHtmlParser htmlParser;
-        private ShotParser parser;
-
-        [SetUp]
-        public void Init()
-        {
-            //webClient = new WebClientFake(Resources.shot10);
-            webClient = new WebClientWTM();
-            htmlParser = new HtmlParser();
-            parser = new ShotParser(webClient, htmlParser);
-
-            var authenticateService = new AuthenticateService(webClient, htmlParser);
-            authenticateService.Login("captainOblivious", "captainOblivious");
-        }
-
         [Test]
-        public void WhenParseThenReturnValidEntity()
+        public void WhenParseOfflineShotPageThenReturnValidEntity()
         {
-            var shot1000 = ParseShotAndDoBasicCheck(1000);
-            Check.That(shot1000.Navigation.PreviousUnsolvedId).HasAValue();
+            ParseShotAndDoBasicCheck(1);
+            ParseShotAndDoBasicCheck(10);
+            ParseShotAndDoBasicCheck(350523);
+            ParseShotAndDoBasicCheck(350532);
+            var shot352612 =  ParseShotAndDoBasicCheck(352612);
+            Check.That(shot352612.FirstSolver).IsNull();
+            Check.That(shot352612.UserStatus).Equals(ShotUserStatus.NeverSolved);
 
-            var shot10 = ParseShotAndDoBasicCheck(10);
-            Check.That(shot10.IsSolutionAvailable.GetValueOrDefault()).IsTrue();
+            ParseShotAndDoBasicCheck(353243);
         }
 
         private Shot ParseShotAndDoBasicCheck(int shotId)
         {
-            var shot = parser.GetById(shotId);
+            var shot = ParseFakeShot(shotId);
 
-            Check.That(shot.ShotId).Equals(shotId);
-            Check.That(shot.Navigation.FirstId).HasAValue();
-            Check.That(shot.Navigation.LastId).HasAValue();
-            Check.That(shot.Navigation.PreviousId).HasAValue();
-            Check.That(shot.Navigation.NextId).HasAValue();
-            Check.That(shot.Navigation.NextUnsolvedId).HasAValue();
+            Check.That(shotId).Equals(shot.ShotId);
             Check.That(shot.Poster).IsNotNull();
             Check.That(shot.ImageUri).IsNotNull();
 
             return shot;
+        }
+
+        private Shot ParseFakeShot(int shotId)
+        {
+            var resourceName = string.Format("Resources/Shots/{0}.html", shotId);
+            return CreateParserWithFakeFile(resourceName).GetById(shotId);
+        }
+
+        private ShotParser CreateParserWithFakeFile(string htmlFilePath)
+        {
+            return new ShotParser(new WebClientFake(htmlFilePath), new HtmlParser());
         }
     }
 }

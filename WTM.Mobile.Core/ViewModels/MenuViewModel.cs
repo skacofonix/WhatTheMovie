@@ -143,7 +143,7 @@ namespace WTM.Mobile.Core.ViewModels
             {
                 if (navigateToTestCommand == null)
                 {
-                    navigateToTestCommand = new MvxCommand(() => ShowViewModel<TestViewModel>());
+                    navigateToTestCommand = new MvxCommand(() => ShowViewModel<NavigationDrawerViewModel>());
                 }
                 return navigateToTestCommand;
             }
