@@ -68,9 +68,6 @@ namespace WTM.Domain
         [DataMember(IsRequired = true)]
         public Rate Rate { get; set; }
 
-        [IgnoreDataMember]
-        public Movie Movie { get; set; }
-
         [DataMember(EmitDefaultValue = false)]
         public bool? IsFavourited { get; set; }
 

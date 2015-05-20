@@ -44,6 +44,8 @@ namespace WTM.Crawler.Test.Parser
             Check.That(shotId).Equals(shot.ShotId);
             Check.That(shot.Poster).IsNotNull();
             Check.That(shot.ImageUri).IsNotNull();
+            Check.That(shot.Navigation).IsNotNull();
+            Check.That(shot.UserStatus).IsNotNull();
 
             return shot;
         }
