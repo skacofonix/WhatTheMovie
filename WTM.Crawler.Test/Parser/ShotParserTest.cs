@@ -17,7 +17,7 @@ namespace WTM.Crawler.Test.Parser
 
             ParseShotAndDoBasicCheck(10);
 
-            var shot350532 = ParseShotAndDoBasicCheck(350532);
+            ParseShotAndDoBasicCheck(350532);
 
             var shot352612 =  ParseShotAndDoBasicCheck(352612);
             Check.That(shot352612.UserStatus).Equals(ShotUserStatus.Unsolved);
