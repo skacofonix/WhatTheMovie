@@ -18,7 +18,7 @@ using Fragment = Android.App.Fragment;
 namespace WTM.Mobile.Droid.Views
 {
     [Activity(Label = "@string/ApplicationName", Icon = "@drawable/ic_launcher")]
-    public class NavigationDrawerView : Activity, MenuAdapter.OnItemClickListener
+    public class NavigationDrawerView : BaseView, MenuAdapter.OnItemClickListener
     {
         private Android.Support.V4.Widget.DrawerLayout mDrawerLayout;
         private RecyclerView mDrawerList;
@@ -148,7 +148,7 @@ namespace WTM.Mobile.Droid.Views
             ft.Commit();
 
             // update selected item title, then close the drawer
-            Title = mPlanetTitles[position];
+            //Title = mPlanetTitles[position];
             mDrawerLayout.CloseDrawer(mDrawerList);
         }
 

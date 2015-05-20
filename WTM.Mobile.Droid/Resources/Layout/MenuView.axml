@@ -92,4 +92,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonAuthenticate"
         local:MvxBind="Click LogoutCommand; Visibility Context.CurrentUser, Converter=Visibility" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="19.9dp"
+        android:id="@+id/space2" />
+    <Button
+        android:text="TEST"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAuthenticate"
+        local:MvxBind="Click NavigateToTestCommand" />
 </LinearLayout>
