@@ -4,6 +4,10 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+  <ScrollView
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -228,4 +232,5 @@
                 local:MvxBind="Text Shot.Rate.NbRaters" />
         </LinearLayout>
     </LinearLayout>
+  </ScrollView>
 </LinearLayout>
