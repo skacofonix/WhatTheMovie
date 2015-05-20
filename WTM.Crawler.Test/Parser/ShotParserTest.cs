@@ -9,17 +9,28 @@ namespace WTM.Crawler.Test.Parser
     public class ShotParserTest
     {
         [Test]
-        public void WhenParseOfflineShotPageThenReturnValidEntity()
+        public void ShouldParseShotPage()
         {
-            ParseShotAndDoBasicCheck(1);
+            var shot1 = ParseShotAndDoBasicCheck(1);
+            Check.That(shot1.Navigation.PreviousId).IsNull();
+            Check.That(shot1.Navigation.PreviousUnsolvedId).IsNull();
+
             ParseShotAndDoBasicCheck(10);
-            ParseShotAndDoBasicCheck(350523);
-            ParseShotAndDoBasicCheck(350532);
+
+            var shot350532 = ParseShotAndDoBasicCheck(350532);
+
             var shot352612 =  ParseShotAndDoBasicCheck(352612);
-            Check.That(shot352612.FirstSolver).IsNull();
-            Check.That(shot352612.UserStatus).Equals(ShotUserStatus.NeverSolved);
+            Check.That(shot352612.UserStatus).Equals(ShotUserStatus.Unsolved);
 
             ParseShotAndDoBasicCheck(353243);
+        }
+
+        [Test]
+        public void ShouldParseNerverSolvedShotPage()
+        {
+            var shot350523 = ParseShotAndDoBasicCheck(350523);
+            Check.That(shot350523.FirstSolver).IsNull();
+            Check.That(shot350523.UserStatus).Equals(ShotUserStatus.NeverSolved);
         }
 
         private Shot ParseShotAndDoBasicCheck(int shotId)

@@ -220,7 +220,7 @@ namespace WTM.Crawler.Parsers
 
         private ShotUserStatus? GetUserStatus(HtmlDocument document, int? nbOfSolver)
         {
-            if (nbOfSolver.GetValueOrDefault(0) > 0)
+            if (nbOfSolver.GetValueOrDefault(0) == 0)
                 return ShotUserStatus.NeverSolved;
 
             var nodeGuess = document.GetElementbyId("guess");
