@@ -74,19 +74,7 @@ namespace WTM.Crawler.Parsers
             instance.NumberOfFavourited = GetNumberOfFavourited(htmlDocument);
 
             // Async call
-            var asyncWebRequest = new Helpers.AsyncWebRequest(WebClient, HtmlParser);
-            var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId);
-            var shoutDocument = asyncWebRequest.DoAsyncGetRequest(uriShout);
-
-            var shoutNavigator = shoutDocument.CreateNavigator();
-            if (shoutNavigator == null)
-                return;
-
-            var shoutRootNode = shoutNavigator.Select("//ul[@id='shoutlist']/li");
-            while (shoutRootNode.MoveNext())
-            {
-                shoutRootNode.Current.SelectSingleNode(".//div/div/strong/a/@title");
-            }
+            ParseShouts(instance);
         }
 
         #region Navigation
@@ -360,37 +348,45 @@ namespace WTM.Crawler.Parsers
 
         private SnapshotDifficulty GetDifficulty(HtmlDocument document)
         {
-            // TODO : extract this in specific class
 
-            //var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId);
-            //string shoutString = null;
+            // It is not possible to determine easly the shot difficulty
+            // This informatin doesn't appear anyway in HTML source.
+            // The difficulty is define once when the shot move 'NewSubmissions' section to 'FeatureFilm'.
+            // The difficulty level rules :
+            //  Hard    : < 30 solvers
+            //  Medium  : 30 =< solvers < 200
+            //  Easy    : >= 200 solvers
 
-            //using (var stream = WebClient.GetStream(uriShout))
-            //using (var sr = new StreamReader(stream))
-            //{
-            //    shoutString = sr.ReadToEnd();
-            //}
+            // One way to determine the difficulty level is using the RandomOptions.
+            // We look the current configuration of awesome random button :
+            //  If difficulty choice selected has 'easy', the difficulty shot was easy
+            //  If difficulty choice selected has 'hard', the difficulty shot was hard
+            //  If difficulty choice selected has 'easy + medium', the difficulty shot was easy or medium, it is not possible to determine the exact level.
+            //  If difficulty choice selected has 'all' it is not possible to determine the difficulty
+            // => Using RandomOptionsService to read this information
 
+            // But this solution is not perfect
+            // 1. It is not possible to determine the difficulty level when 'easy + medium' or 'all' was selected.
+            // 2. If we navigate on a specific shot by ID the real difficulty of this shot can be different with the RandomOption difficulty configuration.
 
-            var isEasy = document.GetElementbyId("difficulty_easy")
-                                 .GetAttributeValue("checked", string.Empty)
-                                 .Equals("cheked");
-            if (isEasy)
-                return SnapshotDifficulty.Easy;
+            throw new NotSupportedException("Using RandomOptionsService to read this information");
+        }
 
-            var isEasyOrMedium = document.GetElementbyId("difficulty_medium")
-                                 .GetAttributeValue("checked", string.Empty)
-                                 .Equals("cheked");
-            if (isEasyOrMedium)
-                return SnapshotDifficulty.Easy | SnapshotDifficulty.Medium;
+        private void ParseShouts(Shot instance)
+        {
+            var asyncWebRequest = new Helpers.AsyncWebRequest(WebClient, HtmlParser);
+            var uriShout = new Uri(WebClient.UriBase, "/shout/shot/" + instance.ShotId);
+            var shoutDocument = asyncWebRequest.DoAsyncGetRequest(uriShout);
 
-            var isHard = document.GetElementbyId("difficulty_hard")
-                                 .GetAttributeValue("checked", string.Empty)
-                                 .Equals("cheked");
-            if (isHard)
-                return SnapshotDifficulty.Hard;
+            var shoutNavigator = shoutDocument.CreateNavigator();
+            if (shoutNavigator == null)
+                return;
 
-            return SnapshotDifficulty.Easy | SnapshotDifficulty.Medium | SnapshotDifficulty.Hard;
+            var shoutRootNode = shoutNavigator.Select("//ul[@id='shoutlist']/li");
+            while (shoutRootNode.MoveNext())
+            {
+                shoutRootNode.Current.SelectSingleNode(".//div/div/strong/a/@title");
+            }
         }
     }
 }
