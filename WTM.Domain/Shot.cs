@@ -44,8 +44,8 @@ namespace WTM.Domain
         [DataMember(IsRequired = true)]
         public DateTime? PublidationDate { get; set; }
 
-        [DataMember(IsRequired = true)]
-        public DateTime? SolutionDate { get; set; }
+        [DataMember(IsRequired = false)]
+        public int? NumberOfDayBeforeSolution { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
         public SnapshotDifficulty? Difficulty { get; set; }

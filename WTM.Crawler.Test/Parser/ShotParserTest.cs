@@ -14,6 +14,8 @@ namespace WTM.Crawler.Test.Parser
             var shot1 = ParseShotAndDoBasicCheck(1);
             Check.That(shot1.Navigation.PreviousId).IsNull();
             Check.That(shot1.Navigation.PreviousUnsolvedId).IsNull();
+            Check.That(shot1.IsSolutionAvailable.GetValueOrDefault(false)).IsTrue();
+            Check.That(shot1.NumberOfDayBeforeSolution).IsNull();
 
             ParseShotAndDoBasicCheck(10);
 
@@ -22,7 +24,9 @@ namespace WTM.Crawler.Test.Parser
             var shot352612 =  ParseShotAndDoBasicCheck(352612);
             Check.That(shot352612.UserStatus).Equals(ShotUserStatus.Unsolved);
 
-            ParseShotAndDoBasicCheck(353243);
+            var shot353243 = ParseShotAndDoBasicCheck(353243);
+            Check.That(shot353243.IsSolutionAvailable.GetValueOrDefault(true)).IsFalse();
+            Check.That(shot353243.NumberOfDayBeforeSolution).IsNotNull();
         }
 
         [Test]

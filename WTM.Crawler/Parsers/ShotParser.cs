@@ -57,7 +57,7 @@ namespace WTM.Crawler.Parsers
             instance.FirstSolver = GetFirstSolver(navigator);
             instance.NbSolver = GetNumberOfSolver(navigator);
             instance.PublidationDate = GetPostedDate(htmlDocument);
-            instance.SolutionDate = GetSolutionDate(navigator);
+            instance.NumberOfDayBeforeSolution = GetNumberOfDayBeforeSolution(navigator);
 
             // Solution station
             instance.ImageUri = GetImageUrl(htmlDocument);
@@ -183,9 +183,29 @@ namespace WTM.Crawler.Parsers
             return date;
         }
 
-        private DateTime? GetSolutionDate(XPathNavigator navigator)
+        private int? GetNumberOfDayBeforeSolution(XPathNavigator navigator)
         {
-            return null;
+            int? numberOfDayBeforeSolution = null;
+
+            var smallButtonsNode = navigator.Select("//ul[@class='ss_buttons_small']/script");
+
+            while (smallButtonsNode.MoveNext())
+            {
+                var scriptNode = smallButtonsNode.Current;
+
+                if(!scriptNode.InnerXml.Contains("solutionbutton"))
+                    continue;
+
+                var match = Regex.Match(scriptNode.InnerXml, "solution will be available in about (\\d*) day");
+                if(!match.Success)
+                    continue;
+
+                int numberOfDayBeforeSolutionTemp;
+                if (int.TryParse(match.Groups[1].Value, out numberOfDayBeforeSolutionTemp))
+                    numberOfDayBeforeSolution = numberOfDayBeforeSolutionTemp;
+            }
+
+            return numberOfDayBeforeSolution;
         }
 
         #endregion
