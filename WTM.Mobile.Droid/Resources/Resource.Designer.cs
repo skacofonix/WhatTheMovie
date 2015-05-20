@@ -275,14 +275,14 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f050045
 			public const int buttonNavigationRandom = 2131034181;
 			
-			// aapt resource value: 0x7f050041
-			public const int buttonNext = 2131034177;
+			// aapt resource value: 0x7f050042
+			public const int buttonNext = 2131034178;
 			
 			// aapt resource value: 0x7f050052
 			public const int buttonPoster = 2131034194;
 			
-			// aapt resource value: 0x7f050040
-			public const int buttonPrevious = 2131034176;
+			// aapt resource value: 0x7f050041
+			public const int buttonPrevious = 2131034177;
 			
 			// aapt resource value: 0x7f05003d
 			public const int buttonReset = 2131034173;
@@ -359,8 +359,8 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f05004a
 			public const int linearLayoutGuessTitle = 2131034186;
 			
-			// aapt resource value: 0x7f05003f
-			public const int linearLayoutNavigation = 2131034175;
+			// aapt resource value: 0x7f050040
+			public const int linearLayoutNavigation = 2131034176;
 			
 			// aapt resource value: 0x7f050051
 			public const int linearLayoutPoster = 2131034193;
@@ -386,8 +386,8 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f05001e
 			public const int loadingProgressWheel = 2131034142;
 			
-			// aapt resource value: 0x7f050042
-			public const int progressBar = 2131034178;
+			// aapt resource value: 0x7f05003f
+			public const int progressBar = 2131034175;
 			
 			// aapt resource value: 0x7f050010
 			public const int progressBar1 = 2131034128;

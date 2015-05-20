@@ -4,6 +4,14 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        local:MvxBind="Visibility Busy, Converter=Visibility"
+        android:indeterminate="true"
+        android:progress="@android:integer/config_mediumAnimTime" />
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -36,12 +44,6 @@
             android:layout_weight="1"
             local:MvxBind="Click NavigateToNextDateCommand" />
     </LinearLayout>
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        local:MvxBind="Visibility Busy, Converter=Visibility" />
     <Mvx.MvxListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
