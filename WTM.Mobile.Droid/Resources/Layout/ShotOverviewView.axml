@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
         local:MvxBind="Visibility Busy, Converter=Visibility"
-        android:indeterminate="true"
-        android:progress="@android:integer/config_mediumAnimTime" />
+        android:indeterminate="true" />
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
