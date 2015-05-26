@@ -4,233 +4,243 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-  <ScrollView
-    android:id="@+id/scrollView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="horizontal"
+    <ScrollView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutNavigation">
-        <Button
-            android:text="First"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/buttonNavigationFirst"
-            android:layout_weight="1"
-            local:MvxBind="Click NavigateToFirstShotCommand" />
-        <Button
-            android:text="Previous"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/buttonNavigationPrevious"
-            android:layout_weight="1"
-            local:MvxBind="Click NavigateToPreviousShotCommand" />
-        <Button
-            android:text="Random"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/buttonNavigationRandom"
-            android:layout_weight="1"
-            local:MvxBind="Click NavigateToRandomShotCommand" />
-        <Button
-            android:text="Next"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/buttonNavigationNext"
-            android:layout_weight="1"
-            local:MvxBind="Click NavigateToNextShotCommand" />
-        <Button
-            android:text="Last"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/buttonNavigationLast"
-            android:layout_weight="1"
-            local:MvxBind="Click NavigateToLastShotCommand" />
-    </LinearLayout>
-    <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="400px"
-        android:id="@+id/relativeLayoutShotImage">
-        <Mvx.MvxImageView
-            android:id="@+id/imageViewShot"
-            local:MvxBind="ImageUrl Shot.ImageUri; Click ShowFullscreenShotCommand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
-        <ProgressBar
-            android:id="@+id/progressBarLoading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            local:MvxBind="Visibility Busy, Converter=Visibility"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutGuessTitle"
-        local:MvxBind="Visibility Response, Converter=InvertedVisibility">
-        <EditText
-            android:id="@+id/editTextGuessTitle"
-            local:MvxBind="Text GuessTitle"
-            android:singleLine="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="10" />
-        <Button
-            android:text="Guess"
-            android:id="@+id/buttonGuessTitle"
-            local:MvxBind="Click GuessTitleCommand"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutSolution"
-        local:MvxBind="Visibility Response, Converter=Visibility">
-        <TextView
-            android:text="Eternal Sunshine of the Sptotless Mind"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textViewSolutionMovieTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:singleLine="true"
-            android:padding="5dp"
-            android:ellipsize="end"
-            android:textAlignment="textStart"
-            local:MvxBind="Text Response.OriginalTitle"
-            android:gravity="center_vertical" />
-        <TextView
-            android:text="(2015)"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/textViewSolutionMovieYear"
-            android:padding="5dp"
-            android:gravity="center_vertical" />
-        <Button
-            android:text="Movie"
-            android:id="@+id/buttonSolutionMovieNavigation"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            local:MvxBind="Click ShowMovieDetailCommand" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutPoster"
-        local:MvxBind="Visibility Shot.Poster, Converter=Visibility">
-        <TextView
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/textView1"
-            local:MvxBind="Text Shot.Poster"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:layout_weight="10"
-            android:ellipsize="end"
-            android:padding="5dp" />
-        <Button
-            android:text="Show poster"
-            android:id="@+id/buttonPoster"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            local:MvxBind="Click ShowPosterCommand"
-            android:layout_weight="3" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutFirstSolver"
-        local:MvxBind="Visibility Shot.FirstSolver, Converter=Visibility">
-        <TextView
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/textView2"
-            local:MvxBind="Text Shot.FirstSolver"
-            android:gravity="center_vertical"
-            android:layout_weight="10"
-            android:ellipsize="end"
-            android:padding="5dp" />
-        <Button
-            android:text="Show fisrt solver"
-            android:id="@+id/buttonFisrtSolver"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            local:MvxBind="Click ShowFirstSolverCommand"
-            android:layout_weight="3" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutAskSolution"
-        local:MvxBind="Visibility Response, Converter=InvertedVisibility">
-        <Button
-            android:text="Ask solution"
-            android:id="@+id/buttonAskSolution"
-            local:MvxBind="Click GetSolutionCommand"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutRate">
-        <RatingBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ratingBarShot"
-            android:numStars="10"
-            android:stepSize="1"
-            local:MvxBind="Rating Shot.Rate.Score" />
+        android:id="@+id/scrollView">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout1"
-            android:gravity="right">
-            <TextView
-                android:text="7.7"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/textViewOverallRating"
-                android:paddingRight="5dp"
-                local:MvxBind="Text Shot.Rate.Score" />
-            <TextView
-                android:text="(123 votes)"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/textViewRateNbRaters"
-                android:textColor="@android:color/darker_gray"
-                local:MvxBind="Text Shot.Rate.NbRaters" />
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout2">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutNavigation">
+                <Button
+                    android:text="First"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/buttonNavigationFirst"
+                    android:layout_weight="1"
+                    local:MvxBind="Click NavigateToFirstShotCommand" />
+                <Button
+                    android:text="Previous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/buttonNavigationPrevious"
+                    android:layout_weight="1"
+                    local:MvxBind="Click NavigateToPreviousShotCommand" />
+                <Button
+                    android:text="Random"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/buttonNavigationRandom"
+                    android:layout_weight="1"
+                    local:MvxBind="Click NavigateToRandomShotCommand" />
+                <Button
+                    android:text="Next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/buttonNavigationNext"
+                    android:layout_weight="1"
+                    local:MvxBind="Click NavigateToNextShotCommand" />
+                <Button
+                    android:text="Last"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/buttonNavigationLast"
+                    android:layout_weight="1"
+                    local:MvxBind="Click NavigateToLastShotCommand" />
+            </LinearLayout>
+            <RelativeLayout
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/relativeLayoutShotImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Mvx.MvxImageView
+                    android:id="@+id/imageViewShot"
+                    local:MvxBind="ImageUrl Shot.ImageUri; Click ShowFullscreenShotCommand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+                <ProgressBar
+                    android:id="@+id/progressBarLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    local:MvxBind="Visibility Busy, Converter=Visibility"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutGuessTitle"
+                local:MvxBind="Visibility Response, Converter=InvertedVisibility">
+                <EditText
+                    android:id="@+id/editTextGuessTitle"
+                    local:MvxBind="Text GuessTitle"
+                    android:singleLine="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10" />
+                <Button
+                    android:text="Guess"
+                    android:id="@+id/buttonGuessTitle"
+                    local:MvxBind="Click GuessTitleCommand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutSolution"
+                local:MvxBind="Visibility Response, Converter=Visibility">
+                <TextView
+                    android:text="Eternal Sunshine of the Sptotless Mind"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textViewSolutionMovieTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:singleLine="true"
+                    android:padding="5dp"
+                    android:ellipsize="end"
+                    android:textAlignment="textStart"
+                    local:MvxBind="Text Response.OriginalTitle"
+                    android:gravity="center_vertical" />
+                <TextView
+                    android:text="(2015)"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textViewSolutionMovieYear"
+                    android:padding="5dp"
+                    android:gravity="center_vertical" />
+                <Button
+                    android:text="Movie"
+                    android:id="@+id/buttonSolutionMovieNavigation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    local:MvxBind="Click ShowMovieDetailCommand" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutPoster"
+                local:MvxBind="Visibility Shot.Poster, Converter=Visibility">
+                <TextView
+                    android:text="Medium Text"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView1"
+                    local:MvxBind="Text Shot.Poster"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:layout_weight="10"
+                    android:ellipsize="end"
+                    android:padding="5dp" />
+                <Button
+                    android:text="Show poster"
+                    android:id="@+id/buttonPoster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    local:MvxBind="Click ShowPosterCommand"
+                    android:layout_weight="3" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutFirstSolver"
+                local:MvxBind="Visibility Shot.FirstSolver, Converter=Visibility">
+                <TextView
+                    android:text="Medium Text"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView2"
+                    local:MvxBind="Text Shot.FirstSolver"
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:ellipsize="end"
+                    android:padding="5dp" />
+                <Button
+                    android:text="Show fisrt solver"
+                    android:id="@+id/buttonFisrtSolver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    local:MvxBind="Click ShowFirstSolverCommand"
+                    android:layout_weight="3" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutAskSolution"
+                local:MvxBind="Visibility Response, Converter=InvertedVisibility">
+                <Button
+                    android:text="Ask solution"
+                    android:id="@+id/buttonAskSolution"
+                    local:MvxBind="Click GetSolutionCommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutRate">
+                <RatingBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBarShot"
+                    android:numStars="10"
+                    android:stepSize="1"
+                    local:MvxBind="Rating Shot.Rate.Score" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout1"
+                    android:gravity="right">
+                    <TextView
+                        android:text="7.7"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textViewOverallRating"
+                        android:paddingRight="5dp"
+                        local:MvxBind="Text Shot.Rate.Score" />
+                    <TextView
+                        android:text="(123 votes)"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textViewRateNbRaters"
+                        android:textColor="@android:color/darker_gray"
+                        local:MvxBind="Text Shot.Rate.NbRaters" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-  </ScrollView>
+    </ScrollView>
 </LinearLayout>
