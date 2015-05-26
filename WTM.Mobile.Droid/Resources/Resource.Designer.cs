@@ -102,6 +102,52 @@ namespace WTM.Mobile.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::WTM.Mobile.Droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::WTM.Mobile.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::WTM.Mobile.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Drawable.dialog_disclosure = global::WTM.Mobile.Droid.Resource.Drawable.dialog_disclosure;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Drawable.dialog_expander_ic_minimized = global::WTM.Mobile.Droid.Resource.Drawable.dialog_expander_ic_minimized;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Drawable.dialog_icon = global::WTM.Mobile.Droid.Resource.Drawable.dialog_icon;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Drawable.dialog_spinner_default_holo_dark = global::WTM.Mobile.Droid.Resource.Drawable.dialog_spinner_default_holo_dark;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Drawable.dialog_spinner_default_holo_light = global::WTM.Mobile.Droid.Resource.Drawable.dialog_spinner_default_holo_light;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_BoolField = global::WTM.Mobile.Droid.Resource.Id.dialog_BoolField;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_Button = global::WTM.Mobile.Droid.Resource.Id.dialog_Button;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_DisclosureField = global::WTM.Mobile.Droid.Resource.Id.dialog_DisclosureField;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_HtmlField = global::WTM.Mobile.Droid.Resource.Id.dialog_HtmlField;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_ImageLeft = global::WTM.Mobile.Droid.Resource.Id.dialog_ImageLeft;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_ImageRight = global::WTM.Mobile.Droid.Resource.Id.dialog_ImageRight;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_LabelField = global::WTM.Mobile.Droid.Resource.Id.dialog_LabelField;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_LabelPercentageField = global::WTM.Mobile.Droid.Resource.Id.dialog_LabelPercentageField;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_LabelSubtextField = global::WTM.Mobile.Droid.Resource.Id.dialog_LabelSubtextField;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_Panel = global::WTM.Mobile.Droid.Resource.Id.dialog_Panel;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_RadioButtonList = global::WTM.Mobile.Droid.Resource.Id.dialog_RadioButtonList;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_SliderField = global::WTM.Mobile.Droid.Resource.Id.dialog_SliderField;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_Spinner = global::WTM.Mobile.Droid.Resource.Id.dialog_Spinner;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.dialog_ValueField = global::WTM.Mobile.Droid.Resource.Id.dialog_ValueField;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Id.iFormFieldValue = global::WTM.Mobile.Droid.Resource.Id.iFormFieldValue;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_achievements = global::WTM.Mobile.Droid.Resource.Layout.dialog_achievements;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_boolfieldleft = global::WTM.Mobile.Droid.Resource.Layout.dialog_boolfieldleft;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_boolfieldright = global::WTM.Mobile.Droid.Resource.Layout.dialog_boolfieldright;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_boolfieldsubleft = global::WTM.Mobile.Droid.Resource.Layout.dialog_boolfieldsubleft;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_boolfieldsubright = global::WTM.Mobile.Droid.Resource.Layout.dialog_boolfieldsubright;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_button = global::WTM.Mobile.Droid.Resource.Layout.dialog_button;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_datefield = global::WTM.Mobile.Droid.Resource.Layout.dialog_datefield;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_fieldsetlabel = global::WTM.Mobile.Droid.Resource.Layout.dialog_fieldsetlabel;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_floatimage = global::WTM.Mobile.Droid.Resource.Layout.dialog_floatimage;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_html = global::WTM.Mobile.Droid.Resource.Layout.dialog_html;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_labeldisclosure = global::WTM.Mobile.Droid.Resource.Layout.dialog_labeldisclosure;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_labelfieldbelow = global::WTM.Mobile.Droid.Resource.Layout.dialog_labelfieldbelow;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_labelfieldright = global::WTM.Mobile.Droid.Resource.Layout.dialog_labelfieldright;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_multiline_labelfieldbelow = global::WTM.Mobile.Droid.Resource.Layout.dialog_multiline_labelfieldbelow;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_onofffieldright = global::WTM.Mobile.Droid.Resource.Layout.dialog_onofffieldright;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_panel = global::WTM.Mobile.Droid.Resource.Layout.dialog_panel;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_root = global::WTM.Mobile.Droid.Resource.Layout.dialog_root;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_selectlist = global::WTM.Mobile.Droid.Resource.Layout.dialog_selectlist;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_selectlistfield = global::WTM.Mobile.Droid.Resource.Layout.dialog_selectlistfield;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_textarea = global::WTM.Mobile.Droid.Resource.Layout.dialog_textarea;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_textfieldbelow = global::WTM.Mobile.Droid.Resource.Layout.dialog_textfieldbelow;
+			global::Cirrious.MvvmCross.Dialog.Droid.Resource.Layout.dialog_textfieldright = global::WTM.Mobile.Droid.Resource.Layout.dialog_textfieldright;
+			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.String.ApplicationName = global::WTM.Mobile.Droid.Resource.String.ApplicationName;
+			global::Cirrious.MvvmCross.Droid.FullFragging.Resource.String.Hello = global::WTM.Mobile.Droid.Resource.String.Hello;
+			global::Cirrious.MvvmCross.Plugins.Network.Droid.Resource.String.ApplicationName = global::WTM.Mobile.Droid.Resource.String.ApplicationName;
+			global::Cirrious.MvvmCross.Plugins.Network.Droid.Resource.String.Hello = global::WTM.Mobile.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Array
@@ -194,34 +240,49 @@ namespace WTM.Mobile.Droid
 			public const int action_search = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int drawer_shadow = 2130837505;
+			public const int dialog_disclosure = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int ic_drawer = 2130837506;
+			public const int dialog_expander_ic_minimized = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int ic_errorstatus = 2130837507;
+			public const int dialog_icon = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int ic_launcher = 2130837508;
+			public const int dialog_spinner_default_holo_dark = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int ic_successstatus = 2130837509;
+			public const int dialog_spinner_default_holo_light = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int Icon = 2130837510;
+			public const int drawer_shadow = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int roundedbg = 2130837511;
+			public const int ic_drawer = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int roundedbgdark = 2130837512;
+			public const int ic_errorstatus = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int splash = 2130837513;
+			public const int ic_launcher = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int tile = 2130837514;
+			public const int ic_successstatus = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int Icon = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int roundedbg = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int roundedbgdark = 2130837517;
+			
+			// aapt resource value: 0x7f02000e
+			public const int splash = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int tile = 2130837519;
 			
 			static Drawable()
 			{
@@ -239,77 +300,119 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f040000
 			public const int MvxBindingTagUnique = 2130968576;
 			
-			// aapt resource value: 0x7f040065
-			public const int action_websearch = 2130968677;
+			// aapt resource value: 0x7f040074
+			public const int action_websearch = 2130968692;
 			
-			// aapt resource value: 0x7f040057
-			public const int buttonAskSolution = 2130968663;
+			// aapt resource value: 0x7f040066
+			public const int buttonAskSolution = 2130968678;
 			
-			// aapt resource value: 0x7f040025
-			public const int buttonAuthenticate = 2130968613;
+			// aapt resource value: 0x7f040034
+			public const int buttonAuthenticate = 2130968628;
 			
-			// aapt resource value: 0x7f040022
-			public const int buttonFeatureFilms = 2130968610;
+			// aapt resource value: 0x7f040031
+			public const int buttonFeatureFilms = 2130968625;
 			
-			// aapt resource value: 0x7f040055
-			public const int buttonFisrtSolver = 2130968661;
+			// aapt resource value: 0x7f040064
+			public const int buttonFisrtSolver = 2130968676;
 			
-			// aapt resource value: 0x7f04004d
-			public const int buttonGuessTitle = 2130968653;
+			// aapt resource value: 0x7f04005c
+			public const int buttonGuessTitle = 2130968668;
 			
 			// aapt resource value: 0x7f04000f
 			public const int buttonLogin = 2130968591;
 			
-			// aapt resource value: 0x7f040044
-			public const int buttonNavigationFirst = 2130968644;
-			
-			// aapt resource value: 0x7f040048
-			public const int buttonNavigationLast = 2130968648;
-			
-			// aapt resource value: 0x7f040047
-			public const int buttonNavigationNext = 2130968647;
-			
-			// aapt resource value: 0x7f040045
-			public const int buttonNavigationPrevious = 2130968645;
-			
-			// aapt resource value: 0x7f040046
-			public const int buttonNavigationRandom = 2130968646;
-			
-			// aapt resource value: 0x7f040042
-			public const int buttonNext = 2130968642;
-			
 			// aapt resource value: 0x7f040053
-			public const int buttonPoster = 2130968659;
+			public const int buttonNavigationFirst = 2130968659;
 			
-			// aapt resource value: 0x7f040041
-			public const int buttonPrevious = 2130968641;
+			// aapt resource value: 0x7f040057
+			public const int buttonNavigationLast = 2130968663;
 			
-			// aapt resource value: 0x7f04003d
-			public const int buttonReset = 2130968637;
+			// aapt resource value: 0x7f040056
+			public const int buttonNavigationNext = 2130968662;
 			
-			// aapt resource value: 0x7f04003c
-			public const int buttonSave = 2130968636;
+			// aapt resource value: 0x7f040054
+			public const int buttonNavigationPrevious = 2130968660;
 			
-			// aapt resource value: 0x7f040024
-			public const int buttonSettings = 2130968612;
+			// aapt resource value: 0x7f040055
+			public const int buttonNavigationRandom = 2130968661;
 			
 			// aapt resource value: 0x7f040051
-			public const int buttonSolutionMovieNavigation = 2130968657;
+			public const int buttonNext = 2130968657;
 			
-			// aapt resource value: 0x7f040023
-			public const int buttonUser = 2130968611;
+			// aapt resource value: 0x7f040062
+			public const int buttonPoster = 2130968674;
+			
+			// aapt resource value: 0x7f040050
+			public const int buttonPrevious = 2130968656;
+			
+			// aapt resource value: 0x7f04004c
+			public const int buttonReset = 2130968652;
+			
+			// aapt resource value: 0x7f04004b
+			public const int buttonSave = 2130968651;
+			
+			// aapt resource value: 0x7f040033
+			public const int buttonSettings = 2130968627;
+			
+			// aapt resource value: 0x7f040060
+			public const int buttonSolutionMovieNavigation = 2130968672;
+			
+			// aapt resource value: 0x7f040032
+			public const int buttonUser = 2130968626;
 			
 			// aapt resource value: 0x7f040007
 			public const int content_frame = 2130968583;
 			
+			// aapt resource value: 0x7f040015
+			public const int dialog_BoolField = 2130968597;
+			
+			// aapt resource value: 0x7f040016
+			public const int dialog_Button = 2130968598;
+			
+			// aapt resource value: 0x7f04001b
+			public const int dialog_DisclosureField = 2130968603;
+			
+			// aapt resource value: 0x7f04001a
+			public const int dialog_HtmlField = 2130968602;
+			
+			// aapt resource value: 0x7f040018
+			public const int dialog_ImageLeft = 2130968600;
+			
+			// aapt resource value: 0x7f040013
+			public const int dialog_ImageRight = 2130968595;
+			
+			// aapt resource value: 0x7f040011
+			public const int dialog_LabelField = 2130968593;
+			
+			// aapt resource value: 0x7f040014
+			public const int dialog_LabelPercentageField = 2130968596;
+			
+			// aapt resource value: 0x7f040012
+			public const int dialog_LabelSubtextField = 2130968594;
+			
+			// aapt resource value: 0x7f04001c
+			public const int dialog_Panel = 2130968604;
+			
+			// aapt resource value: 0x7f04001d
+			public const int dialog_RadioButtonList = 2130968605;
+			
+			// aapt resource value: 0x7f040019
+			public const int dialog_SliderField = 2130968601;
+			
+			// aapt resource value: 0x7f04001e
+			public const int dialog_Spinner = 2130968606;
+			
+			// aapt resource value: 0x7f040017
+			public const int dialog_ValueField = 2130968599;
+			
 			// aapt resource value: 0x7f040006
 			public const int drawer_layout = 2130968582;
 			
-			// aapt resource value: 0x7f04003a
-			public const int editTextFilterTagValue = 2130968634;
+			// aapt resource value: 0x7f040049
+			public const int editTextFilterTagValue = 2130968649;
 			
-			// aapt resource value: 0x7f04004c
-			public const int editTextGuessTitle = 2130968652;
+			// aapt resource value: 0x7f04005b
+			public const int editTextGuessTitle = 2130968667;
 			
 			// aapt resource value: 0x7f04000d
 			public const int editTextPassword = 2130968589;
@@ -317,110 +420,113 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f04000a
 			public const int editTextUsername = 2130968586;
 			
-			// aapt resource value: 0x7f040011
-			public const int image = 2130968593;
-			
-			// aapt resource value: 0x7f040030
-			public const int imageViewMovie = 2130968624;
+			// aapt resource value: 0x7f04001f
+			public const int iFormFieldValue = 2130968607;
 			
 			// aapt resource value: 0x7f040020
-			public const int imageViewShot = 2130968608;
+			public const int image = 2130968608;
 			
-			// aapt resource value: 0x7f04003e
-			public const int imageViewShotFullscreen = 2130968638;
+			// aapt resource value: 0x7f04003f
+			public const int imageViewMovie = 2130968639;
+			
+			// aapt resource value: 0x7f04002f
+			public const int imageViewShot = 2130968623;
+			
+			// aapt resource value: 0x7f04004d
+			public const int imageViewShotFullscreen = 2130968653;
 			
 			// aapt resource value: 0x7f040008
 			public const int left_drawer = 2130968584;
 			
-			// aapt resource value: 0x7f04001f
-			public const int linearLayout1 = 2130968607;
+			// aapt resource value: 0x7f04002e
+			public const int linearLayout1 = 2130968622;
 			
-			// aapt resource value: 0x7f040021
-			public const int linearLayout2 = 2130968609;
+			// aapt resource value: 0x7f040030
+			public const int linearLayout2 = 2130968624;
 			
-			// aapt resource value: 0x7f040056
-			public const int linearLayoutAskSolution = 2130968662;
-			
-			// aapt resource value: 0x7f040031
-			public const int linearLayoutCommonSettings = 2130968625;
-			
-			// aapt resource value: 0x7f04002b
-			public const int linearLayoutDirector = 2130968619;
-			
-			// aapt resource value: 0x7f040038
-			public const int linearLayoutFilterTag = 2130968632;
-			
-			// aapt resource value: 0x7f040054
-			public const int linearLayoutFirstSolver = 2130968660;
-			
-			// aapt resource value: 0x7f040028
-			public const int linearLayoutGenre = 2130968616;
-			
-			// aapt resource value: 0x7f04004b
-			public const int linearLayoutGuessTitle = 2130968651;
+			// aapt resource value: 0x7f040065
+			public const int linearLayoutAskSolution = 2130968677;
 			
 			// aapt resource value: 0x7f040040
-			public const int linearLayoutNavigation = 2130968640;
+			public const int linearLayoutCommonSettings = 2130968640;
 			
-			// aapt resource value: 0x7f040052
-			public const int linearLayoutPoster = 2130968658;
+			// aapt resource value: 0x7f04003a
+			public const int linearLayoutDirector = 2130968634;
 			
-			// aapt resource value: 0x7f040058
-			public const int linearLayoutRate = 2130968664;
+			// aapt resource value: 0x7f040047
+			public const int linearLayoutFilterTag = 2130968647;
 			
-			// aapt resource value: 0x7f04004e
-			public const int linearLayoutSolution = 2130968654;
+			// aapt resource value: 0x7f040063
+			public const int linearLayoutFirstSolver = 2130968675;
 			
-			// aapt resource value: 0x7f040062
-			public const int linearLayoutStatistics = 2130968674;
+			// aapt resource value: 0x7f040037
+			public const int linearLayoutGenre = 2130968631;
+			
+			// aapt resource value: 0x7f04005a
+			public const int linearLayoutGuessTitle = 2130968666;
+			
+			// aapt resource value: 0x7f04004f
+			public const int linearLayoutNavigation = 2130968655;
+			
+			// aapt resource value: 0x7f040061
+			public const int linearLayoutPoster = 2130968673;
+			
+			// aapt resource value: 0x7f040067
+			public const int linearLayoutRate = 2130968679;
 			
 			// aapt resource value: 0x7f04005d
-			public const int linearLayoutSummary = 2130968669;
+			public const int linearLayoutSolution = 2130968669;
 			
-			// aapt resource value: 0x7f04001d
-			public const int loadingImage = 2130968605;
+			// aapt resource value: 0x7f040071
+			public const int linearLayoutStatistics = 2130968689;
 			
-			// aapt resource value: 0x7f04001b
-			public const int loadingProgressBar = 2130968603;
+			// aapt resource value: 0x7f04006c
+			public const int linearLayoutSummary = 2130968684;
 			
-			// aapt resource value: 0x7f04001e
-			public const int loadingProgressWheel = 2130968606;
+			// aapt resource value: 0x7f04002c
+			public const int loadingImage = 2130968620;
 			
-			// aapt resource value: 0x7f04003f
-			public const int progressBar = 2130968639;
+			// aapt resource value: 0x7f04002a
+			public const int loadingProgressBar = 2130968618;
+			
+			// aapt resource value: 0x7f04002d
+			public const int loadingProgressWheel = 2130968621;
+			
+			// aapt resource value: 0x7f04004e
+			public const int progressBar = 2130968654;
 			
 			// aapt resource value: 0x7f040010
 			public const int progressBar1 = 2130968592;
 			
-			// aapt resource value: 0x7f04004a
-			public const int progressBarLoading = 2130968650;
-			
-			// aapt resource value: 0x7f040034
-			public const int radioButtonDifficultyEasy = 2130968628;
-			
-			// aapt resource value: 0x7f040035
-			public const int radioButtonDifficultyEasyMedium = 2130968629;
-			
-			// aapt resource value: 0x7f040036
-			public const int radioButtonDifficultyHard = 2130968630;
-			
-			// aapt resource value: 0x7f040032
-			public const int radioGroupDifficulty = 2130968626;
-			
 			// aapt resource value: 0x7f040059
-			public const int ratingBarShot = 2130968665;
-			
-			// aapt resource value: 0x7f04005c
-			public const int relativeLayout1 = 2130968668;
-			
-			// aapt resource value: 0x7f04003b
-			public const int relativeLayoutCommands = 2130968635;
-			
-			// aapt resource value: 0x7f040049
-			public const int relativeLayoutShotImage = 2130968649;
+			public const int progressBarLoading = 2130968665;
 			
 			// aapt resource value: 0x7f040043
-			public const int scrollView = 2130968643;
+			public const int radioButtonDifficultyEasy = 2130968643;
+			
+			// aapt resource value: 0x7f040044
+			public const int radioButtonDifficultyEasyMedium = 2130968644;
+			
+			// aapt resource value: 0x7f040045
+			public const int radioButtonDifficultyHard = 2130968645;
+			
+			// aapt resource value: 0x7f040041
+			public const int radioGroupDifficulty = 2130968641;
+			
+			// aapt resource value: 0x7f040068
+			public const int ratingBarShot = 2130968680;
+			
+			// aapt resource value: 0x7f04006b
+			public const int relativeLayout1 = 2130968683;
+			
+			// aapt resource value: 0x7f04004a
+			public const int relativeLayoutCommands = 2130968650;
+			
+			// aapt resource value: 0x7f040058
+			public const int relativeLayoutShotImage = 2130968664;
+			
+			// aapt resource value: 0x7f040052
+			public const int scrollView = 2130968658;
 			
 			// aapt resource value: 0x7f04000e
 			public const int space1 = 2130968590;
@@ -428,41 +534,41 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f04000b
 			public const int space2 = 2130968587;
 			
-			// aapt resource value: 0x7f04002f
-			public const int space3 = 2130968623;
+			// aapt resource value: 0x7f04003e
+			public const int space3 = 2130968638;
 			
-			// aapt resource value: 0x7f040037
-			public const int switchShowSolvedShot = 2130968631;
+			// aapt resource value: 0x7f040046
+			public const int switchShowSolvedShot = 2130968646;
 			
-			// aapt resource value: 0x7f040012
-			public const int tableLayout1 = 2130968594;
+			// aapt resource value: 0x7f040021
+			public const int tableLayout1 = 2130968609;
 			
-			// aapt resource value: 0x7f040013
-			public const int tableRow1 = 2130968595;
+			// aapt resource value: 0x7f040022
+			public const int tableRow1 = 2130968610;
 			
-			// aapt resource value: 0x7f040016
-			public const int tableRow2 = 2130968598;
+			// aapt resource value: 0x7f040025
+			public const int tableRow2 = 2130968613;
 			
-			// aapt resource value: 0x7f040019
-			public const int tableRow3 = 2130968601;
+			// aapt resource value: 0x7f040028
+			public const int tableRow3 = 2130968616;
 			
 			// aapt resource value: 0x7f040003
 			public const int textView1 = 2130968579;
 			
-			// aapt resource value: 0x7f040014
-			public const int textView10 = 2130968596;
+			// aapt resource value: 0x7f040023
+			public const int textView10 = 2130968611;
 			
-			// aapt resource value: 0x7f040017
-			public const int textView11 = 2130968599;
+			// aapt resource value: 0x7f040026
+			public const int textView11 = 2130968614;
 			
-			// aapt resource value: 0x7f04001a
-			public const int textView13 = 2130968602;
+			// aapt resource value: 0x7f040029
+			public const int textView13 = 2130968617;
 			
-			// aapt resource value: 0x7f040018
-			public const int textView14 = 2130968600;
+			// aapt resource value: 0x7f040027
+			public const int textView14 = 2130968615;
 			
-			// aapt resource value: 0x7f040015
-			public const int textView16 = 2130968597;
+			// aapt resource value: 0x7f040024
+			public const int textView16 = 2130968612;
 			
 			// aapt resource value: 0x7f040002
 			public const int textView2 = 2130968578;
@@ -476,71 +582,71 @@ namespace WTM.Mobile.Droid
 			// aapt resource value: 0x7f040001
 			public const int textView5 = 2130968577;
 			
-			// aapt resource value: 0x7f040063
-			public const int textView6 = 2130968675;
+			// aapt resource value: 0x7f040072
+			public const int textView6 = 2130968690;
 			
-			// aapt resource value: 0x7f040061
-			public const int textViewAbout = 2130968673;
+			// aapt resource value: 0x7f040070
+			public const int textViewAbout = 2130968688;
 			
-			// aapt resource value: 0x7f04002e
-			public const int textViewAbstract = 2130968622;
+			// aapt resource value: 0x7f04003d
+			public const int textViewAbstract = 2130968637;
 			
-			// aapt resource value: 0x7f040033
-			public const int textViewDifficulty = 2130968627;
+			// aapt resource value: 0x7f040042
+			public const int textViewDifficulty = 2130968642;
 			
-			// aapt resource value: 0x7f04002c
-			public const int textViewDirector = 2130968620;
+			// aapt resource value: 0x7f04003b
+			public const int textViewDirector = 2130968635;
 			
-			// aapt resource value: 0x7f04002d
-			public const int textViewDirectorValue = 2130968621;
+			// aapt resource value: 0x7f04003c
+			public const int textViewDirectorValue = 2130968636;
+			
+			// aapt resource value: 0x7f040048
+			public const int textViewFilterTag = 2130968648;
+			
+			// aapt resource value: 0x7f040038
+			public const int textViewGenre = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int textViewFilterTag = 2130968633;
+			public const int textViewGenreValue = 2130968633;
 			
-			// aapt resource value: 0x7f040029
-			public const int textViewGenre = 2130968617;
+			// aapt resource value: 0x7f040035
+			public const int textViewOriginalTitle = 2130968629;
 			
-			// aapt resource value: 0x7f04002a
-			public const int textViewGenreValue = 2130968618;
-			
-			// aapt resource value: 0x7f040026
-			public const int textViewOriginalTitle = 2130968614;
-			
-			// aapt resource value: 0x7f04005a
-			public const int textViewOverallRating = 2130968666;
+			// aapt resource value: 0x7f040069
+			public const int textViewOverallRating = 2130968681;
 			
 			// aapt resource value: 0x7f04000c
 			public const int textViewPasswordLabel = 2130968588;
 			
-			// aapt resource value: 0x7f040060
-			public const int textViewPersonalInformations = 2130968672;
+			// aapt resource value: 0x7f04006f
+			public const int textViewPersonalInformations = 2130968687;
 			
-			// aapt resource value: 0x7f04005f
-			public const int textViewRank = 2130968671;
+			// aapt resource value: 0x7f04006e
+			public const int textViewRank = 2130968686;
 			
-			// aapt resource value: 0x7f04005b
-			public const int textViewRateNbRaters = 2130968667;
+			// aapt resource value: 0x7f04006a
+			public const int textViewRateNbRaters = 2130968682;
 			
-			// aapt resource value: 0x7f040064
-			public const int textViewSnapshotSolved = 2130968676;
-			
-			// aapt resource value: 0x7f04004f
-			public const int textViewSolutionMovieTitle = 2130968655;
-			
-			// aapt resource value: 0x7f040050
-			public const int textViewSolutionMovieYear = 2130968656;
-			
-			// aapt resource value: 0x7f04001c
-			public const int textViewStatus = 2130968604;
+			// aapt resource value: 0x7f040073
+			public const int textViewSnapshotSolved = 2130968691;
 			
 			// aapt resource value: 0x7f04005e
-			public const int textViewUsername = 2130968670;
+			public const int textViewSolutionMovieTitle = 2130968670;
+			
+			// aapt resource value: 0x7f04005f
+			public const int textViewSolutionMovieYear = 2130968671;
+			
+			// aapt resource value: 0x7f04002b
+			public const int textViewStatus = 2130968619;
+			
+			// aapt resource value: 0x7f04006d
+			public const int textViewUsername = 2130968685;
 			
 			// aapt resource value: 0x7f040009
 			public const int textViewUsernameLabel = 2130968585;
 			
-			// aapt resource value: 0x7f040027
-			public const int textViewYear = 2130968615;
+			// aapt resource value: 0x7f040036
+			public const int textViewYear = 2130968630;
 			
 			static Id()
 			{
@@ -565,55 +671,121 @@ namespace WTM.Mobile.Droid
 			public const int AuthenticateView = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int drawer_list_item = 2130903043;
+			public const int dialog_achievements = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int fragment_planet = 2130903044;
+			public const int dialog_boolfieldleft = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int Item_overview_shot = 2130903045;
+			public const int dialog_boolfieldright = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int item_test = 2130903046;
+			public const int dialog_boolfieldsubleft = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int loading = 2130903047;
+			public const int dialog_boolfieldsubright = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int loadingimage = 2130903048;
+			public const int dialog_button = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int loadingprogress = 2130903049;
+			public const int dialog_datefield = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int MenuDrawerLayout = 2130903050;
+			public const int dialog_fieldsetlabel = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
-			public const int MenuView = 2130903051;
+			public const int dialog_floatimage = 2130903051;
 			
 			// aapt resource value: 0x7f03000c
-			public const int MovieView = 2130903052;
+			public const int dialog_html = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int SettingsView = 2130903053;
+			public const int dialog_labeldisclosure = 2130903053;
 			
 			// aapt resource value: 0x7f03000e
-			public const int ShotFullscreenView = 2130903054;
+			public const int dialog_labelfieldbelow = 2130903054;
 			
 			// aapt resource value: 0x7f03000f
-			public const int ShotOverviewView = 2130903055;
+			public const int dialog_labelfieldright = 2130903055;
 			
 			// aapt resource value: 0x7f030010
-			public const int ShotView = 2130903056;
+			public const int dialog_multiline_labelfieldbelow = 2130903056;
 			
 			// aapt resource value: 0x7f030011
-			public const int SplashScreen = 2130903057;
+			public const int dialog_onofffieldright = 2130903057;
 			
 			// aapt resource value: 0x7f030012
-			public const int TestView = 2130903058;
+			public const int dialog_panel = 2130903058;
 			
 			// aapt resource value: 0x7f030013
-			public const int UserView = 2130903059;
+			public const int dialog_root = 2130903059;
+			
+			// aapt resource value: 0x7f030014
+			public const int dialog_selectlist = 2130903060;
+			
+			// aapt resource value: 0x7f030015
+			public const int dialog_selectlistfield = 2130903061;
+			
+			// aapt resource value: 0x7f030016
+			public const int dialog_textarea = 2130903062;
+			
+			// aapt resource value: 0x7f030017
+			public const int dialog_textfieldbelow = 2130903063;
+			
+			// aapt resource value: 0x7f030018
+			public const int dialog_textfieldright = 2130903064;
+			
+			// aapt resource value: 0x7f030019
+			public const int drawer_list_item = 2130903065;
+			
+			// aapt resource value: 0x7f03001a
+			public const int fragment_planet = 2130903066;
+			
+			// aapt resource value: 0x7f03001b
+			public const int Item_overview_shot = 2130903067;
+			
+			// aapt resource value: 0x7f03001c
+			public const int item_test = 2130903068;
+			
+			// aapt resource value: 0x7f03001d
+			public const int loading = 2130903069;
+			
+			// aapt resource value: 0x7f03001e
+			public const int loadingimage = 2130903070;
+			
+			// aapt resource value: 0x7f03001f
+			public const int loadingprogress = 2130903071;
+			
+			// aapt resource value: 0x7f030020
+			public const int MenuDrawerLayout = 2130903072;
+			
+			// aapt resource value: 0x7f030021
+			public const int MenuView = 2130903073;
+			
+			// aapt resource value: 0x7f030022
+			public const int MovieView = 2130903074;
+			
+			// aapt resource value: 0x7f030023
+			public const int SettingsView = 2130903075;
+			
+			// aapt resource value: 0x7f030024
+			public const int ShotFullscreenView = 2130903076;
+			
+			// aapt resource value: 0x7f030025
+			public const int ShotOverviewView = 2130903077;
+			
+			// aapt resource value: 0x7f030026
+			public const int ShotView = 2130903078;
+			
+			// aapt resource value: 0x7f030027
+			public const int SplashScreen = 2130903079;
+			
+			// aapt resource value: 0x7f030028
+			public const int TestView = 2130903080;
+			
+			// aapt resource value: 0x7f030029
+			public const int UserView = 2130903081;
 			
 			static Layout()
 			{
