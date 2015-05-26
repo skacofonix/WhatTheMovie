@@ -42,7 +42,6 @@ namespace WTM.Mobile.Core.Converters
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
-
             }
 
             return color;
