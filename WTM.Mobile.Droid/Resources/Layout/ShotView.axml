@@ -4,6 +4,13 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarLoading"
+        local:MvxBind="Visibility Busy, Converter=Visibility"
+        android:indeterminate="true" />
     <ScrollView
         android:minWidth="25px"
         android:minHeight="25px"
@@ -73,13 +80,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true" />
-                <ProgressBar
-                    android:id="@+id/progressBarLoading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    local:MvxBind="Visibility Busy, Converter=Visibility"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
             </RelativeLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -142,7 +142,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayoutPoster"
-                local:MvxBind="Visibility Shot.Poster, Converter=Visibility">
+                local:MvxBind="Visibility Shot.Poster, Converter=Visibility; Click ShowPosterCommand"
+                android:layout_margin="5dp">
+                <TextView
+                    android:text="Poster :"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textViewGenre"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical" />
                 <TextView
                     android:text="Medium Text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -154,21 +163,24 @@
                     android:singleLine="true"
                     android:layout_weight="10"
                     android:ellipsize="end"
-                    android:padding="5dp" />
-                <Button
-                    android:text="Show poster"
-                    android:id="@+id/buttonPoster"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    local:MvxBind="Click ShowPosterCommand"
-                    android:layout_weight="3" />
+                    android:padding="5dp"
+                    android:textColor="@android:color/darker_gray" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayoutFirstSolver"
-                local:MvxBind="Visibility Shot.FirstSolver, Converter=Visibility">
+                local:MvxBind="Visibility Shot.FirstSolver, Converter=Visibility; Click ShowFirstSolverCommand"
+                android:layout_margin="5dp">
+                <TextView
+                    android:text="First solver :"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textViewGenre"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical" />
                 <TextView
                     android:text="Medium Text"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -179,14 +191,8 @@
                     android:gravity="center_vertical"
                     android:layout_weight="10"
                     android:ellipsize="end"
-                    android:padding="5dp" />
-                <Button
-                    android:text="Show fisrt solver"
-                    android:id="@+id/buttonFisrtSolver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    local:MvxBind="Click ShowFirstSolverCommand"
-                    android:layout_weight="3" />
+                    android:padding="5dp"
+                    android:textColor="@android:color/darker_gray" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
