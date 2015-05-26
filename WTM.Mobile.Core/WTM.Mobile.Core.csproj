@@ -41,6 +41,7 @@
     <Compile Include="ApiClientSettingsAdapter.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="Converters\ColorUserStatusConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\StringFormatValueConverter.cs" />
     <Compile Include="Converters\StringListValueConverter.cs" />
