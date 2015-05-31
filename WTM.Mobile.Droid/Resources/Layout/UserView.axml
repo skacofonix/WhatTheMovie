@@ -7,11 +7,12 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        local:MvxBind="Visibility Busy, Converter=Visibility" />
+        android:id="@+id/progressBarLoading"
+        local:MvxBind="Visibility Busy, Converter=Visibility"
+        android:indeterminate="true" />
     <RelativeLayout
         android:minWidth="25px"
         android:minHeight="25px"
