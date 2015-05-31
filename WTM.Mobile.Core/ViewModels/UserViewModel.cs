@@ -49,23 +49,7 @@ namespace WTM.Mobile.Core.ViewModels
 
         public void Init(string username = null)
         {
-            if (username == null)
-            {
-                // Juste fo dev
-                User = new User
-                {
-                    Name = "Skacofonix",
-                    About = "Hello everybody, everybody hello. Lorem Ipsum Dolor",
-                    Age = 27,
-                    Country = "France",
-                    FeatureFilmsSolved = 23654,
-                    SnapshotSolved = 87656,
-                    Gender = Gender.Male,
-                    Score = 35679,
-                    Level = "Set Decorator"
-                };
-            }
-            else if (Context.CurrentUser != null && Context.CurrentUser.Name == username)
+            if (Context.CurrentUser != null && Context.CurrentUser.Name == username)
             {
                 User = Context.CurrentUser;
             }

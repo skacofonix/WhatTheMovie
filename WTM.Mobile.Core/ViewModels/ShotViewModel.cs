@@ -320,37 +320,20 @@ namespace WTM.Mobile.Core.ViewModels
 
         #endregion
 
-        #region ShowPosterCommand
+        #region ShowUser
 
-        public ICommand ShowPosterCommand
+        public ICommand ShowUserCommand
         {
             get
             {
-                if (showPosterCommand == null)
+                if (showUserCommand == null)
                 {
-                    showPosterCommand = new MvxCommand(() => ShowViewModel<UserViewModel>(new { userId = Shot.Poster }));
+                    showUserCommand = new MvxCommand(() => ShowViewModel<UserViewModel>(new { username = Shot.FirstSolver }));
                 }
-                return showPosterCommand;
+                return showUserCommand;
             }
         }
-        private MvxCommand showPosterCommand;
-
-        #endregion
-
-        #region ShowFirstSolverCommand
-
-        public ICommand ShowFirstSolverCommand
-        {
-            get
-            {
-                if (showFirstSolverCommand == null)
-                {
-                    showFirstSolverCommand = new MvxCommand(() => ShowViewModel<UserViewModel>(new { userId = Shot.FirstSolver }));
-                }
-                return showFirstSolverCommand;
-            }
-        }
-        private MvxCommand showFirstSolverCommand;
+        private MvxCommand showUserCommand;
 
         #endregion
 

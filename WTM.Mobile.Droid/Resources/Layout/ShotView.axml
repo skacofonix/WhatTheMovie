@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayoutPoster"
-                local:MvxBind="Visibility Shot.Poster, Converter=Visibility; Click ShowPosterCommand"
+                local:MvxBind="Visibility Shot.Poster, Converter=Visibility; Click ShowUserCommand"
                 android:layout_margin="5dp">
                 <TextView
                     android:text="Poster :"
@@ -171,7 +171,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayoutFirstSolver"
-                local:MvxBind="Visibility Shot.FirstSolver, Converter=Visibility; Click ShowFirstSolverCommand"
+                local:MvxBind="Visibility Shot.FirstSolver, Converter=Visibility; Click ShowUserCommand"
                 android:layout_margin="5dp">
                 <TextView
                     android:text="First solver :"
