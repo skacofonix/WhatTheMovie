@@ -57,7 +57,6 @@ namespace WTM.Crawler.Parsers
             instance.FirstSolver = GetFirstSolver(navigator);
             instance.NbSolver = GetNumberOfSolver(navigator);
             instance.PublidationDate = GetPostedDate(htmlDocument);
-            instance.NumberOfDayBeforeSolution = GetNumberOfDayBeforeSolution(navigator);
 
             // Solution station
             instance.ImageUri = GetImageUrl(htmlDocument);
@@ -67,9 +66,13 @@ namespace WTM.Crawler.Parsers
             instance.Tags = GetTags(navigator);
             instance.IsGore = GetIsGore(instance.Tags);
             instance.IsNudity = GetIsNudity(instance.Tags);
+            instance.NumberOfDayBeforeSolution = GetNumberOfDayBeforeSolution(navigator);
+            if (instance.NumberOfDayBeforeSolution.HasValue)
+            {
+                instance.IsSolutionAvailable = (instance.NumberOfDayBeforeSolution.Value == 0);
+            }
             instance.IsFavourited = GetIsFavourited(navigator);
             instance.IsBookmarked = GetIsBookmarked(navigator);
-            instance.IsSolutionAvailable = instance.NumberOfDayBeforeSolution.GetValueOrDefault(0) == 0;
             instance.IsVoteDeletation = GetIsVoteDeletation(navigator);
             instance.NumberOfFavourited = GetNumberOfFavourited(htmlDocument);
 
