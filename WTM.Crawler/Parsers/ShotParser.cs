@@ -251,25 +251,33 @@ namespace WTM.Crawler.Parsers
 
         private Rate GetRate(XPathNavigator navigator)
         {
-            var node = navigator.SelectSingleNode("//div[@id='main_shot']/script[4]");
-            if (node == null) return null;
+            Rate rate = null;
 
             var rateRegex = new Regex(@"Overall rating: &lt;strong&gt;(\d.?\d{2})&lt;/strong&gt; \((\d*) votes\)");
 
-            var match = rateRegex.Match(node.InnerXml);
-            if (!match.Success) return null;
+            var nodes = navigator.Select("//div[@id='main_shot']/script");
 
-            var culture = new CultureInfo("en-US");
+            while (nodes.MoveNext())
+            {
+                var node = nodes.Current;
 
-            var rate = new Rate();
-            decimal rateScore;
-            if (decimal.TryParse(match.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateScore))
-                rate.Score = rateScore;
+                var match = rateRegex.Match(node.InnerXml);
 
-            int nbRaters;
-            if (int.TryParse(match.Groups[2].Value, out nbRaters))
-                rate.NbRaters = nbRaters;
+                if (!match.Success)
+                    continue;
 
+                var culture = new CultureInfo("en-US");
+
+                rate = new Rate();
+                decimal rateScore;
+                if (decimal.TryParse(match.Groups[1].Value, NumberStyles.Number, culture.NumberFormat, out rateScore))
+                    rate.Score = rateScore;
+
+                int nbRaters;
+                if (int.TryParse(match.Groups[2].Value, out nbRaters))
+                    rate.NbRaters = nbRaters;
+            }
+          
             return rate;
         }
 
