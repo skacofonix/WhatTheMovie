@@ -275,14 +275,14 @@ namespace WTM.Crawler.Parsers
 
         private static List<string> GetLanguages(XPathNavigator navigator)
         {
-            var languageRegex = new Regex(@"images/flags/([a-z]*).png");
-            var nodes = navigator.Select("//div[@id='solve_station']/div[@class='col_center clearfix']/ul[@class='language_flags']/li/img/@src");
+            var languageRegex = new Regex(@"flag-c flag-([a-z]*)");
+            var nodes = navigator.Select("//div[@id='solve_station']/div[@class='col_center clearfix']/ul[@class='language_flags']/li/img/@class");
             var languageList = new List<string>(nodes.Count);
             while (nodes.MoveNext())
             {
                 var match = languageRegex.Match(nodes.Current.InnerXml);
                 if (!match.Success) continue;
-
+                
                 languageList.Add(match.Groups[1].Value);
             }
             return languageList;
