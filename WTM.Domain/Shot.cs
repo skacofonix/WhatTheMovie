@@ -65,7 +65,7 @@ namespace WTM.Domain
         [DataMember(EmitDefaultValue = false)]
         public IList<string> Languages { get; set; }
 
-        [DataMember(IsRequired = true)]
+        [DataMember(EmitDefaultValue = false)]
         public Rate Rate { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
