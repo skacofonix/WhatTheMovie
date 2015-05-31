@@ -69,7 +69,7 @@ namespace WTM.Crawler.Parsers
             instance.IsNudity = GetIsNudity(instance.Tags);
             instance.IsFavourited = GetIsFavourited(navigator);
             instance.IsBookmarked = GetIsBookmarked(navigator);
-            instance.IsSolutionAvailable = GetIsSolutionAvailable(htmlDocument);
+            instance.IsSolutionAvailable = instance.NumberOfDayBeforeSolution.GetValueOrDefault(0) == 0;
             instance.IsVoteDeletation = GetIsVoteDeletation(navigator);
             instance.NumberOfFavourited = GetNumberOfFavourited(htmlDocument);
 
@@ -343,15 +343,9 @@ namespace WTM.Crawler.Parsers
             return isFavourite;
         }
 
-        private bool? GetIsSolutionAvailable(HtmlDocument document)
-        {
-            var node = document.DocumentNode.SelectSingleNode("//a[@id='solucebutton']");
-            return node != null;
-        }
-
         private bool? GetIsVoteDeletation(XPathNavigator navigator)
         {
-            return false;
+            return null;
         }
 
         private int GetNumberOfFavourited(HtmlDocument document)
