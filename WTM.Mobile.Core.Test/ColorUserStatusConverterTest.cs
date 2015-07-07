@@ -10,29 +10,29 @@ namespace WTM.Mobile.Core.Test
     [TestFixture]
     public class ColorUserStatusConverterTest
     {
-        private ColorUserStatusConverter converter;
+        private ColorUserStatusValueConverter valueConverter;
 
         [SetUp]
         public void BeforeTest()
         {
-            converter = new ColorUserStatusConverter();
+            valueConverter = new ColorUserStatusValueConverter();
         }
 
         [Test]
         public void WhenConvertShotUserStatusValuesThenReturnColor()
         {
-            Check.That(((MvxColor)converter.ConvertBack(ShotUserStatus.NeverSolved, null, null, null)).ARGB).Equals(new MvxColor(255, 0, 0).ARGB);
-            Check.That(((MvxColor)converter.ConvertBack(ShotUserStatus.Requested, null, null, null)).ARGB).Equals(new MvxColor(0, 255, 0).ARGB);
-            Check.That(((MvxColor)converter.ConvertBack(ShotUserStatus.Solved, null, null, null)).ARGB).Equals(new MvxColor(0, 255, 0).ARGB);
-            Check.That(((MvxColor)converter.ConvertBack(ShotUserStatus.Unsolved, null, null, null)).ARGB).Equals(new MvxColor(255, 0, 0).ARGB);
-            Check.That(((MvxColor)converter.ConvertBack(ShotUserStatus.Uploaded, null, null, null)).ARGB).Equals(new MvxColor(255, 255, 255).ARGB);
+            Check.That(((MvxColor)valueConverter.ConvertBack(ShotUserStatus.NeverSolved, null, null, null)).ARGB).Equals(new MvxColor(255, 0, 0).ARGB);
+            Check.That(((MvxColor)valueConverter.ConvertBack(ShotUserStatus.Requested, null, null, null)).ARGB).Equals(new MvxColor(0, 255, 0).ARGB);
+            Check.That(((MvxColor)valueConverter.ConvertBack(ShotUserStatus.Solved, null, null, null)).ARGB).Equals(new MvxColor(0, 255, 0).ARGB);
+            Check.That(((MvxColor)valueConverter.ConvertBack(ShotUserStatus.Unsolved, null, null, null)).ARGB).Equals(new MvxColor(255, 0, 0).ARGB);
+            Check.That(((MvxColor)valueConverter.ConvertBack(ShotUserStatus.Uploaded, null, null, null)).ARGB).Equals(new MvxColor(255, 255, 255).ARGB);
         }
 
         [Test]
         public void WhenConvertInvalidShotUserStatusThenUnsolvedColor()
         {
-            Check.That(((MvxColor)converter.ConvertBack(null, null, null, null)).ARGB).Equals(new MvxColor(255, 0, 0).ARGB);
-            Check.That(((MvxColor)converter.ConvertBack(new object(), null, null, null)).ARGB).Equals(new MvxColor(255, 0, 0).ARGB);
+            Check.That(((MvxColor)valueConverter.ConvertBack(null, null, null, null)).ARGB).Equals(new MvxColor(255, 0, 0).ARGB);
+            Check.That(((MvxColor)valueConverter.ConvertBack(new object(), null, null, null)).ARGB).Equals(new MvxColor(255, 0, 0).ARGB);
         }
     }
 }

@@ -10,7 +10,8 @@
         android:layout_width="20dp"
         android:layout_height="match_parent"
         android:id="@+id/textViewUserStatus"
-        local:MvxBind="BackgroundColor UserStatus, Converter=ColorUserStatus" />
+        local:MvxBind="BackgroundColor UserStatus, Converter=ColorUserStatus"
+        android:background="@android:color/holo_blue_bright" />
     <Mvx.MvxImageView
         android:layout_width="512px"
         android:layout_margin="5dp"
