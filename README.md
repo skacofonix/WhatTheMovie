@@ -36,3 +36,5 @@ It's ugly, not always very effective, but it works!
 
 To do that the more "cleanly" as possible, it is necessary to set up an unofficial API.
 This homemade API offer WhatTheMovie service across REST interface.
+
+Furthermore, this API can be used by another application.
