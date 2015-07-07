@@ -5,7 +5,7 @@ This project is under MIT License.
 Please see the license detail for more informations.
 
 
-#Introduction
+##Introduction
 
 WhatTheMovie is a great website when you play to find movie with snapshot.
 
@@ -19,7 +19,7 @@ The idea is therefore to provide a mobile version of this website.
 But even doing that well, so make a native mobile application rather than just a mobile website.
 
 
-#Let's go!
+##Let's go!
 
 The goal of this project : a mobile native application for WhatTheMovie targeted Android, then Windows Phone and iOS later.
 
@@ -28,7 +28,7 @@ I choose Xamarin to provide cross plateform tool.
 You can use Xamarin Open Source Project Subscription for a complete business license. http://resources.xamarin.com/open-source-contributor.html
 
 
-#API first
+##API first
 
 There is no API provided by WhatTheMovie.com.
 The only way to retrieve data from the website is to parse it.
