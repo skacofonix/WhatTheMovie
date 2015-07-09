@@ -38,3 +38,5 @@ To do that the more "cleanly" as possible, it is necessary to set up an unoffici
 This homemade API offer WhatTheMovie service across REST interface.
 
 Furthermore, this API can be used by another application.
+
+You can try it : http://wtmapi.azurewebsites.net/api/Shot
