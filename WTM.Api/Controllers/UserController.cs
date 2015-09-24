@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using WTM.Core.Services;
 using WTM.Crawler;
 using WTM.Crawler.Services;

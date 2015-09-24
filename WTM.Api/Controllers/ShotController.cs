@@ -1,11 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using WTM.Core.Services;
 using WTM.Crawler;
@@ -30,33 +23,40 @@ namespace WTM.Api.Controllers
             this.shotService = shotService;
         }
 
-        // GET api/Shot?token={token}
-        public ShotResponse Get(string token = null)
-        {
-            return DoWork(() =>
-            {
-                var shotResponse = new ShotResponse();
+        //public ShotResponse Get([FromBody]string token = null)
+        //{
+        //    return DoWork(() =>
+        //    {
+        //        var shotResponse = new ShotResponse();
 
-                var shot = shotService.GetRandomShot(token);
+        //        var shot = shotService.GetRandomShot(token);
 
-                if (shot != null)
-                {
-                    shotResponse.Shot = shot;
-                }
-                else
-                {
-                    shotResponse.AddError(new Error
-                    {
-                        Message = "Error occured on the server-side API"
-                    });
-                }
+        //        if (shot != null)
+        //        {
+        //            shotResponse.Shot = shot;
+        //        }
+        //        else
+        //        {
+        //            shotResponse.AddError(new Error
+        //            {
+        //                Message = "Error occured on the server-side API"
+        //            });
+        //        }
 
-                return shotResponse;
-            });
-        }
+        //        return shotResponse;
+        //    });
+        //}
 
-        // GET api/Shot/{id}?token={token}
-        public ShotResponse Get(int id, string token = null)
+        /// <summary>
+        /// Return Shot identified by ID.
+        /// </summary>
+        /// <param name="id">Shot ID</param>
+        /// <param name="token">Token</param>
+        /// <returns></returns>
+        /// <response code="400">Bad request</response>
+        /// <response code="404">Shot not found</response>
+        /// <response code="500">Internal Server Error</response>
+        public ShotResponse Get(int id, [FromBody]string token = null)
         {
             return DoWork(() =>
             {
@@ -80,130 +80,135 @@ namespace WTM.Api.Controllers
             });
         }
 
-        // GET api/Shot/{id}?guessTitle={guessTitle}&token={token}
-        [HttpGet]
-        public ShotGuessTitleResponse Guess(int id, [FromUri]string guessTitle, [FromUri]string token = null)
+        public IEnumerable<Shot> Get(Token token)
         {
-            return DoWork(() =>
-            {
-                var response = new ShotGuessTitleResponse();
-
-                var guessTitleResponse = shotService.GuessTitle(id, guessTitle, token);
-
-                if (guessTitleResponse != null)
-                {
-                    response.GuessTitleResponse = guessTitleResponse;
-                }
-                else
-                {
-                    response.AddError(new Error
-                    {
-                        Message = "Error occured on the server-side API"
-                    });
-                }
-
-                return response;
-            });
-
+            return new List<Shot>();
         }
 
-        // GET Api/Shot/{id}/solution?token={token}
-        [Route("Api/Shot/{id}/solution")]
-        public ShotGuessTitleResponse GetSolution(int id, [FromUri]string token = null)
+        public IEnumerable<Shot> FindByTag(string tag)
         {
-            return DoWork(() =>
-            {
-                var response = new ShotGuessTitleResponse();
-
-                var guessTitleResponse = shotService.GetSolution(id, token);
-
-                if (guessTitleResponse != null)
-                {
-                    response.GuessTitleResponse = guessTitleResponse;
-                }
-                else
-                {
-                    response.AddError(new Error
-                    {
-                        Message = "Error occured on the server-side API"
-                    });
-                }
-
-                return response;
-            });
+            return new List<Shot>();
         }
 
-        // GET api/Shot/{id}?rate={rate}&token={token}
-        [HttpGet]
-        public ShotRateResponse Rate(int id, [FromUri]int rate, [FromUri]string token = null)
-        {
-            return DoWork(() =>
-            {
-                var response = new ShotRateResponse();
+        //public ShotGuessTitleResponse GuessSolution([FromUri]int id, [FromBody]string guessTitle, [FromBody]string token = null)
+        //{
+        //    return DoWork(() =>
+        //    {
+        //        var response = new ShotGuessTitleResponse();
 
-                var rateResponse = shotService.Rate(id, rate, token);
+        //        var guessTitleResponse = shotService.GuessTitle(id, guessTitle, token);
 
-                if (rateResponse != null)
-                {
-                    response.Rate = rateResponse;
-                }
-                else
-                {
-                    response.AddError(new Error
-                    {
-                        Message = "Error occured on the server-side API"
-                    });
-                }
+        //        if (guessTitleResponse != null)
+        //        {
+        //            response.GuessTitleResponse = guessTitleResponse;
+        //        }
+        //        else
+        //        {
+        //            response.AddError(new Error
+        //            {
+        //                Message = "Error occured on the server-side API"
+        //            });
+        //        }
 
-                return response;
-            });
-        }
+        //        return response;
+        //    });
 
-        // GET api/Shot?search={search}&page={page}&token={token}
-        [HttpGet]
-        public ShotSearchResult Search(string search, [FromUri] int? page, [FromUri]string token = null)
-        {
-            return DoWork(() =>
-            {
-                var response = new ShotSearchResult();
+        //}
 
-                var shotSummaryCollection = shotService.Search(search, page, token);
+        //public ShotGuessTitleResponse GetSolution([FromUri]int id, [FromBody]string token = null)
+        //{
+        //    return DoWork(() =>
+        //    {
+        //        var response = new ShotGuessTitleResponse();
 
-                if (shotSummaryCollection != null)
-                {
-                    response.ShotSummaries = shotSummaryCollection;
-                }
-                else
-                {
-                    response.AddError(new Error
-                    {
-                        Message = "Error occured on the server-side API"
-                    });
-                }
+        //        var guessTitleResponse = shotService.GetSolution(id, token);
 
-                return response;
-            });
-        }
+        //        if (guessTitleResponse != null)
+        //        {
+        //            response.GuessTitleResponse = guessTitleResponse;
+        //        }
+        //        else
+        //        {
+        //            response.AddError(new Error
+        //            {
+        //                Message = "Error occured on the server-side API"
+        //            });
+        //        }
 
-        // GET api/Shot?image={image}&referer={referer}
-        [HttpGet]
-        public HttpResponseMessage GetImage(string image, [FromUri] string referer)
-        {
-            var uriImage = new Uri(WebUtility.UrlDecode(image));
+        //        return response;
+        //    });
+        //}
 
-            var webClient = new System.Net.WebClient();
-            webClient.Headers = new WebHeaderCollection();
-            webClient.Headers["Referer"] = WebUtility.UrlDecode(referer);
+        //public ShotRateResponse Rate([FromUri]int id, [FromBody]int rate, [FromBody]string token = null)
+        //{
+        //    return DoWork(() =>
+        //    {
+        //        var response = new ShotRateResponse();
 
-            var stream = webClient.OpenRead(uriImage);
-            var ms = new MemoryStream();
-            stream.CopyTo(ms);
+        //        var rateResponse = shotService.Rate(id, rate, token);
 
-            var result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new ByteArrayContent(ms.ToArray());
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+        //        if (rateResponse != null)
+        //        {
+        //            response.Rate = rateResponse;
+        //        }
+        //        else
+        //        {
+        //            response.AddError(new Error
+        //            {
+        //                Message = "Error occured on the server-side API"
+        //            });
+        //        }
 
-            return result;
-        }
+        //        return response;
+        //    });
+        //}
+
+        //public ShotSearchResult Search([FromBody]string search, [FromBody] int? page, [FromBody]string token = null)
+        //{
+        //    return DoWork(() =>
+        //    {
+        //        var response = new ShotSearchResult();
+
+        //        var shotSummaryCollection = shotService.Search(search, page, token);
+
+        //        if (shotSummaryCollection != null)
+        //        {
+        //            response.ShotSummaries = shotSummaryCollection;
+        //        }
+        //        else
+        //        {
+        //            response.AddError(new Error
+        //            {
+        //                Message = "Error occured on the server-side API"
+        //            });
+        //        }
+
+        //        return response;
+        //    });
+        //}
+
+        //public HttpResponseMessage GetImage([FromBody]string image, [FromBody] string referer)
+        //{
+        //    var uriImage = new Uri(WebUtility.UrlDecode(image));
+
+        //    var webClient = new System.Net.WebClient();
+        //    webClient.Headers = new WebHeaderCollection();
+        //    webClient.Headers["Referer"] = WebUtility.UrlDecode(referer);
+
+        //    var stream = webClient.OpenRead(uriImage);
+        //    var ms = new MemoryStream();
+        //    stream.CopyTo(ms);
+
+        //    var result = new HttpResponseMessage(HttpStatusCode.OK);
+        //    result.Content = new ByteArrayContent(ms.ToArray());
+        //    result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+
+        //    return result;
+        //}
+    }
+
+    public class Token
+    {
+        public string Value { get; set; }
     }
 }
