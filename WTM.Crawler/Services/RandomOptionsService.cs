@@ -4,8 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using WTM.Crawler.Helpers;
-using WTM.Common.Helpers;
-using WTM.Domain;
+using WTM.Crawler.Domain;
 
 namespace WTM.Crawler.Services
 {

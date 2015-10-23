@@ -1,9 +1,9 @@
-﻿using WTM.Crawler.Parsers;
-using WTM.Domain;
+﻿using WTM.Crawler.Domain;
+using WTM.Crawler.Parsers;
 
 namespace WTM.Crawler.Services
 {
-    internal class ShotNewSubmissionsService : ShotService
+    public class ShotNewSubmissionsService : ShotService
     {
         public ShotNewSubmissionsService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

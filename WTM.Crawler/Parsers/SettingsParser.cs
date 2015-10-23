@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using WTM.Domain;
+using WTM.Crawler.Domain;
 
 namespace WTM.Crawler.Parsers
 {

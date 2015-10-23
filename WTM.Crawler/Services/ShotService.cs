@@ -3,10 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using WTM.Core.Services;
-using WTM.Common.Helpers;
+using WTM.Crawler.Domain;
+using WTM.Crawler.Helpers;
 using WTM.Crawler.Parsers;
-using WTM.Domain;
 
 namespace WTM.Crawler.Services
 {
@@ -35,9 +34,9 @@ namespace WTM.Crawler.Services
             return shotParser.GetById(id, token);
         }
 
-        public GuessTitleResponse GuessTitle(int id, string title, string token = null)
+        public Domain.GuessTitleResponse GuessTitle(int id, string title, string token = null)
         {
-            GuessTitleResponse response = null;
+            Domain.GuessTitleResponse response = null;
 
             var titleFormatted = WebUtility.UrlEncode(title.Trim());
 
@@ -66,7 +65,7 @@ namespace WTM.Crawler.Services
                 var match = regex.Match(webResponseString);
                 if (match.Success)
                 {
-                    response = new GuessTitleResponse
+                    response = new Domain.GuessTitleResponse
                     {
                         MovieId = match.Groups[1].Value,
                         OriginalTitle = match.Groups[3].Value,
@@ -83,9 +82,9 @@ namespace WTM.Crawler.Services
             return response;
         }
 
-        public GuessTitleResponse GetSolution(int id, string token = null)
+        public Domain.GuessTitleResponse GetSolution(int id, string token = null)
         {
-            GuessTitleResponse response = null;
+            Domain.GuessTitleResponse response = null;
 
             var relativeUri = string.Join("/", "shot", id, "showsolution");
             var uri = new Uri(webClient.UriBase, relativeUri);
@@ -103,7 +102,7 @@ namespace WTM.Crawler.Services
                 var match = regexTitle.Match(webResponseString);
                 if (match.Success)
                 {
-                    response = new GuessTitleResponse
+                    response = new Domain.GuessTitleResponse
                     {
                         OriginalTitle = match.Groups[1].Value,
                         Year = Convert.ToInt32(match.Groups[2].Value),

@@ -76,10 +76,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WTM.Common\WTM.Common.csproj">
-      <Project>{575fcab7-d35e-443e-b9a3-2ab4931415f7}</Project>
-      <Name>WTM.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
       <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
       <Name>WTM.Domain</Name>

@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using WTM.Common.Helpers;
+using WTM.Crawler.Helpers;
 
 namespace WTM.Crawler.Services
 {

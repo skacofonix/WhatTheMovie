@@ -214,10 +214,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\ShotOverviewController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\BookmarkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ShotController.cs" />
@@ -225,6 +225,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LightInject\LightInject.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -304,10 +305,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
-      <Project>{0D34CC8D-817B-419D-8EC6-F524E65F0FCC}</Project>
-      <Name>WTM.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
       <Project>{260C6A5F-983C-43B5-BADE-AD285CDBA2B9}</Project>
       <Name>WTM.Domain</Name>

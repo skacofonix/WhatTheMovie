@@ -100,14 +100,6 @@
       <Project>{6661369F-3C0F-41B6-946B-9EA27DD13FE3}</Project>
       <Name>WTM.Api.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WTM.Common\WTM.Common.csproj">
-      <Project>{575fcab7-d35e-443e-b9a3-2ab4931415f7}</Project>
-      <Name>WTM.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
-      <Project>{0D34CC8D-817B-419D-8EC6-F524E65F0FCC}</Project>
-      <Name>WTM.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
       <Project>{260C6A5F-983C-43B5-BADE-AD285CDBA2B9}</Project>
       <Name>WTM.Domain</Name>

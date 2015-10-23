@@ -1,7 +1,7 @@
 ﻿using NFluent;
 using NUnit.Framework;
+using WTM.Crawler.Domain;
 using WTM.Crawler.Parsers;
-using WTM.Domain;
 
 namespace WTM.Crawler.Test.Parser
 {

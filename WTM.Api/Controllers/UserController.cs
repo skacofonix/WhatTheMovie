@@ -3,6 +3,7 @@ using WTM.Core.Services;
 using WTM.Crawler;
 using WTM.Crawler.Services;
 using WTM.Domain;
+using System.Linq;
 
 namespace WTM.Api.Controllers
 {

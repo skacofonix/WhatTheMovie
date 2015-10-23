@@ -1,106 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
-using WTM.Domain;
-using WTM.Domain.Interfaces;
-using WTM.WebsiteClient.Application.Attributes;
+using System.Runtime.Serialization;
 
-namespace WTM.WebsiteClient.Domain
+namespace WTM.Crawler.Domain
 {
-    public class Shot : IWebsiteEntityBase, IShot
+    [DataContract]
+    public class Shot : IWebsiteEntity
     {
-        public DateTime ParseDateTime { get; private set; }
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
 
-        public Shot()
-        {
-            ParseDateTime = DateTime.Now;
-        }
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
 
-        #region Navigation
+        [IgnoreDataMember]
+        public IList<ParseInfo> ParseInfos { get; set; }
 
-        [StringParser(@"//a[@id='first_shot_link']/@href", @"/shot/(\d*)")]
-        public int? FirstShotId { get; set; }
+        [DataMember(IsRequired = true, Order = 1)]
+        public int ShotId { get; set; }
 
-        [StringParser(@"//a[@id='prev_shot_link']/@href", @"/shot/(\d*)")]
-        public int? PreviousShotId { get; set; }
+        [DataMember(IsRequired = true, Order = 2)]
+        public Uri ImageUri { get; set; }
 
-        [StringParser(@"//li[@id='prev_unsolved_shot']/a/@href", @"/shot/(\d*)")]
-        public int? PreviousUnsolvedShotId { get; set; }
+        [DataMember(IsRequired = true)]
+        public Navigation Navigation { get; set; }
 
-        [StringParser(@"//li[@class='number']", @"(\d*)")]
-        public int? ShotId { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public string MovieId { get; set; }
 
-        [StringParser(@"//li[@id='next_unsolved_shot']/a/@href", @"/shot/(\d*)")]
-        public int? NextUnsolvedShotId { get; set; }
+        [DataMember(IsRequired = true)]
+        public string Poster { get; set; }
 
-        [StringParser(@"//a[@id='next_shot_link']/@href", @"/shot/(\d*)")]
-        public int? NextShotId { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public string Updater { get; set; }
 
-        [StringParser(@"//a[@id='last_shot_link']/@href", @"/shot/(\d*)")]
-        public int? LastShotId { get; set; }
-
-        #endregion
-
-        #region Snapshot
-
-        [StringParser(@"//div[@id='hidden_date']")]
-        public DateTime? PostedDate { get; set; }
-
-        [StringParser(@"//li[@id='postername']/a")]
-        public string PostedBy { get; set; }
-
-        [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo2']/li/a")]
-        public string UpdatedBy { get; set; }
-
-        [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo']/li[3]/a[@class='nametaglink']")]
+        [DataMember(EmitDefaultValue = false)]
         public string FirstSolver { get; set; }
 
-        [BooleanParser(@"//li[@class='unsolved']", null, true)]
-        public bool? IsSolved { get; set; }
-
-        public bool? IsSolvedByUser { get; set; }
-
-        [StringParser(@"//div[@id='main_shot']/ul[@class='nav_shotinfo']/li[@class='solved']", @"status: solved \((\d*)\)")]
+        [DataMember(IsRequired = true)]
         public int? NbSolver { get; set; }
 
-        [StringParser(@"/html/body[@class='black']/div[@id='container']/script", @"var imageSrc = '(/system/images/stills/normal/([a-z0-9]*)/([a-z0-9]*.jpg))';")]
-        public string ImageUrl { get; set; }
+        [DataMember(IsRequired = true)]
+        public DateTime? PublidationDate { get; set; }
 
-        #endregion
+        [DataMember(EmitDefaultValue = false)]
+        public int? NumberOfDayBeforeSolution { get; set; }
 
-        #region Solution
+        [DataMember(EmitDefaultValue = false)]
+        public SnapshotDifficulty? Difficulty { get; set; }
 
-        [AuthenticatedUser]
-        [BooleanParser(@"//a[@id='favbutton']/onclick", @"((un)?fav)")]
-        public bool? IsFavourite { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public ShotUserStatus? UserStatus { get; set; }
 
-        [AuthenticatedUser]
-        [BooleanParser(@"//a[@id='bookbutton']/onclick", @"((un)?watch)")]
-        public bool? IsBookmark { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public bool IsGore { get; set; }
 
-        public string MovieTitle { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public bool IsNudity { get; set; }
 
-        [BooleanParser(@"//a[@id='solucebutton']")]
-        public bool? IsSolutionAvailible { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public IList<string> Tags { get; set; }
 
-        public DateTime SolutionAvailableDate { get; set; }
-        public int? RemainingDaysBeforeSolution { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public IList<string> Languages { get; set; }
 
-        public List<string> Tags { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public Rate Rate { get; set; }
 
-        public List<string> Languages { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public bool? IsFavourited { get; set; }
 
-        public List<string> Comments { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public bool? IsBookmarked { get; set; }
 
-        public decimal? Rate { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public bool? IsSolutionAvailable { get; set; }
 
-        public int? NbRaters { get; set; }
+        [DataMember(EmitDefaultValue = false)]
+        public bool? IsVoteDeletation { get; set; }
 
-        public int? NbFavourited { get; set; }
-
-        public string Difficulty { get; set; }
-        public bool? IncludeArchive { get; set; }
-        public bool? IncludeSolvedSHots { get; set; }
-
-        #endregion
+        [DataMember(EmitDefaultValue = false)]
+        public int NumberOfFavourited { get; set; }
     }
 }

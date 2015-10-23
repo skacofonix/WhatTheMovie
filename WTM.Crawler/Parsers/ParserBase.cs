@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using HtmlAgilityPack;
-using WTM.Domain;
-using WTM.Domain.Interfaces;
+using WTM.Crawler.Domain;
 
 namespace WTM.Crawler.Parsers
 {

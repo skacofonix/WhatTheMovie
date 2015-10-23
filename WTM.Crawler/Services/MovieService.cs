@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using WTM.Core.Services;
+using WTM.Crawler.Domain;
 using WTM.Crawler.Parsers;
-using WTM.Domain;
 
 namespace WTM.Crawler.Services
 {

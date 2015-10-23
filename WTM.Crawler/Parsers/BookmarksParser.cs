@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using WTM.Common.Helpers;
-using WTM.Domain;
+using WTM.Crawler.Domain;
+using WTM.Crawler.Helpers;
 
 namespace WTM.Crawler.Parsers
 {
-    internal class BookmarksParser : ParserBase<BookmarkCollection>
+    public class BookmarksParser : ParserBase<BookmarkCollection>
     {
         protected override string Identifier { get { return "mybookmarks"; } }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using WTM.Core.Services;
 
 namespace WTM.Crawler.Services
 {

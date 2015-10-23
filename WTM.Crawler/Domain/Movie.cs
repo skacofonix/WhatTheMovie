@@ -1,30 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
-using WTM.Domain.Interfaces;
+using System.Runtime.Serialization;
 
-namespace WTM.WebsiteClient.Domain
+namespace WTM.Crawler.Domain
 {
-    public class MovieOld : IWebsiteEntityBase
+    [DataContract]
+    public class Movie : IWebsiteEntity
     {
-        public DateTime ParseDateTime { get; private set; }
-        public string OriginalTitle { get; set; }
-        public List<string> GenreList { get; set; }
-        public string Director { get; set; }
-        public string Abstract { get; set; }
-        public int? Year { get; set; }
-        public int? NumberOfRate { get; set; }
-        public decimal? Rate { get; set; }
-        public List<string> AlternativeTitles { get; set; }
-        public List<string> Tags { get; set; }
-        public int? NumberOfSnapshot { get; set; }
-        public double? TotalSolves { get; set; }
-        public DateTime? IntroducedOn { get; set; }
-        public string IntroducedBy { get; set; }
-        public int? NumberOfReviews { get; set; }
-
         public Movie()
         {
-            ParseDateTime = DateTime.Now;
+            AlternativeTitles = new List<string>();
+            Tags = new List<string>();
         }
+
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
+
+        public IList<ParseInfo> ParseInfos { get; set; }
+
+        [DataMember(IsRequired = true)]
+        public string OriginalTitle { get;  set; }
+
+        [DataMember]
+        public IList<string> GenreList { get;  set; }
+
+        [DataMember]
+        public string Director { get;  set; }
+
+        [DataMember]
+        public string Abstract { get;  set; }
+
+        [DataMember]
+        public int? Year { get;  set; }
+
+        [DataMember]
+        public Rate Rate { get; set; }
+
+        [DataMember]
+        public IList<string> AlternativeTitles { get;  set; }
+
+        [DataMember]
+        public IList<string> Tags { get;  set; }
+
+        [DataMember]
+        public int? NumberOfSnapshot { get;  set; }
+
+        [DataMember]
+        public double? TotalSolves { get;  set; }
+
+        [DataMember]
+        public DateTime? IntroducedOn { get;  set; }
+
+        [DataMember]
+        public string IntroducedBy { get;  set; }
+
+        [DataMember]
+        public int? NumberOfReviews { get; set; }
     }
 }

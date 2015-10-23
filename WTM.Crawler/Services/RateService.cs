@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using WTM.Common.Helpers;
+using WTM.Crawler.Helpers;
 
 namespace WTM.Crawler.Services
 {

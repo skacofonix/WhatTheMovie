@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HtmlAgilityPack;
-using WTM.Domain;
+using WTM.Crawler.Domain;
 
 namespace WTM.Crawler.Parsers
 {

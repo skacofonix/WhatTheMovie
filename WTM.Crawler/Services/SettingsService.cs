@@ -1,12 +1,12 @@
 ﻿using System;
 using HtmlAgilityPack;
-using WTM.Common.Helpers;
+using WTM.Crawler.Domain;
+using WTM.Crawler.Helpers;
 using WTM.Crawler.Parsers;
-using WTM.Domain;
 
 namespace WTM.Crawler.Services
 {
-    internal class SettingsService : IReadWriteService<Settings>
+    public class SettingsService : IReadWriteService<Settings>
     {
         private readonly IWebClient webClient;
         private readonly IHtmlParser htmlParser;

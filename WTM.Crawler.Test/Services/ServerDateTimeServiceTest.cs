@@ -1,6 +1,5 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using WTM.Core.Services;
 using WTM.Crawler.Services;
 
 namespace WTM.Crawler.Test.Services

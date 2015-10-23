@@ -1,20 +1,19 @@
-using System.Collections.Generic;
-using WTM.WebsiteClient.Domain;
+﻿using WTM.Crawler.Domain;
 
-namespace WTM.WebsiteClient.Services
+namespace WTM.Crawler.Services
 {
     public interface IShotService
     {
-        Shot GetRandomShot();
+        Shot GetRandomShot(string token = null);
 
-        Shot GetShotById(int id);
+        Shot GetById(int id, string token = null);
 
-        IEnumerable<Shot> Search(string criteria);
-            
-        GuessTitleResponse GuessTitle(int shotId, string title);
+        Domain.GuessTitleResponse GuessTitle(int id, string title, string token = null);
 
-        ShowSolutionResponse ShowSolution(int shotId);
+        Domain.GuessTitleResponse GetSolution(int id, string token = null);
 
-        bool Rate(int score);
+        Rate Rate(int id, int score, string token = null);
+
+        ShotSummaryCollection Search(string tag, int? page = null, string token = null);
     }
 }

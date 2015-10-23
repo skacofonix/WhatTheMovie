@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="HtmlAgilityPack">
@@ -42,7 +43,45 @@
   <ItemGroup>
     <Compile Include="CookieFactory.cs" />
     <Compile Include="CrawlerException.cs" />
+    <Compile Include="Domain\Bookmark.cs" />
+    <Compile Include="Domain\BookmarkCollection.cs" />
+    <Compile Include="Domain\DifficultyOptions.cs" />
+    <Compile Include="Domain\Error.cs" />
+    <Compile Include="Domain\Gender.cs" />
+    <Compile Include="Domain\GuessTitleResponse.cs" />
+    <Compile Include="Domain\IResponse.cs" />
+    <Compile Include="Domain\IWebsiteEntity.cs" />
+    <Compile Include="Domain\Memorabilia.cs" />
+    <Compile Include="Domain\Movie.cs" />
+    <Compile Include="Domain\MovieSummary.cs" />
+    <Compile Include="Domain\MovieSummaryCollection.cs" />
+    <Compile Include="Domain\Navigation.cs" />
+    <Compile Include="Domain\OverviewDisplayOptions.cs" />
+    <Compile Include="Domain\ParseInfo.cs" />
+    <Compile Include="Domain\ParseLevel.cs" />
+    <Compile Include="Domain\Range.cs" />
+    <Compile Include="Domain\Rate.cs" />
+    <Compile Include="Domain\ResponseBase.cs" />
+    <Compile Include="Domain\SearchResultCollection.cs" />
+    <Compile Include="Domain\SearchResultMovieTv.cs" />
+    <Compile Include="Domain\Settings.cs" />
+    <Compile Include="Domain\Shot.cs" />
+    <Compile Include="Domain\ShotGetSolutionResponse.cs" />
+    <Compile Include="Domain\ShotGuessTitleResponse.cs" />
+    <Compile Include="Domain\ShotSummary.cs" />
+    <Compile Include="Domain\ShotSummaryCollection.cs" />
+    <Compile Include="Domain\ShotType.cs" />
+    <Compile Include="Domain\ShotUserStatus.cs" />
+    <Compile Include="Domain\SnapshotDifficulty.cs" />
+    <Compile Include="Domain\SnapshotDifficultyChoice.cs" />
+    <Compile Include="Domain\SnapshotDifficultyChoiceAll.cs" />
+    <Compile Include="Domain\SnapshotDifficultyChoiceEasy.cs" />
+    <Compile Include="Domain\SnapshotDifficultyChoiceEasyMedium.cs" />
+    <Compile Include="Domain\SnapshotDifficultyChoiceHard.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\UserSummary.cs" />
     <Compile Include="Helpers\AsyncWebRequest.cs" />
+    <Compile Include="Helpers\HttpRequestBuilder.cs" />
     <Compile Include="Parsers\BookmarksParser.cs" />
     <Compile Include="Parsers\OverviewShotParser.cs" />
     <Compile Include="Parsers\SearchMovieTvParser.cs" />
@@ -50,6 +89,16 @@
     <Compile Include="Parsers\SearchTagParser.cs" />
     <Compile Include="Parsers\SearchUserParser.cs" />
     <Compile Include="Parsers\SettingsParser.cs" />
+    <Compile Include="Services\BookmarkService.cs" />
+    <Compile Include="Services\GuessTitleResponse.cs" />
+    <Compile Include="Services\IContextService.cs" />
+    <Compile Include="Services\IMovieService.cs" />
+    <Compile Include="Services\IReadWriteService.cs" />
+    <Compile Include="Services\IServerDateTimeService.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
+    <Compile Include="Services\IShotOverviewService.cs" />
+    <Compile Include="Services\IShotService.cs" />
+    <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ServerDateTimeService.cs" />
     <Compile Include="WebClientWTM.cs" />
     <Compile Include="HtmlParser.cs" />
@@ -92,20 +141,7 @@
     </None>
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WTM.Common\WTM.Common.csproj">
-      <Project>{575fcab7-d35e-443e-b9a3-2ab4931415f7}</Project>
-      <Name>WTM.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WTM.Core\WTM.Core.csproj">
-      <Project>{0D34CC8D-817B-419D-8EC6-F524E65F0FCC}</Project>
-      <Name>WTM.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
-      <Project>{260C6A5F-983C-43B5-BADE-AD285CDBA2B9}</Project>
-      <Name>WTM.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

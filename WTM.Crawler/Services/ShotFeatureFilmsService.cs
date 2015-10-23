@@ -1,8 +1,8 @@
-﻿using WTM.Domain;
+﻿using WTM.Crawler.Domain;
 
 namespace WTM.Crawler.Services
 {
-    internal class ShotFeatureFilmsService : ShotOverviewService
+    public class ShotFeatureFilmsService : ShotOverviewService
     {
         public ShotFeatureFilmsService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

@@ -2,8 +2,8 @@
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using System.Collections.Generic;
+using WTM.Crawler.Domain;
 using WTM.Crawler.Extensions;
-using WTM.Domain;
 
 namespace WTM.Crawler.Parsers
 {

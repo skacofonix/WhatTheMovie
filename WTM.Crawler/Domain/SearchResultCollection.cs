@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
-namespace WTM.WebsiteClient.Domain
+namespace WTM.Crawler.Domain
 {
-    public class SearchResultCollection : IWebsiteEntityBase
+    [DataContract]
+    public class SearchResultCollection : IWebsiteEntity
     {
-        public DateTime ParseDateTime { get; private set; }
+        [IgnoreDataMember]
+        public DateTime ParseDateTime { get; set; }
+
+        [IgnoreDataMember]
+        public TimeSpan ParseDuration { get; set; }
+
+        [IgnoreDataMember]
+        public IList<ParseInfo> ParseInfos { get; set; }
 
         public IList Items { get; set; }
-
-        public SearchResultCollection()
-        {
-            ParseDateTime = DateTime.Now;
-        }
+        public int? Total { get; set; }
+        public Range Range { get; set; }
     }
 }
