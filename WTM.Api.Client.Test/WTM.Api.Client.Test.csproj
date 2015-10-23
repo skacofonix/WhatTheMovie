@@ -72,10 +72,6 @@
       <Project>{6661369f-3c0f-41b6-946b-9ea27dd13fe3}</Project>
       <Name>WTM.Api.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
-      <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
-      <Name>WTM.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

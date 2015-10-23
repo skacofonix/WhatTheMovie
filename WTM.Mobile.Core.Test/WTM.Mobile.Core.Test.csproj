@@ -76,10 +76,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
-      <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
-      <Name>WTM.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WTM.Mobile.Core\WTM.Mobile.Core.csproj">
       <Project>{1f38dfe6-3f8a-4e28-8fd1-4a722225f2e9}</Project>
       <Name>WTM.Mobile.Core</Name>
