@@ -23,7 +23,7 @@ namespace WTM.RestApi.Services
             return shotResponse;
         }
 
-        public ShotResponse GetRandom(string token)
+        public ShotResponse GetRandom(string token = null)
         {
             var shotPage = this.crawlerShotService.GetRandomShot(token);
 
