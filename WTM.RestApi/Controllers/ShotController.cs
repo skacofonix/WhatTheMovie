@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using WTM.Crawler;
 using WTM.RestApi.Models.Request;
 using WTM.RestApi.Models.Response;
 using WTM.RestApi.Services;
@@ -17,9 +18,11 @@ namespace WTM.RestApi.Controllers
         private readonly IShotTagService shotTagService;
         private readonly IMovieService movieService;
 
-        //public ShotController()
-        //{
-        //}
+        public ShotController()
+        {
+            this.shotService = new ShotService(new WTM.Crawler.Services.ShotService(new WebClientWTM(), new HtmlParser()));
+            //this.shotOverviewService = new ShotOverviewService(n);
+        }
 
         public ShotController(IShotService shotService, IShotOverviewService shotOverviewService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
         {

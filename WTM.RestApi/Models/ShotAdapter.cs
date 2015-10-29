@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WTM.RestApi.Models
 {
     public class ShotAdapter : IShot
     {
-#warning USE AUTOMAPPER ?
-
         private readonly Crawler.Domain.Shot shot;
 
         public ShotAdapter(Crawler.Domain.Shot shot)
@@ -17,218 +12,40 @@ namespace WTM.RestApi.Models
             this.shot = shot;
         }
 
-        public string FirstSolver
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public string FirstSolver => this.shot.FirstSolver;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public Uri ImageUri => this.shot.ImageUri;
 
-        public Uri ImageUri
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public bool? IsBookmarked => this.shot.IsBookmarked;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public bool? IsFavourited => this.shot.IsFavourited;
 
-        public bool? IsBookmarked
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public bool IsGore => this.shot.IsGore;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public bool IsNudity => this.shot.IsNudity;
 
-        public bool? IsFavourited
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public bool? IsSolutionAvailable => this.shot.IsSolutionAvailable;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public bool? IsVoteDeletation => this.shot.IsVoteDeletation;
 
-        public bool IsGore
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public IList<string> Languages => this.shot.Languages;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string MovieId => this.shot.MovieId;
 
-        public bool IsNudity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public int? NbSolver => this.shot.NbSolver;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int? NumberOfDayBeforeSolution => this.shot.NumberOfDayBeforeSolution;
 
-        public bool? IsSolutionAvailable
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public int NumberOfFavourited => this.shot.NumberOfFavourited;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string Poster => this.shot.Poster;
 
-        public bool? IsVoteDeletation
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public DateTime? PublidationDate => this.shot.PublidationDate;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public int ShotId => this.shot.ShotId;
 
-        public IList<string> Languages
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public IList<string> Tags => this.shot.Tags;
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string MovieId
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int? NbSolver
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int? NumberOfDayBeforeSolution
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int NumberOfFavourited
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Poster
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public DateTime? PublidationDate
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int ShotId
-        {
-            get
-            {
-                return this.shot.ShotId;
-            }
-        }
-
-        public IList<string> Tags
-        {
-            get
-            {
-                return this.Tags;
-            }
-        }
-
-        public string Updater
-        {
-            get
-            {
-                return this.shot.Updater;
-            }
-        }
+        public string Updater => this.shot.Updater;
     }
 }
