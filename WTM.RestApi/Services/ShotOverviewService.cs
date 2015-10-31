@@ -8,22 +8,22 @@ namespace WTM.RestApi.Services
 {
     public class ShotOverviewService : IShotOverviewService
     {
-        private readonly Crawler.Services.ShotOverviewService shotOverviewServie;
-        private readonly Crawler.Services.ShotFeatureFilmsService shotFeatureFilmsService;
-        private readonly Crawler.Services.ShotArchiveService shotArchiveService;
-        private readonly Crawler.Services.ShotNewSubmissionsService shotNewSubmissionService;
+        private readonly Crawler.Services.IShotOverviewService shotOverviewService;
+        private readonly Crawler.Services.IShotFeatureFilmsService shotFeatureFilmsService;
+        private readonly Crawler.Services.IShotArchiveService shotArchiveService;
+        private readonly Crawler.Services.IShotNewSubmissionsService shotNewSubmissionService;
         private readonly IDateTimeService dateTimeService;
         const int limitMax = 100;
         const int nbDayFeatureFilms = 30;
-
+        
         public ShotOverviewService(
-            Crawler.Services.ShotOverviewService shotOverviewServie,
-            Crawler.Services.ShotFeatureFilmsService shotFeatureFilmsService,
-            Crawler.Services.ShotArchiveService shotArchiveService,
-            Crawler.Services.ShotNewSubmissionsService shotNewSubmissionService,
+            Crawler.Services.IShotOverviewService shotOverviewService,
+            Crawler.Services.IShotFeatureFilmsService shotFeatureFilmsService,
+            Crawler.Services.IShotArchiveService shotArchiveService,
+            Crawler.Services.IShotNewSubmissionsService shotNewSubmissionService,
             IDateTimeService dateTimeService)
         {
-            this.shotOverviewServie = shotOverviewServie;
+            this.shotOverviewService = shotOverviewService;
             this.shotFeatureFilmsService = shotFeatureFilmsService;
             this.shotArchiveService = shotArchiveService;
             this.shotNewSubmissionService = shotNewSubmissionService;
@@ -33,7 +33,7 @@ namespace WTM.RestApi.Services
         public IEnumerable<ShotOverviewResponse> FindByDate(DateTime? date, int? start, int? limit, string token = null)
         {
             var dateCriteria = date ?? dateTimeService.GetDateTime();
-            var shotSummaryCollection = this.shotOverviewServie.GetShotSummaryByDate(dateCriteria);
+            var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(dateCriteria);
 
             var skip = start ?? 0;
             var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
@@ -47,7 +47,7 @@ namespace WTM.RestApi.Services
         public IEnumerable<ShotOverviewResponse> FindByTag(List<string> tags, int? start, int? limit, string token = null)
         {
             var formattedTags = string.Join(" ", tags);
-            var shotSummaryCollection = this.shotOverviewServie.Search(formattedTags, token: token);
+            var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, token: token);
 
             var skip = start ?? 0;
             var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);

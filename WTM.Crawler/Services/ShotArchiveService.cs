@@ -2,7 +2,7 @@
 
 namespace WTM.Crawler.Services
 {
-    public class ShotArchiveService : ShotOverviewService
+    public class ShotArchiveService : ShotOverviewService, IShotArchiveService
     {
         public ShotArchiveService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

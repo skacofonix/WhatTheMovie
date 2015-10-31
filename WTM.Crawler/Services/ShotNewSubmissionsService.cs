@@ -3,7 +3,7 @@ using WTM.Crawler.Parsers;
 
 namespace WTM.Crawler.Services
 {
-    public class ShotNewSubmissionsService : ShotService
+    public class ShotNewSubmissionsService : ShotService, IShotNewSubmissionsService
     {
         public ShotNewSubmissionsService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

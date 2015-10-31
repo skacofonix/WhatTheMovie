@@ -2,7 +2,7 @@
 
 namespace WTM.Crawler.Services
 {
-    public class ShotFeatureFilmsService : ShotOverviewService
+    public class ShotFeatureFilmsService : ShotOverviewService, IShotFeatureFilmsService
     {
         public ShotFeatureFilmsService(IWebClient webClient, IHtmlParser htmlParser)
             : base(webClient, htmlParser)

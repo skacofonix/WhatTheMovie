@@ -96,6 +96,9 @@
     <Compile Include="Services\IReadWriteService.cs" />
     <Compile Include="Services\IServerDateTimeService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
+    <Compile Include="Services\IShotArchiveService.cs" />
+    <Compile Include="Services\IShotFeatureFilmsService.cs" />
+    <Compile Include="Services\IShotNewSubmissionsService.cs" />
     <Compile Include="Services\IShotOverviewService.cs" />
     <Compile Include="Services\IShotService.cs" />
     <Compile Include="Services\IUserService.cs" />
