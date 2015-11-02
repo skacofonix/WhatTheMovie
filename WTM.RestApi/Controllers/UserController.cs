@@ -1,4 +1,7 @@
 ﻿using System.Web.Http;
+using WTM.Crawler;
+using WTM.RestApi.Models;
+using WTM.RestApi.Models.Request;
 using WTM.RestApi.Models.Response;
 
 namespace WTM.RestApi.Controllers
@@ -6,17 +9,32 @@ namespace WTM.RestApi.Controllers
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
-        [Route("login")]
-        [HttpPost]
-        public LoginResponse Login([FromBody]string login, [FromBody]string password)
+        private readonly IUserService userService;
+
+        public UserController()
         {
-            return null;
+            this.userService = new UserService(new Crawler.Services.UserService(new WebClientWTM(), new HtmlParser()));
+        }
+
+        [Route("login")]
+        public LoginResponse Login([FromBody]LoginRequest request)
+        {
+            var token = this.userService.Login(request.Username, request.Password);
+
+            var loginResponse = new LoginResponse();
+            loginResponse.Data.Token = token;
+
+            return loginResponse;
         }
 
         [Route("logout")]
         public LogoutResponse LogOut([FromBody] string token)
         {
-            return null;
+            this.userService.Logout(token);
+
+            var logoutResponse = new LogoutResponse();
+
+            return logoutResponse;
         }
     }
 }

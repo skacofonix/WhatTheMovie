@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using WTM.Crawler;
 using WTM.RestApi.Models.Request;
@@ -79,9 +80,9 @@ namespace WTM.RestApi.Controllers
         /// <returns>Shot</returns>
         [Route("findByTag")]
         [HttpGet]
-        public IEnumerable<ShotOverviewResponse> FindByTag([FromUri]FindByTagRequest request)
+        public IEnumerable<ShotOverviewResponse> FindByTag([FromUri]List<string> tags, [FromUri]int? start = null, [FromUri]int? limit = null, [FromUri]string token = null)
         {
-            return this.shotOverviewService.FindByTag(request.Tags, request.Start, request.Limit, request.Token);
+            return this.shotOverviewService.FindByTag(tags, start, limit, token);
         }
 
         /// <summary>
@@ -92,9 +93,10 @@ namespace WTM.RestApi.Controllers
         /// <returns>Shots overview</returns>
         [Route("findByDate")]
         [HttpGet]
-        public IEnumerable<ShotOverviewResponse> FindByDate([FromUri]FindByDateRequest request)
+        //public IEnumerable<ShotOverviewResponse> FindByDate([FromUri]FindByDateRequest request)
+        public IEnumerable<ShotOverviewResponse> FindByDate([FromUri]DateTime? date, [FromUri]int? start = null, [FromUri]int? limit = null, [FromUri]string token = null)
         {
-            return this.shotOverviewService.FindByDate(request.Date, request.Start, request.Limit, request.Token);
+            return this.shotOverviewService.FindByDate(date, start, limit, token);
         }
 
         /// <summary>
@@ -105,9 +107,9 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("findByMovie")]
         [HttpGet]
-        public IEnumerable<ShotOverviewResponse> FindByMovie([FromUri]FindByMovie request)
+        public IEnumerable<ShotOverviewResponse> FindByMovie([FromUri]string name, [FromUri]string token = null)
         {
-            return this.movieService.GetShotByMovie(request.Name, request.Token);
+            return this.movieService.GetShotByMovie(name, token);
         }
 
         /// <summary>
@@ -120,9 +122,9 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("archives")]
         [HttpGet]
-        public IEnumerable<ShotOverviewResponse> GetArchives([FromUri]GetArchivesRequest request)
+        public IEnumerable<ShotOverviewResponse> GetArchives([FromUri]DateTime? date = null, [FromUri]int? start = null, [FromUri]int? limit = null, [FromUri]string token = null)
         {
-            return this.shotOverviewService.GetArchives(request.Date, request.Start, request.Limit, request.Token);
+            return this.shotOverviewService.GetArchives(date, start, limit, token);
         }
 
         /// <summary>
@@ -135,9 +137,9 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("featureFilms")]
         [HttpGet]
-        public IEnumerable<ShotOverviewResponse> GetFeatureFilms([FromUri]GetFeatureFilmsRequest request)
+        public IEnumerable<ShotOverviewResponse> GetFeatureFilms([FromUri]DateTime? date = null, [FromUri]int? start = null, [FromUri]int? limit = null, [FromUri]string token = null)
         {
-            return this.shotOverviewService.GetFeatureFilms(request.Date, request.Start, request.Limit, request.Token);
+            return this.shotOverviewService.GetFeatureFilms(date, start, limit, token);
         }
 
         /// <summary>
@@ -149,9 +151,9 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("newSubmissions")]
         [HttpGet]
-        public IEnumerable<ShotOverviewResponse> GetNewSubmissions([FromUri]GetNewSubmissionsRequest request)
+        public IEnumerable<ShotOverviewResponse> GetNewSubmissions([FromUri]int? start = null, [FromUri]int? limit = null, [FromUri]string token = null)
         {
-            return this.shotOverviewService.GetNewSubmissions(request.Start, request.Limit, request.Token);
+            return this.shotOverviewService.GetNewSubmissions(start, limit, token);
         }
 
         #endregion
@@ -167,9 +169,9 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         /// <response code="400">Invalid token</response>
         [Route("{id:int}/guess")]
-        public ShotGuessSolutionResponse GuessSolution(int id, [FromBody]GuessSolutionRequest request)
+        public ShotGuessSolutionResponse GuessSolution(int id, [FromBody]string title, [FromBody]string token = null)
         {
-            return this.shotService.GuessSolution(id, request.Title, request.Token);
+            return this.shotService.GuessSolution(id, title, token);
         }
 
         /// <summary>
@@ -180,9 +182,9 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         /// <response code="400">Invalid token</response>
         [Route("{id:int}/solution")]
-        public ShotSolutionResponse GetSolution(int id, [FromBody]GetSolutionRequest request)
+        public ShotSolutionResponse GetSolution(int id, [FromUri]string token)
         {
-            return this.shotService.GetSolution(id, request.Token);
+            return this.shotService.GetSolution(id, token);
         }
 
         #endregion
