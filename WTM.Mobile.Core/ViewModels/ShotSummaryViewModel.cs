@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using Cirrious.MvvmCross.ViewModels;
 using WTM.Domain;
+using WTM.Domain.OldSchool;
 
 namespace WTM.Mobile.Core.ViewModels
 {

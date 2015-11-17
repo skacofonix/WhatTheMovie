@@ -3,6 +3,7 @@ using System;
 using System.Windows.Input;
 using WTM.Core.Services;
 using WTM.Domain;
+using WTM.Domain.OldSchool;
 
 namespace WTM.Mobile.Core.ViewModels
 {

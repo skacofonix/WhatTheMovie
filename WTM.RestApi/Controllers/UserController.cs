@@ -1,8 +1,9 @@
 ﻿using System.Web.Http;
 using WTM.Crawler;
-using WTM.RestApi.Models;
-using WTM.RestApi.Models.Request;
-using WTM.RestApi.Models.Response;
+using WTM.Domain.Request;
+using WTM.Domain.Response;
+using WTM.RestApi.Services;
+
 
 namespace WTM.RestApi.Controllers
 {

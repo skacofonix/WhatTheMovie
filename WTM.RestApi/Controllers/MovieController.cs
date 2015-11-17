@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using WTM.RestApi.Models.Response;
+using WTM.Domain.Response;
 
 namespace WTM.RestApi.Controllers
 {
@@ -14,7 +14,7 @@ namespace WTM.RestApi.Controllers
 
         [Route("findByTag")]
         [HttpGet]
-        public IEnumerable<MovieOverviewResponse> FindByTag(List<string> tags, int? start = null, int? limit = null, [FromBody]string token = null)
+        public IEnumerable<MovieOverviewResponse> FindByTag(List<string> tags, int? start = null, int? limit = null, string token = null)
         {
             return null;
         }

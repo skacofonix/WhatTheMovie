@@ -65,6 +65,14 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NSwag.Core, Version=0.19.5784.33424, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSwag.Core.0.19.5784.33424\lib\net45\NSwag.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.2.1\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
@@ -97,9 +105,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -118,63 +123,14 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BookmarkAdapter.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ShotController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\IShot.cs" />
-    <Compile Include="Models\IShotGuessSolution.cs" />
-    <Compile Include="Models\IShotOverview.cs" />
-    <Compile Include="Models\IShotSolution.cs" />
-    <Compile Include="Models\IUserService.cs" />
-    <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Logout.cs" />
-    <Compile Include="Models\IModelBase.cs" />
-    <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\MovieOverview.cs" />
-    <Compile Include="Models\Request\BookmarksDeleteRequest.cs" />
-    <Compile Include="Models\Request\BookmarksAddRequest.cs" />
-    <Compile Include="Models\Request\FavouritesDeleteRequest.cs" />
-    <Compile Include="Models\Request\BookmarksGetRequest.cs" />
-    <Compile Include="Models\Request\FavouritesGetRequest.cs" />
-    <Compile Include="Models\Request\FavouritesAddRequest.cs" />
-    <Compile Include="Models\Request\FindByDateRequest.cs" />
-    <Compile Include="Models\Request\FindByMovie.cs" />
-    <Compile Include="Models\Request\FindByTagRequest.cs" />
-    <Compile Include="Models\Request\GetArchivesRequest.cs" />
-    <Compile Include="Models\Request\GetFeatureFilmsRequest.cs" />
-    <Compile Include="Models\Request\GetNewSubmissionsRequest.cs" />
-    <Compile Include="Models\Request\GetSolutionRequest.cs" />
-    <Compile Include="Models\Request\GuessSolutionRequest.cs" />
-    <Compile Include="Models\Request\IAuthenticatedRequest.cs" />
-    <Compile Include="Models\Request\IIdentifiableItem.cs" />
-    <Compile Include="Models\Request\IPaginableRequest.cs" />
-    <Compile Include="Models\Request\LoginRequest.cs" />
-    <Compile Include="Models\Request\RateRequest.cs" />
-    <Compile Include="Models\Request\TagsDeleteRequest.cs" />
-    <Compile Include="Models\Request\TagsAddRequest.cs" />
-    <Compile Include="Models\Response\Error.cs" />
-    <Compile Include="Models\Response\LoginResponse.cs" />
-    <Compile Include="Models\Response\LogoutResponse.cs" />
-    <Compile Include="Models\Response\MovieOverviewResponse.cs" />
-    <Compile Include="Models\Response\MovieResponse.cs" />
-    <Compile Include="Models\Response\Pagination.cs" />
-    <Compile Include="Models\Response\ResponseBase.cs" />
-    <Compile Include="Models\Response\ShotGuessSolutionResponse.cs" />
-    <Compile Include="Models\Response\ShotOverviewResponse.cs" />
-    <Compile Include="Models\Response\ShotRateResponse.cs" />
-    <Compile Include="Models\Response\ShotResponse.cs" />
-    <Compile Include="Models\Response\ShotSolutionResponse.cs" />
-    <Compile Include="Models\ShotAdapter.cs" />
-    <Compile Include="Models\ShotGuessSolution.cs" />
-    <Compile Include="Models\ShotOverview.cs" />
-    <Compile Include="Models\ShotRate.cs" />
-    <Compile Include="Models\ShotSolution.cs" />
-    <Compile Include="Models\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\BookmarkAdapter.cs" />
     <Compile Include="Services\BookmarkService.cs" />
     <Compile Include="Services\DateTimeService.cs" />
     <Compile Include="Services\IDateTimeService.cs" />
@@ -185,16 +141,19 @@
     <Compile Include="Services\IShotOverviewService.cs" />
     <Compile Include="Services\IShotService.cs" />
     <Compile Include="Services\IShotTagService.cs" />
+    <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\MovieService.cs" />
     <Compile Include="Services\ShotBookmarkService.cs" />
     <Compile Include="Services\ShoteRateService.cs" />
     <Compile Include="Services\ShotFavouriteService.cs" />
-    <Compile Include="Models\ShotOverviewAdapter.cs" />
     <Compile Include="Services\ShotGuessSolutionAdapter.cs" />
     <Compile Include="Services\ShotOverviewService.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Services\ShotSolutionAdapter.cs" />
     <Compile Include="Services\ShotTagService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="ShotAdapter.cs" />
+    <Compile Include="ShotOverviewAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -207,11 +166,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.Crawler\WTM.Crawler.csproj">
       <Project>{0a433949-dd18-4b4f-a31e-61415fc2a38a}</Project>
       <Name>WTM.Crawler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
+      <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
+      <Name>WTM.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

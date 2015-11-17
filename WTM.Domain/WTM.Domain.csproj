@@ -13,8 +13,8 @@
     <DefaultLanguage>fr-FR</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile344</TargetFrameworkProfile>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,59 +35,110 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
+    <Compile Include="BookmarkAdapter.cs" />
+    <Compile Include="IBookmark.cs" />
+    <Compile Include="IModelBase.cs" />
+    <Compile Include="IShot.cs" />
+    <Compile Include="IShotGuessSolution.cs" />
+    <Compile Include="IShotOverview.cs" />
+    <Compile Include="IShotSolution.cs" />
+    <Compile Include="IShotSummary.cs" />
+    <Compile Include="Login.cs" />
+    <Compile Include="Logout.cs" />
+    <Compile Include="Movie.cs" />
+    <Compile Include="MovieOverview.cs" />
+    <Compile Include="OldSchool\Bookmark.cs" />
+    <Compile Include="OldSchool\BookmarkCollection.cs" />
+    <Compile Include="OldSchool\DifficultyOptions.cs" />
+    <Compile Include="OldSchool\Error.cs" />
+    <Compile Include="OldSchool\Gender.cs" />
+    <Compile Include="OldSchool\GuessTitleResponse.cs" />
+    <Compile Include="OldSchool\Interfaces\IShotSummary.cs" />
+    <Compile Include="OldSchool\Interfaces\IWebsiteEntity.cs" />
+    <Compile Include="OldSchool\IResponse.cs" />
+    <Compile Include="OldSchool\Memorabilia.cs" />
+    <Compile Include="OldSchool\Movie.cs" />
+    <Compile Include="OldSchool\MovieSummary.cs" />
+    <Compile Include="OldSchool\MovieSummaryCollection.cs" />
+    <Compile Include="OldSchool\Navigation.cs" />
+    <Compile Include="OldSchool\NewSubmissionSummary.cs" />
+    <Compile Include="OldSchool\OverviewDisplayOptions.cs" />
+    <Compile Include="OldSchool\ParseErrorsChangedEventArgs.cs" />
+    <Compile Include="OldSchool\ParseInfo.cs" />
+    <Compile Include="OldSchool\ParseLevel.cs" />
+    <Compile Include="OldSchool\Range.cs" />
+    <Compile Include="OldSchool\ResponseBase.cs" />
+    <Compile Include="OldSchool\ResponseGeneric.cs" />
+    <Compile Include="OldSchool\SearchResultCollection.cs" />
+    <Compile Include="OldSchool\SearchResultMovieTv.cs" />
+    <Compile Include="OldSchool\Settings.cs" />
+    <Compile Include="OldSchool\ShotGetSolutionResponse.cs" />
+    <Compile Include="OldSchool\ShotGuessTitleResponse.cs" />
+    <Compile Include="OldSchool\ShotOverviewResponse.cs" />
+    <Compile Include="OldSchool\ShotRateResponse.cs" />
+    <Compile Include="OldSchool\ShotResponse.cs" />
+    <Compile Include="OldSchool\ShotSearchResult.cs" />
+    <Compile Include="OldSchool\ShotSummaryCollection.cs" />
+    <Compile Include="OldSchool\ShotType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OldSchool\Rate.cs" />
+    <Compile Include="OldSchool\Shot.cs" />
+    <Compile Include="OldSchool\ShotSummary.cs" />
+    <Compile Include="OldSchool\ShotUserStatus.cs" />
+    <Compile Include="OldSchool\SnapshotDifficulty.cs" />
+    <Compile Include="OldSchool\SnapshotDifficultyChoice.cs" />
+    <Compile Include="OldSchool\SnapshotDifficultyChoiceEasy.cs" />
+    <Compile Include="OldSchool\SnapshotDifficultyChoiceEasyMedium.cs" />
+    <Compile Include="OldSchool\SnapshotDifficultyChoiceAll.cs" />
+    <Compile Include="OldSchool\SnapshotDifficultyChoiceHard.cs" />
+    <Compile Include="OldSchool\User.cs" />
+    <Compile Include="OldSchool\UserLoginResponse.cs" />
+    <Compile Include="OldSchool\UserResponse.cs" />
+    <Compile Include="OldSchool\UserSearchResponse.cs" />
+    <Compile Include="OldSchool\UserSummary.cs" />
+    <Compile Include="OldSchool\UserSummaryCollection.cs" />
+    <Compile Include="Request\BookmarksAddRequest.cs" />
+    <Compile Include="Request\BookmarksDeleteRequest.cs" />
+    <Compile Include="Request\BookmarksGetRequest.cs" />
+    <Compile Include="Request\FavouritesAddRequest.cs" />
+    <Compile Include="Request\FavouritesDeleteRequest.cs" />
+    <Compile Include="Request\FavouritesGetRequest.cs" />
+    <Compile Include="Request\FindByDateRequest.cs" />
+    <Compile Include="Request\FindByMovie.cs" />
+    <Compile Include="Request\FindByTagRequest.cs" />
+    <Compile Include="Request\GetArchivesRequest.cs" />
+    <Compile Include="Request\GetFeatureFilmsRequest.cs" />
+    <Compile Include="Request\GetNewSubmissionsRequest.cs" />
+    <Compile Include="Request\GetSolutionRequest.cs" />
+    <Compile Include="Request\GuessSolutionRequest.cs" />
+    <Compile Include="Request\IAuthenticatedRequest.cs" />
+    <Compile Include="Request\IIdentifiableItem.cs" />
+    <Compile Include="Request\IPaginableRequest.cs" />
+    <Compile Include="Request\LoginRequest.cs" />
+    <Compile Include="Request\RateRequest.cs" />
+    <Compile Include="Request\TagsAddRequest.cs" />
+    <Compile Include="Request\TagsDeleteRequest.cs" />
+    <Compile Include="Response\Error.cs" />
+    <Compile Include="Response\LoginResponse.cs" />
+    <Compile Include="Response\LogoutResponse.cs" />
+    <Compile Include="Response\MovieOverviewResponse.cs" />
+    <Compile Include="Response\MovieResponse.cs" />
+    <Compile Include="Response\Pagination.cs" />
+    <Compile Include="Response\ResponseBase.cs" />
+    <Compile Include="Response\ShotGuessSolutionResponse.cs" />
+    <Compile Include="Response\ShotOverviewResponse.cs" />
+    <Compile Include="Response\ShotRateResponse.cs" />
+    <Compile Include="Response\ShotResponse.cs" />
+    <Compile Include="Response\ShotSolutionResponse.cs" />
+    <Compile Include="ShotGuessSolution.cs" />
+    <Compile Include="ShotOverview.cs" />
+    <Compile Include="ShotRate.cs" />
+    <Compile Include="ShotSolution.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bookmark.cs" />
-    <Compile Include="BookmarkCollection.cs" />
-    <Compile Include="DifficultyOptions.cs" />
-    <Compile Include="Error.cs" />
-    <Compile Include="Gender.cs" />
-    <Compile Include="GuessTitleResponse.cs" />
-    <Compile Include="Interfaces\IShotSummary.cs" />
-    <Compile Include="Interfaces\IWebsiteEntity.cs" />
-    <Compile Include="IResponse.cs" />
-    <Compile Include="Memorabilia.cs" />
-    <Compile Include="Movie.cs" />
-    <Compile Include="MovieSummary.cs" />
-    <Compile Include="MovieSummaryCollection.cs" />
-    <Compile Include="Navigation.cs" />
-    <Compile Include="NewSubmissionSummary.cs" />
-    <Compile Include="OverviewDisplayOptions.cs" />
-    <Compile Include="ParseErrorsChangedEventArgs.cs" />
-    <Compile Include="ParseInfo.cs" />
-    <Compile Include="ParseLevel.cs" />
-    <Compile Include="Range.cs" />
-    <Compile Include="ResponseBase.cs" />
-    <Compile Include="ResponseGeneric.cs" />
-    <Compile Include="SearchResultCollection.cs" />
-    <Compile Include="SearchResultMovieTv.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="ShotGetSolutionResponse.cs" />
-    <Compile Include="ShotGuessTitleResponse.cs" />
-    <Compile Include="ShotOverviewResponse.cs" />
-    <Compile Include="ShotRateResponse.cs" />
-    <Compile Include="ShotResponse.cs" />
-    <Compile Include="ShotSearchResult.cs" />
-    <Compile Include="ShotSummaryCollection.cs" />
-    <Compile Include="ShotType.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rate.cs" />
-    <Compile Include="Shot.cs" />
-    <Compile Include="ShotSummary.cs" />
-    <Compile Include="ShotUserStatus.cs" />
-    <Compile Include="SnapshotDifficulty.cs" />
-    <Compile Include="SnapshotDifficultyChoice.cs" />
-    <Compile Include="SnapshotDifficultyChoiceEasy.cs" />
-    <Compile Include="SnapshotDifficultyChoiceEasyMedium.cs" />
-    <Compile Include="SnapshotDifficultyChoiceAll.cs" />
-    <Compile Include="SnapshotDifficultyChoiceHard.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserLoginResponse.cs" />
-    <Compile Include="UserResponse.cs" />
-    <Compile Include="UserSearchResponse.cs" />
-    <Compile Include="UserSummary.cs" />
-    <Compile Include="UserSummaryCollection.cs" />
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5\Profile\Profile7\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

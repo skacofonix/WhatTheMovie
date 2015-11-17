@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using WTM.RestApi.Models.Response;
+using WTM.Domain.Response;
 
 namespace WTM.RestApi.Services
 {

@@ -4,6 +4,7 @@ using System.Net.Http;
 using WTM.Api.Client.Helpers;
 using WTM.Core.Services;
 using WTM.Domain;
+using WTM.Domain.OldSchool;
 
 namespace WTM.Api.Client.Services
 {

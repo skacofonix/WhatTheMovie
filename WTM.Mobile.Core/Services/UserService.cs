@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WTM.Core.Services;
 using WTM.Domain;
+using WTM.Domain.OldSchool;
 
 namespace WTM.Mobile.Core.Services
 {

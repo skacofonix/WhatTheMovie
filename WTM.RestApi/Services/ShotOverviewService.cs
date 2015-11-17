@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WTM.RestApi.Models.Response;
 using System.Linq;
-using WTM.RestApi.Models;
+using WTM.Domain.Response;
 
 namespace WTM.RestApi.Services
 {

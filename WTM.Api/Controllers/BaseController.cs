@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using WTM.Domain;
+using WTM.Domain.OldSchool;
 
 namespace WTM.Api.Controllers
 {

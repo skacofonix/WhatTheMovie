@@ -105,6 +105,10 @@
       <Project>{0a433949-dd18-4b4f-a31e-61415fc2a38a}</Project>
       <Name>WTM.Crawler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
+      <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
+      <Name>WTM.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WTM.RestApi\WTM.RestApi.csproj">
       <Project>{27A7BF23-F02C-4C12-9967-F966FAE0D166}</Project>
       <Name>WTM.RestApi</Name>

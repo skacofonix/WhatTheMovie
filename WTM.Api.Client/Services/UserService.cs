@@ -6,6 +6,7 @@ using WTM.Api.Client.Helpers;
 using WTM.Common.Helpers;
 using WTM.Core.Services;
 using WTM.Domain;
+using WTM.Domain.OldSchool;
 
 namespace WTM.Api.Client.Services
 {

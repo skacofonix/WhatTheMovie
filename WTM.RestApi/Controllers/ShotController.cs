@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using WTM.Crawler;
-using WTM.RestApi.Models.Request;
-using WTM.RestApi.Models.Response;
+using WTM.Domain.Request;
+using WTM.Domain.Response;
 using WTM.RestApi.Services;
 
 namespace WTM.RestApi.Controllers
@@ -80,9 +81,9 @@ namespace WTM.RestApi.Controllers
         /// <returns>Shot</returns>
         [Route("findByTag")]
         [HttpGet]
-        public IEnumerable<ShotOverviewResponse> FindByTag([FromUri]List<string> tags, [FromUri]int? start = null, [FromUri]int? limit = null, [FromUri]string token = null)
-        {
-            return this.shotOverviewService.FindByTag(tags, start, limit, token);
+        public IEnumerable<ShotOverviewResponse> FindByTag([FromUri]string tags, [FromUri]int? start = null, [FromUri]int? limit = null, [FromUri]string token = null)
+        { 
+            return this.shotOverviewService.FindByTag(new List<string>() {tags}, start, limit, token);
         }
 
         /// <summary>
@@ -169,9 +170,9 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         /// <response code="400">Invalid token</response>
         [Route("{id:int}/guess")]
-        public ShotGuessSolutionResponse GuessSolution(int id, [FromBody]string title, [FromBody]string token = null)
+        public ShotGuessSolutionResponse GuessSolution(int id, [FromBody]GuessSolutionRequest request)
         {
-            return this.shotService.GuessSolution(id, title, token);
+            return this.shotService.GuessSolution(id, request.Title, request.Token);
         }
 
         /// <summary>
