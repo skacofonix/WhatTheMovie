@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using WTM.Common.Helpers;
 
 namespace WTM.Api.Client
 {

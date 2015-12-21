@@ -1,14 +1,17 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using WTM.Crawler;
-using WTM.Domain.Request;
+using WTM.Crawler.Domain;
 using WTM.Domain.Response;
 using WTM.RestApi.Services;
-
 
 namespace WTM.RestApi.Controllers
 {
     [RoutePrefix("api/user")]
-    public class UserController : ApiController
+    public class UserController : ControllerBase
     {
         private readonly IUserService userService;
 
@@ -18,9 +21,10 @@ namespace WTM.RestApi.Controllers
         }
 
         [Route("login")]
-        public LoginResponse Login([FromBody]LoginRequest request)
+        [HttpPost]
+        public LoginResponse Login(string username, string password)
         {
-            var token = this.userService.Login(request.Username, request.Password);
+            var token = this.userService.Login(username, password);
 
             var loginResponse = new LoginResponse();
             loginResponse.Data.Token = token;
@@ -29,13 +33,45 @@ namespace WTM.RestApi.Controllers
         }
 
         [Route("logout")]
-        public LogoutResponse LogOut([FromBody] string token)
+        [HttpGet]
+        public LogoutResponse Logout([FromBody] string token)
         {
             this.userService.Logout(token);
 
             var logoutResponse = new LogoutResponse();
 
             return logoutResponse;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage Get(string username)
+        {
+            User item;
+
+            try
+            {
+                item = this.userService.GetUserByName(username);
+            }
+            catch (Exception ex)
+            {
+                var message = $"Error occured on Get User method with username {username}. {ex.Message}";
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message);
+            }
+
+            if (item == null)
+            {
+                var message = $"User with name {username} not found";
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, item);
+        }
+
+        [Route("search")]
+        [HttpGet]
+        public IEnumerable<User> Search([FromUri]string filter, [FromUri]int? start = null, [FromUri]int? limit = null)
+        {
+            return null;
         }
     }
 }

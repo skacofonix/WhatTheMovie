@@ -15,6 +15,8 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,13 +37,51 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\ApiClient.cs" />
-    <Compile Include="Client\ApiException.cs" />
-    <Compile Include="Client\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WTM.RestApi\IMovie.cs" />
+    <Compile Include="WTM.RestApi\IShot.cs" />
+    <Compile Include="WTM.RestApi\IUserOperations.cs" />
+    <Compile Include="WTM.RestApi\IWTMRestApi.cs" />
+    <Compile Include="WTM.RestApi\Models\BookmarksAddRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\BookmarksDeleteRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\BookmarksGetRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\Error.cs" />
+    <Compile Include="WTM.RestApi\Models\FavouritesAddRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\FavouritesDeleteRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\FavouritesGetRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\GuessSolutionRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\IShot.cs" />
+    <Compile Include="WTM.RestApi\Models\Login.cs" />
+    <Compile Include="WTM.RestApi\Models\LoginResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\LogoutResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\Memorabilia.cs" />
+    <Compile Include="WTM.RestApi\Models\MovieOverviewResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\MovieOverviewResponseCollection.cs" />
+    <Compile Include="WTM.RestApi\Models\MovieResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\Pagination.cs" />
+    <Compile Include="WTM.RestApi\Models\RateRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\ShotGuessSolutionResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\ShotOverview.cs" />
+    <Compile Include="WTM.RestApi\Models\ShotOverviewResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\ShotOverviewResponseCollection.cs" />
+    <Compile Include="WTM.RestApi\Models\ShotRateResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\ShotResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\ShotSolutionResponse.cs" />
+    <Compile Include="WTM.RestApi\Models\StringCollection.cs" />
+    <Compile Include="WTM.RestApi\Models\TagsAddRequest.cs" />
+    <Compile Include="WTM.RestApi\Models\User.cs" />
+    <Compile Include="WTM.RestApi\Movie.cs" />
+    <Compile Include="WTM.RestApi\MovieExtensions.cs" />
+    <Compile Include="WTM.RestApi\Shot.cs" />
+    <Compile Include="WTM.RestApi\ShotExtensions.cs" />
+    <Compile Include="WTM.RestApi\UserOperations.cs" />
+    <Compile Include="WTM.RestApi\UserOperationsExtensions.cs" />
+    <Compile Include="WTM.RestApi\WTMRestApi.cs" />
+    <Compile Include="WTM.RestApi\WTMRestApiExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
@@ -49,7 +89,45 @@
       <Name>WTM.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=0.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.0.9.6\lib\portable-net403+win8+wpa81\Microsoft.Rest.ClientRuntime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp.Portable, Version=2.4.0.0, Culture=neutral, PublicKeyToken=be81bb0f53eab22f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FubarCoder.RestSharp.Portable.2.4.5\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\RestSharp.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

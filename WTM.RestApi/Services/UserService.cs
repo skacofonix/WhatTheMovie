@@ -1,4 +1,6 @@
-﻿namespace WTM.RestApi.Services
+﻿using WTM.Crawler.Domain;
+
+namespace WTM.RestApi.Services
 {
     public class UserService : IUserService
     {
@@ -17,6 +19,11 @@
         public void Logout(string token)
         {
             this.crawlerUserService.Logout();
+        }
+
+        public User GetUserByName(string username)
+        {
+            return this.crawlerUserService.GetByUsername(username);
         }
     }
 }

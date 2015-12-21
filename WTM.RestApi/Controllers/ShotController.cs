@@ -10,7 +10,7 @@ using WTM.RestApi.Services;
 namespace WTM.RestApi.Controllers
 {
     [RoutePrefix("api/shot")]
-    public class ShotController : ApiController
+    public class ShotController : ControllerBase
     {
         private readonly IShotService shotService;
         private readonly IShotOverviewService shotOverviewService;

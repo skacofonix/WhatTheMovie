@@ -5,7 +5,7 @@ using WTM.Domain.Response;
 namespace WTM.RestApi.Controllers
 {
     [RoutePrefix("api/movie")]
-    public class MovieController : ApiController
+    public class MovieController : ControllerBase
     {
         public MovieResponse GetByName([FromUri] string name)
         {

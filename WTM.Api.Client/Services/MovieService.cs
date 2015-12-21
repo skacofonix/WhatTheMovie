@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Http;
 using WTM.Api.Client.Helpers;
-using WTM.Core.Services;
 using WTM.Domain;
 using WTM.Domain.OldSchool;
 
