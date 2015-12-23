@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.Practices.Unity;
+using WTM.Crawler;
+using WTM.RestApi.Resolver;
 
 namespace WTM.RestApi
 {
@@ -10,6 +13,12 @@ namespace WTM.RestApi
         public static void Register(HttpConfiguration config)
         {
             // Configuration et services API Web
+            var container = new UnityContainer();
+            container.RegisterType<IWebClient, WebClientWTM>(new HierarchicalLifetimeManager());
+            container.RegisterType<IHtmlParser, HtmlParser>(new HierarchicalLifetimeManager());
+            container.RegisterType<WTM.RestApi.Services.IUserService, WTM.RestApi.Services.UserService>(new HierarchicalLifetimeManager());
+            container.RegisterType<Crawler.Services.IUserService, Crawler.Services.UserService>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();

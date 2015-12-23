@@ -2,7 +2,7 @@
 
 namespace WTM.RestApi.Services
 {
-    interface IUserService
+    public interface IUserService
     {
         string Login(string username, string password);
 

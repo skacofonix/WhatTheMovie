@@ -125,6 +125,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BookmarkAdapter.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\Models\SearchRequest.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ShotController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -132,6 +133,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolver\UnityResolver.cs" />
     <Compile Include="Services\DateTimeService.cs" />
     <Compile Include="Services\IDateTimeService.cs" />
     <Compile Include="Services\IMovieService.cs" />
@@ -166,7 +168,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.Crawler\WTM.Crawler.csproj">

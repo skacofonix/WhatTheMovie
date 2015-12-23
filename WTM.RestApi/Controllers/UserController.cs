@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
-using WTM.Crawler;
 using WTM.Crawler.Domain;
 using WTM.Domain.Request;
 using WTM.Domain.Response;
+using WTM.RestApi.Controllers.Models;
 using WTM.RestApi.Services;
 
 namespace WTM.RestApi.Controllers
@@ -16,14 +15,13 @@ namespace WTM.RestApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
-        //private readonly 
 
-        public UserController()
+        public UserController(IUserService userService)
         {
-            this.userService = new UserService(new Crawler.Services.UserService(new WebClientWTM(), new HtmlParser()));
+            this.userService = userService;
         }
 
-        [Route("users/{username}")]
+        [Route("{username}")]
         [HttpGet]
         [ResponseType(typeof(User))]
         public IHttpActionResult Get([Required]string username)
@@ -55,9 +53,14 @@ namespace WTM.RestApi.Controllers
         [Route("users")]
         [HttpGet]
         [ResponseType(typeof(IEnumerable<User>))]
-        public IHttpActionResult Get([FromUri]string filter, [FromUri]int? start = null, [FromUri]int? limit = null)
+        public IHttpActionResult Get([FromUri]SearchRequest filter)
         {
-            return InternalServerError(new NotImplementedException("Come back later"));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return InternalServerError(new NotImplementedException());
         }
 
         [Route("login")]
