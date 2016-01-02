@@ -125,13 +125,17 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BookmarkAdapter.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
-    <Compile Include="Controllers\Models\SearchRequest.cs" />
+    <Compile Include="Models\IUserSearchResponse.cs" />
+    <Compile Include="Models\IUserSearchSummary.cs" />
+    <Compile Include="Models\UserSearchRequest.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ShotController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\UserSearchResponse.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserSearchSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolver\UnityResolver.cs" />
     <Compile Include="Services\DateTimeService.cs" />
@@ -153,7 +157,9 @@
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Services\ShotSolutionAdapter.cs" />
     <Compile Include="Services\ShotTagService.cs" />
+    <Compile Include="Services\UserSearchResponseAdapter.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\UserSummaryAdapter.cs" />
     <Compile Include="ShotAdapter.cs" />
     <Compile Include="ShotOverviewAdapter.cs" />
   </ItemGroup>

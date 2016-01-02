@@ -7,6 +7,7 @@ using WTM.Crawler.Domain;
 using WTM.Domain.Request;
 using WTM.Domain.Response;
 using WTM.RestApi.Controllers.Models;
+using WTM.RestApi.Models;
 using WTM.RestApi.Services;
 
 namespace WTM.RestApi.Controllers
@@ -24,7 +25,7 @@ namespace WTM.RestApi.Controllers
         [Route("{username}")]
         [HttpGet]
         [ResponseType(typeof(User))]
-        public IHttpActionResult Get([Required]string username)
+        public IHttpActionResult Get([Required]string username) 
         {
             User item = null;
 
@@ -42,7 +43,7 @@ namespace WTM.RestApi.Controllers
                 return InternalServerError(ex);
             }
 
-            if (item == null || item.Name == null)
+            if (item?.Name == null)
             {
                 return NotFound();
             }
@@ -50,17 +51,27 @@ namespace WTM.RestApi.Controllers
             return Ok(item);
         }
 
-        [Route("users")]
+        [Route("search")]
         [HttpGet]
-        [ResponseType(typeof(IEnumerable<User>))]
-        public IHttpActionResult Get([FromUri]SearchRequest filter)
+        [ResponseType(typeof(IUserSearchResponse))]
+        public IHttpActionResult Search([FromUri]UserSearchRequest filter)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return InternalServerError(new NotImplementedException());
+            IUserSearchResponse response;
+            try
+            {
+                response = userService.Search(filter);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(response);
         }
 
         [Route("login")]

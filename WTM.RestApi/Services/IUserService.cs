@@ -1,4 +1,7 @@
 ﻿using WTM.Crawler.Domain;
+using WTM.RestApi.Controllers;
+using WTM.RestApi.Controllers.Models;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
@@ -9,5 +12,7 @@ namespace WTM.RestApi.Services
         void Logout(string token);
 
         User GetUserByName(string username);
+
+        IUserSearchResponse Search(UserSearchRequest filter);
     }
 }

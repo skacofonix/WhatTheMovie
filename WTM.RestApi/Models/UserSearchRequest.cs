@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WTM.RestApi.Controllers.Models
 {
-    public class SearchRequest
+    public class UserSearchRequest
     {
         [Required]
         public string Filter { get; set; }
