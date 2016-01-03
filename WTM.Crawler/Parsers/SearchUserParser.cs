@@ -21,54 +21,9 @@ namespace WTM.Crawler.Parsers
         {
             instance.Items = new List<UserSummary>();
 
-            var displayInfoNode = htmlDocument.DocumentNode.SelectSingleNode("//div[@id='main_white']/div[@class='col_left nopadding']/h4");
-            if (displayInfoNode != null)
-            {
-                var rangeRawData = displayInfoNode.SelectSingleNode("//b[1]").InnerText;
-                var regexRange = new Regex(@"^(\d*)&nbsp;-&nbsp;(\d*)$");
-                var match = regexRange.Match(rangeRawData);
-                if (match.Success)
-                {
-                    var min = Convert.ToInt32(match.Groups[1].Value);
-                    var max = Convert.ToInt32(match.Groups[2].Value);
-                    instance.RangeItem = new Range(min, max);
-                }
-
-                var totalRawData = displayInfoNode.SelectSingleNode("//b[2]").InnerText;
-                int total;
-                if (int.TryParse(totalRawData, out total))
-                {
-                    instance.Count = total;
-                }
-            }
-
-            // Footer infos
-            //var paginationNodes = htmlDocument.DocumentNode.SelectNodes("//div[@id='main_white']/div[@class='col_left nopadding']/div[@class='black_pagination']/a");
-            //if (paginationNodes != null)
-            //{
-            //    var success = true;
-
-            //    int firstPage;
-            //    var firstPageRawData = paginationNodes.First().InnerText;
-            //    if (!int.TryParse(firstPageRawData, out firstPage))
-            //    {
-            //        success ^= false;
-            //    }
-
-            //    int lastPage;
-            //    var lastPageRawData = paginationNodes.Last().InnerText;
-            //    if (!int.TryParse(lastPageRawData, out lastPage))
-            //    {
-            //        success ^= false;
-            //    }
-
-            //    if (success)
-            //    {
-            //        instance.RangePage = new Range(firstPage, lastPage);
-            //    }
-            //}
-
             var tagNodes = htmlDocument.DocumentNode.SelectNodes("//li[@class=' big_user']");
+            if (tagNodes == null || tagNodes.Count == 0) return;
+
             foreach (var tagNode in tagNodes)
             {
                 var userSummary = new UserSummary();
@@ -76,17 +31,31 @@ namespace WTM.Crawler.Parsers
 
                 var usernameNode = tagNode.SelectSingleNode("./a");
                 userSummary.Username = usernameNode.GetAttributeValue("title", null);
+                var profilHref = usernameNode.GetAttributeValue("href", null);
+                if (profilHref != null)
+                {
+                    try
+                    {
+                        userSummary.ProfilUrl = new Uri(profilHref);
+                    }
+                    catch (Exception ex)
+                    {
+                        instance.ParseInfos.Add(new ParseInfo("ProfilUrl", ParseLevel.Error, "Error occurred when try to parse User profil URL", ex));
+                    }
+                }
 
                 var avatarNode = tagNode.SelectSingleNode("./a/span/img");
                 var avatarSrc = avatarNode.GetAttributeValue("src", null);
-                try
+                if (avatarSrc != null)
                 {
-                    if (avatarSrc != null)
-                        userSummary.Avatar = new Uri(avatarSrc);
-                }
-                catch (Exception)
-                {
-                    userSummary.Avatar = null;
+                    try
+                    {
+                        userSummary.AvatarUrl = new Uri(avatarSrc);
+                    }
+                    catch (Exception ex)
+                    {
+                        instance.ParseInfos.Add(new ParseInfo("AvatarUrl", ParseLevel.Error, "Error occurred when try to parse User avater URL", ex));
+                    }
                 }
 
                 userSummary.Rank = tagNode.SelectSingleNode("./a/span/span").InnerText;

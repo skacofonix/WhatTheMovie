@@ -34,7 +34,7 @@ namespace WTM.Crawler.Test.Services
             var results = userService.Search("alex");
 
             Check.That(results).IsNotNull();
-            Check.That(results.Items.Count).IsGreaterThan(0);
+            Check.That(results.UserSummaries.Count).IsGreaterThan(0);
         }
     }
 }

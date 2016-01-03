@@ -34,30 +34,48 @@ namespace WTM.Crawler.Parsers
 
         private void ParseResultHeader(SearchResultCollection instance, HtmlDocument htmlDocument)
         {
-            var displayingInfoNode = htmlDocument.DocumentNode.SelectSingleNode(string.Format("//div[@class='{0}']/h4", TagDisplayInfo));
+            var displayInfoNode = htmlDocument.DocumentNode.SelectSingleNode(string.Format("//div[@class='{0}']/h4", TagDisplayInfo));
 
-            if (displayingInfoNode == null) return;
+            if (displayInfoNode == null)
+            {
+                var notFoundNode = htmlDocument.DocumentNode.SelectSingleNode(
+                        "//div[@id='main_white']/div[@class='col_left nopadding']/p");
+                if (notFoundNode != null && notFoundNode.InnerText.Contains("No user found"))
+                {
+                    instance.RangeItem = new Range(0, 0);
+                    instance.Count = 0;
+                    return;
+                }
 
-            // TODO : case when 1 result was found => redirect to shot/movie/user page
-            // TODO : case when there are less than 50 result (1 page)
+                var oneUserFoundNode =
+                    htmlDocument.DocumentNode.SelectSingleNode("//div[@id = 'main_white']/div[@class='header_white']/h1");
+                if (oneUserFoundNode != null)
+                {
+                    instance.RangeItem = new Range(1, 1);
+                    instance.Count = 1;
+                    return;
+                }
 
-            var rangeRawData = displayingInfoNode.SelectSingleNode("./b[1]");
+                // WTF
+            }
+
+            var rangeRawData = displayInfoNode.SelectSingleNode("//b[1]");
             var rangeMatch = RangeDisplayInfoRegex.Match(rangeRawData.InnerHtml);
             if (rangeMatch.Success)
             {
-                instance.RangeItem = new Range
-                {
-                    MinValue = int.Parse(rangeMatch.Groups[1].Value),
-                    MaxValue = int.Parse(rangeMatch.Groups[2].Value)
-                };
+                var min = Convert.ToInt32(rangeMatch.Groups[1].Value);
+                var max = Convert.ToInt32(rangeMatch.Groups[2].Value);
+                instance.RangeItem = new Range(min, max);
             }
 
-            var totalNode = displayingInfoNode.SelectSingleNode("./b[2]");
+            var totalNode = displayInfoNode.SelectSingleNode("//b[2]");
             if (totalNode == null) return;
             var totalString = totalNode.InnerText;
             int temp;
             if (!string.IsNullOrEmpty(totalString) && int.TryParse(totalString, out temp))
+            {
                 instance.Count = temp;
+            }
         }
 
         protected abstract void ParseResultBody(SearchResultCollection instance, HtmlDocument htmlDocument);

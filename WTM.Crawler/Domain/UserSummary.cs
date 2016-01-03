@@ -26,9 +26,12 @@ namespace WTM.Crawler.Domain
         public string Status { get; set; }
 
         [DataMember(IsRequired = true, Order = 4, EmitDefaultValue = false)]
-        public Uri Avatar { get; set; }
+        public Uri AvatarUrl { get; set; }
+
+        public Uri ProfilUrl { get; set; }
 
         [DataMember(IsRequired = false, Order = 5, EmitDefaultValue = false)]
         public string Country { get; set; }
+
     }
 }

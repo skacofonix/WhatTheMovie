@@ -6,6 +6,7 @@ namespace WTM.RestApi.Models
     {
         string Username { get; }
         string Rank { get; }
-        Uri Avatar { get; }
+        Uri AvatarUrl { get; }
+        Uri ProfilUrl { get; }
     }
 }

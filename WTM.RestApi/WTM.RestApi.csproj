@@ -125,8 +125,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BookmarkAdapter.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Models\IRange.cs" />
     <Compile Include="Models\IUserSearchResponse.cs" />
     <Compile Include="Models\IUserSearchSummary.cs" />
+    <Compile Include="Models\Range.cs" />
     <Compile Include="Models\UserSearchRequest.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ShotController.cs" />

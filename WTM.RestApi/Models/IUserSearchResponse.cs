@@ -6,6 +6,10 @@ namespace WTM.RestApi.Models
     {
         // TODO : Add metadata navigation
 
+        int TotalCount { get; set; }
+
+        IRange Range { get; set; }
+
         List<IUserSearchSummary> UserSearchSummaries { get; }
     }
 }

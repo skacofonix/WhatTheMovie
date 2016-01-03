@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace WTM.Crawler.Domain
 {
     [DataContract]
-    public class SearchResultCollection : IWebsiteEntity
+    public class SearchResultCollection : IWebsiteEntity, ISearchResultCollection
     {
         [IgnoreDataMember]
         public DateTime ParseDateTime { get; set; }
@@ -20,6 +20,5 @@ namespace WTM.Crawler.Domain
         public IList Items { get; set; }
         public int Count { get; set; }
         public Range RangeItem { get; set; }
-        public Range RangePage { get; set; }
     }
 }

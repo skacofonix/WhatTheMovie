@@ -50,6 +50,7 @@
     <Compile Include="Domain\Gender.cs" />
     <Compile Include="Domain\GuessTitleResponse.cs" />
     <Compile Include="Domain\IResponse.cs" />
+    <Compile Include="Domain\ISearchResultCollection.cs" />
     <Compile Include="Domain\IWebsiteEntity.cs" />
     <Compile Include="Domain\Memorabilia.cs" />
     <Compile Include="Domain\Movie.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Domain\SnapshotDifficultyChoiceEasyMedium.cs" />
     <Compile Include="Domain\SnapshotDifficultyChoiceHard.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\UserSearchResult.cs" />
     <Compile Include="Domain\UserSummary.cs" />
     <Compile Include="Helpers\AsyncWebRequest.cs" />
     <Compile Include="Helpers\HttpRequestBuilder.cs" />

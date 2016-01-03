@@ -17,6 +17,8 @@ namespace WTM.RestApi.Services
 
         public string Rank => userSummary.Rank;
 
-        public Uri Avatar => userSummary.Avatar;
+        public Uri AvatarUrl => userSummary.AvatarUrl;
+
+        public Uri ProfilUrl => userSummary.ProfilUrl;
     }
 }

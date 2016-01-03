@@ -6,8 +6,11 @@ namespace WTM.RestApi.Services
 {
     internal class UserSearchResponseAdapter : IUserSearchResponse
     {
-        public UserSearchResponseAdapter(IEnumerable<UserSummary> userSummaryList)
+        public UserSearchResponseAdapter(IEnumerable<UserSummary> userSummaryList, IRange range, int totalCount)
         {
+            this.Range = range;
+            this.TotalCount = totalCount;
+
             var userSearchSummary = new List<IUserSearchSummary>();
 
             foreach (var userSummary in userSummaryList)
@@ -19,6 +22,8 @@ namespace WTM.RestApi.Services
             UserSearchSummaries = userSearchSummary;
         }
 
+        public int TotalCount { get; set; }
+        public IRange Range { get; set; }
         public List<IUserSearchSummary> UserSearchSummaries { get; }
     }
 }
