@@ -18,7 +18,8 @@ namespace WTM.Crawler.Domain
         public IList<ParseInfo> ParseInfos { get; set; }
 
         public IList Items { get; set; }
-        public int? Total { get; set; }
-        public Range Range { get; set; }
+        public int Count { get; set; }
+        public Range RangeItem { get; set; }
+        public Range RangePage { get; set; }
     }
 }

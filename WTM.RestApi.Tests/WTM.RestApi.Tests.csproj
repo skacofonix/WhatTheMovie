@@ -99,6 +99,7 @@
     <Compile Include="Services\ShotOverviewServiceTest.cs" />
     <Compile Include="Services\ShotServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UserServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.Crawler\WTM.Crawler.csproj">

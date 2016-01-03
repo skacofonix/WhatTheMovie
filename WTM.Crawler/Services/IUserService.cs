@@ -7,7 +7,7 @@ namespace WTM.Crawler.Services
     {
         User GetByUsername(string username);
 
-        IEnumerable<UserSummary> Search(string search, int? page = null);
+        SearchResultCollection Search(string search, int? page = null);
 
         string Login(string username, string password);
 

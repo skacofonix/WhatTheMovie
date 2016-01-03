@@ -45,7 +45,7 @@ namespace WTM.Crawler.Parsers
             var rangeMatch = RangeDisplayInfoRegex.Match(rangeRawData.InnerHtml);
             if (rangeMatch.Success)
             {
-                instance.Range = new Range
+                instance.RangeItem = new Range
                 {
                     MinValue = int.Parse(rangeMatch.Groups[1].Value),
                     MaxValue = int.Parse(rangeMatch.Groups[2].Value)
@@ -57,7 +57,7 @@ namespace WTM.Crawler.Parsers
             var totalString = totalNode.InnerText;
             int temp;
             if (!string.IsNullOrEmpty(totalString) && int.TryParse(totalString, out temp))
-                instance.Total = temp;
+                instance.Count = temp;
         }
 
         protected abstract void ParseResultBody(SearchResultCollection instance, HtmlDocument htmlDocument);

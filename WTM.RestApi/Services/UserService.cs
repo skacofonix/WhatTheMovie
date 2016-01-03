@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using WTM.Crawler.Domain;
-using WTM.RestApi.Controllers;
 using WTM.RestApi.Controllers.Models;
 using WTM.RestApi.Models;
 
@@ -43,13 +42,33 @@ namespace WTM.RestApi.Services
 
             var userSummaryList = new List<UserSummary>();
 
-            for (var pageIndex = pageStart; pageIndex <= pageEnd; pageIndex++)
+            var pageIndex = pageStart;
+            var continueLoop = true;
+            do
             {
-                var userSummaries = this.crawlerUserService.Search(filter.Filter, pageIndex);
-                userSummaryList.AddRange(userSummaries);
+                var searchResult = this.crawlerUserService.Search(filter.Filter, pageIndex);
+                userSummaryList.AddRange(searchResult.Items.Cast<UserSummary>());
 
-                // TODO : Store and check the number of result page !
-            }
+                pageIndex++;
+
+                var realPageSize = searchResult.RangeItem.MaxValue - searchResult.RangeItem.MinValue;
+                if (realPageSize != pageSize)
+                {
+                    // Todo
+                }
+
+                var realPageEnd = (int) Math.Ceiling(searchResult.Count/(double)realPageSize);
+                if (pageIndex > realPageEnd)
+                {
+                    continueLoop = false;
+                }
+
+                if (pageIndex > pageEnd)
+                {
+                    continueLoop = false;
+                }
+
+            } while (continueLoop);
 
             var skipWithOffset = start - (pageStart-1) * pageSize - 1;
             var userSummaryListFiltered = userSummaryList.Skip(skipWithOffset).Take(limit);

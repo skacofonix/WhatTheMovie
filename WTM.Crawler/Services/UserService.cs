@@ -23,10 +23,9 @@ namespace WTM.Crawler.Services
             return userParser.GetByUsername(username);
         }
 
-        public IEnumerable<UserSummary> Search(string search, int? page = null)
+        public SearchResultCollection Search(string search, int? page = null)
         {
-            var result = userSearcher.Search(search, page);
-            return result.Items.Cast<UserSummary>().ToList();
+            return userSearcher.Search(search, page);
         }
 
         public string Login(string username, string password)
