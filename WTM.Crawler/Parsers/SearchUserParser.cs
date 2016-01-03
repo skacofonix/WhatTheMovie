@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using WTM.Crawler.Domain;
 
@@ -18,6 +19,28 @@ namespace WTM.Crawler.Parsers
         protected override void ParseResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
         {
             instance.Items = new List<UserSummary>();
+
+            var displayInfoNode = htmlDocument.DocumentNode.SelectSingleNode("//div[@id='main_white']/div[@class='col_left nopadding']/h4");
+            if (displayInfoNode != null)
+            {
+                var rangeRawData = displayInfoNode.SelectSingleNode("//b[1]").InnerText;
+                var regexRange = new Regex(@"(\d)*&nbsp;-&nbsp;(\d)*");
+                var match = regexRange.Match(rangeRawData);
+                if (match.Success)
+                {
+                    var min = Convert.ToInt32(match.Groups[1].Value);
+                    var max = Convert.ToInt32(match.Groups[2].Value);
+                    instance.Range = new Range(min, max);
+                }
+
+                var totalRawData = displayInfoNode.SelectSingleNode("//b[2]").InnerText;
+                int total;
+                if (int.TryParse(totalRawData, out total))
+                {
+                    instance.Total = total;
+                }
+            }
+
             var tagNodes = htmlDocument.DocumentNode.SelectNodes("//li[@class=' big_user']");
             foreach (var tagNode in tagNodes)
             {
