@@ -31,18 +31,6 @@ namespace WTM.RestApi.Controllers
             this.movieService = movieService;
         }
 
-        public ShotController()
-        {
-#warning using IoC instead of this piece of shit
-            this.shotService = new ShotService(new WTM.Crawler.Services.ShotService(new WebClientWTM(), new HtmlParser()));
-            this.shotOverviewService = new ShotOverviewService(
-                new WTM.Crawler.Services.ShotOverviewService(new WebClientWTM(), new HtmlParser()),
-                new WTM.Crawler.Services.ShotFeatureFilmsService(new WebClientWTM(), new HtmlParser()),
-                new WTM.Crawler.Services.ShotArchiveService(new WebClientWTM(), new HtmlParser()),
-                new WTM.Crawler.Services.ShotNewSubmissionsService(new WebClientWTM(), new HtmlParser()),
-                new DateTimeService());
-        }
-
         #region Shot
 
         /// <summary>
