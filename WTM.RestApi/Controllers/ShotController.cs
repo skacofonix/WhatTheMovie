@@ -9,7 +9,7 @@ using WTM.RestApi.Services;
 
 namespace WTM.RestApi.Controllers
 {
-    [RoutePrefix("api/shot")]
+    [RoutePrefix("api/shots")]
     public class ShotController : ControllerBase
     {
         private readonly IShotService shotService;
@@ -19,6 +19,17 @@ namespace WTM.RestApi.Controllers
         private readonly IShotBookmarkService shotBookmarkService;
         private readonly IShotTagService shotTagService;
         private readonly IMovieService movieService;
+
+        public ShotController(IShotService shotService, IShotOverviewService shotOverviewService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
+        {
+            this.shotService = shotService;
+            this.shotOverviewService = shotOverviewService;
+            this.shotRateService = shotRateService;
+            this.shotFavouriteService = shotFavouriteService;
+            this.shotBookmarkService = shotBookmarkService;
+            this.shotTagService = shotTagService;
+            this.movieService = movieService;
+        }
 
         public ShotController()
         {
@@ -30,17 +41,6 @@ namespace WTM.RestApi.Controllers
                 new WTM.Crawler.Services.ShotArchiveService(new WebClientWTM(), new HtmlParser()),
                 new WTM.Crawler.Services.ShotNewSubmissionsService(new WebClientWTM(), new HtmlParser()),
                 new DateTimeService());
-        }
-
-        public ShotController(IShotService shotService, IShotOverviewService shotOverviewService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
-        {
-            this.shotService = shotService;
-            this.shotOverviewService = shotOverviewService;
-            this.shotRateService = shotRateService;
-            this.shotFavouriteService = shotFavouriteService;
-            this.shotBookmarkService = shotBookmarkService;
-            this.shotTagService = shotTagService;
-            this.movieService = movieService;
         }
 
         #region Shot
