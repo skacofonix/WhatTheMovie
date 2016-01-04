@@ -4,7 +4,6 @@ using System.Linq;
 using WTM.Crawler.Domain;
 using WTM.RestApi.Controllers.Models;
 using WTM.RestApi.Models;
-using Range = WTM.RestApi.Models.Range;
 
 namespace WTM.RestApi.Services
 {
@@ -46,6 +45,8 @@ namespace WTM.RestApi.Services
             var pageIndex = pageStart;
             var continueLoop = true;
             UserSearchResult userSearchResult = null;
+
+            var rangeMax = start + limit;
             do
             {
                 userSearchResult = this.crawlerUserService.Search(filter.Filter, pageIndex);
@@ -57,6 +58,7 @@ namespace WTM.RestApi.Services
                 if (pageIndex > realPageEnd)
                 {
                     continueLoop = false;
+                    rangeMax = userSearchResult.RangeItem.MaxValue;
                 }
 
                 if (pageIndex > pageEnd)
@@ -67,7 +69,15 @@ namespace WTM.RestApi.Services
 
             var skipWithOffset = start - (pageStart-1) * pageSize - 1;
             var userSummaryListFiltered = userSummaryList.Skip(skipWithOffset).Take(limit).ToList();
-            var result = new UserSearchResponseAdapter(userSummaryListFiltered, new Range(start, start+userSummaryListFiltered.Count), userSearchResult.Count);
+
+            if (userSummaryListFiltered.Count == 0)
+            {
+                start = 0;
+            }
+
+            var range = new Models.Range(start, rangeMax);
+
+            var result = new UserSearchResponseAdapter(userSummaryListFiltered, range, userSearchResult.Count);
 
             return result;
         }

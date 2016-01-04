@@ -16,7 +16,12 @@ namespace WTM.Crawler.Parsers
 
         protected override string TagDisplayInfo { get { return "shot_focus_box"; } }
 
-        protected override void ParseResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
+        protected override void ParseSingleResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void ParseManyResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
         {
             var navigator = htmlDocument.CreateNavigator();
             if (navigator == null)

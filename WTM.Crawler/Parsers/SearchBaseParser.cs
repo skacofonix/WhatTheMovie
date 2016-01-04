@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using WTM.Crawler.Domain;
@@ -16,7 +17,7 @@ namespace WTM.Crawler.Parsers
             : base(webClient, htmlParser)
         { }
 
-        protected readonly Regex RangeDisplayInfoRegex = new Regex("(\\d*)&nbsp;-&nbsp;(\\d*)");
+        private readonly Regex rangeDisplayInfoRegex = new Regex("(\\d*)&nbsp;-&nbsp;(\\d*)");
 
         public SearchResultCollection Search(string criteria, int? page = null)
         {
@@ -26,8 +27,34 @@ namespace WTM.Crawler.Parsers
 
         protected override void ParseHtmlDocument(SearchResultCollection instance, HtmlDocument htmlDocument)
         {
+            // Identify here the use case of result search
+            // case 1 : search have zero result
+            // case 2 : search have one result
+            // case 3 : search have more than 1 result
+
+            var noFoundNode = htmlDocument.DocumentNode.SelectSingleNode("//div[@id='main_white']/div[@class='col_left nopadding']/p");
+            if (noFoundNode != null && noFoundNode.InnerText.Contains($"No {this.SearchIdentifier} found"))
+            {
+                // case 1
+                instance.RangeItem = new Range(0, 0);
+                instance.Count = 0;
+                instance.Items = new List<UserSummary>();
+                return;
+            }
+
+            var singleResultNode = htmlDocument.DocumentNode.SelectSingleNode("//div[@id='main_white']/ul[@class='tabs_white clearfix page_tabs']");
+            if (singleResultNode != null)
+            {
+                // case 2
+                instance.RangeItem = new Range(1, 1);
+                instance.Count = 1;
+                ParseSingleResultBody(instance, htmlDocument);
+                return;
+            }
+
+            // case 3
             ParseResultHeader(instance, htmlDocument);
-            ParseResultBody(instance, htmlDocument);
+            ParseManyResultBody(instance, htmlDocument);
         }
 
         protected abstract string TagDisplayInfo { get; }
@@ -36,31 +63,8 @@ namespace WTM.Crawler.Parsers
         {
             var displayInfoNode = htmlDocument.DocumentNode.SelectSingleNode(string.Format("//div[@class='{0}']/h4", TagDisplayInfo));
 
-            if (displayInfoNode == null)
-            {
-                var notFoundNode = htmlDocument.DocumentNode.SelectSingleNode(
-                        "//div[@id='main_white']/div[@class='col_left nopadding']/p");
-                if (notFoundNode != null && notFoundNode.InnerText.Contains("No user found"))
-                {
-                    instance.RangeItem = new Range(0, 0);
-                    instance.Count = 0;
-                    return;
-                }
-
-                var oneUserFoundNode =
-                    htmlDocument.DocumentNode.SelectSingleNode("//div[@id = 'main_white']/div[@class='header_white']/h1");
-                if (oneUserFoundNode != null)
-                {
-                    instance.RangeItem = new Range(1, 1);
-                    instance.Count = 1;
-                    return;
-                }
-
-                // WTF
-            }
-
             var rangeRawData = displayInfoNode.SelectSingleNode("//b[1]");
-            var rangeMatch = RangeDisplayInfoRegex.Match(rangeRawData.InnerHtml);
+            var rangeMatch = rangeDisplayInfoRegex.Match(rangeRawData.InnerHtml);
             if (rangeMatch.Success)
             {
                 var min = Convert.ToInt32(rangeMatch.Groups[1].Value);
@@ -78,7 +82,9 @@ namespace WTM.Crawler.Parsers
             }
         }
 
-        protected abstract void ParseResultBody(SearchResultCollection instance, HtmlDocument htmlDocument);
+        protected abstract void ParseManyResultBody(SearchResultCollection instance, HtmlDocument htmlDocument);
+
+        protected abstract void ParseSingleResultBody(SearchResultCollection instance, HtmlDocument htmlDocument);
 
         private Uri MakeUri(string criteria, int? page)
         {

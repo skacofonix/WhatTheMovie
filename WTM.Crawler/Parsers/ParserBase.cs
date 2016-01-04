@@ -87,7 +87,5 @@ namespace WTM.Crawler.Parsers
         }
 
         protected abstract void ParseHtmlDocument(T instance, HtmlDocument htmlDocument);
-
-
     }
 }

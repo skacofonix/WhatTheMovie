@@ -17,7 +17,12 @@ namespace WTM.Crawler.Parsers
 
         protected override string TagDisplayInfo { get { return "shot_focus_box"; } }
 
-        protected override void ParseResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
+        protected override void ParseSingleResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void ParseManyResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
         {
             instance.Items = new List<ShotSummary>();
             var tagNodes = htmlDocument.DocumentNode.SelectNodes("//ul[@class='movie_list clearfix']/li/div/div/a[1]");

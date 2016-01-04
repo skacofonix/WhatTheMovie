@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using WTM.Crawler.Domain;
 
@@ -17,7 +15,50 @@ namespace WTM.Crawler.Parsers
 
         protected override string TagDisplayInfo { get { return "col_left nopadding"; } }
 
-        protected override void ParseResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
+        protected override void ParseSingleResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
+        {
+            var userSummary = new UserSummary();
+            instance.Items = new List<UserSummary> { userSummary };
+
+            var mainNode = htmlDocument.DocumentNode.SelectSingleNode("//div[@id='main_white']");
+            if (mainNode == null) return;
+
+            var autographNode = mainNode.SelectSingleNode("//div[contains(@class,'autograph')]");
+            if (autographNode == null) return;
+
+            // Avatar URL
+            var avatarNode = autographNode.SelectSingleNode(@"span[@class='wrapper']/img/@src");
+            var src = avatarNode?.GetAttributeValue("src", null);
+            if (src != null)
+            {
+                try
+                {
+                    userSummary.AvatarUrl = new Uri(src);
+                }
+                catch (Exception ex)
+                {
+                    instance.ParseInfos.Add(new ParseInfo("AvaratUrl", ParseLevel.Error, "Error occured when try to parse Avatar URL", ex));
+                }
+            }
+
+            // Rank
+            var rankNode = autographNode.SelectSingleNode(@"/span[@class='wrapper']/span[@class='avatar_status']");
+            if (rankNode != null)
+            {
+                userSummary.Rank = rankNode.InnerText;
+            }
+
+            // Username
+            var usernameNode = autographNode.SelectSingleNode("//strong[@class='nametag']");
+            if (usernameNode != null)
+            {
+                userSummary.Username = usernameNode.InnerText;
+            }
+
+            userSummary.ProfilUrl = null;
+        }
+
+        protected override void ParseManyResultBody(SearchResultCollection instance, HtmlDocument htmlDocument)
         {
             instance.Items = new List<UserSummary>();
 
