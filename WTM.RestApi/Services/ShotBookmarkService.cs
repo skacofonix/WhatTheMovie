@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WTM.Crawler.Domain;
-using WTM.Domain.Response;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
@@ -58,7 +58,7 @@ namespace WTM.RestApi.Services
             int skip = start ?? 1;
             int take = limit ?? limitMax;
 
-            var shotOverviewResponses = bookmarks.Select(s => new WTM.Domain.Response.ShotOverviewResponse(new BookmarkAdapter(s)));
+            var shotOverviewResponses = bookmarks.Select(s => new ShotOverviewResponse(new BookmarkAdapter(s)));
 
             return shotOverviewResponses;
         }

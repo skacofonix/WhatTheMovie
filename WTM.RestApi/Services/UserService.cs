@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using WTM.Crawler.Domain;
-using WTM.RestApi.Controllers.Models;
 using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services

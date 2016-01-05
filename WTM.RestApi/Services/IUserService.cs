@@ -1,5 +1,4 @@
 ﻿using WTM.Crawler.Domain;
-using WTM.RestApi.Controllers.Models;
 using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services

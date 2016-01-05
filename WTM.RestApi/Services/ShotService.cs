@@ -1,5 +1,4 @@
-﻿using WTM.Domain;
-using WTM.Domain.Response;
+﻿using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
@@ -45,15 +44,13 @@ namespace WTM.RestApi.Services
             return shotSolutionResponse;
         }
 
-        public ShotGuessSolutionResponse GuessSolution(int id, string title, string token = null)
+        public IShotGuessSolution GuessSolution(int id, string title, string token = null)
         {
             var guessTitleResponsePage = this.crawlerShotService.GuessTitle(id, title, token);
 
             var shotGuessSolutionAdaptee = new ShotGuessSolutionAdapter(guessTitleResponsePage);
 
-            var shotGuessSolutionResponse = new ShotGuessSolutionResponse(shotGuessSolutionAdaptee);
-
-            return shotGuessSolutionResponse;
+            return shotGuessSolutionAdaptee;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-using WTM.Domain;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi
 {

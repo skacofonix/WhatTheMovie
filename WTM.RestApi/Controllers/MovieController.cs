@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using WTM.Domain.Response;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Controllers
 {

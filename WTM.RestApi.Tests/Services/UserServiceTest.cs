@@ -2,7 +2,7 @@
 using NFluent;
 using NUnit.Framework;
 using WTM.Crawler;
-using WTM.RestApi.Controllers.Models;
+using WTM.RestApi.Models;
 using WTM.RestApi.Services;
 
 namespace WTM.RestApi.Tests.Services

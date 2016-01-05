@@ -1,4 +1,4 @@
-﻿using WTM.Domain.Response;
+﻿using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
@@ -6,7 +6,7 @@ namespace WTM.RestApi.Services
     {
         ShotResponse GetById(int id, string token = null);
         ShotResponse GetRandom(string token = null);
-        ShotGuessSolutionResponse GuessSolution(int id, string title, string token = null);
+        IShotGuessSolution GuessSolution(int id, string title, string token = null);
         ShotSolutionResponse GetSolution(int id, string token = null);
     }
 }

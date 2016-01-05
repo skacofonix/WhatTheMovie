@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using WTM.Domain.Response;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
     public interface IMovieService
     {
-        IEnumerable<ShotOverviewResponse> GetShotByMovie(string name, string token = null);
+        IShotSearchMovieResponse GetShotByMovie(string name, string token = null);
     }
 }

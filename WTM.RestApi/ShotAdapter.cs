@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using WTM.Domain;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi
 {

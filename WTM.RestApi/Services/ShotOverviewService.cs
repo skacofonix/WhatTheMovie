@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WTM.Domain.Response;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
@@ -29,7 +29,7 @@ namespace WTM.RestApi.Services
             this.dateTimeService = dateTimeService;
         }
 
-        public IEnumerable<ShotOverviewResponse> FindByDate(DateTime? date, int? start, int? limit, string token = null)
+        public IShotSearchDateResponse SearchByDate(DateTime? date, int? start, int? limit, string token = null)
         {
             var dateCriteria = date ?? dateTimeService.GetDateTime();
             var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(dateCriteria);
@@ -38,12 +38,12 @@ namespace WTM.RestApi.Services
             var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
             var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
 
-            var shotOverviews = filteredShots.Select(s => new ShotOverviewResponse(new ShotOverviewAdapter(s)));
+            IShotSearchDateResponse response = new ShotSearchDateResponse(filteredShots);
 
-            return shotOverviews;
+            return response;
         }
 
-        public IEnumerable<ShotOverviewResponse> FindByTag(List<string> tags, int? start, int? limit, string token = null)
+        public IShotSearchTagResponse SearchByTag(List<string> tags, int? start, int? limit, string token = null)
         {
             var formattedTags = string.Join(" ", tags);
             var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, token: token);
@@ -52,12 +52,12 @@ namespace WTM.RestApi.Services
             var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
             var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
 
-            var shotOverviews = filteredShots.Select(s => new ShotOverviewResponse(new ShotOverviewAdapter(s)));
+            IShotSearchTagResponse response = new ShotSearchTagResponse(filteredShots);
 
-            return shotOverviews;
+            return response;
         }
 
-        public IEnumerable<ShotOverviewResponse> GetArchives(DateTime? date, int? start, int? limit, string token = null)
+        public IShotArchivesResponse GetArchives(DateTime? date, int? start, int? limit, string token = null)
         {
             var maxDate = dateTimeService.GetDateTime().Date.AddDays(-30);
             if(date.HasValue && date.Value > maxDate)
@@ -71,12 +71,12 @@ namespace WTM.RestApi.Services
             var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
             var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
 
-            var shotOverviews = filteredShots.Select(s => new ShotOverviewResponse(new ShotOverviewAdapter(s)));
+            IShotArchivesResponse result = new ShotArchivesResponse(filteredShots);
 
-            return shotOverviews;
+            return result;
         }
 
-        public IEnumerable<ShotOverviewResponse> GetFeatureFilms(DateTime? date, int? start, int? limit, string token = null)
+        public IShotFeatureFilmsResponse GetFeatureFilms(DateTime? date, int? start, int? limit, string token = null)
         {
             var minDate = dateTimeService.GetDateTime().Date.AddDays(-30);
             if (date.HasValue && date.Value < minDate)
@@ -90,12 +90,12 @@ namespace WTM.RestApi.Services
             var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
             var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
 
-            var shotOverviews = filteredShots.Select(s => new ShotOverviewResponse(new ShotOverviewAdapter(s)));
+            IShotFeatureFilmsResponse result = new ShotFeatureFilmsResponse(filteredShots);
 
-            return shotOverviews;
+            return result;
         }
 
-        public IEnumerable<ShotOverviewResponse> GetNewSubmissions(int? start, int? limit, string token = null)
+        public IShotNewSubmissionsResponse GetNewSubmissions(int? start, int? limit, string token = null)
         {
             var shotSummaryCollection = this.shotNewSubmissionService.GetShots();
 
@@ -103,9 +103,9 @@ namespace WTM.RestApi.Services
             var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
             var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
 
-            var shotOverviews = filteredShots.Select(s => new ShotOverviewResponse(new ShotOverviewAdapter(s)));
+            IShotNewSubmissionsResponse result = new ShotNewSubmissionsResponse(filteredShots);
 
-            return shotOverviews;
+            return result;
         }
     }
 }

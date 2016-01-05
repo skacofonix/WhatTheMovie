@@ -4,9 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WTM.Crawler.Domain;
-using WTM.Domain.Request;
-using WTM.Domain.Response;
-using WTM.RestApi.Controllers.Models;
 using WTM.RestApi.Models;
 using WTM.RestApi.Services;
 
@@ -23,7 +20,7 @@ namespace WTM.RestApi.Controllers
         }
 
         [Route("{username}")]
-        [HttpGet]
+        [HttpGet]   
         [ResponseType(typeof(User))]
         public IHttpActionResult Get([Required]string username) 
         {

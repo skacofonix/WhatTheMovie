@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
@@ -8,6 +9,6 @@ namespace WTM.RestApi.Services
 
         bool Delete(int id, string token);
 
-        IEnumerable<Domain.Response.ShotOverviewResponse> GetBookmarks(string token, int? start, int? limit);
+        IEnumerable<ShotOverviewResponse> GetBookmarks(string token, int? start, int? limit);
     }
 }

@@ -125,10 +125,53 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BookmarkAdapter.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Models\ShotNewSubmissionsRequest.cs" />
+    <Compile Include="Models\ShotFeatureFilmsRequest.cs" />
+    <Compile Include="Models\ShotArchivesRequest.cs" />
+    <Compile Include="Models\IShotSearchMovieResponse.cs" />
+    <Compile Include="Models\ShotSearchMovieRequest.cs" />
+    <Compile Include="Models\ShotSearchDateRequest.cs" />
+    <Compile Include="Models\ISearchResult.cs" />
+    <Compile Include="Models\IShotSearchTagResponse.cs" />
+    <Compile Include="Models\ShotSearchTagResponse.cs" />
+    <Compile Include="Models\BookmarksAddRequest.cs" />
+    <Compile Include="Models\BookmarksDeleteRequest.cs" />
+    <Compile Include="Models\BookmarksGetRequest.cs" />
+    <Compile Include="Models\FavouritesAddRequest.cs" />
+    <Compile Include="Models\FavouritesDeleteRequest.cs" />
+    <Compile Include="Models\FavouritesGetRequest.cs" />
+    <Compile Include="Models\GuessSolutionRequest.cs" />
+    <Compile Include="Models\IAuthenticable.cs" />
+    <Compile Include="Models\IModelBase.cs" />
+    <Compile Include="Models\IPaginable.cs" />
+    <Compile Include="Models\IShot.cs" />
+    <Compile Include="Models\IShotGuessSolution.cs" />
+    <Compile Include="Models\IShotOverview.cs" />
+    <Compile Include="Models\IShotSolution.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\LoginRequest.cs" />
+    <Compile Include="Models\LoginResponse.cs" />
+    <Compile Include="Models\Logout.cs" />
+    <Compile Include="Models\LogoutResponse.cs" />
+    <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieOverview.cs" />
+    <Compile Include="Models\MovieOverviewResponse.cs" />
+    <Compile Include="Models\MovieResponse.cs" />
+    <Compile Include="Models\RateRequest.cs" />
+    <Compile Include="Models\ResponseBase.cs" />
+    <Compile Include="Models\ShotOverview.cs" />
+    <Compile Include="Models\ShotOverviewResponse.cs" />
+    <Compile Include="Models\ShotRate.cs" />
+    <Compile Include="Models\ShotRateResponse.cs" />
+    <Compile Include="Models\ShotResponse.cs" />
+    <Compile Include="Models\ShotSearchTagRequest.cs" />
     <Compile Include="Models\IRange.cs" />
     <Compile Include="Models\IUserSearchResponse.cs" />
     <Compile Include="Models\IUserSearchSummary.cs" />
     <Compile Include="Models\Range.cs" />
+    <Compile Include="Models\ShotSolutionResponse.cs" />
+    <Compile Include="Models\TagsAddRequest.cs" />
+    <Compile Include="Models\TagsDeleteRequest.cs" />
     <Compile Include="Models\UserSearchRequest.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ShotController.cs" />
@@ -143,19 +186,27 @@
     <Compile Include="Services\DateTimeService.cs" />
     <Compile Include="Services\IDateTimeService.cs" />
     <Compile Include="Services\IMovieService.cs" />
+    <Compile Include="Models\IShotArchivesResponse.cs" />
     <Compile Include="Services\IShotBookmarkService.cs" />
     <Compile Include="Services\IShoteRateService.cs" />
     <Compile Include="Services\IShotFavouriteService.cs" />
+    <Compile Include="Models\IShotFeatureFilmsResponse.cs" />
+    <Compile Include="Models\IShotNewSubmissionsResponse.cs" />
     <Compile Include="Services\IShotOverviewService.cs" />
+    <Compile Include="Models\IShotSearchDateResponse.cs" />
     <Compile Include="Services\IShotService.cs" />
     <Compile Include="Services\IShotTagService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\MovieService.cs" />
+    <Compile Include="Models\ShotArchivesResponse.cs" />
     <Compile Include="Services\ShotBookmarkService.cs" />
     <Compile Include="Services\ShoteRateService.cs" />
     <Compile Include="Services\ShotFavouriteService.cs" />
+    <Compile Include="Models\ShotFeatureFilmsResponse.cs" />
     <Compile Include="Services\ShotGuessSolutionAdapter.cs" />
+    <Compile Include="Models\ShotNewSubmissionsResponse.cs" />
     <Compile Include="Services\ShotOverviewService.cs" />
+    <Compile Include="Models\ShotSearchDateResponse.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Services\ShotSolutionAdapter.cs" />
     <Compile Include="Services\ShotTagService.cs" />
@@ -181,10 +232,6 @@
     <ProjectReference Include="..\WTM.Crawler\WTM.Crawler.csproj">
       <Project>{0a433949-dd18-4b4f-a31e-61415fc2a38a}</Project>
       <Name>WTM.Crawler</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
-      <Project>{260c6a5f-983c-43b5-bade-ad285cdba2b9}</Project>
-      <Name>WTM.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -21,9 +21,9 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.FindByDate(null, null, null);
+            var shotOverviewResponses = shotOverviewService.SearchByDate(null, null, null);
 
-            Check.That(shotOverviewResponses.Any()).IsTrue();
+            Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
 
         [Test]
@@ -36,9 +36,9 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.FindByTag(new List<string> {"un"}, null, null);
+            var shotOverviewResponses = shotOverviewService.SearchByTag(new List<string> {"un"}, null, null);
 
-            Check.That(shotOverviewResponses.Any()).IsTrue();
+            Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace WTM.RestApi.Tests.Services
 
             var shotOverviewResponses = shotOverviewService.GetArchives(null, null, null);
 
-            Check.That(shotOverviewResponses.Any()).IsTrue();
+            Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace WTM.RestApi.Tests.Services
 
             var shotOverviewResponses = shotOverviewService.GetFeatureFilms(null, null, null);
 
-            Check.That(shotOverviewResponses.Any()).IsTrue();
+            Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace WTM.RestApi.Tests.Services
 
             var shotOverviewResponses = shotOverviewService.GetNewSubmissions(null, null, null);
 
-            Check.That(shotOverviewResponses.Any()).IsTrue();
+            Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
     }
 }
