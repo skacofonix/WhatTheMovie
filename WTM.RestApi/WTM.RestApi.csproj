@@ -125,12 +125,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BookmarkAdapter.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Models\IRequest.cs" />
+    <Compile Include="Models\IShotSummary.cs" />
     <Compile Include="Models\ShotNewSubmissionsRequest.cs" />
     <Compile Include="Models\ShotFeatureFilmsRequest.cs" />
     <Compile Include="Models\ShotArchivesRequest.cs" />
     <Compile Include="Models\IShotSearchMovieResponse.cs" />
     <Compile Include="Models\ShotSearchMovieRequest.cs" />
-    <Compile Include="Models\ShotSearchDateRequest.cs" />
+    <Compile Include="Models\ShotByDateRequest.cs" />
     <Compile Include="Models\ISearchResult.cs" />
     <Compile Include="Models\IShotSearchTagResponse.cs" />
     <Compile Include="Models\ShotSearchTagResponse.cs" />
@@ -142,7 +144,7 @@
     <Compile Include="Models\FavouritesGetRequest.cs" />
     <Compile Include="Models\GuessSolutionRequest.cs" />
     <Compile Include="Models\IAuthenticable.cs" />
-    <Compile Include="Models\IModelBase.cs" />
+    <Compile Include="Models\IResponse.cs" />
     <Compile Include="Models\IPaginable.cs" />
     <Compile Include="Models\IShot.cs" />
     <Compile Include="Models\IShotGuessSolution.cs" />
@@ -158,7 +160,6 @@
     <Compile Include="Models\MovieOverviewResponse.cs" />
     <Compile Include="Models\MovieResponse.cs" />
     <Compile Include="Models\RateRequest.cs" />
-    <Compile Include="Models\ResponseBase.cs" />
     <Compile Include="Models\ShotOverview.cs" />
     <Compile Include="Models\ShotOverviewResponse.cs" />
     <Compile Include="Models\ShotRate.cs" />
@@ -170,6 +171,9 @@
     <Compile Include="Models\IUserSearchSummary.cs" />
     <Compile Include="Models\Range.cs" />
     <Compile Include="Models\ShotSolutionResponse.cs" />
+    <Compile Include="Models\ShotSummary.cs" />
+    <Compile Include="Models\ShotSummaryAdapter.cs" />
+    <Compile Include="Models\ShotUserStatus.cs" />
     <Compile Include="Models\TagsAddRequest.cs" />
     <Compile Include="Models\TagsDeleteRequest.cs" />
     <Compile Include="Models\UserSearchRequest.cs" />
@@ -193,7 +197,7 @@
     <Compile Include="Models\IShotFeatureFilmsResponse.cs" />
     <Compile Include="Models\IShotNewSubmissionsResponse.cs" />
     <Compile Include="Services\IShotOverviewService.cs" />
-    <Compile Include="Models\IShotSearchDateResponse.cs" />
+    <Compile Include="Models\IShotByDateResponse.cs" />
     <Compile Include="Services\IShotService.cs" />
     <Compile Include="Services\IShotTagService.cs" />
     <Compile Include="Services\IUserService.cs" />
@@ -206,7 +210,7 @@
     <Compile Include="Services\ShotGuessSolutionAdapter.cs" />
     <Compile Include="Models\ShotNewSubmissionsResponse.cs" />
     <Compile Include="Services\ShotOverviewService.cs" />
-    <Compile Include="Models\ShotSearchDateResponse.cs" />
+    <Compile Include="Models\ShotByDateResponse.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Services\ShotSolutionAdapter.cs" />
     <Compile Include="Services\ShotTagService.cs" />

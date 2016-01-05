@@ -21,7 +21,7 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.SearchByDate(null, null, null);
+            var shotOverviewResponses = shotOverviewService.GetByDate(null, null, null);
 
             Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }

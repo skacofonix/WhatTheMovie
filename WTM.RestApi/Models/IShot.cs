@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WTM.RestApi.Models
 {
-    public interface IShot : IModelBase
+    public interface IShot
     {
         int ShotId { get; }
 

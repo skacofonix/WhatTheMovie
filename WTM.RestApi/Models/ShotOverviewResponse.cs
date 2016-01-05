@@ -1,10 +1,7 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public class ShotOverviewResponse : ResponseBase<ShotOverview>
+    public class ShotOverviewResponse : IResponse, IShotOverview
     {
-        public ShotOverviewResponse(IShotOverview shotOverview)
-        {
-            this.Data = shotOverview as ShotOverview;
-        }
+        public int Id { get; }
     }
 }

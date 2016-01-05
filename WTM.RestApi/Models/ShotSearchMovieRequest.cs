@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotSearchMovieRequest : IAuthenticable
+    public class ShotSearchMovieRequest : IRequest, IAuthenticable
     {
         [Required]
         public string Name { get; set; }

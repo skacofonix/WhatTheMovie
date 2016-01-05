@@ -2,7 +2,7 @@
 
 namespace WTM.RestApi.Models
 {
-    public class UserSearchRequest
+    public class UserSearchRequest: IRequest
     {
         [Required]
         public string Filter { get; set; }

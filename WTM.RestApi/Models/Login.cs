@@ -1,6 +1,6 @@
 namespace WTM.RestApi.Models
 {
-    public class Login : IModelBase
+    public class Login : IResponse
     {
         public string Token { get; set; }
     }

@@ -1,9 +1,8 @@
 using System;
-using WTM.RestApi.Models;
 
-namespace WTM.RestApi.Controllers
+namespace WTM.RestApi.Models
 {
-    public class ShotFeatureFilmsRequest : IPaginable, IAuthenticable
+    public class ShotFeatureFilmsRequest : IRequest, IPaginable, IAuthenticable
     {
         public DateTime? Date { get; set; }
         public int? Start { get; set; }

@@ -1,5 +1,5 @@
-﻿using WTM.Crawler.Domain;
-using WTM.RestApi.Models;
+﻿using WTM.RestApi.Models;
+using ShotSummary = WTM.RestApi.Models.ShotSummary;
 
 namespace WTM.RestApi
 {

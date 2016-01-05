@@ -2,7 +2,7 @@
 
 namespace WTM.RestApi.Models
 {
-    public class GuessSolutionRequest : IAuthenticable
+    public class GuessSolutionRequest : IRequest, IAuthenticable
     {
         [Required]
         public string Title { get; set; }

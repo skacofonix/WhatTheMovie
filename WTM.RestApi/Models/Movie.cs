@@ -1,6 +1,6 @@
 namespace WTM.RestApi.Models
 {
-    public class Movie : IModelBase
+    public class Movie : IResponse
     {
     }
 }

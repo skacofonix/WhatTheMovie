@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotNewSubmissionsResponse : IShotNewSubmissionsResponse
+    public class ShotNewSubmissionsResponse : IResponse, IShotNewSubmissionsResponse
     {
-        public IEnumerable<ShotSummary> Items { get; private set; }
+        public IEnumerable<IShotSummary> Items { get; private set; }
 
-        public ShotNewSubmissionsResponse(IEnumerable<ShotSummary> items)
+        public ShotNewSubmissionsResponse(IEnumerable<IShotSummary> items)
         {
             Items = items;
         }

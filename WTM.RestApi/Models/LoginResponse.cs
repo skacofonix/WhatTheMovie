@@ -1,10 +1,12 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public class LoginResponse : ResponseBase<Login>
+    public class LoginResponse : IResponse, IAuthenticable
     {
-        public LoginResponse()
+        public LoginResponse(string token)
         {
-            this.Data = new Login();
+            this.Token = token;
         }
+
+        public string Token { get; private set; }
     }
 }

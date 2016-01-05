@@ -2,7 +2,6 @@ using System.Web.Http;
 using WebActivatorEx;
 using WTM.RestApi;
 using Swashbuckle.Application;
-using System;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 

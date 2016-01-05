@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public interface IModelBase
+    public interface IResponse
     {
     }
 }

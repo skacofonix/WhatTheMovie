@@ -2,7 +2,7 @@
 
 namespace WTM.RestApi.Models
 {
-    public class BookmarksGetRequest : IAuthenticable, IPaginable
+    public class BookmarksGetRequest : IRequest, IAuthenticable, IPaginable
     {
         [Required]
         public string Token { get; set; }

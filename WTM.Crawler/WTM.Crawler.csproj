@@ -51,6 +51,7 @@
     <Compile Include="Domain\GuessTitleResponse.cs" />
     <Compile Include="Domain\IResponse.cs" />
     <Compile Include="Domain\ISearchResultCollection.cs" />
+    <Compile Include="Domain\IShotSummary.cs" />
     <Compile Include="Domain\IWebsiteEntity.cs" />
     <Compile Include="Domain\Memorabilia.cs" />
     <Compile Include="Domain\Movie.cs" />

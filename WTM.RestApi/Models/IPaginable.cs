@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace WTM.RestApi.Models
+﻿namespace WTM.RestApi.Models
 {
     public interface IPaginable
     {

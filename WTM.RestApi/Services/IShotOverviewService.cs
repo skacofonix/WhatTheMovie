@@ -8,7 +8,7 @@ namespace WTM.RestApi.Services
     {
         IShotSearchTagResponse SearchByTag(List<string> tags, int? start, int? limit, string token = null);
 
-        IShotSearchDateResponse SearchByDate(DateTime? date, int? start, int? limit, string token = null);
+        IShotByDateResponse GetByDate(DateTime? date, int? start, int? limit, string token = null);
 
         IShotArchivesResponse GetArchives(DateTime? date, int? start, int? limit, string token = null);
 

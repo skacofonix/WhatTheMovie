@@ -2,7 +2,7 @@
 
 namespace WTM.RestApi.Models
 {
-    public class FavouritesAddRequest : IAuthenticable
+    public class FavouritesAddRequest : IRequest,  IAuthenticable
     {
         [Required]
         public string Token { get; set; }

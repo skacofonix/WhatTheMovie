@@ -58,9 +58,10 @@ namespace WTM.RestApi.Services
             int skip = start ?? 1;
             int take = limit ?? limitMax;
 
-            var shotOverviewResponses = bookmarks.Select(s => new ShotOverviewResponse(new BookmarkAdapter(s)));
+            var shotOverviewResponses = bookmarks.Select(s => new BookmarkAdapter(s));
 
-            return shotOverviewResponses;
+            return null;
+            //return shotOverviewResponses;
         }
     }
 }

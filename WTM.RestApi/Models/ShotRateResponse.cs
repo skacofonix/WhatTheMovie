@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public class ShotRateResponse : ResponseBase<ShotRate>
+    public class ShotRateResponse : IResponse
     {
     }
 }

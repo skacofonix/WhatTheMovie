@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public interface IShotGuessSolution : IModelBase
+    public interface IShotGuessSolution : IResponse
     {
     }
 }

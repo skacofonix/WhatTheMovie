@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public class ShotOverview : IModelBase, IShotOverview
+    public class ShotOverview : IResponse, IShotOverview
     {
         public int Id { get; set; }
     }

@@ -2,7 +2,7 @@
 
 namespace WTM.RestApi.Models
 {
-    public class TagsAddRequest : IAuthenticable
+    public class TagsAddRequest : IRequest, IAuthenticable
     {
         [Required]
         public string Tag { get; set; }

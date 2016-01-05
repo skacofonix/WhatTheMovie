@@ -20,7 +20,7 @@ namespace WTM.Crawler.Domain
         public DateTime? Date { get; set; }
 
         [DataMember]
-        public IList<ShotSummary> Shots { get; set; }
+        public IList<IShotSummary> Shots { get; set; }
 
         [DataMember]
         public ShotType? ShotType { get; set; }

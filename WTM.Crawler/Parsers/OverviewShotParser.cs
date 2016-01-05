@@ -133,7 +133,7 @@ namespace WTM.Crawler.Parsers
             const string xPathItemRoot = @"//ul[@id='overview_movie_list']/li";
             var nodeIterator = navigator.Select(xPathItemRoot);
 
-            var overviewShotList = new List<ShotSummary>();
+            var overviewShotList = new List<IShotSummary>();
             while (nodeIterator.MoveNext())
             {
                 var shotSummary = new ShotSummary();

@@ -2,7 +2,7 @@
 
 namespace WTM.RestApi.Models
 {
-    public class LoginRequest
+    public class LoginRequest : IRequest
     {
         [Required]
         public string Username { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public class ShotSolutionResponse : ResponseBase<IShotSolution>
+    public class ShotSolutionResponse : IResponse
     {
         private IShotSolution shotSolution;
 

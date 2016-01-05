@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WTM.RestApi.Models;
@@ -31,10 +30,10 @@ namespace WTM.RestApi.Controllers
             this.movieService = movieService;
         }
 
-        #region Shot
+        #region Shots
 
         /// <summary>
-        /// Find shot by ID
+        /// Get shot by ID
         /// </summary>
         /// <param name="id">Shot ID</param>
         /// <param name="token">Session token</param>
@@ -83,17 +82,42 @@ namespace WTM.RestApi.Controllers
             return Ok(response);
         }
 
-        #endregion
+        /// <summary>
+        /// Get shots by date
+        /// </summary>
+        /// <param name="date">Date</param>
+        /// <param name="token">Session token</param>
+        /// <returns>Shots overview</returns>
+        [Route("")]
+        [HttpGet]
+        [ResponseType(typeof(IShotByDateResponse))]
+        public IHttpActionResult GetByDate([FromUri]ShotByDateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        #region Shots
+            IShotByDateResponse result;
+            try
+            {
+                result = this.shotOverviewService.GetByDate(request.Date, request.Start, request.Limit, request.Token);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
+        }
 
         /// <summary>
-        /// Search shots by tag
+        /// Search shots by tags
         /// </summary>
         /// <param name="tags">Tags</param>
         /// <param name="token">Session token</param>
         /// <returns>Shot</returns>
-        [Route("searchByTag")]
+        [Route("tag")]
         [HttpGet]
         [ResponseType(typeof(IShotSearchTagResponse))]
         public IHttpActionResult SearchByTag([FromUri]ShotSearchTagRequest request)
@@ -117,44 +141,15 @@ namespace WTM.RestApi.Controllers
         }
 
         /// <summary>
-        /// Find shots by date
-        /// </summary>
-        /// <param name="date">Date</param>
-        /// <param name="token">Session token</param>
-        /// <returns>Shots overview</returns>
-        [Route("findByDate")]
-        [HttpGet]
-        [ResponseType(typeof(IShotSearchDateResponse))]
-        public IHttpActionResult FindByDate([FromUri]ShotSearchDateRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotSearchDateResponse result;
-            try
-            {
-                result = this.shotOverviewService.SearchByDate(request.Date, request.Start, request.Limit, request.Token);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
-        }
-
-        /// <summary>
-        /// Find shots by movie
+        /// Get shots by movie
         /// </summary>
         /// <param name="name">Movie name</param>
         /// <param name="token">Session token</param>
         /// <returns></returns>
-        [Route("searchByMovie")]
+        [Route("movie")]
         [HttpGet]
         [ResponseType(typeof(IShotSearchMovieResponse))]
-        public IHttpActionResult FindByMovie([FromUri]ShotSearchMovieRequest request)
+        public IHttpActionResult SearchByMovie([FromUri]ShotSearchMovieRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -175,7 +170,7 @@ namespace WTM.RestApi.Controllers
         }
 
         /// <summary>
-        /// Return shots older than 30 days
+        /// Get shots older than 30 days
         /// </summary>
         /// <param name="date">Date</param>
         /// <param name="start">Start element</param>

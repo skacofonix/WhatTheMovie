@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {
-    public interface IShotSearchTagResponse : ISearchResult
+    public interface IShotSearchTagResponse : IResponse, ISearchResult
     {
-        IEnumerable<ShotSummary> Items { get; }
+        IEnumerable<IShotSummary> Items { get; }
     }
 }

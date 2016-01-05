@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotSearchDateRequest : IPaginable, IAuthenticable
+    public class ShotByDateRequest : IRequest, IPaginable, IAuthenticable
     {
         [Required]
         public DateTime Date { get; set; }

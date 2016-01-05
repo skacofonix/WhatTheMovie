@@ -125,7 +125,7 @@ namespace WTM.Crawler.Services
 
             var shotSummaryCollection = new ShotSummaryCollection
             {
-                Shots = result.Items.Cast<ShotSummary>().ToList()
+                Shots = result.Items.Cast<IShotSummary>().ToList()
             };
 
             return shotSummaryCollection;

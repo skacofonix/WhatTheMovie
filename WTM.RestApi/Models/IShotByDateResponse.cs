@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace WTM.RestApi.Models
 {
-    public interface IShotArchivesResponse
+    public interface IShotByDateResponse
     {
         IEnumerable<IShotSummary> Items { get; }
     }

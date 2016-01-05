@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -86,8 +85,7 @@ namespace WTM.RestApi.Controllers
             try
             {
                 token = this.userService.Login(request.Username, request.Password);
-                loginResponse = new LoginResponse();
-                loginResponse.Data.Token = token;
+                loginResponse = new LoginResponse(token);
             }
             catch (Exception ex)
             {

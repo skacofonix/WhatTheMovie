@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotSearchTagRequest : IPaginable, IAuthenticable
+    public class ShotSearchTagRequest : IRequest, IPaginable, IAuthenticable
     {
         [Required]
         public List<string> Tags { get; set; }

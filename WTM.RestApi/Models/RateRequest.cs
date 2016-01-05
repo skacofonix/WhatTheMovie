@@ -2,7 +2,7 @@
 
 namespace WTM.RestApi.Models
 {
-    public class RateRequest : IAuthenticable
+    public class RateRequest : IRequest, IAuthenticable
     {
         [Required]
         [Range(0, 10)]

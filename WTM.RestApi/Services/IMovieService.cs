@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using WTM.RestApi.Models;
+﻿using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {

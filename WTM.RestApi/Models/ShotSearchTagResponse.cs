@@ -1,17 +1,16 @@
 using System.Collections.Generic;
-using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotSearchTagResponse : IShotSearchTagResponse
+    public class ShotSearchTagResponse : IResponse, IShotSearchTagResponse
     {
-        public ShotSearchTagResponse(IEnumerable<ShotSummary> shotOverviews)
+        public ShotSearchTagResponse(IEnumerable<IShotSummary> shotOverviews)
         {
             this.Items = shotOverviews;
         }
 
         public int TotalCount { get; }
         public IRange Range { get; }
-        public IEnumerable<ShotSummary> Items { get; private set; }
+        public IEnumerable<IShotSummary> Items { get; private set; }
     }
 }

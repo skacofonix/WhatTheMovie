@@ -1,9 +1,6 @@
-using System;
-using WTM.RestApi.Models;
-
-namespace WTM.RestApi.Controllers
+namespace WTM.RestApi.Models
 {
-    public class ShotNewSubmissionsRequest : IPaginable, IAuthenticable
+    public class ShotNewSubmissionsRequest : IRequest, IPaginable, IAuthenticable
     {
         public int? Start { get; set; }
         public int? Limit { get; set; }

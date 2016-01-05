@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace WTM.Crawler.Domain
 {
     [DataContract]
-    public class ShotSummary
+    public class ShotSummary : IShotSummary
     {
         [DataMember(IsRequired = true, Order = 1)]
         public int ShotId { get; set; }
