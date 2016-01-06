@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public interface IPaginable
+    public interface IPaginableRequest
     {
         int? Start { get; }
 

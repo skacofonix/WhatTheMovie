@@ -1,14 +1,11 @@
-using System.Collections.Generic;
-using WTM.RestApi.Models;
-
 namespace WTM.RestApi.Services
 {
     public interface IShotBookmarkService
     {
-        bool Add(int id, string token);
+        ShotBookmarkAddResponse Add(int id, string token);
 
-        bool Delete(int id, string token);
+        ShotBookmarkDeleteResponse Delete(int id, string token);
 
-        IEnumerable<ShotOverviewResponse> GetBookmarks(string token, int? start, int? limit);
+        ShotBookmarkResponse Get(string token, int? start, int? limit);
     }
 }

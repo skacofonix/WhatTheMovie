@@ -2,7 +2,7 @@
 {
     public interface IShotTagService
     {
-        bool Add(string tag, string token);
-        bool Delete(string tag, string token);
+        ShotTagAddResponse Add(string tag, string token);
+        ShotTagDeleteResponse Delete(string tag, string token);
     }
 }

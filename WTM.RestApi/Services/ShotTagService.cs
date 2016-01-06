@@ -4,12 +4,12 @@ namespace WTM.RestApi.Services
 {
     public class ShotTagService : IShotTagService
     {
-        public bool Add(string tag, string token)
+        public ShotTagAddResponse Add(string tag, string token)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(string tag, string token)
+        public ShotTagDeleteResponse Delete(string tag, string token)
         {
             throw new NotImplementedException();
         }

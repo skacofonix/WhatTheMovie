@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WTM.Crawler.Domain;
-using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
@@ -17,17 +16,7 @@ namespace WTM.RestApi.Services
             this.bookmarkService = bookmarkService;
         }
 
-        public bool Add(int id, string token)
-        {
-            return this.bookmarkService.Add(id, token);
-        }
-
-        public bool Delete(int id, string token)
-        {
-            return this.bookmarkService.Delete(id, token);
-        }
-
-        public IEnumerable<ShotOverviewResponse> GetBookmarks(string token, int? start, int? limit)
+        public ShotBookmarkResponse Get(string token, int? start, int? limit)
         {
             var bookmarks = new List<Bookmark>();
 
@@ -58,10 +47,21 @@ namespace WTM.RestApi.Services
             int skip = start ?? 1;
             int take = limit ?? limitMax;
 
-            var shotOverviewResponses = bookmarks.Select(s => new BookmarkAdapter(s));
+            var shotOverviewResponses = bookmarks.Select(s => new BookmarkAdapter(s)).Cast<WTM.RestApi.Models.ShotSummary>();
 
-            return null;
-            //return shotOverviewResponses;
+            return new ShotBookmarkResponse(shotOverviewResponses);
+        }
+
+        public ShotBookmarkAddResponse Add(int id, string token)
+        {
+            var success = this.bookmarkService.Add(id, token);
+            return new ShotBookmarkAddResponse(success);
+        }
+
+        public ShotBookmarkDeleteResponse Delete(int id, string token)
+        {
+            var success = this.bookmarkService.Delete(id, token);
+            return new ShotBookmarkDeleteResponse(success);
         }
     }
 }

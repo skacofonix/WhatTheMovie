@@ -2,7 +2,7 @@ using System;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotFeatureFilmsRequest : IRequest, IPaginable, IAuthenticable
+    public class ShotFeatureFilmsRequest : IRequest, IPaginableRequest, IAuthenticable
     {
         public DateTime? Date { get; set; }
         public int? Start { get; set; }

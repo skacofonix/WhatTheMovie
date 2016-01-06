@@ -1,6 +1,6 @@
 namespace WTM.RestApi.Models
 {
-    public interface ISearchResult
+    public interface IPaginableResult
     {
         int TotalCount { get; }
 
