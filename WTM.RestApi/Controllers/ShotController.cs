@@ -38,7 +38,7 @@ namespace WTM.RestApi.Controllers
         /// <response code="404">Shot not found</response>
         [Route("{id}")]
         [HttpGet]
-        [ResponseType(typeof(IShotResponse))]
+        [ResponseType(typeof(ShotResponse))]
         public IHttpActionResult Get(int id, [FromUri]ShotRequest request)
         {
             if (!ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace WTM.RestApi.Controllers
         /// <returns>Shot</returns>
         [Route("random")]
         [HttpGet]
-        [ResponseType(typeof(IShotResponse))]
+        [ResponseType(typeof(ShotResponse))]
         public IHttpActionResult GetRandom([FromUri]ShotRandomRequest request)
         {
             if (!ModelState.IsValid)
@@ -98,7 +98,7 @@ namespace WTM.RestApi.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("{id:int}/guess")]
-        [ResponseType(typeof(IShotGuessTitleResponse))]
+        [ResponseType(typeof(ShotGuessTitleResponse))]
         public IHttpActionResult GuessTitle(int id, [FromBody]GuessSolutionRequest request)
         {
             if (!ModelState.IsValid)
@@ -136,7 +136,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         /// <response code="400">Invalid token</response>
         [Route("{id:int}/solution")]
-        [ResponseType(typeof(IShotSolutionResponse))]
+        [ResponseType(typeof(ShotSolutionResponse))]
         public IHttpActionResult GetSolution(int id, [FromUri]ShotSolutionRequest request)
         {
             if (!ModelState.IsValid)
@@ -174,7 +174,7 @@ namespace WTM.RestApi.Controllers
         /// <returns>Shots overview</returns>
         [Route("date")]
         [HttpGet]
-        [ResponseType(typeof(IShotByDateResponse))]
+        [ResponseType(typeof(ShotByDateResponse))]
         public IHttpActionResult GetByDate([FromUri]ShotByDateRequest request)
         {
             if (!ModelState.IsValid)
@@ -201,7 +201,7 @@ namespace WTM.RestApi.Controllers
         /// <returns>Shot</returns>
         [Route("searchbytags")]
         [HttpGet]
-        [ResponseType(typeof(IShotSearchTagResponse))]
+        [ResponseType(typeof(ShotSearchTagResponse))]
         public IHttpActionResult GetByTag([FromUri]ShotSearchTagRequest request)
         {
             if (!ModelState.IsValid)
@@ -228,7 +228,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("searchbymovie")]
         [HttpGet]
-        [ResponseType(typeof(IShotSearchMovieResponse))]
+        [ResponseType(typeof(ShotSearchMovieResponse))]
         public IHttpActionResult GetByMovie([FromUri]ShotSearchMovieRequest request)
         {
             if (!ModelState.IsValid)
@@ -255,7 +255,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("archives")]
         [HttpGet]
-        [ResponseType(typeof(IShotArchivesResponse))]
+        [ResponseType(typeof(ShotArchivesResponse))]
         public IHttpActionResult GetArchives([FromUri]ShotArchivesRequest request)
         {
             if (!ModelState.IsValid)
@@ -283,7 +283,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("featuresfilms")]
         [HttpGet]
-        [ResponseType(typeof(IShotFeatureFilmsResponse))]
+        [ResponseType(typeof(ShotFeatureFilmsResponse))]
         public IHttpActionResult GetFeatureFilms([FromUri]ShotFeatureFilmsRequest request)
         {
             if (!ModelState.IsValid)
@@ -311,7 +311,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("newsubmissions")]
         [HttpGet]
-        [ResponseType(typeof(IShotNewSubmissionsResponse))]
+        [ResponseType(typeof(ShotNewSubmissionsResponse))]
         public IHttpActionResult GetNewSubmissions([FromUri]ShotNewSubmissionsRequest request)
         {
             if (!ModelState.IsValid)
@@ -340,7 +340,7 @@ namespace WTM.RestApi.Controllers
         /// <response code="400">Invalid token</response>
         [Route("{id:int}/rate")]
         [HttpPost]
-        [ResponseType(typeof(IShotRateResponse))]
+        [ResponseType(typeof(ShotRateResponse))]
         public IHttpActionResult Rate(int id, [FromBody]RateRequest request)
         {
             if (!ModelState.IsValid)
@@ -368,7 +368,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("favourites")]
         [HttpPost]
-        [ResponseType(typeof(IShotFavouritesResponse))]
+        [ResponseType(typeof(ShotFavouritesResponse))]
         public IHttpActionResult GetFavourites([FromBody]FavouritesGetRequest request)
         {
             if (!ModelState.IsValid)
@@ -396,7 +396,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/favourites")]
         [HttpPost]
-        [ResponseType(typeof(IShotFavouritesAddResponse))]
+        [ResponseType(typeof(ShotFavouritesAddResponse))]
         public IHttpActionResult AddFavourite(int id, [FromBody]FavouritesAddRequest request)
         {
             if (!ModelState.IsValid)
@@ -424,7 +424,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/favourites")]
         [HttpDelete]
-        [ResponseType(typeof(IShotFavouritesDeleteResponse))]
+        [ResponseType(typeof(ShotFavouritesDeleteResponse))]
         public IHttpActionResult DeleteFavourite(int id, [FromBody]FavouritesDeleteRequest request)
         {
             if (!ModelState.IsValid)
@@ -452,7 +452,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("bookmarks")]
         [HttpGet]
-        [ResponseType(typeof(IShotBookmarkResponse))]
+        [ResponseType(typeof(ShotBookmarkResponse))]
         public IHttpActionResult GetBookmarks([FromBody]BookmarksGetRequest request)
         {
             if (!ModelState.IsValid)
@@ -480,7 +480,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/bookmarks")]
         [HttpPost]
-        [ResponseType(typeof(IShotBookmarkAddResponse))]
+        [ResponseType(typeof(ShotBookmarkAddResponse))]
         public IHttpActionResult AddBookmarks(int id, [FromBody]BookmarksAddRequest request)
         {
             if (!ModelState.IsValid)
@@ -508,7 +508,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/bookmarks")]
         [HttpDelete]
-        [ResponseType(typeof(IShotBookmarkDeleteResponse))]
+        [ResponseType(typeof(ShotBookmarkDeleteResponse))]
         public IHttpActionResult DeleteBookmark(int id, [FromBody]BookmarksDeleteRequest request)
         {
             if (!ModelState.IsValid)
@@ -535,7 +535,7 @@ namespace WTM.RestApi.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("{id:int}/tags")]
-        [ResponseType(typeof(IShotTagAddResponse))]
+        [ResponseType(typeof(ShotTagAddResponse))]
         public IHttpActionResult AddTag(int id, [FromBody]TagsAddRequest request)
         {
             if (!ModelState.IsValid)
@@ -563,7 +563,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/tags")]
         [HttpDelete]
-        [ResponseType(typeof(IShotTagDeleteResponse))]
+        [ResponseType(typeof(ShotTagDeleteResponse))]
         public IHttpActionResult DeleteTag(int id, [FromBody]TagsDeleteRequest request)
         {
             if (!ModelState.IsValid)

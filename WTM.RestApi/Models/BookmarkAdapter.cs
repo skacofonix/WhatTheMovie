@@ -1,8 +1,6 @@
-﻿
-using System;
-using WTM.RestApi.Models;
+﻿using System;
 
-namespace WTM.RestApi
+namespace WTM.RestApi.Models
 {
     internal class BookmarkAdapter : IShotSummary
     {

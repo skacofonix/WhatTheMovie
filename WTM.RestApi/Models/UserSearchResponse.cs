@@ -14,7 +14,7 @@ namespace WTM.RestApi.Models
 
             foreach (var userSummary in userSummaryList)
             {
-                var userSummaryAdaptee = new UserSummaryAdapter(userSummary);
+                var userSummaryAdaptee = new UserSearchSummary(userSummary);
                 userSearchSummary.Add(userSummaryAdaptee);
             }
 

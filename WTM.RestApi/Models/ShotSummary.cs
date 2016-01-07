@@ -1,13 +1,21 @@
 ﻿using System;
+using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {
     public class ShotSummary : IShotSummary
     {
-        public int ShotId { get; set; }
+        private readonly Crawler.Domain.IShotSummary crawlerShotSummary;
 
-        public Uri ImageUri { get; set; }
+        public ShotSummary(Crawler.Domain.IShotSummary crawlerShotSummary)
+        {
+            this.crawlerShotSummary = crawlerShotSummary;
+        }
 
-        public ShotUserStatus UserStatus { get; set; }
+        public int ShotId => this.crawlerShotSummary.ShotId;
+
+        public Uri ImageUri => this.crawlerShotSummary.ImageUri;
+
+        public ShotUserStatus UserStatus => ShotUserStatusAdapter.Adapt(this.crawlerShotSummary.UserStatus);
     }
 }

@@ -1,12 +1,23 @@
 using System;
+using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {
-    public class UserSearchSummary : IUserSearchSummary
+    internal class UserSearchSummary : IUserSearchSummary
     {
-        public string Username { get; set; }
-        public string Rank { get; set; }
-        public Uri AvatarUrl { get; set; }
-        public Uri ProfilUrl { get; }
+        private readonly UserSummary userSummary;
+
+        public UserSearchSummary(UserSummary userSummary)
+        {
+            this.userSummary = userSummary;
+        }
+
+        public string Username => userSummary.Username;
+
+        public string Rank => userSummary.Rank;
+
+        public Uri AvatarUrl => userSummary.AvatarUrl;
+
+        public Uri ProfilUrl => userSummary.ProfilUrl;
     }
 }

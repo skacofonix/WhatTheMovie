@@ -40,7 +40,7 @@ namespace WTM.RestApi.Services
                 var skip = request.Start.GetValueOrDefault(0);
                 var take = request.Limit.GetValueOrDefault(limitMax);
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result = new ShotByDateResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+                result = new ShotByDateResponse(filteredShots.Select(x => new ShotSummary(x)));
             }
 
             return result;
@@ -57,7 +57,7 @@ namespace WTM.RestApi.Services
                 var skip = request.Start ?? 0;
                 var take = request.Limit.GetValueOrDefault(limitMax);
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result = new ShotSearchTagResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+                result = new ShotSearchTagResponse(filteredShots.Select(x => new ShotSummary(x)));
             }
 
             return result;
@@ -79,7 +79,7 @@ namespace WTM.RestApi.Services
                 var skip = request.Start.GetValueOrDefault(0);
                 var take = request.Limit.GetValueOrDefault(limitMax);
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result =  new ShotArchivesResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+                result =  new ShotArchivesResponse(filteredShots.Select(x => new ShotSummary(x)));
             }
 
             return result;
@@ -101,7 +101,7 @@ namespace WTM.RestApi.Services
                 var skip = request.Start ?? 0;
                 var take = request.Limit.GetValueOrDefault(limitMax);
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result = new ShotFeatureFilmsResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+                result = new ShotFeatureFilmsResponse(filteredShots.Select(x => new ShotSummary(x)));
             }
 
             return result;
@@ -117,7 +117,7 @@ namespace WTM.RestApi.Services
                 var skip = request.Start.GetValueOrDefault(0);
                 var take = request.Limit.GetValueOrDefault(limitMax);
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result = new ShotNewSubmissionsResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+                result = new ShotNewSubmissionsResponse(filteredShots.Select(x => new ShotSummary(x)));
             }
 
             return result;
