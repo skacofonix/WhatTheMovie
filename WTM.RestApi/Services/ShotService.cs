@@ -11,9 +11,9 @@ namespace WTM.RestApi.Services
             this.crawlerShotService = crawlerShotService;
         }
 
-        public ShotResponse GetById(int id, string token = null)
+        public IShotResponse GetById(int id, ShotRequest request)
         {
-            var shotPage = this.crawlerShotService.GetById(id, token);
+            var shotPage = this.crawlerShotService.GetById(id, request.Token);
 
             var shotdaptee = new ShotAdapter(shotPage);
 
@@ -22,26 +22,15 @@ namespace WTM.RestApi.Services
             return shotResponse;
         }
 
-        public ShotResponse GetRandom(string token = null)
+        public IShotResponse GetRandom(ShotRandomRequest request)
         {
-            var shotPage = this.crawlerShotService.GetRandomShot(token);
+            var shotPage = this.crawlerShotService.GetRandomShot(request.Token);
 
             var shotAdaptee = new ShotAdapter(shotPage);
 
             var shotResponse = new ShotResponse(shotAdaptee);
 
             return shotResponse;
-        }
-
-        public ShotSolutionResponse GetSolution(int id, string token = null)
-        {
-            var guessTitleResponsePage = this.crawlerShotService.GetSolution(id, token);
-
-            var shotSolutionAdaptee = new ShotSolutionAdapter(guessTitleResponsePage);
-
-            var shotSolutionResponse = new ShotSolutionResponse(shotSolutionAdaptee);
-
-            return shotSolutionResponse;
         }
 
         public IShotGuessSolution GuessSolution(int id, GuessSolutionRequest reques)
@@ -51,6 +40,17 @@ namespace WTM.RestApi.Services
             var shotGuessSolutionAdaptee = new ShotGuessSolutionAdapter(guessTitleResponsePage);
 
             return shotGuessSolutionAdaptee;
+        }
+
+        public IShotSolutionResponse GetSolution(int id, ShotSolutionRequest request)
+        {
+            var guessTitleResponsePage = this.crawlerShotService.GetSolution(id, request.Token);
+
+            var shotSolutionAdaptee = new ShotSolutionAdapter(guessTitleResponsePage);
+
+            var shotSolutionResponse = new ShotSolutionResponse(shotSolutionAdaptee);
+
+            return shotSolutionResponse;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {
@@ -15,25 +16,6 @@ namespace WTM.RestApi.Models
 
         public Uri ImageUri => this.crawlerShotSummary.ImageUri;
 
-        public ShotUserStatus UserStatus => this.ShotUserStatusAdapter(this.crawlerShotSummary.UserStatus);
-
-        private ShotUserStatus ShotUserStatusAdapter(WTM.Crawler.Domain.ShotUserStatus crawlerUserStatus)
-        {
-            switch (crawlerUserStatus)
-            {
-                case Crawler.Domain.ShotUserStatus.Unsolved:
-                    return ShotUserStatus.Unsolved;
-                case Crawler.Domain.ShotUserStatus.Solved:
-                    return ShotUserStatus.Solved;
-                case Crawler.Domain.ShotUserStatus.NeverSolved:
-                    return ShotUserStatus.NeverSolved;
-                case Crawler.Domain.ShotUserStatus.Uploaded:
-                    return ShotUserStatus.Uploaded;
-                case Crawler.Domain.ShotUserStatus.Requested:
-                    return ShotUserStatus.Requested;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(crawlerUserStatus), crawlerUserStatus, null);
-            }
-        }
+        public ShotUserStatus UserStatus => ShotUserStatusAdapter.Adapt(this.crawlerShotSummary.UserStatus);
     }
 }

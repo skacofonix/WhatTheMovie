@@ -47,7 +47,7 @@ namespace WTM.RestApi.Controllers
 
             try
             {
-                response = this.shotService.GetById(id, request.Token);
+                response = this.shotService.GetById(id, request);
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace WTM.RestApi.Controllers
 
             try
             {
-                response = this.shotService.GetRandom(request.Token);
+                response = this.shotService.GetRandom(request);
             }
             catch (Exception ex)
             {
@@ -295,7 +295,7 @@ namespace WTM.RestApi.Controllers
 
             try
             {
-                result = this.shotService.GetSolution(id, request.Token);
+                result = this.shotService.GetSolution(id, request);
             }
             catch (Exception ex)
             {

@@ -4,9 +4,9 @@ namespace WTM.RestApi.Services
 {
     public interface IShotService
     {
-        ShotResponse GetById(int id, string token = null);
-        ShotResponse GetRandom(string token = null);
-        ShotSolutionResponse GetSolution(int id, string token = null);
+        IShotResponse GetById(int id, ShotRequest request);
+        IShotResponse GetRandom(ShotRandomRequest request);
         IShotGuessSolution GuessSolution(int id, GuessSolutionRequest request);
+        IShotSolutionResponse GetSolution(int id, ShotSolutionRequest request);
     }
 }

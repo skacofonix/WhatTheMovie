@@ -80,7 +80,7 @@ namespace WTM.RestApi.Services
 
             var range = new Models.Range(start, rangeMax);
 
-            var result = new UserSearchResponseAdapter(userSummaryListFiltered, range, userSearchResult.Count);
+            var result = new UserSearchResponse(userSummaryListFiltered, range, userSearchResult.Count);
 
             return result;
         }
