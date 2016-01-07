@@ -20,37 +20,36 @@ namespace WTM.RestApi.Controllers
 
         [Route("{username}")]
         [HttpGet]   
-        [ResponseType(typeof(User))]
-        public IHttpActionResult Get([Required]string username) 
+        [ResponseType(typeof(IUserResponse))]
+        public IHttpActionResult Get(string username) 
         {
-            User item = null;
-
             if (string.IsNullOrWhiteSpace(username))
             {
                 return BadRequest("Username cannot be null or empty");
             }
 
+            IUserResponse result = null;
             try
             {
-                item = this.userService.GetUserByName(username);
+                result = this.userService.Get(username);
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
 
-            if (item?.Name == null)
+            if (result?.User?.Name == null)
             {
                 return NotFound();
             }
 
-            return Ok(item);
+            return Ok(result);
         }
 
         [Route("search")]
         [HttpGet]
         [ResponseType(typeof(IUserSearchResponse))]
-        public IHttpActionResult Search([FromUri]UserSearchRequest filter)
+        public IHttpActionResult Search([FromUri]UserSearchRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -60,7 +59,7 @@ namespace WTM.RestApi.Controllers
             IUserSearchResponse response;
             try
             {
-                response = userService.Search(filter);
+                response = userService.Search(request);
             }
             catch (Exception ex)
             {
@@ -72,56 +71,53 @@ namespace WTM.RestApi.Controllers
 
         [Route("login")]
         [HttpPost]
-        [ResponseType(typeof(LoginResponse))]
-        public IHttpActionResult Login(LoginRequest request)
+        [ResponseType(typeof(IUserLoginResponse))]
+        public IHttpActionResult Login(UserLoginRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            string token = null;
-            LoginResponse loginResponse = null;
+            IUserLoginResponse userLoginResponse = null;
             try
             {
-                token = this.userService.Login(request.Username, request.Password);
-                loginResponse = new LoginResponse(token);
+                userLoginResponse = this.userService.Login(request);
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
 
-            if (string.IsNullOrEmpty(token))
+            if (userLoginResponse?.Token == null)
             {
                 return Unauthorized();
             }
 
-            return Ok(loginResponse);
+            return Ok(userLoginResponse);
         }
 
         [Route("logout")]
         [HttpGet]
-        [ResponseType(typeof(LogoutResponse))]
-        public IHttpActionResult Logout(string token)
+        [ResponseType(typeof(IUserLogoutResponse))]
+        public IHttpActionResult Logout(UserLogoutRequest request)
         {
-            if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(request.Token))
             {
                 return BadRequest();
             }
 
+            IUserLogoutResponse response = null;
             try
             {
-                this.userService.Logout(token);
+                response = this.userService.Logout(request);
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
 
-            var logoutResponse = new LogoutResponse();
-
-            return Ok(logoutResponse);
+            return Ok(response);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotResponse : IResponse, IShot
+    public class ShotResponse : IShotResponse
     {
         private readonly IShot shot;
 

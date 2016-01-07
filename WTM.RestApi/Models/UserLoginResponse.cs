@@ -1,8 +1,8 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public class LoginResponse : IResponse, IAuthenticable
+    public class UserLoginResponse : IUserLoginResponse
     {
-        public LoginResponse(string token)
+        public UserLoginResponse(string token)
         {
             this.Token = token;
         }

@@ -1,16 +1,15 @@
-﻿using WTM.Crawler.Domain;
-using WTM.RestApi.Models;
+﻿using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
     public interface IUserService
     {
-        string Login(string username, string password);
+        IUserResponse Get(string username);
 
-        void Logout(string token);
+        IUserLoginResponse Login(UserLoginRequest request);
 
-        User GetUserByName(string username);
+        IUserLogoutResponse Logout(UserLogoutRequest request);
 
-        IUserSearchResponse Search(UserSearchRequest filter);
+        IUserSearchResponse Search(UserSearchRequest request);
     }
 }

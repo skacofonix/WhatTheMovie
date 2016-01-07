@@ -1,8 +1,10 @@
-﻿namespace WTM.RestApi.Services
+﻿using WTM.RestApi.Models;
+
+namespace WTM.RestApi.Services
 {
     public interface IShotTagService
     {
-        ShotTagAddResponse Add(string tag, string token);
-        ShotTagDeleteResponse Delete(string tag, string token);
+        ShotTagAddResponse Add(int id, TagsAddRequest request);
+        ShotTagDeleteResponse Delete(int id, TagsDeleteRequest request);
     }
 }

@@ -4,6 +4,7 @@ using Moq;
 using NFluent;
 using NUnit.Framework;
 using WTM.Crawler.Services;
+using WTM.RestApi.Models;
 using WTM.RestApi.Services;
 
 namespace WTM.RestApi.Tests.Services
@@ -21,7 +22,7 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.GetByDate(null, null, null);
+            var shotOverviewResponses = shotOverviewService.GetByDate(new ShotByDateRequest());
 
             Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
@@ -36,7 +37,7 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.SearchByTag(new List<string> {"un"}, null, null);
+            var shotOverviewResponses = shotOverviewService.SearchByTag(new ShotSearchTagRequest {Tags = new List<string> {"un"}});
 
             Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
@@ -51,7 +52,7 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.GetArchives(null, null, null);
+            var shotOverviewResponses = shotOverviewService.GetArchives(new ShotArchivesRequest());
 
             Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
@@ -66,7 +67,7 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.GetFeatureFilms(null, null, null);
+            var shotOverviewResponses = shotOverviewService.GetFeatureFilms(new ShotFeatureFilmsRequest());
 
             Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }
@@ -81,7 +82,7 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.GetNewSubmissions(null, null, null);
+            var shotOverviewResponses = shotOverviewService.GetNewSubmissions(new ShotNewSubmissionsRequest());
 
             Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }

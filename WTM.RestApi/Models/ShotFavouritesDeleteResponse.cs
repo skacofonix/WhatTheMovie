@@ -1,6 +1,6 @@
 namespace WTM.RestApi.Models
 {
-    public class ShotFavouritesDeleteResponse : IResponse, ISuccessable
+    public class ShotFavouritesDeleteResponse : IShotFavouritesDeleteResponse
     {
         public ShotFavouritesDeleteResponse(bool success)
         {

@@ -1,8 +1,6 @@
-﻿using WTM.RestApi.Models;
-
-namespace WTM.RestApi.Services
+﻿namespace WTM.RestApi.Models
 {
-    public class ShotTagDeleteResponse : IResponse, ISuccessable
+    public class ShotTagDeleteResponse : IShotTagDeleteResponse
     {
         public ShotTagDeleteResponse(bool success)
         {

@@ -1,8 +1,6 @@
-﻿using WTM.RestApi.Models;
-
-namespace WTM.RestApi.Services
+﻿namespace WTM.RestApi.Models
 {
-    public class ShotTagAddResponse : IResponse, ISuccessable
+    public class ShotTagAddResponse : IShotTagAddResponse
     {
         public ShotTagAddResponse(bool success)
         {

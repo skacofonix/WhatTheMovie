@@ -5,7 +5,7 @@ namespace WTM.RestApi.Services
 {
     public class MovieService : IMovieService
     {
-        public IShotSearchMovieResponse GetShotByMovie(string name, string token = null)
+        public IShotSearchMovieResponse GetShotByMovie(ShotSearchMovieRequest request)
         {
             throw new NotImplementedException();
         }

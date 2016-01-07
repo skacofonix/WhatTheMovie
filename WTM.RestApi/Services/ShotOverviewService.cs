@@ -29,81 +29,96 @@ namespace WTM.RestApi.Services
             this.dateTimeService = dateTimeService;
         }
 
-        public IShotByDateResponse GetByDate(DateTime? date, int? start, int? limit, string token = null)
+        public IShotByDateResponse GetByDate(ShotByDateRequest request)
         {
-            var dateCriteria = date ?? dateTimeService.GetDateTime();
+            var dateCriteria = request.Date;
             var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(dateCriteria);
 
-            var skip = start ?? 0;
-            var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
-            var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
+            IShotByDateResponse result = null;
+            if (shotSummaryCollection != null)
+            {
+                var skip = request.Start.GetValueOrDefault(0);
+                var take = request.Limit.GetValueOrDefault(limitMax);
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
+                result = new ShotByDateResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+            }
 
-            IShotByDateResponse response = new ShotByDateResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
-
-            return response;
+            return result;
         }
 
-        public IShotSearchTagResponse SearchByTag(List<string> tags, int? start, int? limit, string token = null)
+        public IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request)
         {
-            var formattedTags = string.Join(" ", tags);
-            var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, token: token);
+            var formattedTags = string.Join(" ", request.Tags);
+            var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, token: request.Token);
 
-            var skip = start ?? 0;
-            var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
-            var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
+            IShotSearchTagResponse result = null;
+            if (shotSummaryCollection != null)
+            {
+                var skip = request.Start ?? 0;
+                var take = request.Limit.GetValueOrDefault(limitMax);
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
+                result = new ShotSearchTagResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+            }
 
-            IShotSearchTagResponse response = new ShotSearchTagResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
-
-            return response;
+            return result;
         }
 
-        public IShotArchivesResponse GetArchives(DateTime? date, int? start, int? limit, string token = null)
+        public IShotArchivesResponse GetArchives(ShotArchivesRequest request)
         {
             var maxDate = dateTimeService.GetDateTime().Date.AddDays(-30);
-            if(date.HasValue && date.Value > maxDate)
+            if (request.Date.HasValue && (request.Date.Value > maxDate))
             {
                 throw new ArgumentOutOfRangeException("date", string.Format("Date must be before {0}", maxDate));
             }
-            var dateCriteria = date ?? maxDate;
+            var dateCriteria = request.Date.GetValueOrDefault(maxDate);
             var shotSummaryCollection = this.shotArchiveService.GetShotSummaryByDate(dateCriteria);
 
-            var skip = start ?? 0;
-            var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
-            var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-
-            IShotArchivesResponse result = new ShotArchivesResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+            IShotArchivesResponse result = null;
+            if (shotSummaryCollection != null)
+            {
+                var skip = request.Start.GetValueOrDefault(0);
+                var take = request.Limit.GetValueOrDefault(limitMax);
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
+                result =  new ShotArchivesResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+            }
 
             return result;
         }
 
-        public IShotFeatureFilmsResponse GetFeatureFilms(DateTime? date, int? start, int? limit, string token = null)
+        public IShotFeatureFilmsResponse GetFeatureFilms(ShotFeatureFilmsRequest request)
         {
             var minDate = dateTimeService.GetDateTime().Date.AddDays(-30);
-            if (date.HasValue && date.Value < minDate)
+            if (request.Date.HasValue && request.Date.Value < minDate)
             {
                 throw new ArgumentOutOfRangeException("date", string.Format("Date must be after {0}", minDate));
             }
-            var dateCriteria = date ?? minDate;
+            var dateCriteria = request.Date ?? minDate;
             var shotSummaryCollection = this.shotFeatureFilmsService.GetShotSummaryByDate(dateCriteria);
 
-            var skip = start ?? 0;
-            var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
-            var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-
-            IShotFeatureFilmsResponse result = new ShotFeatureFilmsResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+            IShotFeatureFilmsResponse result = null;
+            if (shotSummaryCollection != null)
+            {
+                var skip = request.Start ?? 0;
+                var take = request.Limit.GetValueOrDefault(limitMax);
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
+                result = new ShotFeatureFilmsResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+            }
 
             return result;
         }
 
-        public IShotNewSubmissionsResponse GetNewSubmissions(int? start, int? limit, string token = null)
+        public IShotNewSubmissionsResponse GetNewSubmissions(ShotNewSubmissionsRequest request)
         {
             var shotSummaryCollection = this.shotNewSubmissionService.GetShots();
 
-            var skip = start ?? 0;
-            var take = Math.Min(limitMax, limit ?? shotSummaryCollection.Shots.Count);
-            var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-
-            IShotNewSubmissionsResponse result = new ShotNewSubmissionsResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+            IShotNewSubmissionsResponse result = null;
+            if (shotSummaryCollection != null)
+            {
+                var skip = request.Start.GetValueOrDefault(0);
+                var take = request.Limit.GetValueOrDefault(limitMax);
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
+                result = new ShotNewSubmissionsResponse(filteredShots.Select(x => new ShotSummaryAdapter(x)));
+            }
 
             return result;
         }

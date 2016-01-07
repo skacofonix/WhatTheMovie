@@ -1,8 +1,6 @@
-using WTM.RestApi.Models;
-
-namespace WTM.RestApi.Services
+namespace WTM.RestApi.Models
 {
-    public class ShotBookmarkDeleteResponse : IResponse, ISuccessable
+    public class ShotBookmarkDeleteResponse : IShotBookmarkDeleteResponse
     {
         public ShotBookmarkDeleteResponse(bool success)
         {

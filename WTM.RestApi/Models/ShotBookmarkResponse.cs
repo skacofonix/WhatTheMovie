@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using WTM.RestApi.Models;
 
-namespace WTM.RestApi.Services
+namespace WTM.RestApi.Models
 {
-    public class ShotBookmarkResponse : IResponse, IPaginableResult
+    public class ShotBookmarkResponse : IShotBookmarkResponse
     {
         public ShotBookmarkResponse(IEnumerable<IShotSummary> items)
         {

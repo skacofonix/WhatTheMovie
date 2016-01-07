@@ -15,21 +15,25 @@ namespace WTM.RestApi.Services
             this.crawlerUserService = crawlerUserService;
         }
 
-        public string Login(string username, string password)
+        public IUserResponse Get(string username)
         {
-            return this.crawlerUserService.Login(username, password);
+            var user = this.crawlerUserService.GetByUsername(username);
+            var result = new UserResponse(user);
+            return result;
         }
 
-        public void Logout(string token)
+        public IUserLoginResponse Login(UserLoginRequest request)
         {
-            this.crawlerUserService.Logout();
+            var token = this.crawlerUserService.Login(request.Username, request.Password);
+            var result = new UserLoginResponse(token);
+            return result;
         }
 
-        public User GetUserByName(string username)
+        public IUserLogoutResponse Logout(UserLogoutRequest request)
         {
-            return this.crawlerUserService.GetByUsername(username);
+            throw new NotImplementedException();
         }
-
+      
         public IUserSearchResponse Search(UserSearchRequest filter)
         {
             const int pageSize = 30;

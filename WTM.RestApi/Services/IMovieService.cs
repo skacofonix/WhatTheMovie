@@ -4,6 +4,6 @@ namespace WTM.RestApi.Services
 {
     public interface IMovieService
     {
-        IShotSearchMovieResponse GetShotByMovie(string name, string token = null);
+        IShotSearchMovieResponse GetShotByMovie(ShotSearchMovieRequest request);
     }
 }

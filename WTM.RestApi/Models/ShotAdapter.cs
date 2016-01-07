@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using WTM.RestApi.Models;
 
-namespace WTM.RestApi
+namespace WTM.RestApi.Models
 {
     [DataContract]
     public class ShotAdapter : IShot

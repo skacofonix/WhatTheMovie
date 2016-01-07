@@ -6,17 +6,17 @@ namespace WTM.RestApi.Services
 {
     public class ShotFavouriteService : IShotFavouriteService
     {
-        public ShotFavouritesAddResponse Add(int id, string token)
+        public ShotFavouritesResponse Get(FavouritesGetRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public ShotFavouritesDeleteResponse Delete(int id, string token)
+        public ShotFavouritesAddResponse Add(int id, FavouritesAddRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public ShotFavouritesResponse Get(string token, int? start, int? limit)
+        public ShotFavouritesDeleteResponse Delete(int id, FavouritesDeleteRequest request)
         {
             throw new NotImplementedException();
         }

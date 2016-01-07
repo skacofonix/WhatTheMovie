@@ -1,15 +1,16 @@
 ﻿using System;
+using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
     public class ShotTagService : IShotTagService
     {
-        public ShotTagAddResponse Add(string tag, string token)
+        public ShotTagAddResponse Add(int id, TagsAddRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public ShotTagDeleteResponse Delete(string tag, string token)
+        public ShotTagDeleteResponse Delete(int id, TagsDeleteRequest request)
         {
             throw new NotImplementedException();
         }

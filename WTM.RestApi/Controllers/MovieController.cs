@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Web.Http;
+using System.Web.Http.Description;
 using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Controllers
@@ -7,16 +8,20 @@ namespace WTM.RestApi.Controllers
     [RoutePrefix("api/movie")]
     public class MovieController : ControllerBase
     {
-        public MovieResponse GetByName([FromUri] string name)
+        [Route("{name}")]
+        [HttpGet]
+        [ResponseType(typeof(IMovieResponse))]
+        public IHttpActionResult Get([FromUri]string name)
         {
-            return null;
+            return InternalServerError(new NotImplementedException());
         }
 
-        [Route("findByTag")]
+        [Route("tag")]
         [HttpGet]
-        public IEnumerable<MovieOverviewResponse> FindByTag(List<string> tags, int? start = null, int? limit = null, string token = null)
+        [ResponseType(typeof(IMovieSearchTagResponse))]
+        public IHttpActionResult GetByTag(MovieSearchTagRequest request)
         {
-            return null;
+            return InternalServerError(new NotImplementedException());
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using WTM.RestApi.Models;
-using ShotSummary = WTM.RestApi.Models.ShotSummary;
-
-namespace WTM.RestApi
+﻿namespace WTM.RestApi.Models
 {
     internal class ShotOverviewAdapter : IShotOverview
     {

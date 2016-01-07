@@ -6,14 +6,14 @@ namespace WTM.RestApi.Services
 {
     public interface IShotOverviewService
     {
-        IShotSearchTagResponse SearchByTag(List<string> tags, int? start, int? limit, string token = null);
+        IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request);
 
-        IShotByDateResponse GetByDate(DateTime? date, int? start, int? limit, string token = null);
+        IShotByDateResponse GetByDate(ShotByDateRequest request);
 
-        IShotArchivesResponse GetArchives(DateTime? date, int? start, int? limit, string token = null);
+        IShotArchivesResponse GetArchives(ShotArchivesRequest request);
 
-        IShotFeatureFilmsResponse GetFeatureFilms(DateTime? date, int? start, int? limit, string token = null);
+        IShotFeatureFilmsResponse GetFeatureFilms(ShotFeatureFilmsRequest request);
 
-        IShotNewSubmissionsResponse GetNewSubmissions(int? start, int? limit, string token = null);
+        IShotNewSubmissionsResponse GetNewSubmissions(ShotNewSubmissionsRequest request);
     }
 }

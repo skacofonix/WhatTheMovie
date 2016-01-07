@@ -1,11 +1,11 @@
+using WTM.RestApi.Models;
+
 namespace WTM.RestApi.Services
 {
     public interface IShotBookmarkService
     {
-        ShotBookmarkAddResponse Add(int id, string token);
-
-        ShotBookmarkDeleteResponse Delete(int id, string token);
-
-        ShotBookmarkResponse Get(string token, int? start, int? limit);
+        ShotBookmarkResponse Get(BookmarksGetRequest request);
+        ShotBookmarkAddResponse Add(int id, BookmarksAddRequest request);
+        ShotBookmarkDeleteResponse Delete(int id, BookmarksDeleteRequest request);
     }
 }

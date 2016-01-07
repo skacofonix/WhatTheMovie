@@ -19,7 +19,6 @@ namespace WTM.RestApi.Controllers
         private readonly IMovieService movieService;
 
         public ShotController(IShotService shotService, IShotOverviewService shotOverviewService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
-#pragma warning restore CS1591 // Commentaire XML manquant pour le type ou le membre visible publiquement
         {
             this.shotService = shotService;
             this.shotOverviewService = shotOverviewService;
@@ -30,25 +29,20 @@ namespace WTM.RestApi.Controllers
             this.movieService = movieService;
         }
 
-        #region Shots
-
         /// <summary>
         /// Get shot by ID
         /// </summary>
-        /// <param name="id">Shot ID</param>
-        /// <param name="token">Session token</param>
         /// <returns>Shot</returns>
         /// <response code="404">Shot not found</response>
-        [Route("{id:int}")]
         [HttpGet]
-        [ResponseType(typeof(ShotResponse))]
-        public IHttpActionResult Get(int id, [FromUri]string token = null)
+        [ResponseType(typeof(IShotResponse))]
+        public IHttpActionResult Get(int id, [FromUri]ShotRequest request)
         {
-            ShotResponse response;
+            IShotResponse response;
 
             try
             {
-                response = this.shotService.GetById(id, token);
+                response = this.shotService.GetById(id, request.Token);
             }
             catch (Exception ex)
             {
@@ -65,13 +59,13 @@ namespace WTM.RestApi.Controllers
         [Route("random")]
         [HttpGet]
         [ResponseType(typeof(ShotResponse))]
-        public IHttpActionResult GetRandom([FromUri]string token = null)
+        public IHttpActionResult GetRandom([FromUri]ShotRandomRequest request)
         {
             ShotResponse response;
 
             try
             {
-                response = this.shotService.GetRandom(token);
+                response = this.shotService.GetRandom(request.Token);
             }
             catch (Exception ex)
             {
@@ -98,7 +92,7 @@ namespace WTM.RestApi.Controllers
             IShotByDateResponse result;
             try
             {
-                result = this.shotOverviewService.GetByDate(request.Date, request.Start, request.Limit, request.Token);
+                result = this.shotOverviewService.GetByDate(request);
             }
             catch (Exception ex)
             {
@@ -117,7 +111,6 @@ namespace WTM.RestApi.Controllers
         [ResponseType(typeof(IShotSearchTagResponse))]
         public IHttpActionResult GetByTag([FromUri]ShotSearchTagRequest request)
         {
-            if (request == null) throw new ArgumentNullException(nameof(request));
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -126,7 +119,7 @@ namespace WTM.RestApi.Controllers
             IShotSearchTagResponse response;
             try
             {
-                response = this.shotOverviewService.SearchByTag(request.Tags, request.Start, request.Limit, request.Token);
+                response = this.shotOverviewService.SearchByTag(request);
             }
             catch (Exception ex)
             {
@@ -153,7 +146,7 @@ namespace WTM.RestApi.Controllers
             IShotSearchMovieResponse result;
             try
             {
-                result = this.movieService.GetShotByMovie(request.Name, request.Token);
+                result = this.movieService.GetShotByMovie(request);
             }
             catch (Exception ex)
             {
@@ -180,7 +173,7 @@ namespace WTM.RestApi.Controllers
             IShotArchivesResponse result;
             try
             {
-                result = this.shotOverviewService.GetArchives(request.Date, request.Start, request.Limit, request.Token);
+                result = this.shotOverviewService.GetArchives(request);
             }
             catch (Exception ex)
             {
@@ -207,7 +200,7 @@ namespace WTM.RestApi.Controllers
             IShotFeatureFilmsResponse result;
             try
             {
-                result = this.shotOverviewService.GetFeatureFilms(request.Date, request.Start, request.Limit, request.Token);
+                result = this.shotOverviewService.GetFeatureFilms(request);
             }
             catch (Exception ex)
             {
@@ -234,7 +227,7 @@ namespace WTM.RestApi.Controllers
             IShotNewSubmissionsResponse result;
             try
             {
-                result = this.shotOverviewService.GetNewSubmissions(request.Start, request.Limit, request.Token);
+                result = this.shotOverviewService.GetNewSubmissions(request);
             }
             catch (Exception ex)
             {
@@ -243,10 +236,6 @@ namespace WTM.RestApi.Controllers
 
             return Ok(result);
         }
-
-        #endregion
-
-        #region Solution
 
         /// <summary>
         /// Guess shot title
@@ -264,7 +253,7 @@ namespace WTM.RestApi.Controllers
             IShotGuessSolution result;
             try
             {
-                result = this.shotService.GuessSolution(id, request.Title, request.Token);
+                result = this.shotService.GuessSolution(id, request);
             }
             catch (Exception ex)
             {
@@ -280,13 +269,13 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         /// <response code="400">Invalid token</response>
         [Route("{id:int}/solution")]
-        [ResponseType(typeof(ShotSolutionResponse))]
-        public IHttpActionResult GetSolution(int id, [FromUri]string token)
+        [ResponseType(typeof(IShotSolutionResponse))]
+        public IHttpActionResult GetSolution(int id, [FromUri]ShotSolutionRequest request)
         {
-            ShotSolutionResponse result;
+            IShotSolutionResponse result;
             try
             {
-                result = this.shotService.GetSolution(id, token);
+                result = this.shotService.GetSolution(id, request.Token);
             }
             catch (Exception ex)
             {
@@ -296,19 +285,14 @@ namespace WTM.RestApi.Controllers
             return Ok(result);
         }
 
-        #endregion
-
-        #region Rate
-
         /// <summary>
         /// Rate shot
         /// </summary>
-        /// <param name="id">Shot ID</param>
-        /// <returns></returns>
+        /// <returns></returns>s
         /// <response code="400">Invalid token</response>
         [Route("{id:int}/rate")]
         [HttpPost]
-        [ResponseType(typeof(ShotRateResponse))]
+        [ResponseType(typeof(IShotRateResponse))]
         public IHttpActionResult Rate(int id, [FromBody]RateRequest request)
         {
             if (!ModelState.IsValid)
@@ -316,10 +300,10 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            ShotRateResponse result;
+            IShotRateResponse result;
             try
             {
-                result = this.shotRateService.Rate(id, request.Rate, request.Token);
+                result = this.shotRateService.Rate(request);
             }
             catch (Exception ex)
             {
@@ -329,17 +313,13 @@ namespace WTM.RestApi.Controllers
             return Ok(result);
         }
 
-        #endregion
-
-        #region Favourites
-
         /// <summary>
         /// Get shot favourites
         /// </summary>
         /// <returns></returns>
         [Route("{id:int}/favourites")]
         [HttpPost]
-        [ResponseType(typeof(ShotFavouritesResponse))]
+        [ResponseType(typeof(IShotFavouritesResponse))]
         public IHttpActionResult GetFavourites([FromBody]FavouritesGetRequest request)
         {
             if (!ModelState.IsValid)
@@ -347,10 +327,10 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            ShotFavouritesResponse result;
+            IShotFavouritesResponse result;
             try
             {
-                result = this.shotFavouriteService.Get(request.Token, request.Start, request.Limit);
+                result = this.shotFavouriteService.Get(request);
             }
             catch (Exception ex)
             {
@@ -363,12 +343,10 @@ namespace WTM.RestApi.Controllers
         /// <summary>
         /// Add shot to favourite
         /// </summary>
-        /// <param name="id">Shot ID</param>
-        /// <param name="token">Session token</param>
         /// <returns></returns>
         [Route("{id:int}/favourites")]
         [HttpPost]
-        [ResponseType(typeof(ShotFavouritesAddResponse))]
+        [ResponseType(typeof(IShotFavouritesAddResponse))]
         public IHttpActionResult AddFavourite(int id, [FromBody]FavouritesAddRequest request)
         {
             if (!ModelState.IsValid)
@@ -376,10 +354,10 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            ShotFavouritesAddResponse result;
+            IShotFavouritesAddResponse result;
             try
             {
-                result = this.shotFavouriteService.Add(id, request.Token);
+                result = this.shotFavouriteService.Add(id, request);
             }
             catch (Exception ex)
             {
@@ -395,7 +373,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/favourites")]
         [HttpDelete]
-        [ResponseType(typeof(ShotFavouritesDeleteResponse))]
+        [ResponseType(typeof(IShotFavouritesDeleteResponse))]
         public IHttpActionResult DeleteFavourite(int id, [FromBody]FavouritesDeleteRequest request)
         {
             if (!ModelState.IsValid)
@@ -403,10 +381,10 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            ShotFavouritesDeleteResponse result;
+            IShotFavouritesDeleteResponse result;
             try
             {
-                result = this.shotFavouriteService.Delete(id, request.Token);
+                result = this.shotFavouriteService.Delete(id, request);
             }
             catch (Exception ex)
             {
@@ -416,17 +394,13 @@ namespace WTM.RestApi.Controllers
             return Ok(result);
         }
 
-        #endregion
-
-        #region Bookmarks
-
         /// <summary>
         /// Get shot bookmarks
         /// </summary>
         /// <returns></returns>
         [Route("{id:int}/bookmarks")]
         [HttpGet]
-        [ResponseType(typeof(ShotBookmarkResponse))]
+        [ResponseType(typeof(IShotBookmarkResponse))]
         public IHttpActionResult GetBookmarks([FromBody]BookmarksGetRequest request)
         {
             if (!ModelState.IsValid)
@@ -434,10 +408,10 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            ShotBookmarkResponse result;
+            IShotBookmarkResponse result;
             try
             {
-                result = this.shotBookmarkService.Get(request.Token, request.Start, request.Limit);
+                result = this.shotBookmarkService.Get(request);
             }
             catch (Exception ex)
             {
@@ -453,7 +427,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/bookmarks")]
         [HttpPost]
-        [ResponseType(typeof(ShotBookmarkAddResponse))]
+        [ResponseType(typeof(IShotBookmarkAddResponse))]
         public IHttpActionResult AddBookmarks(int id, [FromBody]BookmarksAddRequest request)
         {
             if (!ModelState.IsValid)
@@ -461,10 +435,10 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            ShotBookmarkAddResponse result;
+            IShotBookmarkAddResponse result;
             try
             {
-                result = this.shotBookmarkService.Add(id, request.Token);
+                result = this.shotBookmarkService.Add(id, request);
             }
             catch (Exception ex)
             {
@@ -480,7 +454,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/bookmarks")]
         [HttpDelete]
-        [ResponseType(typeof(ShotBookmarkDeleteResponse))]
+        [ResponseType(typeof(IShotBookmarkDeleteResponse))]
         public IHttpActionResult DeleteBookmark(int id, [FromBody]BookmarksDeleteRequest request)
         {
             if (!ModelState.IsValid)
@@ -488,10 +462,10 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            ShotBookmarkDeleteResponse result;
+            IShotBookmarkDeleteResponse result;
             try
             {
-                result = this.shotBookmarkService.Delete(id, request.Token);
+                result = this.shotBookmarkService.Delete(id, request);
             }
             catch (Exception ex)
             {
@@ -501,16 +475,12 @@ namespace WTM.RestApi.Controllers
             return Ok(result);
         }
 
-        #endregion
-
-        #region Tags
-
         /// <summary>
         /// Add tag to shot
         /// </summary>
         /// <returns></returns>
         [Route("{id:int}/tags")]
-        [ResponseType(typeof(ShotTagAddResponse))]
+        [ResponseType(typeof(IShotTagAddResponse))]
         public IHttpActionResult AddTag(int id, [FromBody]TagsAddRequest request)
         {
             if (!ModelState.IsValid)
@@ -518,10 +488,10 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            ShotTagAddResponse result;
+            IShotTagAddResponse result;
             try
             {
-                result = this.shotTagService.Add(request.Tag, request.Token);
+                result = this.shotTagService.Add(id, request);
             }
             catch (Exception ex)
             {
@@ -534,24 +504,21 @@ namespace WTM.RestApi.Controllers
         /// <summary>
         /// Delete tage from shot
         /// </summary>
-        /// <param name="id">Shot ID</param>
-        /// <param name="tag">Tag</param>
-        /// <param name="token">Session token</param>
         /// <returns></returns>
         [Route("{id:int}/tags")]
         [HttpDelete]
-        [ResponseType(typeof(ShotTagDeleteResponse))]
-        public IHttpActionResult DeleteTag(int id, [FromBody]TagsAddRequest request)
+        [ResponseType(typeof(IShotTagDeleteResponse))]
+        public IHttpActionResult DeleteTag(int id, [FromBody]TagsDeleteRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            ShotTagDeleteResponse result;
+            IShotTagDeleteResponse result;
             try
             {
-                result = this.shotTagService.Delete(request.Tag, request.Token);
+                result = this.shotTagService.Delete(id, request);
             }
             catch (Exception ex)
             {
@@ -560,7 +527,5 @@ namespace WTM.RestApi.Controllers
 
             return Ok(result);
         }
-
-        #endregion
     }
 }

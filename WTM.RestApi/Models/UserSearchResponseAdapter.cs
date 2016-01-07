@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using WTM.Crawler.Domain;
-using WTM.RestApi.Models;
 
-namespace WTM.RestApi.Services
+namespace WTM.RestApi.Models
 {
     internal class UserSearchResponseAdapter : IUserSearchResponse
     {
