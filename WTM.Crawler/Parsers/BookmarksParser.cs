@@ -32,13 +32,13 @@ namespace WTM.Crawler.Parsers
 
         public BookmarkCollection GetFirst30Bookmarks()
         {
-            return base.Parse();
+            return Parse();
         }
 
         public BookmarkCollection GetBookmarksByPage(int page)
         {
             var uri = new Uri(MakeUri(), "?page=" + page);
-            return base.Parse(uri);
+            return Parse(uri);
         }
 
         private bool ChangeOrderOfBookmarks(bool isOrderNewestToOlder)

@@ -20,7 +20,7 @@ namespace WTM.RestApi
             container.RegisterType<IShotBookmarkService, ShotBookmarkService>();
             container.RegisterType<IShoteRateService, ShoteRateService>();
             container.RegisterType<IShotFavouriteService, ShotFavouriteService>();
-            container.RegisterType<IShotOverviewService, ShotOverviewService>();
+            container.RegisterType<IShotSummaryService, ShotSummaryService>();
             container.RegisterType<IShotService, ShotService>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

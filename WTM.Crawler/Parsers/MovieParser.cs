@@ -20,9 +20,9 @@ namespace WTM.Crawler.Parsers
 
         public Movie GetById(string title)
         {
-            var movie = base.Parse(title);
+            var movie = Parse(title);
 
-            var baseUri = base.MakeUri(title);
+            var baseUri = MakeUri(title);
 
             var movieInfoHtmlDocument = GetMovieInfo(baseUri);
 

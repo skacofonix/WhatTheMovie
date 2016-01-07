@@ -20,7 +20,7 @@ namespace WTM.RestApi.Tests.Services
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.GetByDate(new ShotByDateRequest());
 
@@ -35,7 +35,7 @@ namespace WTM.RestApi.Tests.Services
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.SearchByTag(new ShotSearchTagRequest {Tags = new List<string> {"un"}});
 
@@ -50,7 +50,7 @@ namespace WTM.RestApi.Tests.Services
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.GetArchives(new ShotArchivesRequest());
 
@@ -65,7 +65,7 @@ namespace WTM.RestApi.Tests.Services
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.GetFeatureFilms(new ShotFeatureFilmsRequest());
 
@@ -80,7 +80,7 @@ namespace WTM.RestApi.Tests.Services
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotOverviewService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.GetNewSubmissions(new ShotNewSubmissionsRequest());
 

@@ -93,7 +93,6 @@
     <Compile Include="Parsers\SearchUserParser.cs" />
     <Compile Include="Parsers\SettingsParser.cs" />
     <Compile Include="Services\BookmarkService.cs" />
-    <Compile Include="Services\GuessTitleResponse.cs" />
     <Compile Include="Services\IContextService.cs" />
     <Compile Include="Services\IMovieService.cs" />
     <Compile Include="Services\IReadWriteService.cs" />

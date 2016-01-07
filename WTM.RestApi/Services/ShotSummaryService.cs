@@ -5,7 +5,7 @@ using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
-    public class ShotOverviewService : IShotOverviewService
+    public class ShotSummaryService : IShotSummaryService
     {
         private readonly Crawler.Services.IShotOverviewService shotOverviewService;
         private readonly Crawler.Services.IShotFeatureFilmsService shotFeatureFilmsService;
@@ -15,7 +15,7 @@ namespace WTM.RestApi.Services
         const int limitMax = 100;
         const int nbDayFeatureFilms = 30;
         
-        public ShotOverviewService(
+        public ShotSummaryService(
             Crawler.Services.IShotOverviewService shotOverviewService,
             Crawler.Services.IShotFeatureFilmsService shotFeatureFilmsService,
             Crawler.Services.IShotArchiveService shotArchiveService,

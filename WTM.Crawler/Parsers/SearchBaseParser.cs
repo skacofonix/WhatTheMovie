@@ -33,7 +33,7 @@ namespace WTM.Crawler.Parsers
             // case 3 : search have more than 1 result
 
             var noFoundNode = htmlDocument.DocumentNode.SelectSingleNode("//div[@id='main_white']/div[@class='col_left nopadding']/p");
-            if (noFoundNode != null && noFoundNode.InnerText.Contains($"No {this.SearchIdentifier} found"))
+            if (noFoundNode != null && noFoundNode.InnerText.Contains($"No {SearchIdentifier} found"))
             {
                 // case 1
                 instance.RangeItem = new Range(0, 0);

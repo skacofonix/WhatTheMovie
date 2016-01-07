@@ -18,7 +18,7 @@ namespace WTM.RestApi
             container.RegisterType<Crawler.Services.IUserService, Crawler.Services.UserService>(new HierarchicalLifetimeManager());
 
             container.RegisterType<IShotService, ShotService>(new HierarchicalLifetimeManager());
-            container.RegisterType<IShotOverviewService, ShotOverviewService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IShotSummaryService, ShotSummaryService>(new HierarchicalLifetimeManager());
             container.RegisterType<IShoteRateService, ShoteRateService>(new HierarchicalLifetimeManager());
             container.RegisterType<IShotFavouriteService, ShotFavouriteService>(new HierarchicalLifetimeManager());
             container.RegisterType<IShotBookmarkService, ShotBookmarkService>(new HierarchicalLifetimeManager());

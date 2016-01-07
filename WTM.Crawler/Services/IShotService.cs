@@ -8,9 +8,9 @@ namespace WTM.Crawler.Services
 
         Shot GetById(int id, string token = null);
 
-        Domain.GuessTitleResponse GuessTitle(int id, string title, string token = null);
+        GuessTitleResponse GuessTitle(int id, string title, string token = null);
 
-        Domain.GuessTitleResponse GetSolution(int id, string token = null);
+        GuessTitleResponse GetSolution(int id, string token = null);
 
         Rate Rate(int id, int score, string token = null);
 

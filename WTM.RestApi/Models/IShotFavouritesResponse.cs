@@ -4,6 +4,6 @@ namespace WTM.RestApi.Models
 {
     public interface IShotFavouritesResponse : IResponse, IPaginableResult
     {
-        IEnumerable<ShotOverviewResponse> Items { get; set; }
+        IEnumerable<IShotSummary> Items { get; set; }
     }
 }

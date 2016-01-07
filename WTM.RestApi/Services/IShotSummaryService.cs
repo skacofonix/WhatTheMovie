@@ -4,7 +4,7 @@ using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
 {
-    public interface IShotOverviewService
+    public interface IShotSummaryService
     {
         IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request);
 

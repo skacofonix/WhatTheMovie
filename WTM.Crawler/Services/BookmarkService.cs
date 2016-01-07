@@ -19,7 +19,7 @@ namespace WTM.Crawler.Services
 
         public BookmarkCollection GetBookmark(string token, int? page)
         {
-            return this.parser.GetBookmarksByPage(page ?? 1);
+            return parser.GetBookmarksByPage(page ?? 1);
         }
 
         public bool Add(int id, string token)

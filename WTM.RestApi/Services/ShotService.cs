@@ -33,11 +33,11 @@ namespace WTM.RestApi.Services
             return shotResponse;
         }
 
-        public IShotGuessSolution GuessSolution(int id, GuessSolutionRequest reques)
+        public IShotGuessSolution GuessTitle(int id, GuessSolutionRequest reques)
         {
             var guessTitleResponsePage = this.crawlerShotService.GuessTitle(id, reques.Title, reques.Token);
 
-            var shotGuessSolutionAdaptee = new ShotGuessSolutionAdapter(guessTitleResponsePage);
+            var shotGuessSolutionAdaptee = new ShotGuessSolution(guessTitleResponsePage);
 
             return shotGuessSolutionAdaptee;
         }

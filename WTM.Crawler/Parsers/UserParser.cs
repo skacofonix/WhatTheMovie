@@ -158,7 +158,7 @@ namespace WTM.Crawler.Parsers
 
             if (instance.Name != null)
             {
-                var baseUri = base.MakeUri(instance.Name);
+                var baseUri = MakeUri(instance.Name);
 
                 GetUploadInfos(baseUri, instance);
                 GetFavouritesInfos(baseUri, instance);

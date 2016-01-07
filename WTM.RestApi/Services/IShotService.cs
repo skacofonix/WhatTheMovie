@@ -6,7 +6,7 @@ namespace WTM.RestApi.Services
     {
         IShotResponse GetById(int id, ShotRequest request);
         IShotResponse GetRandom(ShotRandomRequest request);
-        IShotGuessSolution GuessSolution(int id, GuessSolutionRequest request);
+        IShotGuessSolution GuessTitle(int id, GuessSolutionRequest request);
         IShotSolutionResponse GetSolution(int id, ShotSolutionRequest request);
     }
 }

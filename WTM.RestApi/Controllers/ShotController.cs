@@ -11,17 +11,17 @@ namespace WTM.RestApi.Controllers
     public class ShotController : ControllerBase
     {
         private readonly IShotService shotService;
-        private readonly IShotOverviewService shotOverviewService;
+        private readonly IShotSummaryService shotSummaryService;
         private readonly IShoteRateService shotRateService;
         private readonly IShotFavouriteService shotFavouriteService;
         private readonly IShotBookmarkService shotBookmarkService;
         private readonly IShotTagService shotTagService;
         private readonly IMovieService movieService;
 
-        public ShotController(IShotService shotService, IShotOverviewService shotOverviewService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
+        public ShotController(IShotService shotService, IShotSummaryService shotSummaryService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
         {
             this.shotService = shotService;
-            this.shotOverviewService = shotOverviewService;
+            this.shotSummaryService = shotSummaryService;
             this.shotRateService = shotRateService;
             this.shotFavouriteService = shotFavouriteService;
             this.shotBookmarkService = shotBookmarkService;
@@ -102,7 +102,7 @@ namespace WTM.RestApi.Controllers
             IShotByDateResponse result;
             try
             {
-                result = this.shotOverviewService.GetByDate(request);
+                result = this.shotSummaryService.GetByDate(request);
             }
             catch (Exception ex)
             {
@@ -129,7 +129,7 @@ namespace WTM.RestApi.Controllers
             IShotSearchTagResponse response;
             try
             {
-                response = this.shotOverviewService.SearchByTag(request);
+                response = this.shotSummaryService.SearchByTag(request);
             }
             catch (Exception ex)
             {
@@ -184,7 +184,7 @@ namespace WTM.RestApi.Controllers
 
             try
             {
-                result = this.shotOverviewService.GetArchives(request);
+                result = this.shotSummaryService.GetArchives(request);
             }
             catch (Exception ex)
             {
@@ -212,7 +212,7 @@ namespace WTM.RestApi.Controllers
 
             try
             {
-                result = this.shotOverviewService.GetFeatureFilms(request);
+                result = this.shotSummaryService.GetFeatureFilms(request);
             }
             catch (Exception ex)
             {
@@ -240,7 +240,7 @@ namespace WTM.RestApi.Controllers
 
             try
             {
-                result = this.shotOverviewService.GetNewSubmissions(request);
+                result = this.shotSummaryService.GetNewSubmissions(request);
             }
             catch (Exception ex)
             {
@@ -256,7 +256,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("{id:int}/guess")]
         [ResponseType(typeof(IShotGuessSolution))]
-        public IHttpActionResult GuessSolution(int id, [FromBody]GuessSolutionRequest request)
+        public IHttpActionResult GuessTitle(int id, [FromBody]GuessSolutionRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -267,7 +267,7 @@ namespace WTM.RestApi.Controllers
 
             try
             {
-                result = this.shotService.GuessSolution(id, request);
+                result = this.shotService.GuessTitle(id, request);
             }
             catch (Exception ex)
             {
