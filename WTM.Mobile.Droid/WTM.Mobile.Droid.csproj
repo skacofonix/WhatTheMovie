@@ -219,10 +219,6 @@
       <Project>{0D34CC8D-817B-419D-8EC6-F524E65F0FCC}</Project>
       <Name>WTM.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WTM.Domain\WTM.Domain.csproj">
-      <Project>{260C6A5F-983C-43B5-BADE-AD285CDBA2B9}</Project>
-      <Name>WTM.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WTM.Mobile.Core\WTM.Mobile.Core.csproj">
       <Project>{1F38DFE6-3F8A-4E28-8FD1-4A722225F2E9}</Project>
       <Name>WTM.Mobile.Core</Name>
