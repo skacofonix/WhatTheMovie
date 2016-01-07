@@ -94,6 +94,81 @@ namespace WTM.RestApi.Controllers
         }
 
         /// <summary>
+        /// Guess shot title
+        /// </summary>
+        /// <returns></returns>
+        [Route("{id:int}/guess")]
+        [ResponseType(typeof(IShotGuessTitleResponse))]
+        public IHttpActionResult GuessTitle(int id, [FromBody]GuessSolutionRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotGuessTitleResponse result;
+
+            try
+            {
+                result = this.shotService.GuessTitle(id, request);
+            }
+            catch (WebException wex)
+            {
+                var response = wex.Response as HttpWebResponse;
+                if (response?.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
+
+                return InternalServerError(wex);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Get the solution (if it is available)
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="400">Invalid token</response>
+        [Route("{id:int}/solution")]
+        [ResponseType(typeof(IShotSolutionResponse))]
+        public IHttpActionResult GetSolution(int id, [FromUri]ShotSolutionRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotSolutionResponse result;
+
+            try
+            {
+                result = this.shotService.GetSolution(id, request);
+            }
+            catch (WebException wex)
+            {
+                var response = wex.Response as HttpWebResponse;
+                if (response?.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
+
+                return InternalServerError(wex);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
         /// Get shots by date
         /// </summary>
         /// <returns>Shots overview</returns>
@@ -206,7 +281,7 @@ namespace WTM.RestApi.Controllers
         /// Get shots old less than 30 days
         /// </summary>
         /// <returns></returns>
-        [Route("featuresilms")]
+        [Route("featuresfilms")]
         [HttpGet]
         [ResponseType(typeof(IShotFeatureFilmsResponse))]
         public IHttpActionResult GetFeatureFilms([FromUri]ShotFeatureFilmsRequest request)
@@ -249,81 +324,6 @@ namespace WTM.RestApi.Controllers
             try
             {
                 result = this.shotSummaryService.GetNewSubmissions(request);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
-        }
-
-        /// <summary>
-        /// Guess shot title
-        /// </summary>
-        /// <returns></returns>
-        [Route("{id:int}/guess")]
-        [ResponseType(typeof(IShotGuessTitleResponse))]
-        public IHttpActionResult GuessTitle(int id, [FromBody]GuessSolutionRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotGuessTitleResponse result;
-
-            try
-            {
-                result = this.shotService.GuessTitle(id, request);
-            }
-            catch (WebException wex)
-            {
-                var response = wex.Response as HttpWebResponse;
-                if (response?.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return NotFound();
-                }
-
-                return InternalServerError(wex);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
-        }
-
-        /// <summary>
-        /// Get the solution (if it is available)
-        /// </summary>
-        /// <returns></returns>
-        /// <response code="400">Invalid token</response>
-        [Route("{id:int}/solution")]
-        [ResponseType(typeof(IShotSolutionResponse))]
-        public IHttpActionResult GetSolution(int id, [FromUri]ShotSolutionRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotSolutionResponse result;
-
-            try
-            {
-                result = this.shotService.GetSolution(id, request);
-            }
-            catch (WebException wex)
-            {
-                var response = wex.Response as HttpWebResponse;
-                if (response?.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return NotFound();
-                }
-
-                return InternalServerError(wex);
             }
             catch (Exception ex)
             {
