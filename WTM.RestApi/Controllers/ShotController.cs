@@ -36,6 +36,7 @@ namespace WTM.RestApi.Controllers
         /// </summary>
         /// <returns>Shot</returns>
         /// <response code="404">Shot not found</response>
+        [Route("{id}")]
         [HttpGet]
         [ResponseType(typeof(IShotResponse))]
         public IHttpActionResult Get(int id, [FromUri]ShotRequest request)
@@ -54,6 +55,11 @@ namespace WTM.RestApi.Controllers
             catch (Exception ex)
             {
                 return InternalServerError(ex);
+            }
+
+            if (response.Id != id)
+            {
+                return NotFound();
             }
 
             return Ok(response);
@@ -271,6 +277,16 @@ namespace WTM.RestApi.Controllers
             {
                 result = this.shotService.GuessTitle(id, request);
             }
+            catch (WebException wex)
+            {
+                var response = wex.Response as HttpWebResponse;
+                if (response?.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
+
+                return InternalServerError(wex);
+            }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
@@ -293,7 +309,7 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            IShotSolutionResponse result = null;
+            IShotSolutionResponse result;
 
             try
             {

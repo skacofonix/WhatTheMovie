@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace WTM.RestApi.Models
 {
-    public interface IShot
+    public interface IShot : IIdentifiable
     {
-        int ShotId { get; }
+        int Id { get; }
 
-        Uri ImageUri { get; }
+        Uri Image { get; }
 
         //public Navigation Navigation { get; set; }
-
-        string MovieId { get; }
 
         string Poster { get; }
 
@@ -21,13 +19,13 @@ namespace WTM.RestApi.Models
 
         int? NbSolver { get; }
 
-        DateTime? PublidationDate { get; }
+        DateTime PublidationDate { get; }
 
         int? NumberOfDayBeforeSolution { get; }
 
         //SnapshotDifficulty? Difficulty { get; }
 
-        //ShotUserStatus? UserStatus { get; }
+        ShotUserStatus UserStatus { get; }
 
         bool IsGore { get; }
 
