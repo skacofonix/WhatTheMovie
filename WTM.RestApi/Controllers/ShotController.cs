@@ -38,6 +38,11 @@ namespace WTM.RestApi.Controllers
         [ResponseType(typeof(IShotResponse))]
         public IHttpActionResult Get(int id, [FromUri]ShotRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             IShotResponse response;
 
             try
@@ -58,10 +63,15 @@ namespace WTM.RestApi.Controllers
         /// <returns>Shot</returns>
         [Route("random")]
         [HttpGet]
-        [ResponseType(typeof(ShotResponse))]
+        [ResponseType(typeof(IShotResponse))]
         public IHttpActionResult GetRandom([FromUri]ShotRandomRequest request)
         {
-            ShotResponse response;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotResponse response;
 
             try
             {
@@ -106,7 +116,7 @@ namespace WTM.RestApi.Controllers
         /// Get shots by tags
         /// </summary>
         /// <returns>Shot</returns>
-        [Route("tag")]
+        [Route("searchbytags")]
         [HttpGet]
         [ResponseType(typeof(IShotSearchTagResponse))]
         public IHttpActionResult GetByTag([FromUri]ShotSearchTagRequest request)
@@ -133,7 +143,7 @@ namespace WTM.RestApi.Controllers
         /// Get shots by movie
         /// </summary>
         /// <returns></returns>
-        [Route("movie")]
+        [Route("searchbymovie")]
         [HttpGet]
         [ResponseType(typeof(IShotSearchMovieResponse))]
         public IHttpActionResult GetByMovie([FromUri]ShotSearchMovieRequest request)
@@ -171,6 +181,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotArchivesResponse result;
+
             try
             {
                 result = this.shotOverviewService.GetArchives(request);
@@ -187,7 +198,7 @@ namespace WTM.RestApi.Controllers
         /// Get shots old less than 30 days
         /// </summary>
         /// <returns></returns>
-        [Route("featureFilms")]
+        [Route("featuresilms")]
         [HttpGet]
         [ResponseType(typeof(IShotFeatureFilmsResponse))]
         public IHttpActionResult GetFeatureFilms([FromUri]ShotFeatureFilmsRequest request)
@@ -198,6 +209,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotFeatureFilmsResponse result;
+
             try
             {
                 result = this.shotOverviewService.GetFeatureFilms(request);
@@ -214,7 +226,7 @@ namespace WTM.RestApi.Controllers
         /// Return new shots
         /// </summary>
         /// <returns></returns>
-        [Route("newSubmissions")]
+        [Route("newsubmissions")]
         [HttpGet]
         [ResponseType(typeof(IShotNewSubmissionsResponse))]
         public IHttpActionResult GetNewSubmissions([FromUri]ShotNewSubmissionsRequest request)
@@ -225,6 +237,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotNewSubmissionsResponse result;
+
             try
             {
                 result = this.shotOverviewService.GetNewSubmissions(request);
@@ -251,6 +264,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotGuessSolution result;
+
             try
             {
                 result = this.shotService.GuessSolution(id, request);
@@ -272,7 +286,13 @@ namespace WTM.RestApi.Controllers
         [ResponseType(typeof(IShotSolutionResponse))]
         public IHttpActionResult GetSolution(int id, [FromUri]ShotSolutionRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             IShotSolutionResponse result;
+
             try
             {
                 result = this.shotService.GetSolution(id, request.Token);
@@ -301,6 +321,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotRateResponse result;
+
             try
             {
                 result = this.shotRateService.Rate(request);
@@ -317,7 +338,7 @@ namespace WTM.RestApi.Controllers
         /// Get shot favourites
         /// </summary>
         /// <returns></returns>
-        [Route("{id:int}/favourites")]
+        [Route("favourites")]
         [HttpPost]
         [ResponseType(typeof(IShotFavouritesResponse))]
         public IHttpActionResult GetFavourites([FromBody]FavouritesGetRequest request)
@@ -328,6 +349,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotFavouritesResponse result;
+
             try
             {
                 result = this.shotFavouriteService.Get(request);
@@ -355,6 +377,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotFavouritesAddResponse result;
+
             try
             {
                 result = this.shotFavouriteService.Add(id, request);
@@ -382,6 +405,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotFavouritesDeleteResponse result;
+
             try
             {
                 result = this.shotFavouriteService.Delete(id, request);
@@ -398,7 +422,7 @@ namespace WTM.RestApi.Controllers
         /// Get shot bookmarks
         /// </summary>
         /// <returns></returns>
-        [Route("{id:int}/bookmarks")]
+        [Route("bookmarks")]
         [HttpGet]
         [ResponseType(typeof(IShotBookmarkResponse))]
         public IHttpActionResult GetBookmarks([FromBody]BookmarksGetRequest request)
@@ -409,6 +433,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotBookmarkResponse result;
+
             try
             {
                 result = this.shotBookmarkService.Get(request);
@@ -436,6 +461,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotBookmarkAddResponse result;
+
             try
             {
                 result = this.shotBookmarkService.Add(id, request);
@@ -463,6 +489,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotBookmarkDeleteResponse result;
+
             try
             {
                 result = this.shotBookmarkService.Delete(id, request);
@@ -489,6 +516,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotTagAddResponse result;
+
             try
             {
                 result = this.shotTagService.Add(id, request);
@@ -516,6 +544,7 @@ namespace WTM.RestApi.Controllers
             }
 
             IShotTagDeleteResponse result;
+
             try
             {
                 result = this.shotTagService.Delete(id, request);
