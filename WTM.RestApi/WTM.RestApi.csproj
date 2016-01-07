@@ -127,7 +127,7 @@
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Models\IMovieResponse.cs" />
     <Compile Include="Models\IMovieSearchTagResponse.cs" />
-    <Compile Include="Models\IMovieSolution.cs" />
+    <Compile Include="Models\IShotMovieSolution.cs" />
     <Compile Include="Models\IMovieSummary.cs" />
     <Compile Include="Models\IShotBookmarkAddResponse.cs" />
     <Compile Include="Models\IShotBookmarkDeleteResponse.cs" />
@@ -141,9 +141,9 @@
     <Compile Include="Models\IShotTagAddResponse.cs" />
     <Compile Include="Models\IShotTagDeleteResponse.cs" />
     <Compile Include="Models\MovieSearchTagRequest.cs" />
-    <Compile Include="Models\MovieSolution.cs" />
+    <Compile Include="Models\ShotMovieSolution.cs" />
     <Compile Include="Models\MovieSummary.cs" />
-    <Compile Include="Models\ShotGuessSolution.cs" />
+    <Compile Include="Models\ShotGuessTitleResponse.cs" />
     <Compile Include="Models\ShotUserStatusAdapter.cs" />
     <Compile Include="Models\UserRequest.cs" />
     <Compile Include="Models\IUserLogoutResponse.cs" />
@@ -177,7 +177,7 @@
     <Compile Include="Models\IResponse.cs" />
     <Compile Include="Models\IPaginableRequest.cs" />
     <Compile Include="Models\IShot.cs" />
-    <Compile Include="Models\IShotGuessSolution.cs" />
+    <Compile Include="Models\IShotGuessTitleResponse.cs" />
     <Compile Include="Models\IShotSolution.cs" />
     <Compile Include="Models\UserLoginResponse.cs" />
     <Compile Include="Models\UserLogoutResponse.cs" />
@@ -235,7 +235,6 @@
     <Compile Include="Services\ShotSummaryService.cs" />
     <Compile Include="Models\ShotByDateResponse.cs" />
     <Compile Include="Services\ShotService.cs" />
-    <Compile Include="Models\ShotSolutionAdapter.cs" />
     <Compile Include="Models\ShotTagAddResponse.cs" />
     <Compile Include="Models\ShotTagDeleteResponse.cs" />
     <Compile Include="Services\ShotTagService.cs" />

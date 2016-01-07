@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WTM.RestApi.Models;
@@ -255,7 +257,7 @@ namespace WTM.RestApi.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("{id:int}/guess")]
-        [ResponseType(typeof(IShotGuessSolution))]
+        [ResponseType(typeof(IShotGuessTitleResponse))]
         public IHttpActionResult GuessTitle(int id, [FromBody]GuessSolutionRequest request)
         {
             if (!ModelState.IsValid)
@@ -263,7 +265,7 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            IShotGuessSolution result;
+            IShotGuessTitleResponse result;
 
             try
             {
@@ -291,11 +293,21 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            IShotSolutionResponse result;
+            IShotSolutionResponse result = null;
 
             try
             {
                 result = this.shotService.GetSolution(id, request);
+            }
+            catch (WebException wex)
+            {
+                var response = wex.Response as HttpWebResponse;
+                if (response?.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound();
+                }
+
+                return InternalServerError(wex);
             }
             catch (Exception ex)
             {

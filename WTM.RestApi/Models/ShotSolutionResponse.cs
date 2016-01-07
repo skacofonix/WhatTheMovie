@@ -1,14 +1,30 @@
-﻿using WTM.RestApi.Services;
+﻿using System.Runtime.Serialization;
+using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {
+    [DataContract]
     public class ShotSolutionResponse : IShotSolutionResponse
     {
-        public ShotSolutionResponse(IShotSolution shotSolution)
+        public ShotSolutionResponse(SolutionTitleResponse guessTitleResponse)
         {
-            this.ShotSolution = shotSolution;
+            if (guessTitleResponse.Available)
+            {
+                Available = true;
+
+                ShotMovieSolution = new ShotMovieSolution
+                {
+                    Id = guessTitleResponse.MovieId,
+                    Title = guessTitleResponse.OriginalTitle,
+                    Year = guessTitleResponse.Year.Value
+                };
+            }
         }
 
-        public IShotSolution ShotSolution { get; private set; }
+        [DataMember]
+        public bool Available { get; }
+
+        [DataMember(EmitDefaultValue = false)]
+        public IShotMovieSolution ShotMovieSolution { get; }
     }
 }

@@ -10,7 +10,7 @@ namespace WTM.Crawler.Services
 
         GuessTitleResponse GuessTitle(int id, string title, string token = null);
 
-        GuessTitleResponse GetSolution(int id, string token = null);
+        SolutionTitleResponse GetSolution(int id, string token = null);
 
         Rate Rate(int id, int score, string token = null);
 

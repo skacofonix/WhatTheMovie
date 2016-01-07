@@ -1,6 +1,6 @@
 namespace WTM.RestApi.Models
 {
-    public interface IMovieSolution
+    public interface IShotMovieSolution
     {
         string Id { get; }
         string Title { get; }

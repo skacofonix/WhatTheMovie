@@ -71,26 +71,25 @@ namespace WTM.Crawler.Services
                 var match = regex.Match(webResponseString);
                 if (match.Success)
                 {
-                    response = new GuessTitleResponse
-                    {
-                        MovieId = match.Groups[1].Value,
-                        OriginalTitle = match.Groups[3].Value,
-                        Year = Convert.ToInt32(match.Groups[4].Value),
-                        RightGuess = true
-                    };
+                    response.RightGuess = true;
+                    response.MovieId = match.Groups[1].Value;
+                    response.OriginalTitle = match.Groups[3].Value;
+                    response.Year = Convert.ToInt32(match.Groups[4].Value);
 
                     int shotId;
                     if (int.TryParse(match.Groups[2].Value, out shotId))
+                    {
                         response.ShotId = shotId;
+                    }
                 }
             }
 
             return response;
         }
 
-        public GuessTitleResponse GetSolution(int id, string token = null)
+        public SolutionTitleResponse GetSolution(int id, string token = null)
         {
-            GuessTitleResponse response = null;
+            var response = new SolutionTitleResponse {ShotId = id};
 
             var relativeUri = string.Join("/", "shot", id, "showsolution");
             var uri = new Uri(webClient.UriBase, relativeUri);
@@ -98,9 +97,15 @@ namespace WTM.Crawler.Services
 
             string webResponseString = null;
             using (var stream = webResponse.GetResponseStream())
+            { 
                 if (stream != null)
+                { 
                     using (var sr = new StreamReader(stream))
+                    {
                         webResponseString = sr.ReadToEnd();
+                    }
+                }
+            }
 
             if (webResponseString != null)
             {
@@ -108,12 +113,11 @@ namespace WTM.Crawler.Services
                 var match = regexTitle.Match(webResponseString);
                 if (match.Success)
                 {
-                    response = new GuessTitleResponse
-                    {
-                        OriginalTitle = match.Groups[1].Value,
-                        Year = Convert.ToInt32(match.Groups[2].Value),
-                        MovieId = match.Groups[3].Value
-                    };
+                    response.Available = true;
+
+                    response.MovieId = match.Groups[3].Value;
+                    response.OriginalTitle = match.Groups[1].Value;
+                    response.Year = Convert.ToInt32(match.Groups[2].Value);
                 }
             }
 

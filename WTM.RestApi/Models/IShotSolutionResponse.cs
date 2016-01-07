@@ -2,5 +2,7 @@
 {
     public interface IShotSolutionResponse : IResponse
     {
+        bool Available { get; }
+        IShotMovieSolution ShotMovieSolution { get; }
     }
 }

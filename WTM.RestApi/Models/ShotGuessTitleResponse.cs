@@ -4,15 +4,15 @@ using WTM.Crawler.Domain;
 namespace WTM.RestApi.Models
 {
     [DataContract]
-    public class ShotGuessSolution : IShotGuessSolution
+    public class ShotGuessTitleResponse : IShotGuessTitleResponse
     {
-        public ShotGuessSolution(GuessTitleResponse guessTitleResponse)
+        public ShotGuessTitleResponse(GuessTitleResponse guessTitleResponse)
         {
             if (guessTitleResponse.RightGuess)
             {
                 this.Success = true;
 
-                this.MovieSolution = new MovieSolution
+                this.ShotMovieSolution = new ShotMovieSolution
                 {
                     Id = guessTitleResponse.MovieId,
                     Title = guessTitleResponse.OriginalTitle,
@@ -25,6 +25,6 @@ namespace WTM.RestApi.Models
         public bool Success { get; private set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public IMovieSolution MovieSolution { get; private set; }
+        public IShotMovieSolution ShotMovieSolution { get; private set; }
     }
 }

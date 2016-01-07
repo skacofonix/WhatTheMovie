@@ -33,24 +33,22 @@ namespace WTM.RestApi.Services
             return shotResponse;
         }
 
-        public IShotGuessSolution GuessTitle(int id, GuessSolutionRequest reques)
+        public IShotGuessTitleResponse GuessTitle(int id, GuessSolutionRequest reques)
         {
             var guessTitleResponsePage = this.crawlerShotService.GuessTitle(id, reques.Title, reques.Token);
 
-            var shotGuessSolutionAdaptee = new ShotGuessSolution(guessTitleResponsePage);
+            var shotGuessSolutionAdaptee = new ShotGuessTitleResponse(guessTitleResponsePage);
 
             return shotGuessSolutionAdaptee;
         }
 
         public IShotSolutionResponse GetSolution(int id, ShotSolutionRequest request)
         {
-            var guessTitleResponsePage = this.crawlerShotService.GetSolution(id, request.Token);
+            var solutionTitleResponse = this.crawlerShotService.GetSolution(id, request.Token);
 
-            var shotSolutionAdaptee = new ShotSolutionAdapter(guessTitleResponsePage);
+            var result = new ShotSolutionResponse(solutionTitleResponse);
 
-            var shotSolutionResponse = new ShotSolutionResponse(shotSolutionAdaptee);
-
-            return shotSolutionResponse;
+            return result;
         }
     }
 }

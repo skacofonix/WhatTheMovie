@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public class MovieSolution : IMovieSolution
+    public class ShotMovieSolution : IShotMovieSolution
     {
         public string Id { get; set; }
 
