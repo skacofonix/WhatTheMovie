@@ -32,6 +32,60 @@ namespace WTM.RestApi.Controllers
         }
 
         /// <summary>
+        /// Get today's shots
+        /// </summary>
+        /// <returns></returns>
+        [Route("")]
+        [HttpGet]
+        [ResponseType(typeof(ShotsResponse))]
+        public IHttpActionResult Get([FromUri]ShotsRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotsResponse result;
+            try
+            {
+                result = this.shotSummaryService.Get(request);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Get shots by date
+        /// </summary>
+        /// <returns></returns>
+        [Route("date")]
+        [HttpGet]
+        [ResponseType(typeof(ShotByDateResponse))]
+        public IHttpActionResult GetByDate([FromUri]ShotByDateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotByDateResponse result;
+            try
+            {
+                result = this.shotSummaryService.GetByDate(request);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
         /// Get shot by ID
         /// </summary>
         /// <returns>Shot</returns>
@@ -159,33 +213,6 @@ namespace WTM.RestApi.Controllers
                 }
 
                 return InternalServerError(wex);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
-        }
-
-        /// <summary>
-        /// Get shots by date
-        /// </summary>
-        /// <returns>Shots overview</returns>
-        [Route("date")]
-        [HttpGet]
-        [ResponseType(typeof(ShotByDateResponse))]
-        public IHttpActionResult GetByDate([FromUri]ShotByDateRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotByDateResponse result;
-            try
-            {
-                result = this.shotSummaryService.GetByDate(request);
             }
             catch (Exception ex)
             {

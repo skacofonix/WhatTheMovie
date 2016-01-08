@@ -4,6 +4,6 @@ namespace WTM.RestApi.Models
 {
     public interface IShotBookmarkResponse : IResponse, IPaginableResult
     {
-        IEnumerable<IShotSummary> Items { get; set; }
+        IEnumerable<IShotSummary> Items { get; }
     }
 }

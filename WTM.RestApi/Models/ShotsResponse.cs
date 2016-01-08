@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WTM.RestApi.Services;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotByDateResponse : IShotByDateResponse
+    public class ShotsResponse : IShotsResponse
     {
-        public ShotByDateResponse(DateTime date, IRange range, int totalCount, IEnumerable<ShotSummary> items)
+        public ShotsResponse(DateTime date, IRange range, int totalCount, IEnumerable<ShotSummary> enumerable)
         {
             this.Date = date;
             this.Range = range;
             this.TotalCount = totalCount;
-            this.Items = items;
+            this.Items = enumerable;
         }
 
         public DateTime Date { get; private set; }

@@ -77,7 +77,7 @@ namespace WTM.RestApi.Tests.Services
             Check.That(simpleResult.Range.Min).Equals(1);
             Check.That(simpleResult.Range.Max).Equals(1);
             Check.That(simpleResult.TotalCount).Equals(1);
-            Check.That(simpleResult.UserSearchSummaries.First().Username).Equals("captainOblivious");
+            Check.That(simpleResult.Items.First().Username).Equals("captainOblivious");
         }
     }
 }

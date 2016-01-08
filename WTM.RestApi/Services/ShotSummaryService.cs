@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WTM.RestApi.Controllers;
 using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
@@ -29,18 +30,49 @@ namespace WTM.RestApi.Services
             this.dateTimeService = dateTimeService;
         }
 
+        public IShotsResponse Get(ShotsRequest request)
+        {
+            var date = this.dateTimeService.GetDateTime();
+            var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(date);
+
+            IShotsResponse result;
+            if (shotSummaryCollection != null)
+            {
+                var skip = request?.Start ?? 0;
+                var take = request?.Limit ?? limitMax;
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take).ToList();
+                var start = request?.Start ?? 1;
+                var range = new Range(start, start + filteredShots.Count);
+                var totalCount = shotSummaryCollection.Shots.Count;
+                result = new ShotsResponse(date, range, totalCount, filteredShots.Select(x => new ShotSummary(x)));
+            }
+            else
+            {
+                result = new ShotsResponse(date, new Range(0, 0), 0, new List<ShotSummary>());
+            }
+
+            return result;
+        }
+
         public IShotByDateResponse GetByDate(ShotByDateRequest request)
         {
-            var dateCriteria = request.Date;
-            var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(dateCriteria);
+            var date = request?.Date ?? this.dateTimeService.GetDateTime();
+            var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(date);
 
             IShotByDateResponse result = null;
             if (shotSummaryCollection != null)
             {
-                var skip = request.Start.GetValueOrDefault(0);
-                var take = request.Limit.GetValueOrDefault(limitMax);
-                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result = new ShotByDateResponse(filteredShots.Select(x => new ShotSummary(x)));
+                var skip = request?.Start ?? 0;
+                var take = request?.Limit ?? limitMax;
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take).ToList();
+                var start = request?.Start ?? 1;
+                var range = new Range(start, start + filteredShots.Count);
+                var totalCount = shotSummaryCollection.Shots.Count;
+                result = new ShotByDateResponse(date, range, totalCount, filteredShots.Select(x => new ShotSummary(x)));
+            }
+            else
+            {
+                result = new ShotByDateResponse(date, new Range(0, 0), 0, new List<ShotSummary>());
             }
 
             return result;

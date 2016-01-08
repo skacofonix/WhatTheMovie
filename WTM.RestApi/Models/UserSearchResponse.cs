@@ -18,11 +18,12 @@ namespace WTM.RestApi.Models
                 userSearchSummary.Add(userSummaryAdaptee);
             }
 
-            UserSearchSummaries = userSearchSummary;
+            Items = userSearchSummary;
         }
 
-        public int TotalCount { get; set; }
-        public IRange Range { get; set; }
-        public List<IUserSearchSummary> UserSearchSummaries { get; }
+        public int TotalCount { get; private set; }
+        public int DisplayCount => Items.Count;
+        public IRange Range { get; private set; }
+        public List<IUserSearchSummary> Items { get; private set; }
     }
 }

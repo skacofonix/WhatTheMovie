@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WTM.RestApi.Models
 {
@@ -9,8 +10,9 @@ namespace WTM.RestApi.Models
             this.Items = items;
         }
 
-        public IEnumerable<IShotSummary> Items { get; set; }
-        public int TotalCount { get; }
-        public IRange Range { get; }
+        public IEnumerable<IShotSummary> Items { get; private set; }
+        public int TotalCount { get; private set; }
+        public int DisplayCount => Items.Count();
+        public IRange Range { get; private set; }
     }
 }

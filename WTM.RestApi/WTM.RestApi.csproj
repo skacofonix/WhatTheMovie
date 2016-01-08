@@ -123,6 +123,8 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\ShotsRequest.cs" />
+    <Compile Include="Models\ShotsResponse.cs" />
     <Compile Include="Models\ShotSearchMovieResponse.cs" />
     <Compile Include="Models\BookmarkAdapter.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
@@ -214,6 +216,7 @@
     <Compile Include="Services\IShotFavouriteService.cs" />
     <Compile Include="Models\IShotFeatureFilmsResponse.cs" />
     <Compile Include="Models\IShotNewSubmissionsResponse.cs" />
+    <Compile Include="Services\IShotsResponse.cs" />
     <Compile Include="Services\IShotSummaryService.cs" />
     <Compile Include="Models\IShotByDateResponse.cs" />
     <Compile Include="Services\IShotService.cs" />
