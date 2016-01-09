@@ -1,4 +1,6 @@
-﻿namespace WTM.RestApi.Models
+﻿using System.Runtime.Serialization;
+
+namespace WTM.RestApi.Models
 {
     public enum ShotUserStatus
     {
