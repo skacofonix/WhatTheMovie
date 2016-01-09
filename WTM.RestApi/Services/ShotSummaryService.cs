@@ -32,7 +32,7 @@ namespace WTM.RestApi.Services
 
         public IShotsResponse Get(ShotsRequest request)
         {
-            var date = this.dateTimeService.GetDateTime();
+            var date = request?.Date ?? this.dateTimeService.GetDateTime();
             var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(date);
 
             IShotsResponse result;
@@ -49,47 +49,6 @@ namespace WTM.RestApi.Services
             else
             {
                 result = new ShotsResponse(date, new Range(0, 0), 0, new List<ShotSummary>());
-            }
-
-            return result;
-        }
-
-        public IShotByDateResponse GetByDate(ShotByDateRequest request)
-        {
-            var date = request?.Date ?? this.dateTimeService.GetDateTime();
-            var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(date);
-
-            IShotByDateResponse result = null;
-            if (shotSummaryCollection != null)
-            {
-                var skip = request?.Start ?? 0;
-                var take = request?.Limit ?? limitMax;
-                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take).ToList();
-                var start = request?.Start ?? 1;
-                var range = new Range(start, start + filteredShots.Count);
-                var totalCount = shotSummaryCollection.Shots.Count;
-                result = new ShotByDateResponse(date, range, totalCount, filteredShots.Select(x => new ShotSummary(x)));
-            }
-            else
-            {
-                result = new ShotByDateResponse(date, new Range(0, 0), 0, new List<ShotSummary>());
-            }
-
-            return result;
-        }
-
-        public IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request)
-        {
-            var formattedTags = string.Join(" ", request.Tags);
-            var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, token: request.Token);
-
-            IShotSearchTagResponse result = null;
-            if (shotSummaryCollection != null)
-            {
-                var skip = request.Start ?? 0;
-                var take = request.Limit.GetValueOrDefault(limitMax);
-                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result = new ShotSearchTagResponse(filteredShots.Select(x => new ShotSummary(x)));
             }
 
             return result;
@@ -150,6 +109,23 @@ namespace WTM.RestApi.Services
                 var take = request.Limit.GetValueOrDefault(limitMax);
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
                 result = new ShotNewSubmissionsResponse(filteredShots.Select(x => new ShotSummary(x)));
+            }
+
+            return result;
+        }
+
+        public IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request)
+        {
+            var formattedTags = string.Join(" ", request.Tags);
+            var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, token: request.Token);
+
+            IShotSearchTagResponse result = null;
+            if (shotSummaryCollection != null)
+            {
+                var skip = request.Start ?? 0;
+                var take = request.Limit.GetValueOrDefault(limitMax);
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
+                result = new ShotSearchTagResponse(filteredShots.Select(x => new ShotSummary(x)));
             }
 
             return result;

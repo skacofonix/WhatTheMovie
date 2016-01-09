@@ -58,32 +58,6 @@ namespace WTM.RestApi.Controllers
             return Ok(result);
         }
 
-        /// <summary>
-        /// Get shots by date
-        /// </summary>
-        /// <returns></returns>
-        [Route("date")]
-        [HttpGet]
-        [ResponseType(typeof(ShotByDateResponse))]
-        public IHttpActionResult GetByDate([FromUri]ShotByDateRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotByDateResponse result;
-            try
-            {
-                result = this.shotSummaryService.GetByDate(request);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
-        }
 
         /// <summary>
         /// Get shot by ID

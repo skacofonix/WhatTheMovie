@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using WTM.RestApi.Controllers;
+﻿
 using WTM.RestApi.Models;
 
 namespace WTM.RestApi.Services
@@ -9,14 +7,12 @@ namespace WTM.RestApi.Services
     {
         IShotsResponse Get(ShotsRequest request);
 
-        IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request);
-
-        IShotByDateResponse GetByDate(ShotByDateRequest request);
-
         IShotArchivesResponse GetArchives(ShotArchivesRequest request);
 
         IShotFeatureFilmsResponse GetFeatureFilms(ShotFeatureFilmsRequest request);
 
         IShotNewSubmissionsResponse GetNewSubmissions(ShotNewSubmissionsRequest request);
+
+        IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request);
     }
 }

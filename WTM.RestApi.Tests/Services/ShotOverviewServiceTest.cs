@@ -13,21 +13,6 @@ namespace WTM.RestApi.Tests.Services
     public class ShotOverviewServiceTest
     {
         [Test]
-        public void ShouldFindByDate()
-        {
-            var shotOverviewCrawler = new Mock<WTM.Crawler.Services.IShotOverviewService>();
-            var shotFeatureFilmsCrawler = new Mock<IShotFeatureFilmsService>();
-            var shotArchiveCrawler = new Mock<IShotArchiveService>();
-            var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
-            var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
-
-            var shotOverviewResponses = shotOverviewService.GetByDate(new ShotByDateRequest());
-
-            Check.That(shotOverviewResponses.Items.Any()).IsTrue();
-        }
-
-        [Test]
         public void ShouldFindByTag()
         {
             var shotOverviewCrawler = new Mock<WTM.Crawler.Services.IShotOverviewService>();
