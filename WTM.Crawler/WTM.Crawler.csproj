@@ -106,6 +106,7 @@
     <Compile Include="Services\IShotService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ServerDateTimeService.cs" />
+    <Compile Include="Domain\ShotSearchResult.cs" />
     <Compile Include="WebClientWTM.cs" />
     <Compile Include="HtmlParser.cs" />
     <Compile Include="IHtmlParser.cs" />

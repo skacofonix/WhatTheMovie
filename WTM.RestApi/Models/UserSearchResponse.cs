@@ -1,29 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {
     internal class UserSearchResponse : IUserSearchResponse
     {
-        public UserSearchResponse(IEnumerable<UserSummary> userSummaryList, IRange range, int totalCount)
+        public UserSearchResponse(IEnumerable<UserSummary> crawlerUserSummaries, IRange displayRange, int totalCount)
         {
-            this.Range = range;
+            this.DisplayRange = displayRange;   
             this.TotalCount = totalCount;
-
-            var userSearchSummary = new List<IUserSearchSummary>();
-
-            foreach (var userSummary in userSummaryList)
-            {
-                var userSummaryAdaptee = new UserSearchSummary(userSummary);
-                userSearchSummary.Add(userSummaryAdaptee);
-            }
-
-            Items = userSearchSummary;
+            Items = crawlerUserSummaries.Select(userSummary => new UserSearchSummary(userSummary)).Cast<IUserSearchSummary>().ToList();
         }
 
         public int TotalCount { get; private set; }
-        public int DisplayCount => Items.Count;
-        public IRange Range { get; private set; }
-        public List<IUserSearchSummary> Items { get; private set; }
+        public int DisplayCount => Items.Count();
+        public IRange DisplayRange { get; private set; }
+        public IEnumerable<IUserSearchSummary> Items { get; private set; }
     }
 }

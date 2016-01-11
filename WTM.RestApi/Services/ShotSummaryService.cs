@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WTM.RestApi.Controllers;
+using WTM.Crawler.Domain;
 using WTM.RestApi.Models;
+using Range = WTM.RestApi.Models.Range;
+using ShotSummary = WTM.RestApi.Models.ShotSummary;
 
 namespace WTM.RestApi.Services
 {
@@ -117,18 +119,51 @@ namespace WTM.RestApi.Services
         public IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request)
         {
             var formattedTags = string.Join(" ", request.Tags);
-            var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, token: request.Token);
 
-            IShotSearchTagResponse result = null;
-            if (shotSummaryCollection != null)
+            const int pageSize = 50;
+
+            var start = request.Start.GetValueOrDefault(1);
+            var limit = request.Limit.GetValueOrDefault(pageSize);
+            var pageStart = (int)Math.Ceiling(start / (double)pageSize);
+            var pageEnd = (int)Math.Ceiling((start + limit) / (double)pageSize);
+            var rangeMax = Math.Max(0, start + limit - 1);
+
+            var userSummaryList = new List<WTM.Crawler.Domain.IShotSummary>();
+
+            var totalCount = 0;
+            var pageIndex = pageStart;
+            var continueLoop = true;
+            do
             {
-                var skip = request.Start ?? 0;
-                var take = request.Limit.GetValueOrDefault(limitMax);
-                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result = new ShotSearchTagResponse(filteredShots.Select(x => new ShotSummary(x)));
-            }
+                var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, pageIndex);
+                userSummaryList.AddRange(shotSummaryCollection.ShotSummaries);
+                totalCount = shotSummaryCollection.Count;
 
-            return result;
+                pageIndex++;
+
+                var realPageEnd = (int)Math.Ceiling(shotSummaryCollection.Count / (double)pageSize);
+                if (pageIndex > realPageEnd)
+                {
+                    continueLoop = false;
+                    rangeMax = shotSummaryCollection.RangeItem.MaxValue;
+                }
+
+                if (pageIndex > pageEnd)
+                {
+                    continueLoop = false;
+                }
+            } while (continueLoop);
+
+            var skipWithOffset = start - (pageStart - 1) * pageSize - 1;
+            var shotSummaryListFiltered = userSummaryList.Skip(skipWithOffset).Take(limit).ToList();
+
+            if (userSummaryList.Count == 0)
+            {
+                start = 0;
+            }
+            var range = new Models.Range(start, rangeMax);
+
+            return new ShotSearchTagResponse(shotSummaryListFiltered, range, totalCount);
         }
     }
 }

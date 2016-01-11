@@ -7,6 +7,6 @@ namespace WTM.RestApi.Models
         public IEnumerable<IShotSummary> Items { get; set; }
         public int DisplayCount { get; }
         public int TotalCount { get; }
-        public IRange Range { get; }
+        public IRange DisplayRange { get; }
     }
 }

@@ -5,14 +5,16 @@ namespace WTM.RestApi.Models
 {
     public class ShotSearchTagResponse : IShotSearchTagResponse
     {
-        public ShotSearchTagResponse(IEnumerable<IShotSummary> shotOverviews)
+        public ShotSearchTagResponse(IEnumerable<Crawler.Domain.IShotSummary> crawlerShotSummaries, IRange range, int totalCount)
         {
-            this.Items = shotOverviews;
+            this.TotalCount = totalCount;
+            this.DisplayRange = range;
+            this.Items = crawlerShotSummaries.Select(shotSummary => new ShotSummary(shotSummary)).Cast<IShotSummary>().ToList();
         }
 
-        public int DisplayCount { get; private set; }
-        public int TotalCount => Items.Count();
-        public IRange Range { get; private set; }
+        public int TotalCount { get; private set; }
+        public int DisplayCount => this.Items.Count();
+        public IRange DisplayRange { get; private set; }
         public IEnumerable<IShotSummary> Items { get; private set; }
     }
 }

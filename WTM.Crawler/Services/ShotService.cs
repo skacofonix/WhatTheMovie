@@ -128,17 +128,11 @@ namespace WTM.Crawler.Services
         {
             throw new NotImplementedException();
         }
-
-        public ShotSummaryCollection Search(string tag, int? page = null, string token = null)
+        
+        public ShotSearchResult Search(string tag, int? page = null)
         {
-            var result = shotSearcher.Search(tag, page);
-
-            var shotSummaryCollection = new ShotSummaryCollection
-            {
-                Shots = result.Items.Cast<IShotSummary>().ToList()
-            };
-
-            return shotSummaryCollection;
+            var searchResultCollection = shotSearcher.Search(tag, page);
+            return new ShotSearchResult(searchResultCollection);
         }
     }
 }

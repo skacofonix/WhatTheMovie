@@ -27,8 +27,8 @@ namespace WTM.RestApi.Tests.Services
             var simpleResult = this.userService.Search(new UserSearchRequest {Filter = "ama"});
 
             Check.That(simpleResult).IsNotNull();
-            Check.That(simpleResult.Range.Min).Equals(1);
-            Check.That(simpleResult.Range.Max).Equals(31);
+            Check.That(simpleResult.DisplayRange.Min).Equals(1);
+            Check.That(simpleResult.DisplayRange.Max).Equals(31);
         }
 
         [Test]
@@ -37,8 +37,8 @@ namespace WTM.RestApi.Tests.Services
             var simpleResult = this.userService.Search(new UserSearchRequest { Filter = "ama", Start = 102});
 
             Check.That(simpleResult).IsNotNull();
-            Check.That(simpleResult.Range.Min).Equals(102);
-            Check.That(simpleResult.Range.Max).Equals(132);
+            Check.That(simpleResult.DisplayRange.Min).Equals(102);
+            Check.That(simpleResult.DisplayRange.Max).Equals(132);
         }
 
         [Test]
@@ -46,8 +46,8 @@ namespace WTM.RestApi.Tests.Services
         {
             var simpleResult = this.userService.Search(new UserSearchRequest { Filter = "ama", Start = 102, Limit = 100});
 
-            Check.That(simpleResult.Range.Min).Equals(102);
-            Check.That(simpleResult.Range.Max).Equals(202);
+            Check.That(simpleResult.DisplayRange.Min).Equals(102);
+            Check.That(simpleResult.DisplayRange.Max).Equals(202);
         }
 
         [Test]
@@ -55,8 +55,8 @@ namespace WTM.RestApi.Tests.Services
         {
             var simpleResult = this.userService.Search(new UserSearchRequest { Filter = "ama", Start = 400, Limit = 100 });
 
-            Check.That(simpleResult.Range.Min).Equals(400);
-            Check.That(simpleResult.Range.Max).IsLessThan(500);
+            Check.That(simpleResult.DisplayRange.Min).Equals(400);
+            Check.That(simpleResult.DisplayRange.Max).IsLessThan(500);
         }
 
         [Test]
@@ -64,8 +64,8 @@ namespace WTM.RestApi.Tests.Services
         {
             var simpleResult = this.userService.Search(new UserSearchRequest { Filter = "azezaeezarazerzearazr" });
 
-            Check.That(simpleResult.Range.Min).Equals(0);
-            Check.That(simpleResult.Range.Max).Equals(0);
+            Check.That(simpleResult.DisplayRange.Min).Equals(0);
+            Check.That(simpleResult.DisplayRange.Max).Equals(0);
             Check.That(simpleResult.TotalCount).Equals(0);
         }
 
@@ -74,8 +74,8 @@ namespace WTM.RestApi.Tests.Services
         {
             var simpleResult = this.userService.Search(new UserSearchRequest { Filter = "captainOblivious" });
 
-            Check.That(simpleResult.Range.Min).Equals(1);
-            Check.That(simpleResult.Range.Max).Equals(1);
+            Check.That(simpleResult.DisplayRange.Min).Equals(1);
+            Check.That(simpleResult.DisplayRange.Max).Equals(1);
             Check.That(simpleResult.TotalCount).Equals(1);
             Check.That(simpleResult.Items.First().Username).Equals("captainOblivious");
         }

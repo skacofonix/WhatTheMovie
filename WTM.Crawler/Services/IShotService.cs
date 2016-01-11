@@ -14,6 +14,6 @@ namespace WTM.Crawler.Services
 
         Rate Rate(int id, int score, string token = null);
 
-        ShotSummaryCollection Search(string tag, int? page = null, string token = null);
+        ShotSearchResult Search(string tag, int? page = null);
     }
 }

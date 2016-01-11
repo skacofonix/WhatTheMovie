@@ -33,27 +33,27 @@ namespace WTM.RestApi.Services
         {
             throw new NotImplementedException();
         }
-      
-        public IUserSearchResponse Search(UserSearchRequest filter)
+
+        public IUserSearchResponse Search(UserSearchRequest request)
         {
             const int pageSize = 30;
 
-            var start = filter.Start.GetValueOrDefault(1);
-            var limit = filter.Limit.GetValueOrDefault(pageSize);
+            var start = request.Start.GetValueOrDefault(1);
+            var limit = request.Limit.GetValueOrDefault(pageSize);
             var pageStart = (int)Math.Ceiling(start / (double)pageSize);
             var pageEnd = (int)Math.Ceiling((start + limit) / (double)pageSize);
+            var rangeMax = Math.Max(0, start + limit - 1);
 
             var userSummaryList = new List<UserSummary>();
 
+            var totalCount = 0;
             var pageIndex = pageStart;
             var continueLoop = true;
-            UserSearchResult userSearchResult = null;
-
-            var rangeMax = start + limit;
             do
             {
-                userSearchResult = this.crawlerUserService.Search(filter.Filter, pageIndex);
+                var userSearchResult = this.crawlerUserService.Search(request.Filter, pageIndex);
                 userSummaryList.AddRange(userSearchResult.UserSummaries);
+                totalCount = userSearchResult.Count;
 
                 pageIndex++;
 
@@ -77,12 +77,9 @@ namespace WTM.RestApi.Services
             {
                 start = 0;
             }
-
             var range = new Models.Range(start, rangeMax);
 
-            var result = new UserSearchResponse(userSummaryListFiltered, range, userSearchResult.Count);
-
-            return result;
+            return new UserSearchResponse(userSummaryListFiltered, range, totalCount);
         }
     }
 }

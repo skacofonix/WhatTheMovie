@@ -4,6 +4,6 @@ namespace WTM.RestApi.Models
 {
     public interface IUserSearchResponse : IResponse, IPaginableResult
     {
-        List<IUserSearchSummary> Items { get; }
+        IEnumerable<IUserSearchSummary> Items { get; }
     }
 }

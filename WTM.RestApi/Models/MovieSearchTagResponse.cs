@@ -4,6 +4,6 @@ namespace WTM.RestApi.Models
     {
         public int DisplayCount { get; }
         public int TotalCount { get; }
-        public IRange Range { get; }
+        public IRange DisplayRange { get; }
     }
 }
