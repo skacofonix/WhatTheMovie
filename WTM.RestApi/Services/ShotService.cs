@@ -25,9 +25,9 @@ namespace WTM.RestApi.Services
             return new ShotResponse(shotPage);
         }
 
-        public IShotGuessTitleResponse GuessTitle(int id, GuessSolutionRequest reques)
+        public IShotGuessTitleResponse GuessTitle(int id, GuessSolutionRequest request)
         {
-            var guessTitleResponsePage = this.crawlerShotService.GuessTitle(id, reques.Title, reques.Token);
+            var guessTitleResponsePage = this.crawlerShotService.GuessTitle(id, request.Title, request.Token);
 
             return new ShotGuessTitleResponse(guessTitleResponsePage);
         }

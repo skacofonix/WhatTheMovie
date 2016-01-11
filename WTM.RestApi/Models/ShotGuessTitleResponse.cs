@@ -26,5 +26,7 @@ namespace WTM.RestApi.Models
 
         [DataMember(EmitDefaultValue = false)]
         public IShotMovieSolution ShotMovieSolution { get; private set; }
+
+        public string Username { get; }
     }
 }

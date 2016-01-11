@@ -1,6 +1,4 @@
-﻿using WTM.RestApi.Models;
-
-namespace WTM.RestApi.Services
+﻿namespace WTM.RestApi.Models
 {
     public interface IShotsResponse : IResponse, IPaginableResult
     {

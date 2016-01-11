@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public interface IShotSearchMovieResponse
+    public interface IShotSearchMovieResponse : IResponse, IPaginableResult
     {
     }
 }

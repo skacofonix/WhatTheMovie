@@ -19,6 +19,8 @@ namespace WTM.RestApi.Services
 
         public ShotBookmarkResponse Get(BookmarksGetRequest request)
         {
+            var start = request.Start.GetValueOrDefault(1);
+
             var bookmarks = new List<Bookmark>();
 
             var firstPage = this.bookmarkService.GetBookmark(request.Token, null);
@@ -45,9 +47,9 @@ namespace WTM.RestApi.Services
                 bookmarks.AddRange(firstPage.Bookmarks);
             }
 
-            var shotOverviewResponses = bookmarks.Select(s => new BookmarkAdapter(s)).Cast<WTM.RestApi.Models.ShotSummary>();
+            var shotOverviewResponses = bookmarks.Select(s => new BookmarkAdapter(s)).Cast<Models.ShotSummary>();
 
-            return new ShotBookmarkResponse(shotOverviewResponses);
+            return new ShotBookmarkResponse(shotOverviewResponses, start, 0);
         }
 
         public ShotBookmarkAddResponse Add(int id, BookmarksAddRequest request)

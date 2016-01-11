@@ -197,7 +197,7 @@ namespace WTM.RestApi.Controllers
         }
 
         /// <summary>
-        /// Get shots by tags
+        /// Get shots by tag
         /// </summary>
         /// <returns>Shot</returns>
         [Route("searchbytags")]

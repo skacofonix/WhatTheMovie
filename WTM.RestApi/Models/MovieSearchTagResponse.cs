@@ -2,8 +2,9 @@ namespace WTM.RestApi.Models
 {
     public class MovieSearchTagResponse : IMovieSearchTagResponse
     {
-        public int DisplayCount { get; }
         public int TotalCount { get; }
-        public IRange DisplayRange { get; }
+        public int DisplayCount { get; }
+        public int DisplayMin { get; }
+        public int DisplayMax { get; }
     }
 }

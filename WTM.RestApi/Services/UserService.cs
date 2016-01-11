@@ -42,7 +42,6 @@ namespace WTM.RestApi.Services
             var limit = request.Limit.GetValueOrDefault(pageSize);
             var pageStart = (int)Math.Ceiling(start / (double)pageSize);
             var pageEnd = (int)Math.Ceiling((start + limit) / (double)pageSize);
-            var rangeMax = Math.Max(0, start + limit - 1);
 
             var userSummaryList = new List<UserSummary>();
 
@@ -61,7 +60,6 @@ namespace WTM.RestApi.Services
                 if (pageIndex > realPageEnd)
                 {
                     continueLoop = false;
-                    rangeMax = userSearchResult.RangeItem.MaxValue;
                 }
 
                 if (pageIndex > pageEnd)
@@ -77,9 +75,8 @@ namespace WTM.RestApi.Services
             {
                 start = 0;
             }
-            var range = new Models.Range(start, rangeMax);
 
-            return new UserSearchResponse(userSummaryListFiltered, range, totalCount);
+            return new UserSearchResponse(userSummaryListFiltered, start, totalCount);
         }
     }
 }

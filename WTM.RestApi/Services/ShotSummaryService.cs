@@ -44,13 +44,12 @@ namespace WTM.RestApi.Services
                 var take = request?.Limit ?? limitMax;
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take).ToList();
                 var start = request?.Start ?? 1;
-                var range = new Range(start, start + filteredShots.Count);
                 var totalCount = shotSummaryCollection.Shots.Count;
-                result = new ShotsResponse(date, range, totalCount, filteredShots.Select(x => new ShotSummary(x)));
+                result = new ShotsResponse(date, start, totalCount, filteredShots.Select(x => new ShotSummary(x)));
             }
             else
             {
-                result = new ShotsResponse(date, new Range(0, 0), 0, new List<ShotSummary>());
+                result = new ShotsResponse(date, 0, 0, new List<ShotSummary>());
             }
 
             return result;
@@ -124,7 +123,6 @@ namespace WTM.RestApi.Services
             var limit = request.Limit.GetValueOrDefault(pageSize);
             var pageStart = (int)Math.Ceiling(start / (double)pageSize);
             var pageEnd = (int)Math.Ceiling((start + limit) / (double)pageSize);
-            var rangeMax = Math.Max(0, start + limit - 1);
 
             var userSummaryList = new List<WTM.Crawler.Domain.IShotSummary>();
 
@@ -134,10 +132,13 @@ namespace WTM.RestApi.Services
             do
             {
                 var shotSummaryCollection = this.shotOverviewService.Search(request.Tag, pageIndex);
-                if (shotSummaryCollection?.ShotSummaries != null)
+                if (shotSummaryCollection != null)
                 {
-                    userSummaryList.AddRange(shotSummaryCollection.ShotSummaries);
-                    totalCount = shotSummaryCollection.ShotSummaries.Count;
+                    totalCount = shotSummaryCollection.Count;
+                    if (shotSummaryCollection.ShotSummaries != null)
+                    {
+                        userSummaryList.AddRange(shotSummaryCollection.ShotSummaries);
+                    }
                 }
 
                 pageIndex++;
@@ -146,10 +147,6 @@ namespace WTM.RestApi.Services
                 if (pageIndex > realPageEnd)
                 {
                     continueLoop = false;
-                    if (shotSummaryCollection?.RangeItem != null)
-                    {
-                        rangeMax = shotSummaryCollection.RangeItem.MaxValue;
-                    }
                 }
 
                 if (pageIndex > pageEnd)
@@ -161,13 +158,7 @@ namespace WTM.RestApi.Services
             var skipWithOffset = start - (pageStart - 1) * pageSize - 1;
             var shotSummaryListFiltered = userSummaryList.Skip(skipWithOffset).Take(limit).ToList();
 
-            if (userSummaryList.Count == 0)
-            {
-                start = 0;
-            }
-            var range = new Models.Range(start, rangeMax);
-
-            return new ShotSearchTagResponse(shotSummaryListFiltered, range, totalCount);
+            return new ShotSearchTagResponse(shotSummaryListFiltered, start, totalCount);
         }
     }
 }

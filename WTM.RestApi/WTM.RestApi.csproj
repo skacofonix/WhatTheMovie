@@ -123,7 +123,9 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\IPaginableResult.cs" />
     <Compile Include="Models\MovieSearchTagResponse.cs" />
+    <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\ShotsRequest.cs" />
     <Compile Include="Models\ShotsResponse.cs" />
     <Compile Include="Models\ShotSearchMovieResponse.cs" />
@@ -167,7 +169,6 @@
     <Compile Include="Models\IShotSearchMovieResponse.cs" />
     <Compile Include="Models\ShotSearchMovieRequest.cs" />
     <Compile Include="Models\ShotByDateRequest.cs" />
-    <Compile Include="Models\IPaginableResult.cs" />
     <Compile Include="Models\IShotSearchTagResponse.cs" />
     <Compile Include="Models\ShotSearchTagResponse.cs" />
     <Compile Include="Models\BookmarksAddRequest.cs" />
@@ -217,9 +218,8 @@
     <Compile Include="Services\IShotFavouriteService.cs" />
     <Compile Include="Models\IShotFeatureFilmsResponse.cs" />
     <Compile Include="Models\IShotNewSubmissionsResponse.cs" />
-    <Compile Include="Services\IShotsResponse.cs" />
+    <Compile Include="Models\IShotsResponse.cs" />
     <Compile Include="Services\IShotSummaryService.cs" />
-    <Compile Include="Models\IShotByDateResponse.cs" />
     <Compile Include="Services\IShotService.cs" />
     <Compile Include="Services\IShotTagService.cs" />
     <Compile Include="Models\IUserResponse.cs" />
@@ -236,7 +236,6 @@
     <Compile Include="Models\ShotFavouritesResponse.cs" />
     <Compile Include="Models\ShotNewSubmissionsResponse.cs" />
     <Compile Include="Services\ShotSummaryService.cs" />
-    <Compile Include="Models\ShotByDateResponse.cs" />
     <Compile Include="Services\ShotService.cs" />
     <Compile Include="Models\ShotTagAddResponse.cs" />
     <Compile Include="Models\ShotTagDeleteResponse.cs" />

@@ -5,7 +5,7 @@ namespace WTM.RestApi.Models
 {
     public class ShotBookmarkResponse : IShotBookmarkResponse
     {
-        public ShotBookmarkResponse(IEnumerable<IShotSummary> items)
+        public ShotBookmarkResponse(IEnumerable<IShotSummary> items, int startIndex, int totalCount)
         {
             this.Items = items;
         }
@@ -13,6 +13,7 @@ namespace WTM.RestApi.Models
         public IEnumerable<IShotSummary> Items { get; private set; }
         public int TotalCount { get; private set; }
         public int DisplayCount => Items.Count();
-        public IRange DisplayRange { get; private set; }
+        public int DisplayMin { get; }
+        public int DisplayMax { get; }
     }
 }

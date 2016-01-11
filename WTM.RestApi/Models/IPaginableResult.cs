@@ -4,6 +4,7 @@ namespace WTM.RestApi.Models
     {
         int TotalCount { get; }
         int DisplayCount { get; }
-        IRange DisplayRange { get; }
+        int DisplayMin { get; }
+        int DisplayMax { get; }
     }
 }
