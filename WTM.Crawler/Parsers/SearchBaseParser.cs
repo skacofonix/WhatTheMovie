@@ -28,9 +28,17 @@ namespace WTM.Crawler.Parsers
         protected override void ParseHtmlDocument(SearchResultCollection instance, HtmlDocument htmlDocument)
         {
             // Identify here the use case of result search
+            // case 0 : search invalid "Please specify at least 3 characters"
             // case 1 : search have zero result
             // case 2 : search have one result
             // case 3 : search have more than 1 result
+
+            var errorNode = htmlDocument.DocumentNode.SelectSingleNode("//div[@id='container']/div[contains(@class,'flash_error')]");
+            if (errorNode != null)
+            {
+                // case 0
+                throw new ArgumentException("Please specify at least 3 characters.");
+            }
 
             var noFoundNode = htmlDocument.DocumentNode.SelectSingleNode("//div[@id='main_white']/div[@class='col_left nopadding']/p");
             if (noFoundNode != null && noFoundNode.InnerText.Contains($"No {SearchIdentifier} found"))

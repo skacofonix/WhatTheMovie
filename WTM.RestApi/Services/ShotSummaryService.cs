@@ -118,8 +118,6 @@ namespace WTM.RestApi.Services
 
         public IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request)
         {
-            var formattedTags = string.Join(" ", request.Tags);
-
             const int pageSize = 50;
 
             var start = request.Start.GetValueOrDefault(1);
@@ -135,17 +133,23 @@ namespace WTM.RestApi.Services
             var continueLoop = true;
             do
             {
-                var shotSummaryCollection = this.shotOverviewService.Search(formattedTags, pageIndex);
-                userSummaryList.AddRange(shotSummaryCollection.ShotSummaries);
-                totalCount = shotSummaryCollection.Count;
+                var shotSummaryCollection = this.shotOverviewService.Search(request.Tag, pageIndex);
+                if (shotSummaryCollection?.ShotSummaries != null)
+                {
+                    userSummaryList.AddRange(shotSummaryCollection.ShotSummaries);
+                    totalCount = shotSummaryCollection.ShotSummaries.Count;
+                }
 
                 pageIndex++;
 
-                var realPageEnd = (int)Math.Ceiling(shotSummaryCollection.Count / (double)pageSize);
+                var realPageEnd = (int)Math.Ceiling(totalCount / (double)pageSize);
                 if (pageIndex > realPageEnd)
                 {
                     continueLoop = false;
-                    rangeMax = shotSummaryCollection.RangeItem.MaxValue;
+                    if (shotSummaryCollection?.RangeItem != null)
+                    {
+                        rangeMax = shotSummaryCollection.RangeItem.MaxValue;
+                    }
                 }
 
                 if (pageIndex > pageEnd)
