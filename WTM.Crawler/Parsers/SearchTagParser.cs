@@ -36,9 +36,11 @@ namespace WTM.Crawler.Parsers
                 var hrefValue = hrefNode.GetAttributeValue("href", null);
                 if (!string.IsNullOrEmpty(hrefValue))
                 {
-                    int? shotId = hrefValue.ExtractAndParseInt(new Regex("shot/(\\d)*"));
+                    int? shotId = hrefValue.ExtractAndParseInt(new Regex("shot/(\\d*)"));
                     if (shotId.HasValue)
+                    {
                         shotSummary.ShotId = shotId.Value;
+                    }
                 }
 
                 // Image
@@ -48,7 +50,9 @@ namespace WTM.Crawler.Parsers
                 {
                     Uri uri = null;
                     if (Uri.TryCreate(rawUri, UriKind.Absolute, out uri))
+                    {
                         shotSummary.ImageUri = uri;
+                    }
                 }
             }
         }
