@@ -10,7 +10,7 @@ using WTM.RestApi.Services;
 namespace WTM.RestApi.Controllers
 {
     [RoutePrefix("api/shots")]
-    public class ShotController : ControllerBase
+    public class ShotsController : ControllerBase
     {
         private readonly IShotService shotService;
         private readonly IShotSummaryService shotSummaryService;
@@ -20,7 +20,7 @@ namespace WTM.RestApi.Controllers
         private readonly IShotTagService shotTagService;
         private readonly IMovieService movieService;
 
-        public ShotController(IShotService shotService, IShotSummaryService shotSummaryService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
+        public ShotsController(IShotService shotService, IShotSummaryService shotSummaryService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
         {
             this.shotService = shotService;
             this.shotSummaryService = shotSummaryService;
@@ -32,7 +32,7 @@ namespace WTM.RestApi.Controllers
         }
 
         /// <summary>
-        /// Get today's shots
+        /// Get shots
         /// </summary>
         /// <returns></returns>
         [Route("")]
@@ -57,7 +57,6 @@ namespace WTM.RestApi.Controllers
 
             return Ok(result);
         }
-
 
         /// <summary>
         /// Get shot by ID

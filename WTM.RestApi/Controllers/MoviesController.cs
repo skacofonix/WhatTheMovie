@@ -6,11 +6,11 @@ using WTM.RestApi.Models;
 namespace WTM.RestApi.Controllers
 {
     [RoutePrefix("api/movie")]
-    public class MovieController : ControllerBase
+    public class MoviesController : ControllerBase
     {
         [Route("{name}")]
         [HttpGet]
-        [ResponseType(typeof(IMovieResponse))]
+        [ResponseType(typeof(MovieResponse))]
         public IHttpActionResult Get([FromUri]string name)
         {
             return InternalServerError(new NotImplementedException());
@@ -18,7 +18,7 @@ namespace WTM.RestApi.Controllers
 
         [Route("tag")]
         [HttpGet]
-        [ResponseType(typeof(IMovieSearchTagResponse))]
+        [ResponseType(typeof(MovieSearchTagResponse))]
         public IHttpActionResult GetByTag(MovieSearchTagRequest request)
         {
             return InternalServerError(new NotImplementedException());

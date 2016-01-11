@@ -9,18 +9,18 @@ using WTM.RestApi.Services;
 namespace WTM.RestApi.Controllers
 {
     [RoutePrefix("api/users")]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
 
-        public UserController(IUserService userService)
+        public UsersController(IUserService userService)
         {
             this.userService = userService;
         }
 
         [Route("{username}")]
         [HttpGet]   
-        [ResponseType(typeof(IUserResponse))]
+        [ResponseType(typeof(UserResponse))]
         public IHttpActionResult Get(string username) 
         {
             if (string.IsNullOrWhiteSpace(username))
@@ -48,7 +48,7 @@ namespace WTM.RestApi.Controllers
 
         [Route("search")]
         [HttpGet]
-        [ResponseType(typeof(IUserSearchResponse))]
+        [ResponseType(typeof(UserSearchResponse))]
         public IHttpActionResult Search([FromUri]UserSearchRequest request)
         {
             if (!ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace WTM.RestApi.Controllers
 
         [Route("login")]
         [HttpPost]
-        [ResponseType(typeof(IUserLoginResponse))]
+        [ResponseType(typeof(UserLoginResponse))]
         public IHttpActionResult Login(UserLoginRequest request)
         {
             if (!ModelState.IsValid)
@@ -99,7 +99,7 @@ namespace WTM.RestApi.Controllers
 
         [Route("logout")]
         [HttpGet]
-        [ResponseType(typeof(IUserLogoutResponse))]
+        [ResponseType(typeof(UserLogoutResponse))]
         public IHttpActionResult Logout(UserLogoutRequest request)
         {
             if (string.IsNullOrEmpty(request.Token))
