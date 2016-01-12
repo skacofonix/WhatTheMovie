@@ -11,5 +11,7 @@ namespace WTM.RestApi.Services
         IUserLogoutResponse Logout(UserLogoutRequest request);
 
         IUserSearchResponse Search(UserSearchRequest request);
+
+        IUserSummary GetUserSummaryByToken(string token);
     }
 }

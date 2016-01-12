@@ -25,7 +25,7 @@ namespace WTM.RestApi.Models
 
         //SnapshotDifficulty? Difficulty { get; }
 
-        ShotUserStatus UserStatus { get; }
+        ShotUserStatus? UserStatus { get; }
 
         bool IsGore { get; }
 

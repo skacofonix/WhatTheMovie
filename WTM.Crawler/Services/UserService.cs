@@ -18,9 +18,25 @@ namespace WTM.Crawler.Services
             authenticateService = new AuthenticateService(webClient, htmlParser);
         }
 
-        public User GetByUsername(string username)
+        public User Get(string username)
         {
             return userParser.GetByUsername(username);
+        }
+
+        public UserSummary GetSummary(string username)
+        {
+            var user = this.Get(username);
+
+            var userSummary = new UserSummary
+            {
+                Username = user.Name,
+                AvatarUrl = user.ImageUri,
+                Country = user.Country,
+                ProfilUrl = null,
+                Rank = null
+            };
+
+            return userSummary;
         }
 
         public UserSearchResult Search(string search, int? page = null)

@@ -2,7 +2,7 @@ using System;
 
 namespace WTM.RestApi.Models
 {
-    public interface IUserSearchSummary
+    public interface IUserSummary
     {
         string Username { get; }
         string Rank { get; }

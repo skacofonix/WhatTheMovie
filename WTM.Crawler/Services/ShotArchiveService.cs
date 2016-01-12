@@ -8,9 +8,9 @@ namespace WTM.Crawler.Services
             : base(webClient, htmlParser)
         { }
 
-        public ShotSummaryCollection GetArchiveOneMonthOld()
+        public ShotSummaryCollection GetArchiveOneMonthOld(string token = null)
         {
-            return OverviewShotParser.ParseArchiveOneMonthOld();
+            return OverviewShotParser.ParseArchiveOneMonthOld(token);
         }
     }
 }   

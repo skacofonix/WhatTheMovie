@@ -5,7 +5,9 @@ namespace WTM.Crawler.Services
 {
     public interface IUserService
     {
-        User GetByUsername(string username);
+        User Get(string username);
+
+        UserSummary GetSummary(string username);
 
         UserSearchResult Search(string search, int? page = null);
 

@@ -14,6 +14,7 @@ namespace WTM.RestApi.Services
         private readonly Crawler.Services.IShotFeatureFilmsService shotFeatureFilmsService;
         private readonly Crawler.Services.IShotArchiveService shotArchiveService;
         private readonly Crawler.Services.IShotNewSubmissionsService shotNewSubmissionService;
+        private readonly Crawler.Services.IUserService userService;
         private readonly IDateTimeService dateTimeService;
         const int limitMax = 100;
         const int nbDayFeatureFilms = 30;
@@ -23,33 +24,41 @@ namespace WTM.RestApi.Services
             Crawler.Services.IShotFeatureFilmsService shotFeatureFilmsService,
             Crawler.Services.IShotArchiveService shotArchiveService,
             Crawler.Services.IShotNewSubmissionsService shotNewSubmissionService,
+            Crawler.Services.IUserService userService,
             IDateTimeService dateTimeService)
         {
             this.shotOverviewService = shotOverviewService;
             this.shotFeatureFilmsService = shotFeatureFilmsService;
             this.shotArchiveService = shotArchiveService;
             this.shotNewSubmissionService = shotNewSubmissionService;
+            this.userService = userService;
             this.dateTimeService = dateTimeService;
         }
 
         public IShotsResponse Get(ShotsRequest request)
         {
             var date = request?.Date ?? this.dateTimeService.GetDateTime();
-            var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(date);
+            var shotSummaryCollection = this.shotOverviewService.GetShotSummaryByDate(date, request?.Token);
 
             IShotsResponse result;
             if (shotSummaryCollection != null)
             {
+                Crawler.Domain.UserSummary userSummary = null;
+                if (shotSummaryCollection.ConnectedUsername != null)
+                {
+                    userSummary = userService.GetSummary(shotSummaryCollection.ConnectedUsername);
+                }
+
                 var skip = request?.Start ?? 0;
                 var take = request?.Limit ?? limitMax;
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take).ToList();
                 var start = request?.Start ?? 1;
                 var totalCount = shotSummaryCollection.Shots.Count;
-                result = new ShotsResponse(date, start, totalCount, filteredShots.Select(x => new ShotSummary(x)));
+                result = new ShotsResponse(date, start, totalCount, userSummary, filteredShots.Select(x => new ShotSummary(x)));
             }
             else
             {
-                result = new ShotsResponse(date, 0, 0, new List<ShotSummary>());
+                result = new ShotsResponse(date, 0, 0, null, new List<ShotSummary>());
             }
 
             return result;

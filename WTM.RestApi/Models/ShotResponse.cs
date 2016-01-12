@@ -39,7 +39,7 @@ namespace WTM.RestApi.Models
         public int? NumberOfDayBeforeSolution => this.shot.NumberOfDayBeforeSolution;
 
         [DataMember]
-        public ShotUserStatus UserStatus => ShotUserStatusAdapter.Adapt(this.shot.UserStatus.Value);
+        public ShotUserStatus? UserStatus => ShotUserStatusAdapter.Adapt(this.shot.UserStatus);
 
         [DataMember]
         public bool IsGore => this.shot.IsGore;

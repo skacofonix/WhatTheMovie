@@ -1,6 +1,6 @@
 ﻿namespace WTM.RestApi.Models
 {
-    public interface IShotsResponse : IResponse, IPaginableResult
+    public interface IShotsResponse : IResponse, IPaginableResult, IAuthenticated
     {
     }
 }

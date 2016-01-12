@@ -28,42 +28,38 @@ namespace WTM.Crawler.Parsers
             return base.Parse();
         }
 
-        public ShotSummaryCollection ParseOverviewShotByDate()
+        public ShotSummaryCollection ParseOverviewShotByDate(string token = null)
         {
+            SetUserToken(token);
             return base.Parse();
         }
 
-        public ShotSummaryCollection ParseByDate(DateTime date)
+        public ShotSummaryCollection ParseByDate(DateTime date, string token = null)
         {
-            return ParseOverviewShotByDate(date);
+            return ParseOverviewShotByDate(date, token);
         }
 
-        public ShotSummaryCollection ParseByDate(int year, int month, int day)
+        public ShotSummaryCollection ParseNewSubmission(string token = null)
         {
-            var date = new DateTime(year, month, day);
-            return ParseOverviewShotByDate(date);
+            return ParseCustomOverview("newsubmissions", token);
         }
 
-        public ShotSummaryCollection ParseNewSubmission()
+        public ShotSummaryCollection ParseFeatureFilmsToday(string token = null)
         {
-            return ParseCustomOverview("newsubmissions");
+            return ParseCustomOverview("featurefilms", token);
         }
 
-        public ShotSummaryCollection ParseFeatureFilmsToday()
+        public ShotSummaryCollection ParseArchiveOneMonthOld(string token = null)
         {
-            return ParseCustomOverview("featurefilms");
+            return ParseCustomOverview("thearchive", token);
         }
 
-        public ShotSummaryCollection ParseArchiveOneMonthOld()
-        {
-            return ParseCustomOverview("thearchive");
-        }
-
-        private ShotSummaryCollection ParseCustomOverview(string identifier)
+        private ShotSummaryCollection ParseCustomOverview(string identifier, string token = null)
         {
             var uri = new Uri(WebClient.UriBase, identifier);
             HtmlDocument document;
 
+            SetUserToken(token);
             using (var stream = WebClient.GetStream(uri))
             {
                 document = HtmlParser.GetHtmlDocument(stream);
@@ -76,8 +72,9 @@ namespace WTM.Crawler.Parsers
             return instance;
         }
 
-        private ShotSummaryCollection ParseOverviewShotByDate(DateTime date)
+        private ShotSummaryCollection ParseOverviewShotByDate(DateTime date, string token = null)
         {
+            SetUserToken(token);
             var stringDate = date.ToString(DateFormat);
             return base.Parse(stringDate);
         }
@@ -138,20 +135,23 @@ namespace WTM.Crawler.Parsers
             {
                 var shotSummary = new ShotSummary();
 
-                var nodeUnsolved = GetFirstValue(nodeIterator.Current, ".//@class");
-                if (!string.IsNullOrEmpty(nodeUnsolved))
+                if (instance.ConnectedUsername != null)
                 {
-                    switch (nodeUnsolved)
+                    var nodeUnsolved = GetFirstValue(nodeIterator.Current, ".//@class");
+                    if (!string.IsNullOrEmpty(nodeUnsolved))
                     {
-                        case "unsolved":
-                            shotSummary.UserStatus = ShotUserStatus.NeverSolved;
-                            break;
-                        case "punsolved":
-                            shotSummary.UserStatus = ShotUserStatus.Unsolved;
-                            break;
-                        case "solved":
-                            shotSummary.UserStatus = ShotUserStatus.Solved;
-                            break;
+                        switch (nodeUnsolved)
+                        {
+                            case "unsolved":
+                                shotSummary.UserStatus = ShotUserStatus.NeverSolved;
+                                break;
+                            case "punsolved":
+                                shotSummary.UserStatus = ShotUserStatus.Unsolved;
+                                break;
+                            case "solved":
+                                shotSummary.UserStatus = ShotUserStatus.Solved;
+                                break;
+                        }
                     }
                 }
 

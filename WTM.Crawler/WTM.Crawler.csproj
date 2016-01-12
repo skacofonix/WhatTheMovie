@@ -48,6 +48,7 @@
     <Compile Include="Domain\DifficultyOptions.cs" />
     <Compile Include="Domain\Error.cs" />
     <Compile Include="Domain\Gender.cs" />
+    <Compile Include="Domain\IUserConnected.cs" />
     <Compile Include="Domain\SolutionTitleResponse.cs" />
     <Compile Include="Domain\GuessTitleResponse.cs" />
     <Compile Include="Domain\IResponse.cs" />

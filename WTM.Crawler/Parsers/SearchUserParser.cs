@@ -52,7 +52,7 @@ namespace WTM.Crawler.Parsers
             var usernameNode = autographNode.SelectSingleNode("//strong[@class='nametag']");
             if (usernameNode != null)
             {
-                userSummary.Username = usernameNode.InnerText;
+                userSummary.ConnectedUsername = usernameNode.InnerText;
             }
 
             userSummary.ProfilUrl = null;
@@ -71,7 +71,7 @@ namespace WTM.Crawler.Parsers
                 instance.Items.Add(userSummary);
 
                 var usernameNode = tagNode.SelectSingleNode("./a");
-                userSummary.Username = usernameNode.GetAttributeValue("title", null);
+                userSummary.ConnectedUsername = usernameNode.GetAttributeValue("title", null);
                 var profilHref = usernameNode.GetAttributeValue("href", null);
                 if (profilHref != null)
                 {

@@ -15,7 +15,9 @@ namespace WTM.Crawler.Domain
 
         [IgnoreDataMember]
         public IList<ParseInfo> ParseInfos { get; set; }
-        
+
+        public string ConnectedUsername { get; set; }
+
         [DataMember]
         public DateTime? Date { get; set; }
 
@@ -24,5 +26,7 @@ namespace WTM.Crawler.Domain
 
         [DataMember]
         public ShotType? ShotType { get; set; }
+
+        public UserSummary UserSummary { get; set; }
     }
 }

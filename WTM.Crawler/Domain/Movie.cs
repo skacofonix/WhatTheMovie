@@ -21,6 +21,8 @@ namespace WTM.Crawler.Domain
 
         public IList<ParseInfo> ParseInfos { get; set; }
 
+        public string ConnectedUsername { get; set; }
+
         [DataMember(IsRequired = true)]
         public string OriginalTitle { get;  set; }
 

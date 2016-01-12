@@ -5,8 +5,11 @@ namespace WTM.RestApi.Models
 {
     public static class ShotUserStatusAdapter
     {
-        public static ShotUserStatus Adapt(WTM.Crawler.Domain.ShotUserStatus source)
+        public static ShotUserStatus? Adapt(WTM.Crawler.Domain.ShotUserStatus? source)
         {
+            if (!source.HasValue)
+                return null;
+
             switch (source)
             {
                 case Crawler.Domain.ShotUserStatus.Unsolved:

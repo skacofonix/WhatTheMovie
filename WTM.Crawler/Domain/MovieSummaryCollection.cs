@@ -10,7 +10,8 @@ namespace WTM.Crawler.Domain
         public TimeSpan ParseDuration { get; set; }
 
         public IList<ParseInfo> ParseInfos { get; set; }
-       
+        public string ConnectedUsername { get; set; }
+
         public DateTime? Date { get; set; }
         
         public IList<MovieSummary> Movies { get; set; }

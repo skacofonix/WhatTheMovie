@@ -10,6 +10,7 @@ namespace WTM.Crawler.Domain
         public TimeSpan ParseDuration { get; set; }
 
         public IList<ParseInfo> ParseInfos { get; set; }
+        public string ConnectedUsername { get; set; }
 
         public bool ShowSolved { get; set; }
         

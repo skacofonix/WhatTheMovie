@@ -6,16 +6,16 @@ namespace WTM.RestApi.Models
 {
     internal class UserSearchResponse : IUserSearchResponse
     {
-        public UserSearchResponse(IEnumerable<UserSummary> crawlerUserSummaries, int startIndex, int totalCount)
+        public UserSearchResponse(IEnumerable<Crawler.Domain.UserSummary> crawlerUserSummaries, int startIndex, int totalCount)
         {
             this.TotalCount = totalCount;
-            Items = crawlerUserSummaries.Select(userSummary => new UserSearchSummary(userSummary)).Cast<IUserSearchSummary>().ToList();
+            Items = crawlerUserSummaries.Select(userSummary => new UserSummary(userSummary)).Cast<IUserSummary>().ToList();
         }
 
         public int TotalCount { get; private set; }
         public int DisplayCount => Items.Count();
         public int DisplayMin { get; private set; }
         public int DisplayMax => this.DisplayMin + this.DisplayCount;
-        public IEnumerable<IUserSearchSummary> Items { get; private set; }
+        public IEnumerable<IUserSummary> Items { get; private set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
-using WTM.Crawler.Domain;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace WTM.RestApi.Models
 {
@@ -12,10 +13,13 @@ namespace WTM.RestApi.Models
             this.crawlerShotSummary = crawlerShotSummary;
         }
 
+        [Required]
         public int ShotId => this.crawlerShotSummary.ShotId;
 
+        [Required]
         public Uri ImageUri => this.crawlerShotSummary.ImageUri;
 
-        public ShotUserStatus UserStatus => ShotUserStatusAdapter.Adapt(this.crawlerShotSummary.UserStatus);
+        [DataMember(EmitDefaultValue = false)]
+        public ShotUserStatus? UserStatus => ShotUserStatusAdapter.Adapt(this.crawlerShotSummary.UserStatus);
     }
 }

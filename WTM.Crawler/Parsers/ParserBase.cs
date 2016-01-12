@@ -72,6 +72,7 @@ namespace WTM.Crawler.Parsers
 
             try
             {
+                ParseUserInformations(instance, document);
                 ParseHtmlDocument(instance, document);
             }
             catch (Exception ex)
@@ -84,6 +85,15 @@ namespace WTM.Crawler.Parsers
             instance.ParseDateTime = DateTime.Now;
 
             return instance;
+        }
+
+        protected virtual void ParseUserInformations(T instance, HtmlDocument htmlDocument)
+        {
+            var userNode = htmlDocument.DocumentNode.SelectSingleNode("//ul[@id='secondary_nav']/li[@class='secondary_nav'][2]/a/span");
+            if (userNode != null)
+            {
+                instance.ConnectedUsername = userNode.InnerText;
+            }
         }
 
         protected abstract void ParseHtmlDocument(T instance, HtmlDocument htmlDocument);

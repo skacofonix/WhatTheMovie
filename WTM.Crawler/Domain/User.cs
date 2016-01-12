@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace WTM.Crawler.Domain
 {
     [DataContract]
-    public class User : IWebsiteEntity
+    public class User : IWebsiteEntity, IUserConnected
     {
         public User()
         {
@@ -21,6 +21,8 @@ namespace WTM.Crawler.Domain
 
         [IgnoreDataMember]
         public IList<ParseInfo> ParseInfos { get; set; }
+
+        public string ConnectedUsername { get; set; }
 
         [DataMember]
         public string Name { get; set; }

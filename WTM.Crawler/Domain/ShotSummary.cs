@@ -13,6 +13,6 @@ namespace WTM.Crawler.Domain
         public Uri ImageUri { get; set; }
 
         [DataMember(IsRequired = true, Order = 3)]
-        public ShotUserStatus UserStatus { get; set; }
+        public ShotUserStatus? UserStatus { get; set; }
     }
 }

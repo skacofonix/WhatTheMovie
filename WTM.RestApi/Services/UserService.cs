@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WTM.Crawler.Domain;
 using WTM.RestApi.Models;
+using UserSummary = WTM.Crawler.Domain.UserSummary;
 
 namespace WTM.RestApi.Services
 {
@@ -17,7 +18,7 @@ namespace WTM.RestApi.Services
 
         public IUserResponse Get(string username)
         {
-            var user = this.crawlerUserService.GetByUsername(username);
+            var user = this.crawlerUserService.Get(username);
             var result = new UserResponse(user);
             return result;
         }
@@ -77,6 +78,11 @@ namespace WTM.RestApi.Services
             }
 
             return new UserSearchResponse(userSummaryListFiltered, start, totalCount);
+        }
+
+        public IUserSummary GetUserSummaryByToken(string token)
+        {
+            throw new NotImplementedException();
         }
     }
 }

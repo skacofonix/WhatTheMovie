@@ -5,6 +5,6 @@ namespace WTM.Crawler.Services
 {
     public interface IShotOverviewService : IShotService
     {
-        ShotSummaryCollection GetShotSummaryByDate(DateTime date);
+        ShotSummaryCollection GetShotSummaryByDate(DateTime date, string token = null);
     }
 }

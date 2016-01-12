@@ -123,6 +123,8 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\Authenticated.cs" />
+    <Compile Include="Models\IAuthenticated.cs" />
     <Compile Include="Models\IPaginableResult.cs" />
     <Compile Include="Models\MovieSearchTagResponse.cs" />
     <Compile Include="Models\Pagination.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Models\MovieSummary.cs" />
     <Compile Include="Models\ShotGuessTitleResponse.cs" />
     <Compile Include="Models\ShotUserStatusAdapter.cs" />
+    <Compile Include="Models\UnAuthenticated.cs" />
     <Compile Include="Models\UserRequest.cs" />
     <Compile Include="Models\IUserLogoutResponse.cs" />
     <Compile Include="Models\IUserLoginResponse.cs" />
@@ -193,7 +196,7 @@
     <Compile Include="Models\ShotSearchTagRequest.cs" />
     <Compile Include="Models\IRange.cs" />
     <Compile Include="Models\IUserSearchResponse.cs" />
-    <Compile Include="Models\IUserSearchSummary.cs" />
+    <Compile Include="Models\IUserSummary.cs" />
     <Compile Include="Models\Range.cs" />
     <Compile Include="Models\ShotSolutionResponse.cs" />
     <Compile Include="Models\ShotSummary.cs" />
@@ -245,7 +248,7 @@
     <Compile Include="Models\UserLogoutRequest.cs" />
     <Compile Include="Models\UserSearchResponse.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="Models\UserSearchSummary.cs" />
+    <Compile Include="Models\UserSummary.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

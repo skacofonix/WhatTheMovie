@@ -19,8 +19,9 @@ namespace WTM.RestApi.Tests.Services
             var shotFeatureFilmsCrawler = new Mock<IShotFeatureFilmsService>();
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
+            var userService = new Mock<WTM.Crawler.Services.IUserService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, userService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.SearchByTag(new ShotSearchTagRequest {Tag = "un"});
 
@@ -34,8 +35,9 @@ namespace WTM.RestApi.Tests.Services
             var shotFeatureFilmsCrawler = new Mock<IShotFeatureFilmsService>();
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
+            var userService = new Mock<WTM.Crawler.Services.IUserService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, userService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.GetArchives(new ShotArchivesRequest());
 
@@ -49,8 +51,9 @@ namespace WTM.RestApi.Tests.Services
             var shotFeatureFilmsCrawler = new Mock<IShotFeatureFilmsService>();
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
+            var userService = new Mock<WTM.Crawler.Services.IUserService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, userService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.GetFeatureFilms(new ShotFeatureFilmsRequest());
 
@@ -64,8 +67,9 @@ namespace WTM.RestApi.Tests.Services
             var shotFeatureFilmsCrawler = new Mock<IShotFeatureFilmsService>();
             var shotArchiveCrawler = new Mock<IShotArchiveService>();
             var shotNewSubmissionsService = new Mock<IShotNewSubmissionsService>();
+            var userService = new Mock<WTM.Crawler.Services.IUserService>();
             var dateTimeServie = new Mock<IDateTimeService>();
-            var shotOverviewService = new WTM.RestApi.Services.ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, dateTimeServie.Object);
+            var shotOverviewService = new ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, userService.Object, dateTimeServie.Object);
 
             var shotOverviewResponses = shotOverviewService.GetNewSubmissions(new ShotNewSubmissionsRequest());
 

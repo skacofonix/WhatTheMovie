@@ -4,6 +4,6 @@ namespace WTM.Crawler.Services
 {
     public interface IShotFeatureFilmsService : IShotOverviewService
     {
-        ShotSummaryCollection GetShotSummaryToday();
+        ShotSummaryCollection GetShotSummaryToday(string token = null);
     }
 }

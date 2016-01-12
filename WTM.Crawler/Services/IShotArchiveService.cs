@@ -4,6 +4,6 @@ namespace WTM.Crawler.Services
 {
     public interface IShotArchiveService : IShotOverviewService
     {
-        ShotSummaryCollection GetArchiveOneMonthOld();
+        ShotSummaryCollection GetArchiveOneMonthOld(string token = null);
     }
 }

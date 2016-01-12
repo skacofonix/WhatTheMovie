@@ -16,6 +16,8 @@ namespace WTM.Crawler.Domain
         [IgnoreDataMember]
         public IList<ParseInfo> ParseInfos { get; set; }
 
+        public string ConnectedUsername { get; set; }
+
         [DataMember]
         public bool? ShowGore { get; set; }
 

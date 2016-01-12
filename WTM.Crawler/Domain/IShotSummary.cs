@@ -6,6 +6,6 @@ namespace WTM.Crawler.Domain
     {
         int ShotId { get; }
         Uri ImageUri { get; }
-        ShotUserStatus UserStatus { get;}
+        ShotUserStatus? UserStatus { get;}
     }
 }

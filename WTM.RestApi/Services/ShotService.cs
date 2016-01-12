@@ -14,7 +14,6 @@ namespace WTM.RestApi.Services
         public IShotResponse GetById(int id, ShotRequest request)
         {
             var shotPage = this.crawlerShotService.GetById(id, request?.Token);
-
             return new ShotResponse(shotPage);
         }
 

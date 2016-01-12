@@ -8,9 +8,9 @@ namespace WTM.Crawler.Services
             : base(webClient, htmlParser)
         { }
 
-        public ShotSummaryCollection GetShotSummaryToday()
+        public ShotSummaryCollection GetShotSummaryToday(string token = null)
         {
-            return OverviewShotParser.ParseFeatureFilmsToday();
+            return OverviewShotParser.ParseFeatureFilmsToday(token);
         }
     }
 }

@@ -14,9 +14,9 @@ namespace WTM.Crawler.Services
 
         protected readonly OverviewShotParser OverviewShotParser;
 
-        public ShotSummaryCollection GetShotSummaryByDate(DateTime date)
+        public ShotSummaryCollection GetShotSummaryByDate(DateTime date, string token = null)
         {
-            return OverviewShotParser.ParseByDate(date);
+            return OverviewShotParser.ParseByDate(date, token);
         }
     }
 }
