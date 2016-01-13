@@ -60,7 +60,7 @@ namespace WTM.Crawler.Parsers
 
             // Solution station
             instance.ImageUri = GetImageUrl(htmlDocument);
-            instance.UserStatus = GetUserStatus(htmlDocument, instance.NbSolver);
+            instance.UserStatus = GetUserStatus(htmlDocument, instance.NbSolver, instance.ConnectedUsername);
             instance.Rate = GetRate(navigator);
             instance.Languages = GetLanguages(navigator);
             instance.Tags = GetTags(navigator);
@@ -229,8 +229,11 @@ namespace WTM.Crawler.Parsers
             return uri;
         }
 
-        private ShotUserStatus? GetUserStatus(HtmlDocument document, int? nbOfSolver)
+        private ShotUserStatus? GetUserStatus(HtmlDocument document, int? nbOfSolver, string username)
         {
+            if(username == null)
+                return ShotUserStatus.NotConnected;
+
             if (nbOfSolver.GetValueOrDefault(0) == 0)
                 return ShotUserStatus.NeverSolved;
 

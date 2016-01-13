@@ -5,6 +5,8 @@ namespace WTM.Crawler.Domain
     [DataContract]
     public enum ShotUserStatus
     {
+        NotConnected,
+
         Unsolved,
 
         Solved,

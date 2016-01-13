@@ -7,12 +7,12 @@ namespace WTM.RestApi.Models
     public interface IShotSummary
     {
         [Required]
-        int ShotId { get; }
+        int Id { get; }
 
         [Required]
-        Uri ImageUri { get; }
+        Uri Image { get; }
 
-        [DataMember(EmitDefaultValue = false)]
-        ShotUserStatus? UserStatus { get; }
+        [Required]
+        ShotUserStatus Status { get; }
     }
 }

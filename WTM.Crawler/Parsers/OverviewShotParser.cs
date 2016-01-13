@@ -135,8 +135,14 @@ namespace WTM.Crawler.Parsers
             {
                 var shotSummary = new ShotSummary();
 
-                if (instance.ConnectedUsername != null)
+
+                if (instance.ConnectedUsername == null)
                 {
+                    shotSummary.UserStatus = ShotUserStatus.NotConnected;
+                }
+                else
+                {
+                    shotSummary.UserStatus = ShotUserStatus.Unsolved;
                     var nodeUnsolved = GetFirstValue(nodeIterator.Current, ".//@class");
                     if (!string.IsNullOrEmpty(nodeUnsolved))
                     {

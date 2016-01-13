@@ -43,22 +43,16 @@ namespace WTM.RestApi.Services
             IShotsResponse result;
             if (shotSummaryCollection != null)
             {
-                Crawler.Domain.UserSummary userSummary = null;
-                if (shotSummaryCollection.ConnectedUsername != null)
-                {
-                    userSummary = userService.GetSummary(shotSummaryCollection.ConnectedUsername);
-                }
-
                 var skip = request?.Start ?? 0;
                 var take = request?.Limit ?? limitMax;
                 var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take).ToList();
                 var start = request?.Start ?? 1;
                 var totalCount = shotSummaryCollection.Shots.Count;
-                result = new ShotsResponse(date, start, totalCount, userSummary, filteredShots.Select(x => new ShotSummary(x)));
+                result = new ShotsResponse(date, start, totalCount, filteredShots.Select(x => new ShotSummary(x)));
             }
             else
             {
-                result = new ShotsResponse(date, 0, 0, null, new List<ShotSummary>());
+                result = new ShotsResponse(date, 0, 0, new List<ShotSummary>());
             }
 
             return result;

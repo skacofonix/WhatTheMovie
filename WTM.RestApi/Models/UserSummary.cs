@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
 {

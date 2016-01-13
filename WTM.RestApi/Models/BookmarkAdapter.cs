@@ -11,8 +11,8 @@ namespace WTM.RestApi.Models
             this.bookmark = bookmark;
         }
         
-        public int ShotId => bookmark.ShotId.Value;
-        public Uri ImageUri => new Uri(bookmark.ImageUrl);
-        public ShotUserStatus? UserStatus { get; }
+        public int Id => bookmark.ShotId.Value;
+        public Uri Image => new Uri(bookmark.ImageUrl);
+        public ShotUserStatus Status { get; }
     }
 }

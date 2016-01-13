@@ -4,6 +4,8 @@ namespace WTM.RestApi.Models
 {
     public enum ShotUserStatus
     {
+        NotConnected,
+
         Unsolved,
 
         Solved,

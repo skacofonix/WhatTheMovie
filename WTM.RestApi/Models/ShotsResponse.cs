@@ -8,23 +8,16 @@ namespace WTM.RestApi.Models
 {
     public class ShotsResponse : IShotsResponse
     {
-        public ShotsResponse(DateTime date, int startIndex, int totalCount, Crawler.Domain.UserSummary user, IEnumerable<ShotSummary> items)
+        public ShotsResponse(DateTime date, int startIndex, int totalCount, IEnumerable<ShotSummary> items)
         {
             this.Date = date;
             this.TotalCount = totalCount;
             this.DisplayMin = startIndex;
             this.Items = items;
-
-            if (user != null)
-            {
-                this.User = new UserSummary(user);
-            }
         }
 
         [Required]
         public DateTime Date { get; private set; }
-
-        public IUserSummary User { get; }
 
         [Required]
         public int TotalCount { get; private set; }
@@ -39,6 +32,6 @@ namespace WTM.RestApi.Models
         public int DisplayMax => this.DisplayMin + this.DisplayCount;
 
         [Required]
-        public IEnumerable<IShotSummary> Items { get; private set; }
+        public IEnumerable<ShotSummary> Items { get; private set; }
     }
 }
