@@ -224,33 +224,6 @@ namespace WTM.RestApi.Controllers
         }
 
         /// <summary>
-        /// Get shots by movie
-        /// </summary>
-        /// <returns></returns>
-        [Route("searchbymovie")]
-        [HttpGet]
-        [ResponseType(typeof(ShotSearchMovieResponse))]
-        public IHttpActionResult GetByMovie([FromUri]ShotSearchMovieRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotSearchMovieResponse result;
-            try
-            {
-                result = this.movieService.GetShotByMovie(request);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
-        }
-
-        /// <summary>
         /// Get shots older than 30 days
         /// </summary>
         /// <returns></returns>
