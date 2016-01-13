@@ -7,6 +7,8 @@ namespace WTM.RestApi.Services
     {
         public IShotSearchMovieResponse GetShotByMovie(ShotSearchMovieRequest request)
         {
+
+
             throw new NotImplementedException();
         }
     }

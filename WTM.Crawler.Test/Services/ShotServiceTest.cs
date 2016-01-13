@@ -72,5 +72,13 @@ namespace WTM.Crawler.Test.Services
 
             Check.That(shotSummary).IsNotNull();
         }
+
+        [Test]
+        public void CheckGetShotSummaryFromMovieTitleAndIndex()
+        {
+            var shotSummary = shotService.GetShotSummary("eternal_sunshine_of_the_spotless_mind", 0);
+
+            Check.That(shotSummary).IsNotNull();
+        }
     }
 }

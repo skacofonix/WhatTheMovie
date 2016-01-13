@@ -17,7 +17,7 @@ namespace WTM.Crawler.Services
 
         public Movie GetById(string id)
         {
-            return movieParser.GetById(id);
+            return movieParser.Get(id);
         }
 
         public MovieSummaryCollection Search(string title, int? page = null)

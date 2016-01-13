@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using WTM.Crawler.Domain;
+using WTM.Crawler.Extensions;
 using WTM.Crawler.Helpers;
 using WTM.Crawler.Parsers;
 
@@ -12,6 +14,7 @@ namespace WTM.Crawler.Services
     public class ShotService : IShotService
     {
         private readonly IWebClient webClient;
+        private readonly IHtmlParser htmlParser;
         private readonly ShotParser shotParser;
         private readonly SearchTagParser shotSearcher;
         private readonly CookieFactory cookieFactory;
@@ -19,6 +22,7 @@ namespace WTM.Crawler.Services
         public ShotService(IWebClient webClient, IHtmlParser htmlParser)
         {
             this.webClient = webClient;
+            this.htmlParser = htmlParser;
             shotParser = new ShotParser(webClient, htmlParser);
             shotSearcher = new SearchTagParser(webClient, htmlParser);
             cookieFactory = new CookieFactory(webClient);
@@ -133,6 +137,78 @@ namespace WTM.Crawler.Services
         {
             var searchResultCollection = shotSearcher.Search(tag, page);
             return new ShotSearchResult(searchResultCollection);
+        }
+
+        public ShotSearchResult GetByMovie(string title)
+        {
+            var result = new ShotSearchResult(new SearchResultCollection());
+
+            var relativeUri = string.Join("/", "movie", title, "snapshots");
+            var uri = new Uri(webClient.UriBase, relativeUri);
+            var webResponse = webClient.Post(uri);
+
+            string rawData = null;
+            using (var stream = webResponse.GetResponseStream())
+            {
+                if (stream != null)
+                {
+                    var document = htmlParser.GetHtmlDocument(stream);
+
+                    var shotNodes = document.DocumentNode.SelectNodes("//ul[@id='carousel_buttons]//a");
+                    var links = shotNodes.Select(shotNode => shotNode.GetAttributeValue("href", null)).ToList();
+
+                    var shots = new List<ShotSummary>();
+
+                    for (var index = 0; index < links.Count; index++)
+                    {
+                        var shotResponse = webClient.Get(new Uri(webClient.UriBase, $"/movie/{title}/carousel_shot?to={index}"));
+
+
+                    }
+                }
+            }
+
+            if (rawData != null)
+            {
+                return result;
+            }
+
+            return result;
+        }
+
+        public ShotSummary GetShotSummary(string title, int index)
+        {
+            var webResponse = webClient.Get(new Uri(webClient.UriBase, $"/movie/{title}/carousel_shot?to={index}"));
+
+            string rawData = string.Empty;
+            using (var stream = webResponse.GetResponseStream())
+            {
+                if (stream != null)
+                {
+                    using (var sr = new StreamReader(stream))
+                    {
+                        rawData = sr.ReadToEnd().CleanString();
+                    }
+                }
+            }
+
+            int shotId = 0;
+            var regexShotId = new Regex("href=\\\"w*shot/(\\d*)\\\"");
+            var matchShotId = regexShotId.Match(rawData);
+            if (matchShotId.Success)
+            {
+                shotId = int.Parse(matchShotId.Groups[1].Value);
+            }
+
+            Uri image = null;
+            var regexImage = new Regex("img src=\"(\\w*)\"");
+            var matchImage = regexImage.Match(rawData);
+            if (matchImage.Success)
+            {
+                image = new Uri(matchImage.Groups[1].Value);
+            }
+
+            return new ShotSummary {ImageUri = image, ShotId = shotId};
         }
     }
 }

@@ -22,7 +22,7 @@ namespace WTM.Crawler.Test.Parser
         [Test]
         public void WhenParseThenReturnValidEntity()
         {
-            var movie = movieParser.GetById("eternal_sunshine_of_the_spotless_mind");
+            var movie = movieParser.Get("eternal_sunshine_of_the_spotless_mind");
 
             Check.That(movie).IsNotNull();
             Check.That(movie.ParseDateTime).IsNotEqualTo(null);

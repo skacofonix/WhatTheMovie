@@ -18,7 +18,7 @@ namespace WTM.Crawler.Parsers
             : base(webClient, htmlParser)
         { }
 
-        public Movie GetById(string title)
+        public Movie Get(string title)
         {
             var movie = Parse(title);
 
