@@ -4,6 +4,6 @@ namespace WTM.RestApi.Models
 {
     public interface IShotSearchTagResponse : IResponse, IPaginableResult
     {
-        IEnumerable<IShotSummary> Items { get; }
+        IEnumerable<ShotSearchTag> Items { get; }
     }
 }

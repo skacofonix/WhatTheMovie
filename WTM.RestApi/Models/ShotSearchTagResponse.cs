@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,13 +10,13 @@ namespace WTM.RestApi.Models
         {
             this.TotalCount = totalCount;
             this.DisplayMin = startIndex;
-            this.Items = crawlerShotSummaries.Select(shotSummary => new ShotSummary(shotSummary)).Cast<IShotSummary>().ToList();
+            this.Items = crawlerShotSummaries.Select(shotSummary => new ShotSearchTag(shotSummary)).ToList();
         }
 
         public int TotalCount { get; private set; }
         public int DisplayCount => this.Items.Count();
         public int DisplayMin { get; }
-        public int DisplayMax => DisplayMin + DisplayCount;
-        public IEnumerable<IShotSummary> Items { get; private set; }
+        public int DisplayMax => Math.Max(0, DisplayMin + DisplayCount - 1);
+        public IEnumerable<ShotSearchTag> Items { get; private set; }
     }
 }
