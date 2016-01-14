@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
@@ -21,12 +22,10 @@ namespace WTM.RestApi.Models
             }
         }
 
-        [DataMember]
+        [Required]
         public bool Success { get; private set; }
 
         [DataMember(EmitDefaultValue = false)]
         public IShotMovieSolution ShotMovieSolution { get; private set; }
-
-        public string Username { get; }
     }
 }

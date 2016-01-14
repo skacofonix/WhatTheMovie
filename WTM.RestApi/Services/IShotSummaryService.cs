@@ -7,12 +7,12 @@ namespace WTM.RestApi.Services
     {
         IShotsResponse Get(ShotsRequest request);
 
-        IShotArchivesResponse GetArchives(ShotArchivesRequest request);
+        IShotsResponse GetArchives(ShotArchivesRequest request);
 
         IShotFeatureFilmsResponse GetFeatureFilms(ShotFeatureFilmsRequest request);
 
         IShotNewSubmissionsResponse GetNewSubmissions(ShotNewSubmissionsRequest request);
 
-        IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request);
+        IShotSearchTagResponse SearchByTag(ShotSearchRequest request);
     }
 }

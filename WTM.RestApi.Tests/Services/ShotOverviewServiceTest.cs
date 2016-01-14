@@ -23,7 +23,7 @@ namespace WTM.RestApi.Tests.Services
             var dateTimeServie = new Mock<IDateTimeService>();
             var shotOverviewService = new ShotSummaryService(shotOverviewCrawler.Object, shotFeatureFilmsCrawler.Object, shotArchiveCrawler.Object, shotNewSubmissionsService.Object, userService.Object, dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.SearchByTag(new ShotSearchTagRequest {Tag = "un"});
+            var shotOverviewResponses = shotOverviewService.SearchByTag(new ShotSearchRequest {Tag = "un"});
 
             Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }

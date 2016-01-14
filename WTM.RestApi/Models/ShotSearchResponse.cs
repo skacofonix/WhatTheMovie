@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotSearchTagResponse : IShotSearchTagResponse
+    public class ShotSearchResponse : IShotSearchTagResponse
     {
-        public ShotSearchTagResponse(IEnumerable<Crawler.Domain.IShotSummary> crawlerShotSummaries, int startIndex, int totalCount)
+        public ShotSearchResponse(IEnumerable<Crawler.Domain.IShotSummary> crawlerShotSummaries, int startIndex, int totalCount)
         {
             this.TotalCount = totalCount;
             this.DisplayMin = startIndex;

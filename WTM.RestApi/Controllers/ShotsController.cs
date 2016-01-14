@@ -200,10 +200,10 @@ namespace WTM.RestApi.Controllers
         /// Get shots by tag
         /// </summary>
         /// <returns>Shot</returns>
-        [Route("searchbytags")]
+        [Route("search")]
         [HttpGet]
-        [ResponseType(typeof(ShotSearchTagResponse))]
-        public IHttpActionResult GetByTag([FromUri]ShotSearchTagRequest request)
+        [ResponseType(typeof(ShotResponse))]
+        public IHttpActionResult Search([FromUri]ShotSearchRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -306,6 +306,8 @@ namespace WTM.RestApi.Controllers
 
             return Ok(result);
         }
+
+        /*
 
         /// <summary>
         /// Rate shot
@@ -558,5 +560,7 @@ namespace WTM.RestApi.Controllers
 
             return Ok(result);
         }
+
+        */
     }
 }

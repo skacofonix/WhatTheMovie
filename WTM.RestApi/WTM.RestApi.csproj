@@ -174,7 +174,7 @@
     <Compile Include="Models\ShotSearchMovieRequest.cs" />
     <Compile Include="Models\ShotByDateRequest.cs" />
     <Compile Include="Models\IShotSearchTagResponse.cs" />
-    <Compile Include="Models\ShotSearchTagResponse.cs" />
+    <Compile Include="Models\ShotSearchResponse.cs" />
     <Compile Include="Models\BookmarksAddRequest.cs" />
     <Compile Include="Models\BookmarksDeleteRequest.cs" />
     <Compile Include="Models\BookmarksGetRequest.cs" />
@@ -194,7 +194,7 @@
     <Compile Include="Models\RateRequest.cs" />
     <Compile Include="Models\ShotRateResponse.cs" />
     <Compile Include="Models\ShotResponse.cs" />
-    <Compile Include="Models\ShotSearchTagRequest.cs" />
+    <Compile Include="Models\ShotSearchRequest.cs" />
     <Compile Include="Models\IRange.cs" />
     <Compile Include="Models\IUserSearchResponse.cs" />
     <Compile Include="Models\IUserSummary.cs" />

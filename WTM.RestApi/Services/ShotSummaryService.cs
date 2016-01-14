@@ -58,23 +58,36 @@ namespace WTM.RestApi.Services
             return result;
         }
 
-        public IShotArchivesResponse GetArchives(ShotArchivesRequest request)
+        public IShotsResponse GetArchives(ShotArchivesRequest request)
         {
             var maxDate = dateTimeService.GetDateTime().Date.AddDays(-30);
-            if (request.Date.HasValue && (request.Date.Value > maxDate))
-            {
-                throw new ArgumentOutOfRangeException("date", string.Format("Date must be before {0}", maxDate));
-            }
-            var dateCriteria = request.Date.GetValueOrDefault(maxDate);
-            var shotSummaryCollection = this.shotArchiveService.GetShotSummaryByDate(dateCriteria);
+            var date = maxDate;
 
-            IShotArchivesResponse result = null;
+            if (request?.Date != null )
+            {
+                if (request.Date.Value > maxDate)
+                {
+                    throw new ArgumentOutOfRangeException("date", $"Date must be before {maxDate}");
+                }
+
+                date = request.Date.Value;
+            }
+
+            var shotSummaryCollection = this.shotArchiveService.GetShotSummaryByDate(date);
+
+            ShotsResponse result = null;
             if (shotSummaryCollection != null)
             {
-                var skip = request.Start.GetValueOrDefault(0);
-                var take = request.Limit.GetValueOrDefault(limitMax);
-                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take);
-                result =  new ShotArchivesResponse(filteredShots.Select(x => new ShotSummary(x)));
+                var skip = request?.Start ?? 0;
+                var take = request?.Limit ?? limitMax;
+                var filteredShots = shotSummaryCollection.Shots.Skip(skip).Take(take).ToList();
+                var start = request?.Start ?? 1;
+                var totalCount = shotSummaryCollection.Shots.Count;
+                result = new ShotsResponse(date, start, totalCount, filteredShots.Select(x => new ShotSummary(x)));
+            }
+            else
+            {
+                result = new ShotsResponse(date, 0, 0, new List<ShotSummary>());
             }
 
             return result;
@@ -118,7 +131,7 @@ namespace WTM.RestApi.Services
             return result;
         }
 
-        public IShotSearchTagResponse SearchByTag(ShotSearchTagRequest request)
+        public IShotSearchTagResponse SearchByTag(ShotSearchRequest request)
         {
             const int pageSize = 50;
 
@@ -161,7 +174,7 @@ namespace WTM.RestApi.Services
             var skipWithOffset = start - (pageStart - 1) * pageSize - 1;
             var shotSummaryListFiltered = userSummaryList.Skip(skipWithOffset).Take(limit).ToList();
 
-            return new ShotSearchTagResponse(shotSummaryListFiltered, start, totalCount);
+            return new ShotSearchResponse(shotSummaryListFiltered, start, totalCount);
         }
     }
 }
