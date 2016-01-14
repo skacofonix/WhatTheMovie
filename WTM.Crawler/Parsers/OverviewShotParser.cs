@@ -39,7 +39,7 @@ namespace WTM.Crawler.Parsers
             return ParseOverviewShotByDate(date, token);
         }
 
-        public ShotSummaryCollection ParseNewSubmission(string token = null)
+        public ShotSummaryCollection ParseNewSubmission(string token)
         {
             return ParseCustomOverview("newsubmissions", token);
         }
@@ -67,6 +67,7 @@ namespace WTM.Crawler.Parsers
 
             var instance = new ShotSummaryCollection();
 
+            ParseUserInformations(instance, document);
             ParseHtmlDocument(instance, document);
 
             return instance;
@@ -134,7 +135,6 @@ namespace WTM.Crawler.Parsers
             while (nodeIterator.MoveNext())
             {
                 var shotSummary = new ShotSummary();
-
 
                 if (instance.ConnectedUsername == null)
                 {

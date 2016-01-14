@@ -38,7 +38,7 @@ namespace WTM.RestApi.Controllers
         /// <returns></returns>
         [Route("")]
         [HttpGet]
-        [ResponseType(typeof(ShotsResponse))]
+        [ResponseType(typeof(ShotCollectionResponse))]
         public IHttpActionResult Get([FromUri]ShotsRequest request)
         {
             if (!ModelState.IsValid)
@@ -46,10 +46,119 @@ namespace WTM.RestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            IShotsResponse result;
+            IShotCollectionResponse result;
             try
             {
                 result = this.shotSummaryService.Get(request);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Get random shot
+        /// </summary>
+        /// <returns>Shot</returns>
+        [Route("random")]
+        [HttpGet]
+        [ResponseType(typeof(ShotResponse))]
+        public IHttpActionResult GetRandom([FromUri]ShotRandomRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotResponse response;
+
+            try
+            {
+                response = this.shotService.GetRandom(request);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Get shots older than 30 days
+        /// </summary>
+        /// <returns></returns>
+        [Route("archives")]
+        [HttpGet]
+        [ResponseType(typeof(ShotCollectionResponse))]
+        public IHttpActionResult GetArchives([FromUri]ShotArchivesRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotCollectionResponse result;
+            try
+            {
+                result = this.shotSummaryService.GetArchives(request);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Get shots old less than 30 days
+        /// </summary>
+        /// <returns></returns>
+        [Route("featuresfilms")]
+        [HttpGet]
+        [ResponseType(typeof(ShotCollectionResponse))]
+        public IHttpActionResult GetFeatureFilms([FromUri]ShotFeatureFilmsRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotCollectionResponse result;
+            try
+            {
+                result = this.shotSummaryService.GetFeatureFilms(request);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Return new shots
+        /// </summary>
+        /// <returns></returns>
+        [Route("newsubmissions")]
+        [HttpGet]
+        [ResponseType(typeof(ShotCollectionResponse))]
+        public IHttpActionResult GetNewSubmissions([FromUri]ShotNewSubmissionsRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IShotCollectionResponse result;
+            try
+            {
+                result = this.shotSummaryService.GetNewSubmissions(request);
             }
             catch (Exception ex)
             {
@@ -88,34 +197,6 @@ namespace WTM.RestApi.Controllers
             if (response.Id != id)
             {
                 return NotFound();
-            }
-
-            return Ok(response);
-        }
-
-        /// <summary>
-        /// Get random shot
-        /// </summary>
-        /// <returns>Shot</returns>
-        [Route("random")]
-        [HttpGet]
-        [ResponseType(typeof(ShotResponse))]
-        public IHttpActionResult GetRandom([FromUri]ShotRandomRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotResponse response;
-
-            try
-            {
-                response = this.shotService.GetRandom(request);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
             }
 
             return Ok(response);
@@ -221,90 +302,6 @@ namespace WTM.RestApi.Controllers
             }
 
             return Ok(response);
-        }
-
-        /// <summary>
-        /// Get shots older than 30 days
-        /// </summary>
-        /// <returns></returns>
-        [Route("archives")]
-        [HttpGet]
-        [ResponseType(typeof(ShotArchivesResponse))]
-        public IHttpActionResult GetArchives([FromUri]ShotArchivesRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotArchivesResponse result;
-
-            try
-            {
-                result = this.shotSummaryService.GetArchives(request);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
-        }
-
-        /// <summary>
-        /// Get shots old less than 30 days
-        /// </summary>
-        /// <returns></returns>
-        [Route("featuresfilms")]
-        [HttpGet]
-        [ResponseType(typeof(ShotFeatureFilmsResponse))]
-        public IHttpActionResult GetFeatureFilms([FromUri]ShotFeatureFilmsRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotFeatureFilmsResponse result;
-
-            try
-            {
-                result = this.shotSummaryService.GetFeatureFilms(request);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
-        }
-
-        /// <summary>
-        /// Return new shots
-        /// </summary>
-        /// <returns></returns>
-        [Route("newsubmissions")]
-        [HttpGet]
-        [ResponseType(typeof(ShotNewSubmissionsResponse))]
-        public IHttpActionResult GetNewSubmissions([FromUri]ShotNewSubmissionsRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IShotNewSubmissionsResponse result;
-
-            try
-            {
-                result = this.shotSummaryService.GetNewSubmissions(request);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-
-            return Ok(result);
         }
 
         /*

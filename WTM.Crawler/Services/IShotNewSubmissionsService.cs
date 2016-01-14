@@ -4,6 +4,6 @@ namespace WTM.Crawler.Services
 {
     public interface IShotNewSubmissionsService
     {
-        ShotSummaryCollection GetShots();
+        ShotSummaryCollection GetShots(string token);
     }
 }

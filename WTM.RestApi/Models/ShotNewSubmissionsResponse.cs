@@ -2,13 +2,17 @@
 
 namespace WTM.RestApi.Models
 {
-    public class ShotNewSubmissionsResponse : IResponse, IShotNewSubmissionsResponse
+    public class ShotNewSubmissionsResponse : IShotCollectionResponse
     {
-        public IEnumerable<IShotSummary> Items { get; private set; }
-
         public ShotNewSubmissionsResponse(IEnumerable<IShotSummary> items)
         {
             Items = items;
         }
+
+        public int TotalCount { get; }
+        public int DisplayCount { get; }
+        public int DisplayMin { get; }
+        public int DisplayMax { get; }
+        public IEnumerable<IShotSummary> Items { get; private set; }
     }
 }

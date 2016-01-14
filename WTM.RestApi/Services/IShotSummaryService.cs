@@ -5,13 +5,13 @@ namespace WTM.RestApi.Services
 {
     public interface IShotSummaryService
     {
-        IShotsResponse Get(ShotsRequest request);
+        IShotCollectionResponse Get(ShotsRequest request);
 
-        IShotsResponse GetArchives(ShotArchivesRequest request);
+        IShotCollectionResponse GetArchives(ShotArchivesRequest request);
 
-        IShotFeatureFilmsResponse GetFeatureFilms(ShotFeatureFilmsRequest request);
+        IShotCollectionResponse GetFeatureFilms(ShotFeatureFilmsRequest request);
 
-        IShotNewSubmissionsResponse GetNewSubmissions(ShotNewSubmissionsRequest request);
+        IShotCollectionResponse GetNewSubmissions(ShotNewSubmissionsRequest request);
 
         IShotSearchTagResponse SearchByTag(ShotSearchRequest request);
     }

@@ -6,9 +6,10 @@ using System.Runtime.Serialization;
 
 namespace WTM.RestApi.Models
 {
-    public class ShotsResponse : IShotsResponse
+    [DataContract]
+    public class ShotCollectionResponse : IShotCollectionResponse
     {
-        public ShotsResponse(DateTime date, int startIndex, int totalCount, IEnumerable<ShotSummary> items)
+        public ShotCollectionResponse(DateTime date, int startIndex, int totalCount, IEnumerable<ShotSummary> items)
         {
             this.Date = date;
             this.TotalCount = totalCount;
@@ -17,21 +18,27 @@ namespace WTM.RestApi.Models
         }
 
         [Required]
+        [DataMember]
         public DateTime Date { get; private set; }
 
         [Required]
+        [DataMember]
         public int TotalCount { get; private set; }
 
         [Required]
+        [DataMember]
         public int DisplayCount => Items.Count();
 
         [Required]
+        [DataMember]
         public int DisplayMin { get; }
 
         [Required]
+        [DataMember]
         public int DisplayMax => this.DisplayMin + this.DisplayCount;
 
         [Required]
-        public IEnumerable<ShotSummary> Items { get; private set; }
+        [DataMember]
+        public IEnumerable<IShotSummary> Items { get; private set; }
     }
 }

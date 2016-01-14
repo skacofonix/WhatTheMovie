@@ -126,11 +126,12 @@
     <Compile Include="Models\Authenticated.cs" />
     <Compile Include="Models\IAuthenticated.cs" />
     <Compile Include="Models\IPaginableResult.cs" />
+    <Compile Include="Models\IShotCollectionRequest.cs" />
     <Compile Include="Models\MovieSearchTagResponse.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\ShotSearchTag.cs" />
     <Compile Include="Models\ShotsRequest.cs" />
-    <Compile Include="Models\ShotsResponse.cs" />
+    <Compile Include="Models\ShotCollectionResponse.cs" />
     <Compile Include="Models\ShotSearchMovieResponse.cs" />
     <Compile Include="Models\BookmarkAdapter.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
@@ -222,7 +223,7 @@
     <Compile Include="Services\IShotFavouriteService.cs" />
     <Compile Include="Models\IShotFeatureFilmsResponse.cs" />
     <Compile Include="Models\IShotNewSubmissionsResponse.cs" />
-    <Compile Include="Models\IShotsResponse.cs" />
+    <Compile Include="Models\IShotCollectionResponse.cs" />
     <Compile Include="Services\IShotSummaryService.cs" />
     <Compile Include="Services\IShotService.cs" />
     <Compile Include="Services\IShotTagService.cs" />

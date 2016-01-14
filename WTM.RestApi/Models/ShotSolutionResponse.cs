@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using WTM.Crawler.Domain;
 
 namespace WTM.RestApi.Models
@@ -21,6 +22,7 @@ namespace WTM.RestApi.Models
             }
         }
 
+        [Required]
         [DataMember]
         public bool Available { get; }
 

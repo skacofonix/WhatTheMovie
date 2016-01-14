@@ -13,9 +13,9 @@ namespace WTM.Crawler.Services
 
         private readonly OverviewShotParser overviewShotParser;
 
-        public ShotSummaryCollection GetShots()
+        public ShotSummaryCollection GetShots(string token)
         {
-            return overviewShotParser.ParseNewSubmission();
+            return overviewShotParser.ParseNewSubmission(token);
         }
     }
 }
