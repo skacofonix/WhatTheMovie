@@ -16,6 +16,8 @@ namespace WTM.Crawler.Domain
         [IgnoreDataMember]
         public IList<ParseInfo> ParseInfos { get; set; }
 
+        public Uri Uri { get; set; }
+
         public string ConnectedUsername { get; set; }
 
         [DataMember]

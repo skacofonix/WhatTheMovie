@@ -7,16 +7,22 @@ using System.Xml.XPath;
 using HtmlAgilityPack;
 using WTM.Crawler.Domain;
 using WTM.Crawler.Extensions;
+using WTM.Crawler.Services;
 
 namespace WTM.Crawler.Parsers
 {
     public class OverviewShotParser : ParserBase<ShotSummaryCollection>
     {
+        private readonly IImageDownloader imageDownloader;
+        private readonly IImageRepository imageRepository;
         protected override string Identifier { get { return "overview"; } }
 
-        public OverviewShotParser(IWebClient webClient, IHtmlParser htmlParser)
+        public OverviewShotParser(IWebClient webClient, IHtmlParser htmlParser, IImageDownloader imageDownloader, IImageRepository imageRepository)
             : base(webClient, htmlParser)
-        { }
+        {
+            this.imageDownloader = imageDownloader;
+            this.imageRepository = imageRepository;
+        }
 
         const string DateFormat = "yyyy/MM/dd";
 
@@ -24,14 +30,30 @@ namespace WTM.Crawler.Parsers
         {
             DateTime date;
             if (parameter != null && DateTime.TryParseExact(parameter, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
                 return ParseOverviewShotByDate(date);
+            }
+
             return base.Parse();
         }
 
         public ShotSummaryCollection ParseOverviewShotByDate(string token = null)
         {
             SetUserToken(token);
-            return base.Parse();
+
+            var result = base.Parse();
+
+            // Here
+
+            foreach (var shot in result.Shots)
+            {
+                var url = result.Uri.ToString();
+                var rawData = this.imageDownloader.Get(shot.ImageUri, url);
+
+                this.imageRepository.Add(shot.ImageUri.ToString(), rawData);
+            }
+
+            return result;
         }
 
         public ShotSummaryCollection ParseByDate(DateTime date, string token = null)
@@ -70,6 +92,19 @@ namespace WTM.Crawler.Parsers
             ParseUserInformations(instance, document);
             ParseHtmlDocument(instance, document);
 
+            // Here
+
+            string url;
+            foreach (var shot in instance.Shots)
+            {
+                url = instance.Uri.ToString();
+                var rawData = this.imageDownloader.Get(shot.ImageUri, url);
+
+                this.imageRepository.Add(shot.ImageUri.ToString(), rawData);
+            }
+
+            //
+
             return instance;
         }
 
@@ -77,7 +112,30 @@ namespace WTM.Crawler.Parsers
         {
             SetUserToken(token);
             var stringDate = date.ToString(DateFormat);
-            return base.Parse(stringDate);
+
+            var result = base.Parse(stringDate);
+
+            // Here
+
+            string url;
+            foreach (var shot in result.Shots)
+            {
+                try
+                {
+                    url = result.Uri.ToString();
+                    var rawData = this.imageDownloader.Get(shot.ImageUri, url);
+
+                    this.imageRepository.Add(shot.ImageUri.ToString(), rawData);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            //
+
+            return result;
         }
 
         private string GetFirstValue(XPathNavigator navigator, string xPath)

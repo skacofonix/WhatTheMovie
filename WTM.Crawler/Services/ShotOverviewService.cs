@@ -6,10 +6,10 @@ namespace WTM.Crawler.Services
 {
     public class ShotOverviewService : ShotService, IShotOverviewService
     {
-        public ShotOverviewService(IWebClient webClient, IHtmlParser htmlParser)
+        public ShotOverviewService(IWebClient webClient, IHtmlParser htmlParser, IImageDownloader imageDownloader, IImageRepository imageRepository)
             : base(webClient, htmlParser)
         {
-            OverviewShotParser = new OverviewShotParser(webClient, htmlParser);
+            OverviewShotParser = new OverviewShotParser(webClient, htmlParser, imageDownloader, imageRepository);
         }
 
         protected readonly OverviewShotParser OverviewShotParser;

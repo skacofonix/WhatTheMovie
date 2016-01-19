@@ -123,6 +123,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Models\Authenticated.cs" />
     <Compile Include="Models\IAuthenticated.cs" />
     <Compile Include="Models\IPaginableResult.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Services\IDateTimeService.cs" />
     <Compile Include="Services\IMovieService.cs" />
     <Compile Include="Models\IShotArchivesResponse.cs" />
+    <Compile Include="Services\IResourceService.cs" />
     <Compile Include="Services\IShotBookmarkService.cs" />
     <Compile Include="Services\IShoteRateService.cs" />
     <Compile Include="Services\IShotFavouriteService.cs" />

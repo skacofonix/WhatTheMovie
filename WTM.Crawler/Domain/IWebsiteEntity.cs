@@ -11,6 +11,8 @@ namespace WTM.Crawler.Domain
 
         IList<ParseInfo> ParseInfos { get; set; }
 
+        Uri Uri { get; set; }
+
         string ConnectedUsername { get; set; }
     }
 }

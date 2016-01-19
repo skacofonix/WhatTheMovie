@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Linq;
 using WTM.Crawler.Parsers;
+using WTM.Crawler.Services;
 
 namespace WTM.Crawler.Test.Parser
 {
@@ -10,6 +11,8 @@ namespace WTM.Crawler.Test.Parser
     {
         private IWebClient webClient;
         private IHtmlParser htmlParser;
+        private IImageDownloader imageDownloader;
+        private IImageRepository imageRepository;
         private OverviewShotParser parser;
 
         [SetUp]
@@ -17,7 +20,10 @@ namespace WTM.Crawler.Test.Parser
         {
             webClient = new WebClientFake("Resources/FeatureFilms/FeatureFilms20141201.html");
             htmlParser = new HtmlParser();
-            parser = new OverviewShotParser(webClient, htmlParser);
+            imageDownloader = new ImageDownloader(webClient);
+            imageRepository = new ImageRepository();
+
+            parser = new OverviewShotParser(webClient, htmlParser, imageDownloader, imageRepository);
         }
 
         [Test]

@@ -11,6 +11,8 @@ namespace WTM.Crawler.Test.Services
     {
         private IWebClient webClient;
         private IHtmlParser htmlParser;
+        private IImageDownloader imageDownloader;
+        private IImageRepository imageRepository;
         private ShotFeatureFilmsService shotFeatureFilmService;
         private IServerDateTimeService serverDateTime;
 
@@ -19,7 +21,8 @@ namespace WTM.Crawler.Test.Services
         {
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
-            shotFeatureFilmService = new ShotFeatureFilmsService(webClient, htmlParser);
+            imageDownloader= new ImageDownloader(webClient);
+            shotFeatureFilmService = new ShotFeatureFilmsService(webClient, htmlParser, imageDownloader, imageRepository);
             serverDateTime = new ServerDateTimeService(webClient);
         }
 

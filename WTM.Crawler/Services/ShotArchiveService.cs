@@ -4,8 +4,8 @@ namespace WTM.Crawler.Services
 {
     public class ShotArchiveService : ShotOverviewService, IShotArchiveService
     {
-        public ShotArchiveService(IWebClient webClient, IHtmlParser htmlParser)
-            : base(webClient, htmlParser)
+        public ShotArchiveService(IWebClient webClient, IHtmlParser htmlParser, IImageDownloader imageDownloader, IImageRepository imageRepository)
+            : base(webClient, htmlParser, imageDownloader, imageRepository)
         { }
 
         public ShotSummaryCollection GetArchiveOneMonthOld(string token = null)

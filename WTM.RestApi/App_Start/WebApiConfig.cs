@@ -1,8 +1,15 @@
 ﻿using System.Web.Http;
 using Microsoft.Practices.Unity;
 using WTM.Crawler;
+using WTM.Crawler.Services;
 using WTM.RestApi.Resolver;
 using WTM.RestApi.Services;
+using IMovieService = WTM.RestApi.Services.IMovieService;
+using IShotService = WTM.RestApi.Services.IShotService;
+using IUserService = WTM.RestApi.Services.IUserService;
+using MovieService = WTM.RestApi.Services.MovieService;
+using ShotService = WTM.RestApi.Services.ShotService;
+using UserService = WTM.RestApi.Services.UserService;
 
 namespace WTM.RestApi
 {
@@ -12,10 +19,14 @@ namespace WTM.RestApi
         {
             // Configuration et services API Web
             var container = new UnityContainer();
+
             container.RegisterType<IWebClient, WebClientWTM>(new HierarchicalLifetimeManager());
             container.RegisterType<IHtmlParser, HtmlParser>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserService, UserService>(new HierarchicalLifetimeManager());
             container.RegisterType<Crawler.Services.IUserService, Crawler.Services.UserService>(new HierarchicalLifetimeManager());
+
+            container.RegisterType<IImageRepository, ImageRepository>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IImageDownloader, ImageDownloader>(new HierarchicalLifetimeManager());
 
             container.RegisterType<IShotService, ShotService>(new HierarchicalLifetimeManager());
             container.RegisterType<IShotSummaryService, ShotSummaryService>(new HierarchicalLifetimeManager());

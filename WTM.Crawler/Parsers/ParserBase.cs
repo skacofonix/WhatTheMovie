@@ -68,7 +68,11 @@ namespace WTM.Crawler.Parsers
                 throw new CrawlerException("Error occured when parsing HTML page " + uri, ex);
             }
 
-            var instance = new T {ParseInfos = new List<ParseInfo>()};
+            var instance = new T
+            {
+                ParseInfos = new List<ParseInfo>(),
+                Uri = uri
+            };
 
             try
             {

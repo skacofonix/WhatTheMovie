@@ -11,6 +11,8 @@ namespace WTM.Crawler.Test.Services
     {
         private IWebClient webClient;
         private IHtmlParser htmlParser;
+        private IImageDownloader imageDownloader;
+        private IImageRepository imageRepository;
         private ShotArchiveService shotArchiveService;
 
         [SetUp]
@@ -18,7 +20,9 @@ namespace WTM.Crawler.Test.Services
         {
             webClient = new WebClientWTM();
             htmlParser = new HtmlParser();
-            shotArchiveService = new ShotArchiveService(webClient, htmlParser);
+            imageDownloader = new ImageDownloader(webClient);
+            imageRepository = new ImageRepository();
+            shotArchiveService = new ShotArchiveService(webClient, htmlParser, imageDownloader, imageRepository);
         }
 
         [Test]

@@ -96,6 +96,10 @@
     <Compile Include="Parsers\SettingsParser.cs" />
     <Compile Include="Services\BookmarkService.cs" />
     <Compile Include="Services\IContextService.cs" />
+    <Compile Include="Services\IImageDownloader.cs" />
+    <Compile Include="Services\IImageRepository.cs" />
+    <Compile Include="Services\ImageDownloader.cs" />
+    <Compile Include="Services\ImageRepository.cs" />
     <Compile Include="Services\IMovieService.cs" />
     <Compile Include="Services\IReadWriteService.cs" />
     <Compile Include="Services\IServerDateTimeService.cs" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WTM.Crawler.Domain;
+using WTM.Crawler.Services;
 using WTM.RestApi.Models;
 using Range = WTM.RestApi.Models.Range;
 using ShotSummary = WTM.RestApi.Models.ShotSummary;
@@ -15,6 +16,7 @@ namespace WTM.RestApi.Services
         private readonly Crawler.Services.IShotArchiveService shotArchiveService;
         private readonly Crawler.Services.IShotNewSubmissionsService shotNewSubmissionService;
         private readonly Crawler.Services.IUserService userService;
+        private readonly IImageRepository imageRepository;
         private readonly IDateTimeService dateTimeService;
         const int limitMax = 100;
         const int nbDayFeatureFilms = 30;
@@ -25,6 +27,7 @@ namespace WTM.RestApi.Services
             Crawler.Services.IShotArchiveService shotArchiveService,
             Crawler.Services.IShotNewSubmissionsService shotNewSubmissionService,
             Crawler.Services.IUserService userService,
+            Crawler.Services.IImageRepository imageRepository,
             IDateTimeService dateTimeService)
         {
             this.shotOverviewService = shotOverviewService;
@@ -32,13 +35,23 @@ namespace WTM.RestApi.Services
             this.shotArchiveService = shotArchiveService;
             this.shotNewSubmissionService = shotNewSubmissionService;
             this.userService = userService;
+            this.imageRepository = imageRepository;
             this.dateTimeService = dateTimeService;
         }
 
         public IShotCollectionResponse Get(ShotsRequest request)
         {
             var date = request?.Date ?? this.dateTimeService.GetDateTime();
-            return Get(date, request?.Start, request?.Limit, request?.Token);
+
+            var result = Get(date, request?.Start, request?.Limit, request?.Token);
+
+            //foreach (var item in result.Items)
+            //{
+            //    item.
+            //}
+            //imageDownloader.Get()
+
+            return result;
         }
 
         public IShotCollectionResponse GetArchives(ShotArchivesRequest request)

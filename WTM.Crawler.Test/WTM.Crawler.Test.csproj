@@ -63,6 +63,7 @@
     <Compile Include="Parser\MovieParserTest.cs" />
     <Compile Include="Parser\SearchMovieTvParserTest.cs" />
     <Compile Include="Parser\UserParserTest.cs" />
+    <Compile Include="Services\ImageDownloaderTest.cs" />
     <Compile Include="WebClientFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
