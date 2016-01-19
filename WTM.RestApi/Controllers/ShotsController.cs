@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Services.Description;
 using WTM.RestApi.Models;
 using WTM.RestApi.Services;
 
@@ -20,8 +25,9 @@ namespace WTM.RestApi.Controllers
         private readonly IShotBookmarkService shotBookmarkService;
         private readonly IShotTagService shotTagService;
         private readonly IMovieService movieService;
+        private readonly IImageResourceService imageResourceService;
 
-        public ShotsController(IShotService shotService, IShotSummaryService shotSummaryService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService)
+        public ShotsController(IShotService shotService, IShotSummaryService shotSummaryService, IShoteRateService shotRateService, IShotFavouriteService shotFavouriteService, IShotBookmarkService shotBookmarkService, IShotTagService shotTagService, IMovieService movieService, IImageResourceService imageResourceService)
         {
             this.shotService = shotService;
             this.shotSummaryService = shotSummaryService;
@@ -30,6 +36,7 @@ namespace WTM.RestApi.Controllers
             this.shotBookmarkService = shotBookmarkService;
             this.shotTagService = shotTagService;
             this.movieService = movieService;
+            this.imageResourceService = imageResourceService;
         }
 
         /// <summary>
@@ -278,6 +285,66 @@ namespace WTM.RestApi.Controllers
         }
 
         /// <summary>
+        /// Get shot thumbnail by ID
+        /// </summary>
+        /// <param name="id">Shot ID</param>
+        /// <returns>Thumbnail</returns>
+        [Route("{id:int}/thumb")]
+        [HttpGet]
+        public HttpResponseMessage GetThumbnail(int id)
+        {
+            HttpResponseMessage response;
+
+            try
+            {
+                var rawData = this.imageResourceService.GetThumbnail(id);
+                response = new HttpResponseMessage(HttpStatusCode.OK);
+                response.Content = new ByteArrayContent(rawData);
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+            }
+            catch (NotFoundException nfe)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.NotFound);
+            }
+            catch (Exception ex)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+
+            return response;
+        }
+
+        /// <summary>
+        /// Get shot image by ID
+        /// </summary>
+        /// <param name="id">Shot ID</param>
+        /// <returns>Image</returns>
+        [Route("{id:int}/image")]
+        [HttpGet]
+        public HttpResponseMessage GetImage(int id)
+        {
+            HttpResponseMessage response;
+
+            try
+            {
+                var rawData = this.imageResourceService.GetImage(id);
+                response = new HttpResponseMessage(HttpStatusCode.OK);
+                response.Content = new ByteArrayContent(rawData);
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+            }
+            catch (NotFoundException nfe)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.NotFound);
+            }
+            catch (Exception ex)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+
+            return response;
+        }
+
+        /// <summary>
         /// Get shots by tag
         /// </summary>
         /// <returns>Shot</returns>
@@ -303,8 +370,6 @@ namespace WTM.RestApi.Controllers
 
             return Ok(response);
         }
-
-
 
         /*
 

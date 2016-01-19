@@ -42,6 +42,8 @@ namespace WTM.RestApi
             container.RegisterType<Crawler.Services.IShotNewSubmissionsService, Crawler.Services.ShotNewSubmissionsService>(new HierarchicalLifetimeManager());
             container.RegisterType<IDateTimeService, DateTimeService>(new HierarchicalLifetimeManager());
 
+            container.RegisterType<IImageResourceService, ImageResourceService>(new HierarchicalLifetimeManager());
+
             config.DependencyResolver = new UnityResolver(container);
 
             // Itinéraires de l'API Web
