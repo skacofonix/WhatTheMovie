@@ -358,7 +358,7 @@ namespace WTM.RestApi.Controllers
             IShotSearchTagResponse response;
             try
             {
-                response = this.shotSummaryService.SearchByTag(request);
+                response = this.shotSummaryService.Search(request);
             }
             catch (Exception ex)
             {

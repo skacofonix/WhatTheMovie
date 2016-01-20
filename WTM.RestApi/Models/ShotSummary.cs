@@ -16,7 +16,7 @@ namespace WTM.RestApi.Models
         public int Id => this.crawlerShotSummary.ShotId;
 
         [Required]
-        public Uri Image => this.crawlerShotSummary.ImageUri;
+        public string Thumb => $"/api/shots/{crawlerShotSummary.ShotId}/thumb";
 
         [Required]
         public ShotUserStatus Status => ShotUserStatusAdapter.Adapt(this.crawlerShotSummary.UserStatus);

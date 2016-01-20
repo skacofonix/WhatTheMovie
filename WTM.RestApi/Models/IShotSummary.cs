@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
 namespace WTM.RestApi.Models
 {
@@ -9,8 +8,11 @@ namespace WTM.RestApi.Models
         [Required]
         int Id { get; }
 
+        //[Required]
+        //Uri Image { get; }
+
         [Required]
-        Uri Image { get; }
+        string Thumb { get; }
 
         [Required]
         ShotUserStatus Status { get; }

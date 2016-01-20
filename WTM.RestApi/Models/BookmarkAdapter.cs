@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WTM.RestApi.Models
 {
@@ -12,7 +13,10 @@ namespace WTM.RestApi.Models
         }
         
         public int Id => bookmark.ShotId.Value;
-        public Uri Image => new Uri(bookmark.ImageUrl);
+
+        [Required]
+        public string Thumb => $"/api/shots/{bookmark.ShotId}/thumb";
+
         public ShotUserStatus Status { get; }
     }
 }

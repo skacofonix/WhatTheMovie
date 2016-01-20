@@ -45,12 +45,6 @@ namespace WTM.RestApi.Services
 
             var result = Get(date, request?.Start, request?.Limit, request?.Token);
 
-            //foreach (var item in result.Items)
-            //{
-            //    item.
-            //}
-            //imageDownloader.Get()
-
             return result;
         }
 
@@ -98,7 +92,7 @@ namespace WTM.RestApi.Services
             return Foo(shotSummaryCollection, date, request?.Start, request?.Limit, request?.Token);
         }
 
-        public IShotSearchTagResponse SearchByTag(ShotSearchRequest request)
+        public IShotSearchTagResponse Search(ShotSearchRequest request)
         {
             const int pageSize = 50;
 

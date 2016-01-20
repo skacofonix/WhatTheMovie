@@ -30,7 +30,7 @@ namespace WTM.RestApi.Tests.Services
                 imageRepository.Object,
                 dateTimeServie.Object);
 
-            var shotOverviewResponses = shotOverviewService.SearchByTag(new ShotSearchRequest {Tag = "un"});
+            var shotOverviewResponses = shotOverviewService.Search(new ShotSearchRequest {Tag = "un"});
 
             Check.That(shotOverviewResponses.Items.Any()).IsTrue();
         }

@@ -13,6 +13,6 @@ namespace WTM.RestApi.Services
 
         IShotCollectionResponse GetNewSubmissions(ShotNewSubmissionsRequest request);
 
-        IShotSearchTagResponse SearchByTag(ShotSearchRequest request);
+        IShotSearchTagResponse Search(ShotSearchRequest request);
     }
 }
