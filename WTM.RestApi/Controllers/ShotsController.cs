@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Mime;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Services.Description;
 using WTM.RestApi.Models;
 using WTM.RestApi.Services;
 
 namespace WTM.RestApi.Controllers
 {
+    /// <summary>
+    /// Provide shots features
+    /// </summary>
     [RoutePrefix("api/shots")]
     public class ShotsController : ControllerBase
     {

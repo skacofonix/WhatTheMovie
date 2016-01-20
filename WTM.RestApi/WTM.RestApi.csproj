@@ -237,6 +237,7 @@
     <Compile Include="Models\ShotBookmarkAddResponse.cs" />
     <Compile Include="Models\ShotBookmarkDeleteResponse.cs" />
     <Compile Include="Models\ShotBookmarkResponse.cs" />
+    <Compile Include="Services\NotFoundException.cs" />
     <Compile Include="Services\ShotBookmarkService.cs" />
     <Compile Include="Services\ShoteRateService.cs" />
     <Compile Include="Services\ShotFavouriteService.cs" />

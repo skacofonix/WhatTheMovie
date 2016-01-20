@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Web.Http;
 using System.Web.Http.Description;
-using WTM.Crawler.Domain;
 using WTM.RestApi.Models;
 using WTM.RestApi.Services;
 
