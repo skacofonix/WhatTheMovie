@@ -122,12 +122,12 @@ namespace WTM.RestApi.Client.Models
             set { this._friends = value; }
         }
         
-        private int? _gender;
+        private string _gender;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public int? Gender
+        public string Gender
         {
             get { return this._gender; }
             set { this._gender = value; }
@@ -392,7 +392,7 @@ namespace WTM.RestApi.Client.Models
                 JToken genderValue = inputObject["Gender"];
                 if (genderValue != null && genderValue.Type != JTokenType.Null)
                 {
-                    this.Gender = ((int)genderValue);
+                    this.Gender = ((string)genderValue);
                 }
                 JToken idValue = inputObject["Id"];
                 if (idValue != null && idValue.Type != JTokenType.Null)

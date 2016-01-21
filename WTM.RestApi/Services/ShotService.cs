@@ -11,30 +11,27 @@ namespace WTM.RestApi.Services
             this.crawlerShotService = crawlerShotService;
         }
 
-        public IShotResponse GetById(int id, ShotRequest request)
+        public IShotResponse GetById(int id, IShotRequest request)
         {
             var shotPage = this.crawlerShotService.GetById(id, request?.Token);
             return new ShotResponse(shotPage);
         }
 
-        public IShotResponse GetRandom(ShotRandomRequest request)
+        public IShotResponse GetRandom(IShotRandomRequest request)
         {
             var shotPage = this.crawlerShotService.GetRandomShot(request?.Token);
-
             return new ShotResponse(shotPage);
         }
 
-        public IShotGuessTitleResponse GuessTitle(int id, GuessSolutionRequest request)
+        public IShotGuessTitleResponse GuessTitle(int id, IGuessSolutionRequest request)
         {
             var guessTitleResponsePage = this.crawlerShotService.GuessTitle(id, request.Title, request.Token);
-
             return new ShotGuessTitleResponse(guessTitleResponsePage);
         }
 
-        public IShotSolutionResponse GetSolution(int id, ShotSolutionRequest request)
+        public IShotSolutionResponse GetSolution(int id, IShotSolutionRequest request)
         {
             var solutionTitleResponse = this.crawlerShotService.GetSolution(id, request.Token);
-
             return new ShotSolutionResponse(solutionTitleResponse);
         }
     }

@@ -26,17 +26,17 @@ namespace WTM.RestApi.Client
             get; set; 
         }
         
-        IMovie Movie
+        IMovies Movies
         {
             get; 
         }
         
-        IShot Shot
+        IShots Shots
         {
             get; 
         }
         
-        IUserOperations User
+        IUsers Users
         {
             get; 
         }

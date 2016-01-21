@@ -33,25 +33,25 @@ namespace WTM.RestApi.Client
             set { this._credentials = value; }
         }
         
-        private IMovie _movie;
+        private IMovies _movies;
         
-        public virtual IMovie Movie
+        public virtual IMovies Movies
         {
-            get { return this._movie; }
+            get { return this._movies; }
         }
         
-        private IShot _shot;
+        private IShots _shots;
         
-        public virtual IShot Shot
+        public virtual IShots Shots
         {
-            get { return this._shot; }
+            get { return this._shots; }
         }
         
-        private IUserOperations _user;
+        private IUsers _users;
         
-        public virtual IUserOperations User
+        public virtual IUsers Users
         {
-            get { return this._user; }
+            get { return this._users; }
         }
         
         /// <summary>
@@ -60,9 +60,9 @@ namespace WTM.RestApi.Client
         public WTMRestApi()
             : base()
         {
-            this._movie = new Movie(this);
-            this._shot = new Shot(this);
-            this._user = new UserOperations(this);
+            this._movies = new Movies(this);
+            this._shots = new Shots(this);
+            this._users = new Users(this);
             this._baseUri = new Uri("http://localhost:19889");
         }
         
@@ -76,9 +76,9 @@ namespace WTM.RestApi.Client
         public WTMRestApi(params DelegatingHandler[] handlers)
             : base(handlers)
         {
-            this._movie = new Movie(this);
-            this._shot = new Shot(this);
-            this._user = new UserOperations(this);
+            this._movies = new Movies(this);
+            this._shots = new Shots(this);
+            this._users = new Users(this);
             this._baseUri = new Uri("http://localhost:19889");
         }
         
@@ -95,9 +95,9 @@ namespace WTM.RestApi.Client
         public WTMRestApi(HttpClientHandler rootHandler, params DelegatingHandler[] handlers)
             : base(rootHandler, handlers)
         {
-            this._movie = new Movie(this);
-            this._shot = new Shot(this);
-            this._user = new UserOperations(this);
+            this._movies = new Movies(this);
+            this._shots = new Shots(this);
+            this._users = new Users(this);
             this._baseUri = new Uri("http://localhost:19889");
         }
         

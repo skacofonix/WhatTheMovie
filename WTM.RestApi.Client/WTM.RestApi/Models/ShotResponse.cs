@@ -2,45 +2,211 @@
 // Changes may cause incorrect behavior and will be lost if the code is regenerated.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Rest;
 using Newtonsoft.Json.Linq;
-using WTM.RestApi.Client.Models;
 
 namespace WTM.RestApi.Client.Models
 {
     public partial class ShotResponse
     {
-        private IShot _data;
+        private string _firstSolver;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public IShot Data
+        public string FirstSolver
         {
-            get { return this._data; }
-            set { this._data = value; }
+            get { return this._firstSolver; }
+            set { this._firstSolver = value; }
         }
         
-        private Error _error;
+        private int? _id;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public Error Error
+        public int? Id
         {
-            get { return this._error; }
-            set { this._error = value; }
+            get { return this._id; }
+            set { this._id = value; }
         }
         
-        private Pagination _pagination;
+        private string _image;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public Pagination Pagination
+        public string Image
         {
-            get { return this._pagination; }
-            set { this._pagination = value; }
+            get { return this._image; }
+            set { this._image = value; }
+        }
+        
+        private bool? _isBookmarked;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public bool? IsBookmarked
+        {
+            get { return this._isBookmarked; }
+            set { this._isBookmarked = value; }
+        }
+        
+        private bool? _isFavourited;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public bool? IsFavourited
+        {
+            get { return this._isFavourited; }
+            set { this._isFavourited = value; }
+        }
+        
+        private bool? _isGore;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public bool? IsGore
+        {
+            get { return this._isGore; }
+            set { this._isGore = value; }
+        }
+        
+        private bool? _isNudity;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public bool? IsNudity
+        {
+            get { return this._isNudity; }
+            set { this._isNudity = value; }
+        }
+        
+        private bool? _isSolutionAvailable;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public bool? IsSolutionAvailable
+        {
+            get { return this._isSolutionAvailable; }
+            set { this._isSolutionAvailable = value; }
+        }
+        
+        private bool? _isVoteDeletation;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public bool? IsVoteDeletation
+        {
+            get { return this._isVoteDeletation; }
+            set { this._isVoteDeletation = value; }
+        }
+        
+        private IList<string> _languages;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public IList<string> Languages
+        {
+            get { return this._languages; }
+            set { this._languages = value; }
+        }
+        
+        private int? _nbSolver;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public int? NbSolver
+        {
+            get { return this._nbSolver; }
+            set { this._nbSolver = value; }
+        }
+        
+        private int? _numberOfDayBeforeSolution;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public int? NumberOfDayBeforeSolution
+        {
+            get { return this._numberOfDayBeforeSolution; }
+            set { this._numberOfDayBeforeSolution = value; }
+        }
+        
+        private int? _numberOfFavourited;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public int? NumberOfFavourited
+        {
+            get { return this._numberOfFavourited; }
+            set { this._numberOfFavourited = value; }
+        }
+        
+        private string _poster;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string Poster
+        {
+            get { return this._poster; }
+            set { this._poster = value; }
+        }
+        
+        private DateTimeOffset? _publidationDate;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public DateTimeOffset? PublidationDate
+        {
+            get { return this._publidationDate; }
+            set { this._publidationDate = value; }
+        }
+        
+        private IList<string> _tags;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public IList<string> Tags
+        {
+            get { return this._tags; }
+            set { this._tags = value; }
+        }
+        
+        private string _updater;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string Updater
+        {
+            get { return this._updater; }
+            set { this._updater = value; }
+        }
+        
+        private string _userStatus;
+        
+        /// <summary>
+        /// Optional.
+        /// </summary>
+        public string UserStatus
+        {
+            get { return this._userStatus; }
+            set { this._userStatus = value; }
         }
         
         /// <summary>
@@ -48,6 +214,8 @@ namespace WTM.RestApi.Client.Models
         /// </summary>
         public ShotResponse()
         {
+            this.Languages = new LazyList<string>();
+            this.Tags = new LazyList<string>();
         }
         
         /// <summary>
@@ -57,26 +225,101 @@ namespace WTM.RestApi.Client.Models
         {
             if (inputObject != null && inputObject.Type != JTokenType.Null)
             {
-                JToken dataValue = inputObject["Data"];
-                if (dataValue != null && dataValue.Type != JTokenType.Null)
+                JToken firstSolverValue = inputObject["FirstSolver"];
+                if (firstSolverValue != null && firstSolverValue.Type != JTokenType.Null)
                 {
-                    IShot iShot = new IShot();
-                    iShot.DeserializeJson(dataValue);
-                    this.Data = iShot;
+                    this.FirstSolver = ((string)firstSolverValue);
                 }
-                JToken errorValue = inputObject["Error"];
-                if (errorValue != null && errorValue.Type != JTokenType.Null)
+                JToken idValue = inputObject["Id"];
+                if (idValue != null && idValue.Type != JTokenType.Null)
                 {
-                    Error error = new Error();
-                    error.DeserializeJson(errorValue);
-                    this.Error = error;
+                    this.Id = ((int)idValue);
                 }
-                JToken paginationValue = inputObject["Pagination"];
-                if (paginationValue != null && paginationValue.Type != JTokenType.Null)
+                JToken imageValue = inputObject["Image"];
+                if (imageValue != null && imageValue.Type != JTokenType.Null)
                 {
-                    Pagination pagination = new Pagination();
-                    pagination.DeserializeJson(paginationValue);
-                    this.Pagination = pagination;
+                    this.Image = ((string)imageValue);
+                }
+                JToken isBookmarkedValue = inputObject["IsBookmarked"];
+                if (isBookmarkedValue != null && isBookmarkedValue.Type != JTokenType.Null)
+                {
+                    this.IsBookmarked = ((bool)isBookmarkedValue);
+                }
+                JToken isFavouritedValue = inputObject["IsFavourited"];
+                if (isFavouritedValue != null && isFavouritedValue.Type != JTokenType.Null)
+                {
+                    this.IsFavourited = ((bool)isFavouritedValue);
+                }
+                JToken isGoreValue = inputObject["IsGore"];
+                if (isGoreValue != null && isGoreValue.Type != JTokenType.Null)
+                {
+                    this.IsGore = ((bool)isGoreValue);
+                }
+                JToken isNudityValue = inputObject["IsNudity"];
+                if (isNudityValue != null && isNudityValue.Type != JTokenType.Null)
+                {
+                    this.IsNudity = ((bool)isNudityValue);
+                }
+                JToken isSolutionAvailableValue = inputObject["IsSolutionAvailable"];
+                if (isSolutionAvailableValue != null && isSolutionAvailableValue.Type != JTokenType.Null)
+                {
+                    this.IsSolutionAvailable = ((bool)isSolutionAvailableValue);
+                }
+                JToken isVoteDeletationValue = inputObject["IsVoteDeletation"];
+                if (isVoteDeletationValue != null && isVoteDeletationValue.Type != JTokenType.Null)
+                {
+                    this.IsVoteDeletation = ((bool)isVoteDeletationValue);
+                }
+                JToken languagesSequence = ((JToken)inputObject["Languages"]);
+                if (languagesSequence != null && languagesSequence.Type != JTokenType.Null)
+                {
+                    foreach (JToken languagesValue in ((JArray)languagesSequence))
+                    {
+                        this.Languages.Add(((string)languagesValue));
+                    }
+                }
+                JToken nbSolverValue = inputObject["NbSolver"];
+                if (nbSolverValue != null && nbSolverValue.Type != JTokenType.Null)
+                {
+                    this.NbSolver = ((int)nbSolverValue);
+                }
+                JToken numberOfDayBeforeSolutionValue = inputObject["NumberOfDayBeforeSolution"];
+                if (numberOfDayBeforeSolutionValue != null && numberOfDayBeforeSolutionValue.Type != JTokenType.Null)
+                {
+                    this.NumberOfDayBeforeSolution = ((int)numberOfDayBeforeSolutionValue);
+                }
+                JToken numberOfFavouritedValue = inputObject["NumberOfFavourited"];
+                if (numberOfFavouritedValue != null && numberOfFavouritedValue.Type != JTokenType.Null)
+                {
+                    this.NumberOfFavourited = ((int)numberOfFavouritedValue);
+                }
+                JToken posterValue = inputObject["Poster"];
+                if (posterValue != null && posterValue.Type != JTokenType.Null)
+                {
+                    this.Poster = ((string)posterValue);
+                }
+                JToken publidationDateValue = inputObject["PublidationDate"];
+                if (publidationDateValue != null && publidationDateValue.Type != JTokenType.Null)
+                {
+                    this.PublidationDate = ((DateTimeOffset)publidationDateValue);
+                }
+                JToken tagsSequence = ((JToken)inputObject["Tags"]);
+                if (tagsSequence != null && tagsSequence.Type != JTokenType.Null)
+                {
+                    foreach (JToken tagsValue in ((JArray)tagsSequence))
+                    {
+                        this.Tags.Add(((string)tagsValue));
+                    }
+                }
+                JToken updaterValue = inputObject["Updater"];
+                if (updaterValue != null && updaterValue.Type != JTokenType.Null)
+                {
+                    this.Updater = ((string)updaterValue);
+                }
+                JToken userStatusValue = inputObject["UserStatus"];
+                if (userStatusValue != null && userStatusValue.Type != JTokenType.Null)
+                {
+                    this.UserStatus = ((string)userStatusValue);
                 }
             }
         }

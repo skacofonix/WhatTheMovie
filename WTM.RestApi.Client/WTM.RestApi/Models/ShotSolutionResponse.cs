@@ -9,37 +9,26 @@ namespace WTM.RestApi.Client.Models
 {
     public partial class ShotSolutionResponse
     {
-        private string _data;
+        private bool _available;
         
         /// <summary>
-        /// Optional.
+        /// Required.
         /// </summary>
-        public string Data
+        public bool Available
         {
-            get { return this._data; }
-            set { this._data = value; }
+            get { return this._available; }
+            set { this._available = value; }
         }
         
-        private Error _error;
+        private IShotMovieSolution _shotMovieSolution;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public Error Error
+        public IShotMovieSolution ShotMovieSolution
         {
-            get { return this._error; }
-            set { this._error = value; }
-        }
-        
-        private Pagination _pagination;
-        
-        /// <summary>
-        /// Optional.
-        /// </summary>
-        public Pagination Pagination
-        {
-            get { return this._pagination; }
-            set { this._pagination = value; }
+            get { return this._shotMovieSolution; }
+            set { this._shotMovieSolution = value; }
         }
         
         /// <summary>
@@ -47,6 +36,16 @@ namespace WTM.RestApi.Client.Models
         /// </summary>
         public ShotSolutionResponse()
         {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the ShotSolutionResponse class with
+        /// required arguments.
+        /// </summary>
+        public ShotSolutionResponse(bool available)
+            : this()
+        {
+            this.Available = available;
         }
     }
 }

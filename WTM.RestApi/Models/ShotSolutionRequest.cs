@@ -1,7 +1,11 @@
-﻿namespace WTM.RestApi.Models
+﻿using System.Runtime.Serialization;
+
+namespace WTM.RestApi.Models
 {
-    public class ShotSolutionRequest : IRequest, IAuthenticable
+    [DataContract]
+    public class ShotSolutionRequest : IShotSolutionRequest
     {
+        [DataMember]
         public string Token { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace WTM.RestApi.Controllers
         [Route("search")]
         [HttpGet]
         [ResponseType(typeof(UserSearchResponse))]
-        public IHttpActionResult Search([FromUri]UserSearchRequest request)
+        public IHttpActionResult Search([FromUri]IUserSearchRequest request)
         {
             if (!ModelState.IsValid)
             {

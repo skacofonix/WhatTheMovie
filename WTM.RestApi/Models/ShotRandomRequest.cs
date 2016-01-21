@@ -1,7 +1,11 @@
+using System.Runtime.Serialization;
+
 namespace WTM.RestApi.Models
 {
-    public class ShotRandomRequest : IRequest, IAuthenticable
+    [DataContract]
+    public class ShotRandomRequest : IShotRandomRequest
     {
+        [DataMember]
         public string Token { get; }
     }
 }

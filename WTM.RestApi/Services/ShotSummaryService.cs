@@ -39,7 +39,7 @@ namespace WTM.RestApi.Services
             this.dateTimeService = dateTimeService;
         }
 
-        public IShotCollectionResponse Get(ShotsRequest request)
+        public IShotCollectionResponse Get(IShotsRequest request)
         {
             var date = request?.Date ?? this.dateTimeService.GetDateTime();
 
@@ -48,7 +48,7 @@ namespace WTM.RestApi.Services
             return result;
         }
 
-        public IShotCollectionResponse GetArchives(ShotArchivesRequest request)
+        public IShotCollectionResponse GetArchives(IShotArchivesRequest request)
         {
             var maxDate = dateTimeService.GetDateTime().Date.AddDays(-nbDayFeatureFilms);
             var date = maxDate;
@@ -66,7 +66,7 @@ namespace WTM.RestApi.Services
             return Get(date, request?.Start, request?.Limit, request?.Token);
         }
 
-        public IShotCollectionResponse GetFeatureFilms(ShotFeatureFilmsRequest request)
+        public IShotCollectionResponse GetFeatureFilms(IShotFeatureFilmsRequest request)
         {
             var now = dateTimeService.GetDateTime().Date;
             var minDate = now.AddDays(-nbDayFeatureFilms);
@@ -85,14 +85,14 @@ namespace WTM.RestApi.Services
             return Get(date, request?.Start, request?.Limit, request?.Token);
         }
 
-        public IShotCollectionResponse GetNewSubmissions(ShotNewSubmissionsRequest request)
+        public IShotCollectionResponse GetNewSubmissions(IShotNewSubmissionsRequest request)
         {
             var date = dateTimeService.GetDateTime().Date;
             var shotSummaryCollection = this.shotNewSubmissionService.GetShots(request.Token);
             return Foo(shotSummaryCollection, date, request?.Start, request?.Limit, request?.Token);
         }
 
-        public IShotSearchTagResponse Search(ShotSearchRequest request)
+        public IShotSearchTagResponse Search(IShotSearchRequest request)
         {
             const int pageSize = 50;
 

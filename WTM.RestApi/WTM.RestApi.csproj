@@ -125,8 +125,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Models\Authenticated.cs" />
     <Compile Include="Models\IAuthenticated.cs" />
+    <Compile Include="Models\IGuessSolutionRequest.cs" />
     <Compile Include="Models\IPaginableResult.cs" />
+    <Compile Include="Models\IShotArchivesRequest.cs" />
     <Compile Include="Models\IShotCollectionRequest.cs" />
+    <Compile Include="Models\IShotFeatureFilmsRequest.cs" />
+    <Compile Include="Models\IShotNewSubmissionsRequest.cs" />
+    <Compile Include="Models\IShotRandomRequest.cs" />
+    <Compile Include="Models\IShotRequest.cs" />
+    <Compile Include="Models\IShotSearchRequest.cs" />
+    <Compile Include="Models\IShotSolutionRequest.cs" />
     <Compile Include="Models\MovieSearchTagResponse.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\ShotSearchTag.cs" />

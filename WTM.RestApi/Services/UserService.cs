@@ -35,7 +35,7 @@ namespace WTM.RestApi.Services
             throw new NotImplementedException();
         }
 
-        public IUserSearchResponse Search(UserSearchRequest request)
+        public IUserSearchResponse Search(IUserSearchRequest request)
         {
             const int pageSize = 30;
 

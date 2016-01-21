@@ -10,7 +10,7 @@ namespace WTM.RestApi.Services
 
         IUserLogoutResponse Logout(UserLogoutRequest request);
 
-        IUserSearchResponse Search(UserSearchRequest request);
+        IUserSearchResponse Search(IUserSearchRequest request);
 
         IUserSummary GetUserSummaryByToken(string token);
     }
