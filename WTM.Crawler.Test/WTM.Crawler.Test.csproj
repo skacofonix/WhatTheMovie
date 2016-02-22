@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Extensions\StringExtensionsTest.cs" />
+    <Compile Include="HttpRequestBuilderTest.cs" />
     <Compile Include="Parser\BookmarksParserTest.cs" />
     <Compile Include="Parser\OverviewShotParserTest.cs" />
     <Compile Include="Parser\SearchUserParserTest.cs" />
