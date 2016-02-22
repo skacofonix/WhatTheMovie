@@ -44,11 +44,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{6FB28AA6-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Mobile.Core.Test", "WTM.Mobile.Core.Test\WTM.Mobile.Core.Test.csproj", "{1D554FE2-4428-4F51-9D11-C9D8FC9D9B39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.RestApi", "WTM.RestApi\WTM.RestApi.csproj", "{27A7BF23-F02C-4C12-9967-F966FAE0D166}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Api", "WTM.Api\WTM.Api.csproj", "{27A7BF23-F02C-4C12-9967-F966FAE0D166}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.RestApi.Tests", "WTM.RestApi.Tests\WTM.RestApi.Tests.csproj", "{49AE7E18-908D-4313-838A-E936182FA3DC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.RestApi.Client", "WTM.RestApi.Client\WTM.RestApi.Client.csproj", "{ECA383BA-0503-44F8-9511-AC9A7C15C96C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Api.Tests", "WTM.Api.Tests\WTM.Api.Tests.csproj", "{49AE7E18-908D-4313-838A-E936182FA3DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +81,6 @@ Global
 		{49AE7E18-908D-4313-838A-E936182FA3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49AE7E18-908D-4313-838A-E936182FA3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49AE7E18-908D-4313-838A-E936182FA3DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ECA383BA-0503-44F8-9511-AC9A7C15C96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECA383BA-0503-44F8-9511-AC9A7C15C96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECA383BA-0503-44F8-9511-AC9A7C15C96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECA383BA-0503-44F8-9511-AC9A7C15C96C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
