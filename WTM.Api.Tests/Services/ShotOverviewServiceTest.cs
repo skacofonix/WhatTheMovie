@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Moq;
 using NFluent;
 using NUnit.Framework;
@@ -7,7 +6,7 @@ using WTM.Api.Models;
 using WTM.Api.Services;
 using WTM.Crawler.Services;
 
-namespace WTM.RestApi.Tests.Services
+namespace WTM.Api.Tests.Services
 {
     [TestFixture]
     public class ShotOverviewServiceTest

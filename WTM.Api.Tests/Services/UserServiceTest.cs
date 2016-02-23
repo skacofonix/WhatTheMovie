@@ -5,7 +5,7 @@ using WTM.Api.Models;
 using WTM.Api.Services;
 using WTM.Crawler;
 
-namespace WTM.RestApi.Tests.Services
+namespace WTM.Api.Tests.Services
 {
     [TestFixture]
     public class UserServiceTest

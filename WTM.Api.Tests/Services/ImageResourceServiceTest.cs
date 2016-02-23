@@ -3,11 +3,10 @@ using NUnit.Framework;
 using WTM.Api.Services;
 using WTM.Crawler;
 using WTM.Crawler.Services;
-using IShotService = WTM.Api.Services.IShotService;
 using ShotService = WTM.Api.Services.ShotService;
 using UserService = WTM.Crawler.Services.UserService;
 
-namespace WTM.RestApi.Tests.Services
+namespace WTM.Api.Tests.Services
 {
     [TestFixture]
     public class ImageResourceServiceTest

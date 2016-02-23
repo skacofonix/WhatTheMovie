@@ -1,11 +1,11 @@
 using System.Web.Http;
-using WebActivatorEx;
-using WTM.RestApi.Tests;
 using Swashbuckle.Application;
+using WebActivatorEx;
+using WTM.Api.Tests;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
-namespace WTM.RestApi.Tests
+namespace WTM.Api.Tests
 {
     public class SwaggerConfig
     {

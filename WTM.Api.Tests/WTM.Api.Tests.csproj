@@ -6,8 +6,8 @@
     <ProjectGuid>{49AE7E18-908D-4313-838A-E936182FA3DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WTM.RestApi.Tests</RootNamespace>
-    <AssemblyName>WTM.RestApi.Tests</AssemblyName>
+    <RootNamespace>WTM.Api.Tests</RootNamespace>
+    <AssemblyName>WTM.Api.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -103,6 +103,10 @@
     <Compile Include="Services\UserServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WTM.Api\WTM.Api.csproj">
+      <Project>{27a7bf23-f02c-4c12-9967-f966fae0d166}</Project>
+      <Name>WTM.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WTM.Crawler\WTM.Crawler.csproj">
       <Project>{0a433949-dd18-4b4f-a31e-61415fc2a38a}</Project>
       <Name>WTM.Crawler</Name>
