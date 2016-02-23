@@ -1,9 +1,10 @@
-What The Movie
+What the Movie
 ==========
 
 This project is under MIT License.
 Please see the license detail for more informations.
 
+v2 coming soon !
 
 ##Introduction
 
