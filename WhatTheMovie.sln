@@ -9,21 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2FD81C3D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Crawler.Test", "WTM.Crawler.Test\WTM.Crawler.Test.csproj", "{1022C2E5-EF1A-474A-BE00-46BF578DCEAE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{97602895-82C2-4982-A093-893C4CCC965A}"
-	ProjectSection(SolutionItems) = preProject
-		PublishScripts\AzureVMPublishModule.psm1 = PublishScripts\AzureVMPublishModule.psm1
-		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
-		PublishScripts\Publish-WebApplicationVM.ps1 = PublishScripts\Publish-WebApplicationVM.ps1
-		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{6F79842E-956B-466C-AD6D-C6A94881B799}"
-	ProjectSection(SolutionItems) = preProject
-		PublishScripts\Configurations\WTMApi-WAWS-dev.json = PublishScripts\Configurations\WTMApi-WAWS-dev.json
-		PublishScripts\Configurations\WTMApi2-WAWS-dev.json = PublishScripts\Configurations\WTMApi2-WAWS-dev.json
-		PublishScripts\Configurations\WTMApi3-WAWS-dev.json = PublishScripts\Configurations\WTMApi3-WAWS-dev.json
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{C22C5396-B477-4405-9CFC-8D9EFF6D2426}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Mobile.Core", "WTM.Mobile.Core\WTM.Mobile.Core.csproj", "{1F38DFE6-3F8A-4E28-8FD1-4A722225F2E9}"
@@ -87,7 +72,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1022C2E5-EF1A-474A-BE00-46BF578DCEAE} = {2FD81C3D-787D-46B8-8062-3701330371F6}
-		{6F79842E-956B-466C-AD6D-C6A94881B799} = {97602895-82C2-4982-A093-893C4CCC965A}
 		{1F38DFE6-3F8A-4E28-8FD1-4A722225F2E9} = {C22C5396-B477-4405-9CFC-8D9EFF6D2426}
 		{4AF4487D-0C3E-4384-BA68-62CB1680C648} = {C22C5396-B477-4405-9CFC-8D9EFF6D2426}
 		{1D554FE2-4428-4F51-9D11-C9D8FC9D9B39} = {2FD81C3D-787D-46B8-8062-3701330371F6}

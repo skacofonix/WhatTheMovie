@@ -275,9 +275,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\WTM.Crawler\WTM.Crawler.csproj">
       <Project>{0a433949-dd18-4b4f-a31e-61415fc2a38a}</Project>
