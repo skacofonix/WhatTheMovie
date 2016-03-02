@@ -1,0 +1,5 @@
+C:\Repository\WhatTheMovie\WTM.ApiClient\bin\Release\WTM.ApiClient.dll
+C:\Repository\WhatTheMovie\WTM.ApiClient\bin\Release\WTM.ApiClient.pdb
+C:\Repository\WhatTheMovie\WTM.ApiClient\obj\Release\WTM.ApiClient.csprojResolveAssemblyReference.cache
+C:\Repository\WhatTheMovie\WTM.ApiClient\obj\Release\WTM.ApiClient.dll
+C:\Repository\WhatTheMovie\WTM.ApiClient\obj\Release\WTM.ApiClient.pdb

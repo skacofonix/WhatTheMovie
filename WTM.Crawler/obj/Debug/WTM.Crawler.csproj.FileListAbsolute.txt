@@ -1,0 +1,9 @@
+C:\Repository\WhatTheMovie\WTM.Crawler\bin\Debug\WTM.Crawler.dll.config
+C:\Repository\WhatTheMovie\WTM.Crawler\bin\Debug\WTM.Crawler.dll
+C:\Repository\WhatTheMovie\WTM.Crawler\bin\Debug\WTM.Crawler.pdb
+C:\Repository\WhatTheMovie\WTM.Crawler\bin\Debug\HtmlAgilityPack.dll
+C:\Repository\WhatTheMovie\WTM.Crawler\bin\Debug\HtmlAgilityPack.pdb
+C:\Repository\WhatTheMovie\WTM.Crawler\bin\Debug\HtmlAgilityPack.xml
+C:\Repository\WhatTheMovie\WTM.Crawler\obj\Debug\WTM.Crawler.csprojResolveAssemblyReference.cache
+C:\Repository\WhatTheMovie\WTM.Crawler\obj\Debug\WTM.Crawler.dll
+C:\Repository\WhatTheMovie\WTM.Crawler\obj\Debug\WTM.Crawler.pdb
