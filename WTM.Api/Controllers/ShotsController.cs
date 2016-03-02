@@ -211,6 +211,7 @@ namespace WTM.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("{id:int}/guess")]
+        [HttpPost]
         [ResponseType(typeof(ShotGuessTitleResponse))]
         public IHttpActionResult GuessTitle(int id, [FromBody]GuessSolutionRequest request)
         {

@@ -9,15 +9,15 @@ namespace WTM.Api.Models
         [Required]
         [MinLength(3)]
         [DataMember]
-        public string Tag { get; }
+        public string Tag { get; set; }
 
         [DataMember]
-        public int? Start { get; }
+        public int? Start { get; set; }
 
         [DataMember]
-        public int? Limit { get; }
+        public int? Limit { get; set; }
 
         [DataMember]
-        public string Token { get; }
+        public string Token { get; set; }
     }
 }

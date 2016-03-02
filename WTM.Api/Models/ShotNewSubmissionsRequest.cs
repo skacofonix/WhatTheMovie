@@ -7,13 +7,13 @@ namespace WTM.Api.Models
     public class ShotNewSubmissionsRequest : IShotNewSubmissionsRequest
     {
         [DataMember]
-        public int? Start { get; }
+        public int? Start { get; set; }
 
         [DataMember]
-        public int? Limit { get; }
+        public int? Limit { get; set; }
 
         [Required]
         [DataMember]
-        public string Token { get; }
+        public string Token { get; set; }
     }
 }

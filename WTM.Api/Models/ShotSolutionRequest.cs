@@ -6,6 +6,6 @@ namespace WTM.Api.Models
     public class ShotSolutionRequest : IShotSolutionRequest
     {
         [DataMember]
-        public string Token { get; }
+        public string Token { get; set; }
     }
 }

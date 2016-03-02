@@ -6,10 +6,10 @@ namespace WTM.Api.Models
     public interface IPaginableRequest
     {
         [DataMember]
-        int? Start { get; }
+        int? Start { get; set; }
 
         [DataMember]
         [Range(5, 100)]
-        int? Limit { get; }
+        int? Limit { get; set; }
     } 
 }

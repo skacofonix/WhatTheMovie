@@ -5,6 +5,6 @@ namespace WTM.Api.Models
     public interface IAuthenticable
     {
         [DataMember]
-        string Token { get; }
+        string Token { get; set; }
     }
 }

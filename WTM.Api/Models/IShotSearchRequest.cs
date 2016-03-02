@@ -6,6 +6,6 @@ namespace WTM.Api.Models
     {
         [Required]
         [MinLength(3)]
-        string Tag { get; }
+        string Tag { get; set; }
     }
 }

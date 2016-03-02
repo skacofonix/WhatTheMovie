@@ -6,6 +6,6 @@ namespace WTM.Api.Models
     public class ShotRandomRequest : IShotRandomRequest
     {
         [DataMember]
-        public string Token { get; }
+        public string Token { get; set; }
     }
 }
