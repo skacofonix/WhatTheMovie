@@ -4,6 +4,6 @@ namespace WTM.Api.Models
 {
     public interface IShotArchivesRequest : IRequest, IPaginableRequest, IAuthenticable
     {
-        DateTime? Date { get; set; }
+        DateTime? Date { get; }
     }
 }

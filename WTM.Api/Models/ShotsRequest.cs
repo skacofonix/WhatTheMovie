@@ -7,15 +7,15 @@ namespace WTM.Api.Models
     public class ShotsRequest : IShotsRequest
     {
         [DataMember]
-        public DateTime? Date { get; set; }
+        public DateTime? Date { get; }
 
         [DataMember]
-        public int? Start { get; set; }
+        public int? Start { get; }
 
         [DataMember]
-        public int? Limit { get; set; }
+        public int? Limit { get; }
 
         [DataMember]
-        public string Token { get; set; }
+        public string Token { get; }
     }
 }

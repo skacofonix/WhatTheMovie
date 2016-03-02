@@ -43,7 +43,7 @@ namespace WTM.Api.Controllers
         [Route("")]
         [HttpGet]
         [ResponseType(typeof(ShotCollectionResponse))]
-        public IHttpActionResult GetShotCollection([FromUri]IShotsRequest request)
+        public IHttpActionResult GetShotCollection([FromUri]ShotsRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -63,7 +63,6 @@ namespace WTM.Api.Controllers
             return Ok(result);
         }
 
-     
         /// <summary>
         /// Get random shot
         /// </summary>
@@ -71,7 +70,7 @@ namespace WTM.Api.Controllers
         [Route("random")]
         [HttpGet]
         [ResponseType(typeof(ShotResponse))]
-        public IHttpActionResult GetRandom([FromUri]IShotRandomRequest request)
+        public IHttpActionResult GetRandom([FromUri]ShotRandomRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -99,7 +98,7 @@ namespace WTM.Api.Controllers
         [Route("archives")]
         [HttpGet]
         [ResponseType(typeof(ShotCollectionResponse))]
-        public IHttpActionResult GetArchives([FromUri]IShotArchivesRequest request)
+        public IHttpActionResult GetArchives([FromUri]ShotArchivesRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -126,7 +125,7 @@ namespace WTM.Api.Controllers
         [Route("featuresfilms")]
         [HttpGet]
         [ResponseType(typeof(ShotCollectionResponse))]
-        public IHttpActionResult GetFeatureFilms([FromUri]IShotFeatureFilmsRequest request)
+        public IHttpActionResult GetFeatureFilms([FromUri]ShotFeatureFilmsRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -153,7 +152,7 @@ namespace WTM.Api.Controllers
         [Route("newsubmissions")]
         [HttpGet]
         [ResponseType(typeof(ShotCollectionResponse))]
-        public IHttpActionResult GetNewSubmissions([FromUri]IShotNewSubmissionsRequest request)
+        public IHttpActionResult GetNewSubmissions([FromUri]ShotNewSubmissionsRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -181,7 +180,7 @@ namespace WTM.Api.Controllers
         [Route("{id}")]
         [HttpGet]
         [ResponseType(typeof(ShotResponse))]
-        public IHttpActionResult GetById(int id, [FromUri]IShotRequest request)
+        public IHttpActionResult GetById(int id, [FromUri]ShotRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -213,7 +212,7 @@ namespace WTM.Api.Controllers
         /// <returns></returns>
         [Route("{id:int}/guess")]
         [ResponseType(typeof(ShotGuessTitleResponse))]
-        public IHttpActionResult GuessTitle(int id, [FromBody]IGuessSolutionRequest request)
+        public IHttpActionResult GuessTitle(int id, [FromBody]GuessSolutionRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -251,7 +250,7 @@ namespace WTM.Api.Controllers
         /// <response code="400">Invalid token</response>
         [Route("{id:int}/solution")]
         [ResponseType(typeof(ShotSolutionResponse))]
-        public IHttpActionResult GetSolution(int id, [FromUri]IShotSolutionRequest request)
+        public IHttpActionResult GetSolution(int id, [FromUri]ShotSolutionRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -349,7 +348,7 @@ namespace WTM.Api.Controllers
         [Route("search")]
         [HttpGet]
         [ResponseType(typeof(ShotResponse))]
-        public IHttpActionResult Search([FromUri]IShotSearchRequest request)
+        public IHttpActionResult Search([FromUri]ShotSearchRequest request)
         {
             if (!ModelState.IsValid)
             {

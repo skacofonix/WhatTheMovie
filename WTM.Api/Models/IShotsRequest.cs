@@ -5,7 +5,6 @@ namespace WTM.Api.Models
 {
     public interface IShotsRequest : IRequest, IPaginableRequest, IAuthenticable
     {
-        [DataMember]
         DateTime? Date { get; }
     }
 }
