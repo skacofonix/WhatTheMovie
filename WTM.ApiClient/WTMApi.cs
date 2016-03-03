@@ -5,11 +5,13 @@ namespace WTM.ApiClient
 {
     public class WTMApi : ServiceClient<WTMApi>
     {
+        private readonly Uri baseUri;
+
         public WTMApi()
         {
-            this.BaseUri = new Uri("http://localhost:19889");
+            this.baseUri = new Uri("http://localhost:19889");
         }
 
-        public Uri BaseUri { get; set; }
+        public Uri BaseUri => baseUri;
     }
 }

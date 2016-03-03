@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Api", "WTM.Api\WTM.Api.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Api.Tests", "WTM.Api.Tests\WTM.Api.Tests.csproj", "{49AE7E18-908D-4313-838A-E936182FA3DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.ApiClient", "WTM.ApiClient\WTM.ApiClient.csproj", "{1A07AA21-DC34-46AE-9873-142B1E06EB1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{49AE7E18-908D-4313-838A-E936182FA3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49AE7E18-908D-4313-838A-E936182FA3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49AE7E18-908D-4313-838A-E936182FA3DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A07AA21-DC34-46AE-9873-142B1E06EB1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A07AA21-DC34-46AE-9873-142B1E06EB1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A07AA21-DC34-46AE-9873-142B1E06EB1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A07AA21-DC34-46AE-9873-142B1E06EB1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
