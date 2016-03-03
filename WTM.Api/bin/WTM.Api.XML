@@ -9,50 +9,50 @@
             Provide shots features
             </summary>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.GetShotCollection(WTM.Api.Models.IShotsRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.GetShotCollection(WTM.Api.Models.ShotsRequest)">
             <summary>
             Get shots
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.GetRandom(WTM.Api.Models.IShotRandomRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.GetRandom(WTM.Api.Models.ShotRandomRequest)">
             <summary>
             Get random shot
             </summary>
             <returns>Shot</returns>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.GetArchives(WTM.Api.Models.IShotArchivesRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.GetArchives(WTM.Api.Models.ShotArchivesRequest)">
             <summary>
             Get shots older than 30 days
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.GetFeatureFilms(WTM.Api.Models.IShotFeatureFilmsRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.GetFeatureFilms(WTM.Api.Models.ShotFeatureFilmsRequest)">
             <summary>
             Get shots old less than 30 days
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.GetNewSubmissions(WTM.Api.Models.IShotNewSubmissionsRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.GetNewSubmissions(WTM.Api.Models.ShotNewSubmissionsRequest)">
             <summary>
             Return new shots
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.GetById(System.Int32,WTM.Api.Models.IShotRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.GetById(System.Int32,WTM.Api.Models.ShotRequest)">
             <summary>
             Get shot by ID
             </summary>
             <returns>Shot</returns>
             <response code="404">Shot not found</response>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.GuessTitle(System.Int32,WTM.Api.Models.IGuessSolutionRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.GuessTitle(System.Int32,WTM.Api.Models.GuessSolutionRequest)">
             <summary>
             Guess shot title
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.GetSolution(System.Int32,WTM.Api.Models.IShotSolutionRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.GetSolution(System.Int32,WTM.Api.Models.ShotSolutionRequest)">
             <summary>
             Get the solution (if it is available)
             </summary>
@@ -73,7 +73,7 @@
             <param name="id">Shot ID</param>
             <returns>Image</returns>
         </member>
-        <member name="M:WTM.Api.Controllers.ShotsController.Search(WTM.Api.Models.IShotSearchRequest)">
+        <member name="M:WTM.Api.Controllers.ShotsController.Search(WTM.Api.Models.ShotSearchRequest)">
             <summary>
             Get shots by tag
             </summary>

@@ -4,6 +4,5 @@ C:\Repository\WhatTheMovie\WTM.Crawler\bin\Release\WTM.Crawler.pdb
 C:\Repository\WhatTheMovie\WTM.Crawler\bin\Release\HtmlAgilityPack.dll
 C:\Repository\WhatTheMovie\WTM.Crawler\bin\Release\HtmlAgilityPack.pdb
 C:\Repository\WhatTheMovie\WTM.Crawler\bin\Release\HtmlAgilityPack.xml
-C:\Repository\WhatTheMovie\WTM.Crawler\obj\Release\WTM.Crawler.csprojResolveAssemblyReference.cache
 C:\Repository\WhatTheMovie\WTM.Crawler\obj\Release\WTM.Crawler.dll
 C:\Repository\WhatTheMovie\WTM.Crawler\obj\Release\WTM.Crawler.pdb

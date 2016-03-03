@@ -9,7 +9,7 @@ namespace WTM.ApiClient
 
         public WtmApi()
         {
-            this.baseUri = new Uri("http://localhost:19889");
+            this.baseUri = new Uri("http://localhost:19889/");
         }
 
         public Uri BaseUri => baseUri;

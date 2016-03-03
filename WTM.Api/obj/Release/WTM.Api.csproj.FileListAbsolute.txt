@@ -45,3 +45,4 @@ C:\Repository\WhatTheMovie\WTM.Api\bin\fr\System.Web.Http.WebHost.resources.dll
 C:\Repository\WhatTheMovie\WTM.Api\obj\Release\WTM.Api.csprojResolveAssemblyReference.cache
 C:\Repository\WhatTheMovie\WTM.Api\obj\Release\WTM.Api.dll
 C:\Repository\WhatTheMovie\WTM.Api\obj\Release\WTM.Api.pdb
+C:\Repository\WhatTheMovie\WTM.Api\bin\WTM.Api.XML

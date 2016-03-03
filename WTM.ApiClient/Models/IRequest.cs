@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WTM.ApiClient.Models
 {
-    public partial class ShotSearchRequest : IRequest
-    {
+    public interface IRequest
+    {       
     }
 }

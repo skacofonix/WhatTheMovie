@@ -29,11 +29,11 @@ namespace WTM.ApiClient.Helpers
         {
             var sb = new StringBuilder(prefix);
 
-            if (!string.IsNullOrEmpty(prefix) && !prefix.EndsWith("/"))
-                sb.Append("?");
-
             if (parameters.Count > 0)
+            {
+                sb.Append("?");
                 AppendParameter(sb, parameters.First());
+            }
 
             if (parameters.Count > 1)
             {
