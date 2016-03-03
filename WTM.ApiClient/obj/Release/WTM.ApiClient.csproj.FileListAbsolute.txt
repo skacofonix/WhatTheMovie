@@ -7,3 +7,4 @@ C:\Repository\WhatTheMovie\WTM.ApiClient\bin\Release\Microsoft.Rest.ClientRuntim
 C:\Repository\WhatTheMovie\WTM.ApiClient\bin\Release\Newtonsoft.Json.xml
 C:\Repository\WhatTheMovie\WTM.ApiClient\obj\Release\WTM.ApiClient.dll
 C:\Repository\WhatTheMovie\WTM.ApiClient\obj\Release\WTM.ApiClient.pdb
+C:\Repository\WhatTheMovie\WTM.ApiClient\bin\Release\WTM.ApiClient.dll.config

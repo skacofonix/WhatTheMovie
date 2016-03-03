@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.Api.Tests", "WTM.Api.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.ApiClient", "WTM.ApiClient\WTM.ApiClient.csproj", "{1A07AA21-DC34-46AE-9873-142B1E06EB1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTM.ApiClientGenerated", "WTM.ApiClientGenerated\WTM.ApiClientGenerated.csproj", "{3530E446-21FA-4C76-BCB9-3F95E7B055E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{1A07AA21-DC34-46AE-9873-142B1E06EB1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A07AA21-DC34-46AE-9873-142B1E06EB1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A07AA21-DC34-46AE-9873-142B1E06EB1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3530E446-21FA-4C76-BCB9-3F95E7B055E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3530E446-21FA-4C76-BCB9-3F95E7B055E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3530E446-21FA-4C76-BCB9-3F95E7B055E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3530E446-21FA-4C76-BCB9-3F95E7B055E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

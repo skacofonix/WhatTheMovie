@@ -35,10 +35,36 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\HttpRequestBuilder.cs" />
+    <Compile Include="Models\GuessSolutionRequest.cs" />
+    <Compile Include="Models\IShotMovieSolution.cs" />
+    <Compile Include="Models\IShotSummary.cs" />
+    <Compile Include="Models\IUserSearchRequest.cs" />
+    <Compile Include="Models\IUserSummary.cs" />
+    <Compile Include="Models\Memorabilia.cs" />
+    <Compile Include="Models\MovieSearchTagRequest.cs" />
+    <Compile Include="Models\MovieSearchTagResponse.cs" />
+    <Compile Include="Models\MovieSummary.cs" />
+    <Compile Include="Models\ShotArchivesRequest.cs" />
+    <Compile Include="Models\ShotCollectionResponse.cs" />
+    <Compile Include="Models\ShotFeatureFilmsRequest.cs" />
+    <Compile Include="Models\ShotGuessTitleResponse.cs" />
+    <Compile Include="Models\ShotNewSubmissionsRequest.cs" />
+    <Compile Include="Models\ShotRandomRequest.cs" />
+    <Compile Include="Models\ShotRequest.cs" />
+    <Compile Include="Models\ShotResponse.cs" />
+    <Compile Include="Models\ShotSearchRequest.cs" />
+    <Compile Include="Models\ShotSolutionRequest.cs" />
+    <Compile Include="Models\ShotSolutionResponse.cs" />
+    <Compile Include="Models\ShotsRequest.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserLoginRequest.cs" />
+    <Compile Include="Models\UserLoginResponse.cs" />
+    <Compile Include="Models\UserLogoutRequest.cs" />
+    <Compile Include="Models\UserResponse.cs" />
+    <Compile Include="Models\UserSearchResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shot.cs" />
     <Compile Include="WTMApi.cs" />
@@ -48,12 +74,13 @@
       <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.1.0\lib\portable-net45+win+wpa81\Microsoft.Rest.ClientRuntime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

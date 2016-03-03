@@ -4,21 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest;
+using WTM.ApiClient.Models;
 
 namespace WTM.ApiClient
 {
-    public class Shot : IServiceOperations<WTMApi>
+    public class Shot : IServiceOperations<WtmApi>
     {
-        private readonly WTMApi client;
+        private readonly WtmApi client;
         private readonly Uri baseUri;
 
-        public Shot(WTMApi client)
+        public Shot(WtmApi client)
         {
             this.client = client;
             this.baseUri = new Uri(this.client.BaseUri, "api/shots");
         }
 
-        public WTMApi Client
+        public WtmApi Client
         {
             get
             {
@@ -26,11 +27,15 @@ namespace WTM.ApiClient
             }
         }
 
-        //public async Task<HttpOperationResponse<ShotCollectionResponse>> GetShotCollection(ShotsRequest request)
-        //{
-        //    // Build URL
-        //    var result = new HttpOperationResponse<ShotCollectionResponse>();
-        //    return result;
-        //}
+        public async Task<HttpOperationResponse<ShotCollectionResponse>> GetShotCollection(ShotsRequest request)
+        {
+            // Build URL
+
+
+
+
+            var result = new HttpOperationResponse<ShotCollectionResponse>();
+            return result;
+        }
     }
 }

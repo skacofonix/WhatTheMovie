@@ -3,11 +3,11 @@ using Microsoft.Rest;
 
 namespace WTM.ApiClient
 {
-    public class WTMApi : ServiceClient<WTMApi>
+    public class WtmApi : ServiceClient<WtmApi>
     {
         private readonly Uri baseUri;
 
-        public WTMApi()
+        public WtmApi()
         {
             this.baseUri = new Uri("http://localhost:19889");
         }
