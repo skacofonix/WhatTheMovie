@@ -16,9 +16,9 @@ namespace WTM.ApiClient.Test
         [Test]
         public void ShouldGetShots()
         {
-            var foo = new Shot(new WtmApi());
+            var foo = new ShotsService(new WtmApi());
 
-            var result = foo.GetShotCollection(new ShotsRequest
+            var result = foo.GetShots(new ShotsRequest
             {
                 Start = 10,
                 Limit = 50,
