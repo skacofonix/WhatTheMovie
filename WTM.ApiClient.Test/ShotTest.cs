@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -22,6 +24,8 @@ namespace WTM.ApiClient.Test
                 Limit = 50,
                 Token = Guid.NewGuid().ToString()
             });
+
+            Assert.IsNotNull(result);
         }
     }
 }
