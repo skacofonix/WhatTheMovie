@@ -11,6 +11,7 @@ C:\Repository\WhatTheMovie\WTM.Api\bin\roslyn\vbc.exe
 C:\Repository\WhatTheMovie\WTM.Api\bin\roslyn\VBCSCompiler.exe
 C:\Repository\WhatTheMovie\WTM.Api\bin\roslyn\VBCSCompiler.exe.config
 C:\Repository\WhatTheMovie\WTM.Api\bin\WTM.Api.dll.config
+C:\Repository\WhatTheMovie\WTM.Api\bin\WTM.Api.XML
 C:\Repository\WhatTheMovie\WTM.Api\bin\WTM.Api.dll
 C:\Repository\WhatTheMovie\WTM.Api\bin\WTM.Api.pdb
 C:\Repository\WhatTheMovie\WTM.Api\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -45,4 +46,3 @@ C:\Repository\WhatTheMovie\WTM.Api\bin\fr\System.Web.Http.WebHost.resources.dll
 C:\Repository\WhatTheMovie\WTM.Api\obj\Release\WTM.Api.csprojResolveAssemblyReference.cache
 C:\Repository\WhatTheMovie\WTM.Api\obj\Release\WTM.Api.dll
 C:\Repository\WhatTheMovie\WTM.Api\obj\Release\WTM.Api.pdb
-C:\Repository\WhatTheMovie\WTM.Api\bin\WTM.Api.XML
